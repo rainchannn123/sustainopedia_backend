@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ecoSpold xmlns="http://www.EcoInvent.org/EcoSpold02">
+  <childActivityDataset>
+    <activityDescription>
+      <activity id="cb51250c-bc8f-4a77-9faf-d704ffb94221" activityNameId="7c046930-820e-42ff-808e-abfa11cd9973" parentActivityId="98e0ec33-4d71-418a-a90b-abfa11e67e60" inheritanceDepth="-1" type="1" specialActivityType="0">
+        <activityName xml:lang="en">heat, from municipal waste incineration to generic market for heat district or industrial, other than natural gas</activityName>
+        <synonym xml:lang="en">WTE</synonym>
+        <synonym xml:lang="en">waste-to-energy</synonym>
+        <generalComment>
+          <text xml:lang="en" index="1">This dataset changes the names of the (internally used) heat product of waste incineration and connects it with the external grid and the respective average energy markets (district heat grid).</text>
+        </generalComment>
+      </activity>
+      <classification classificationId="be3540ee-592f-46fd-bd68-c362a3bbccc6">
+        <classificationSystem xml:lang="en">ISIC rev.4 ecoinvent</classificationSystem>
+        <classificationValue xml:lang="en">3530:Steam and air conditioning supply</classificationValue>
+      </classification>
+      <geography geographyId="7846b897-7c04-4f9f-b607-2b83fcd9a74c">
+        <shortname xml:lang="en">RoW</shortname>
+      </geography>
+      <technology technologyLevel="3">
+        <comment>
+          <text xml:lang="en" index="1"></text>
+        </comment>
+      </technology>
+      <timePeriod startDate="2008-01-01" endDate="2021-12-31" isDataValidForEntirePeriod="true">
+        <comment>
+          <text xml:lang="en" index="1"></text>
+        </comment>
+      </timePeriod>
+      <macroEconomicScenario macroEconomicScenarioId="d9f57f0a-a01f-42eb-a57b-8f18d6635801">
+        <name xml:lang="en">Business-as-Usual</name>
+      </macroEconomicScenario>
+    </activityDescription>
+    <flowData>
+      <intermediateExchange id="92e39f28-d1c9-42e0-a330-abfa11580e6e" unitId="980b811e-3905-4797-82a5-173f5568bc7e" amount="1" isCalculatedAmount="true" mathematicalRelation="E_th_prod_MSWI" sourceId="8358a2ce-c42c-4b66-b7e4-abfa1111b0c1" sourceYear="2013" sourceFirstAuthor="Doka G." pageNumbers="" intermediateExchangeId="71e2f1db-a2c5-44d0-8337-dfff15be974d" productionVolumeAmount="8798582786.94897" productionVolumeSourceId="8358a2ce-c42c-4b66-b7e4-abfa1111b0c1">
+        <name xml:lang="en">heat, district or industrial, other than natural gas</name>
+        <unitName xml:lang="en">MJ</unitName>
+        <comment xml:lang="en">Net heat from municipal waste incineration fed in to district heating grid</comment>
+        <property propertyId="38f94dd1-d5aa-41b8-b182-c0c42985d9dc" amount="0.0106" unitId="7b75baf0-cbee-45e6-bf66-af119da06553">
+          <name xml:lang="en">price</name>
+          <unitName xml:lang="en">EUR2005</unitName>
+          <comment xml:lang="en">Average European district heat price from Ecoheatcool and Euroheat 2005-2006, Ecoheat Work package 1: The European heat market. Final report. 10.6 EUR/GJ i s the price of district heat. http://www.solarthermalworld.org/files/Ecoheatcool%20WP1%20Web.pdf?download</comment>
+        </property>
+        <property propertyId="48c987bb-3144-4872-b5c7-b1389c40be25" amount="1" mathematicalRelation="" unitId="980b811e-3905-4797-82a5-173f5568bc7e">
+          <name xml:lang="en">heating value, net</name>
+          <unitName xml:lang="en">MJ</unitName>
+        </property>
+        <productionVolumeComment xml:lang="en">based on average net heat from Swiss municipal waste incineration fed in to district heating grid in 2011, and 200 Mio tonnes MSW incinerated annually worldwide in 2010 (Pike 2010).</productionVolumeComment>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="da9e0ee4-0a34-499e-9f51-82a5235d243c">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17300: Steam and hot water</classificationValue>
+        </classification>
+        <outputGroup>0</outputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="145fdf95-d7c6-4582-9bb5-d99aabf84f9d" unitId="980b811e-3905-4797-82a5-173f5568bc7e" variableName="E_th_prod_MSWI" amount="1" sourceId="8358a2ce-c42c-4b66-b7e4-abfa1111b0c1" sourceYear="2013" sourceFirstAuthor="Doka G." intermediateExchangeId="45fbbc41-7ae9-46cc-bb31-abfa11e69de0" activityLinkId="03aa0180-210e-4f22-bc5f-53e3d53505c3">
+        <name xml:lang="en">heat, for reuse in municipal waste incineration only</name>
+        <unitName xml:lang="en">MJ</unitName>
+        <comment xml:lang="en">useful heat produced in municipal waste incineration (internal)</comment>
+        <uncertainty>
+          <lognormal meanValue="1" mu="0" variance="0" varianceWithPedigreeUncertainty="0.008" />
+          <pedigreeMatrix reliability="1" completeness="1" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en">a mere name exchange. There is no additonal uncertainty</comment>
+        </uncertainty>
+        <synonym xml:lang="en">WTE</synonym>
+        <synonym xml:lang="en">waste-to-energy</synonym>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="da9e0ee4-0a34-499e-9f51-82a5235d243c">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17300: Steam and hot water</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+    </flowData>
+    <modellingAndValidation>
+      <representativeness percent="100" systemModelId="290c1f85-4cc4-4fa1-b0c8-2cb7f4276dce">
+        <systemModelName xml:lang="en">Allocation, cut-off by classification</systemModelName>
+      </representativeness>
+      <review reviewerId="35d091e9-38c2-4037-9efe-a73673c57123" reviewerName="Emilia Moreno Ruiz" reviewerEmail="moreno@ecoinvent.org" reviewDate="2013-02-21" reviewedMajorRelease="3" reviewedMinorRelease="0" reviewedMajorRevision="0" reviewedMinorRevision="32">
+        <details>
+          <text xml:lang="en" index="0">Conecting DS from specific to generic market</text>
+        </details>
+        <otherDetails xml:lang="en"></otherDetails>
+      </review>
+      <review reviewerId="c4597934-ecac-422c-b431-382e85fdcb83" reviewerName="[System]" reviewerEmail="support@ecoinvent.org" reviewDate="2013-01-31" reviewedMajorRelease="3" reviewedMinorRelease="0" reviewedMajorRevision="0" reviewedMinorRevision="21" />
+      <review reviewerId="c4597934-ecac-422c-b431-382e85fdcb83" reviewerName="[System]" reviewerEmail="support@ecoinvent.org" reviewDate="2013-07-23" reviewedMajorRelease="3" reviewedMinorRelease="0" reviewedMajorRevision="0" reviewedMinorRevision="32">
+        <details />
+        <otherDetails xml:lang="en">Validation warnings:
+
+- The input exchange 'heat, municipal waste incineration' does not have an activity link and therefore requires a market for that input to be available. If the market is not available the dataset will be put on hold at the end of its review and will remain on hold until such a market has been accepted into the ecoinvent database.
+
+</otherDetails>
+      </review>
+    </modellingAndValidation>
+    <administrativeInformation>
+      <dataEntryBy personId="e8d6ebac-c6d1-4f98-b4db-6613e1520289" isActiveAuthor="true" personName="Gabor Doka" personEmail="gabor@doka.ch" />
+      <dataGeneratorAndPublication personId="e8d6ebac-c6d1-4f98-b4db-6613e1520289" personName="Gabor Doka" personEmail="gabor@doka.ch" publishedSourceId="8358a2ce-c42c-4b66-b7e4-abfa1111b0c1" publishedSourceYear="2013" publishedSourceFirstAuthor="Doka G." isCopyrightProtected="true" accessRestrictedTo="1" />
+      <fileAttributes majorRelease="3" minorRelease="0" majorRevision="3" minorRevision="0" internalSchemaVersion="2.0.10" defaultLanguage="en" creationTimestamp="2011-11-25T17:38:24" lastEditTimestamp="2013-07-23T13:07:24" fileGenerator="EcoEditor 3.3.65.10694" fileTimestamp="2013-07-23T13:07:24" contextId="de659012-50c4-4e96-b54a-fc781bf987ab">
+        <contextName xml:lang="en">ecoinvent</contextName>
+      </fileAttributes>
+    </administrativeInformation>
+  </childActivityDataset>
+</ecoSpold>

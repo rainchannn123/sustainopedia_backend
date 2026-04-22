@@ -1,0 +1,522 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ecoSpold xmlns="http://www.EcoInvent.org/EcoSpold02">
+  <childActivityDataset>
+    <activityDescription>
+      <activity id="7dae4c50-83d6-469e-892e-39105419f7f9" activityNameId="b034b927-084a-44e5-8cc5-1386ea7e1140" parentActivityId="601d7da6-51a7-4f9e-8f7f-d708a79cd89a" inheritanceDepth="-1" type="1" specialActivityType="0">
+        <activityName xml:lang="en">washing, drying and finishing laundry</activityName>
+        <includedActivitiesStart xml:lang="en">From receving the laundry at the laundry service. The activity models the service of washing, drying and finishing 1 kg of laundry, it therefore includes the energy, water, detergent and infrastructure required per reference product. Because the activity is a service, the input of laundry is not included. 1 kg of this service should be used together with 1 kg of laundry (i.e. an input of linen) to be washed.</includedActivitiesStart>
+        <includedActivitiesEnd xml:lang="en">This activity includes the cleaning, drying and ironing of laundry.</includedActivitiesEnd>
+        <generalComment>
+          <text xml:lang="en" index="2">The dataset includes the infrastructure (washing machine and dryer, building infrastructure) required for the operation of the laundry service, and includes all the inputs (water, electrical and thermal energy, cleaning detergent) required to perform the service of laundry.  The dataset is modelled as a service dataset-the input and output of laundry is excluded from the scope.</text>
+          <text xml:lang="en" index="1">This dataset represents the service of washing, drying, and finishing (including ironing) of laundry in low capacity professional laundries—capacity 
+range of  300–500 kg of laundry per shift (8 h).
+The capacity of such laundry services is typically between 8 to 12 kg per batch. Flat linen is ironed employing cylinder-heated ironers, garments were assumed to be ironed using ironing presses. Small-scale laundries iron linen manually. </text>
+        </generalComment>
+        <tag>sevice</tag>
+      </activity>
+      <classification classificationId="df3b4969-2c2e-4097-b726-0f75dff8ba87">
+        <classificationSystem xml:lang="en">ISIC rev.4 ecoinvent</classificationSystem>
+        <classificationValue xml:lang="en">9601:Washing and (dry-) cleaning of textile and fur products</classificationValue>
+      </classification>
+      <geography geographyId="34dbbff8-88ce-11de-ad60-0019e336be3a">
+        <shortname xml:lang="en">GLO</shortname>
+      </geography>
+      <technology technologyLevel="3" />
+      <timePeriod startDate="2013-01-01" endDate="2021-12-31" isDataValidForEntirePeriod="true" />
+      <macroEconomicScenario macroEconomicScenarioId="d9f57f0a-a01f-42eb-a57b-8f18d6635801">
+        <name xml:lang="en">Business-as-Usual</name>
+      </macroEconomicScenario>
+    </activityDescription>
+    <flowData>
+      <intermediateExchange id="17026c5a-244f-4d80-a5fd-ea74542c5253" unitId="de5b3c87-0e35-4fb0-9765-4f3ba34c99e5" variableName="wastewater" amount="0" isCalculatedAmount="true" mathematicalRelation="" intermediateExchangeId="f33b4dc5-f3af-4ca8-aeff-3deeb7159ec1" productionVolumeAmount="0" productionVolumeMathematicalRelation="">
+        <name xml:lang="en">wastewater, from residence</name>
+        <unitName xml:lang="en">m3</unitName>
+        <comment xml:lang="en">The amount of waste water generation was considered to be 96% of the water input, according to Máša et al (2013), with 4% of the water lost as steam during the process. </comment>
+        <uncertainty>
+          <undefined minValue="0" maxValue="0" standardDeviation95="0" />
+          <pedigreeMatrix reliability="1" completeness="1" temporalCorrelation="1" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <property propertyId="38f94dd1-d5aa-41b8-b182-c0c42985d9dc" variableName="wastewater_price_EUR2005" amount="0" unitId="7b75baf0-cbee-45e6-bf66-af119da06553">
+          <name xml:lang="en">price</name>
+          <unitName xml:lang="en">EUR2005</unitName>
+          <comment xml:lang="en">Waste products are assigned a price of zero as they are assumed to require further treatment.</comment>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="999.662523843921" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">wet mass-dry mass</comment>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="2962.17230710238" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water mass/dry mass</comment>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="0.33747615607878" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">Tap water dry mass was used as an estimation of the wastewater dry mass. This approach was chosen when the addition of compunds in wastewater was smaller than the mineral content estimated using the chemical properties of tap water in ecoinvent v2.2 report 8, Tab 93.1.</comment>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0.19942149626799" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">0.0673 kg TOC/m3 (Tab A.17, ecoinvent v2.2 report 13_I). TOC was considered as Total Carbon.</comment>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1000" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">Density of water was assumed that of tap water 1kg/L, that is 1000kg/m3.</comment>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.19942149626799" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0673" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <productionVolumeComment xml:lang="en">Calculated from production volume of reference product using the relative outputs.</productionVolumeComment>
+        <classification classificationId="ee3238ec-ca7a-4ddc-af1b-e7c35957b9b6">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">Waste</classificationValue>
+        </classification>
+        <classification classificationId="34f49fca-a18e-48df-a635-ee7e24ef6dbb">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">39920: Sewage sludge</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="3ec0fd47-ae66-4e0a-a7d6-126855e45058" unitId="5b972631-34e3-4db7-a615-f6931770a0cb" amount="8E-07" isCalculatedAmount="true" mathematicalRelation="1/(10* 250* 500)" intermediateExchangeId="8d220649-94e4-47e9-8e86-50e7e03c06dc" activityLinkId="efd62f45-27af-461d-b839-2a207d87da27">
+        <name xml:lang="en">washing machine</name>
+        <unitName xml:lang="en">unit</unitName>
+        <comment xml:lang="en">Considering an average lifetime of 10 years per washing machine, 250 working days per year, and 500 kg of laundry daily capacity, the average contribution of washing machine per kg washed laundry is calculated as 1/ [10 (years) * 250 (days per year) * 500 (kg/day) ] = 8.00E-07</comment>
+        <uncertainty>
+          <lognormal meanValue="8E-07" mu="-14.04" variance="0.3" varianceWithPedigreeUncertainty="0.434" />
+          <pedigreeMatrix reliability="3" completeness="5" temporalCorrelation="3" geographicalCorrelation="5" furtherTechnologyCorrelation="5" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <synonym xml:lang="en">laundry machine</synonym>
+        <property propertyId="964f8b50-ce16-4364-835a-a3db5fb760b0" amount="10" isDefiningValue="false" unitId="2cf92850-0f92-4004-9dba-a6ceb6a414c2">
+          <name xml:lang="en">lifetime</name>
+          <unitName xml:lang="en">year</unitName>
+          <comment xml:lang="en">Based on the estimate from Yuan et al. 2016. Source: Yuan et al. 2016, 2016, Yuan, Z., Zhang, Y., and Liu, X., Life cycle assessment of horizontal-axis washing machines in China, International Journal of Life Cycle Asse, 21, 15-28, 1 - Article</comment>
+        </property>
+        <property propertyId="53338e64-f7ea-4948-b342-3fc6e3d3c302" amount="75" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">weight</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">Based on the estimate from Yuan et al. 2016. Source: Yuan et al. 2016, 2016, Yuan, Z., Zhang, Y., and Liu, X., Life cycle assessment of horizontal-axis washing machines in China, International Journal of Life Cycle Asse, 21, 15-28, 1 - Article</comment>
+        </property>
+        <property propertyId="93bfda45-49f5-44bd-beb0-91b38dde4035" amount="1995" isDefiningValue="false" mathematicalRelation="133*10*1.5" isCalculatedAmount="true" unitId="e32b56ef-fa80-4487-9796-f3c1476c27b3">
+          <name xml:lang="en">lifetime capacity [h]</name>
+          <unitName xml:lang="en">hour</unitName>
+          <comment xml:lang="en">Literature source assumed: "10 years lifespan with 133 washing cycles per year". Based on the estimate from Yuan et al. 2016. Source: Yuan et al. 2016, 2016, Yuan, Z., Zhang, Y., and Liu, X., Life cycle assessment of horizontal-axis washing machines in China, International Journal of Life Cycle Asse, 21, 15-28. A cycle is estimated to last 1.5hours.</comment>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="7a4702a0-6f66-44a4-8dcf-45c03ca66dab">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">971: Washing, cleaning and dyeing services</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="61980ae7-798d-4ded-931c-3aedc2815ae5" unitId="1017f68a-f818-4f9d-a34d-a31e7386f628" amount="1.6E-05" isCalculatedAmount="true" mathematicalRelation="100/(50 * 250  * 500) " intermediateExchangeId="d72638dc-71b8-4c4f-b5c7-72cbe6bdd145" activityLinkId="be724c30-9465-4c62-83b5-0f92d5cde92f">
+        <name xml:lang="en">building, hall</name>
+        <unitName xml:lang="en">m2</unitName>
+        <comment xml:lang="en">Considering a 100 square meter laundry service station, an average lifetime of 50 years per building hall, 250 working days per year, and 500 kg of laundry daily capacity, the average contribution of building hall per kg washed and dryed laundry is calculated as 100 (m2) / [50 (years)  * 250 (days / year) * 500 (kg/day) ] = 1.60E-05
+
+
+
+</comment>
+        <uncertainty>
+          <lognormal meanValue="1.6E-05" mu="-11.04" variance="0.3" varianceWithPedigreeUncertainty="0.434" />
+          <pedigreeMatrix reliability="3" completeness="5" temporalCorrelation="3" geographicalCorrelation="5" furtherTechnologyCorrelation="5" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="b01c4db8-8617-4fe1-ad51-e3f3bb5576d3">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">531: Buildings</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="d9c5cf2e-9bd6-4eab-9585-7087bedbd462" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" variableName="water_consumption_per_kg" casNumber="7732-18-5" amount="13" isCalculatedAmount="false" intermediateExchangeId="c5adb1fb-872e-4446-a3bb-c4b61aa4bd45" activityLinkId="c3c75991-f4c9-4b81-bf28-c4d9f7b55b59">
+        <name xml:lang="en">tap water</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">According to "Máša, V., Bobák, P., Kuba, P., &amp; Stehlík, P. (2013). Analysis of energy efficient and environmentally friendly technologies in professional laundry service. Clean Technologies and Environmental Policy, 15(3), 445-457", the average waste water production per kg washed and dryed laundry is 12.5 kg, Considering a loss rate of 4% in the form of steam, the average water consumption per kg of laundry is calculated as 13 kg or 13 L. </comment>
+        <uncertainty>
+          <lognormal meanValue="13" mu="2.565" variance="0.0006" varianceWithPedigreeUncertainty="0.1346" />
+          <pedigreeMatrix reliability="3" completeness="5" temporalCorrelation="3" geographicalCorrelation="5" furtherTechnologyCorrelation="5" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="2962.17" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water in wet mass/dry mass</comment>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0.00178990835661632" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">Bicarbonate content is 2.93 mol/m3. CO2 content is 0.1 mol/m3 (ecoinvent v2.2 report 8, Tab 93.1).</comment>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="0.00033747615607878" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">Mineral content was estimated using the chemical properties of tap water in ecoinvent v2.2 report 8, Tab 93.1.</comment>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0.999662523843921" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">wet mass-dry mass</comment>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.00178990835661632" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="6.04051391924162E-07" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <classification classificationId="ced3d107-ae48-4f1e-801e-3b956776120c">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">18000: Natural water</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="6fba0f20-1578-46cb-8dfd-3de8aae90e0d" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" variableName="RP" amount="1" intermediateExchangeId="98ab81fc-5bbf-40ba-ade0-e7ceae4ca463" productionVolumeAmount="155140000" productionVolumeVariableName="RP_PV" productionVolumeMathematicalRelation="500000*62056*0.5*0.02*0.5">
+        <name xml:lang="en">washing, drying and finishing laundry</name>
+        <unitName xml:lang="en">kg</unitName>
+        <property propertyId="38f94dd1-d5aa-41b8-b182-c0c42985d9dc" variableName="RP_price_EUR2005" amount="0.0875480819153362" unitId="7b75baf0-cbee-45e6-bf66-af119da06553">
+          <name xml:lang="en">price</name>
+          <unitName xml:lang="en">EUR2005</unitName>
+          <comment xml:lang="en">Calculated based on inputs: The price of the product has been calculated as a sum of the values of the material and energy inputs for this product. This value is therefore a rough estimation. It may underestimate the real price since there are additional expenses when producing any product. These expences can include for example labour costs, treatment of waste materials and profit for the producer. Please consider carefully whether this level of data quality is acceptable for your application.</comment>
+        </property>
+        <productionVolumeComment xml:lang="en">Estimated value. The production volume of such a service is virtually impossible to estimate. To attempt estimating it the following formula is used: estimated number of hotels world wide 500000 (van Poll 2012) * average guests per year (62056) * assuming half of hotels outsource laundry services (0.5) * kg of laundry per guest per guest night (0.02kg) * assuming not all laundry is washed everyday (0.5). All assumption but the number of hotels in the world, are based on average data from the tourism operation datasets in ecoinvent. 
+
+Van Poll B. 2012. How many hotels are there in the world? Retrieved from: &lt;http://www.spottedbylocals.com/blog/booking-com-and-the-race-towards-offering-all-hotels/&gt;, accessed 7May2018
+</productionVolumeComment>
+        <classification classificationId="7a4702a0-6f66-44a4-8dcf-45c03ca66dab">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">971: Washing, cleaning and dyeing services</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <outputGroup>0</outputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="6236335b-459a-431f-bd48-64e0b68fbee8" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" amount="0.0114285714285714" isCalculatedAmount="true" mathematicalRelation="40/1000/3.5 " intermediateExchangeId="3fc068d9-71cf-5f55-8e15-1675bbc38caf" activityLinkId="1c55c7a2-2279-4bd1-b84d-52843b75a5fd">
+        <name xml:lang="en">non-ionic surfactant</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">Estimated average amount of washing agent per wash cyle is 40 grams (based on average supplier data). Considering a load of 3.5 kg per wash cycle according to "Pakula, C., &amp; Stamminger, R. (2010). Electricity and water consumption for laundry washing by washing machine worldwide. Energy Efficiency, 3(4), 365-382., Table 1",  the amount of washing agent per kg washed laundry is 40/3.5 = 11.42 g/kg washed Laundry or 0.011 kg/kg washed laundry. </comment>
+        <uncertainty>
+          <lognormal meanValue="0.0114285714285714" mu="-4.472" variance="0.0006" varianceWithPedigreeUncertainty="0.1346" />
+          <pedigreeMatrix reliability="3" completeness="5" temporalCorrelation="3" geographicalCorrelation="5" furtherTechnologyCorrelation="5" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <classification classificationId="2f4a2f91-9a23-4149-a82f-de8e8abb1019">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">35310: Organic surface active agents, except soap</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="21c6c4fc-8d02-4230-b6c7-5cdf7a8f3220" unitId="980b811e-3905-4797-82a5-173f5568bc7e" amount="3.276" intermediateExchangeId="1125e767-7b5d-442e-81d6-9b0d3e1919ac" activityLinkId="fa126864-ed17-495a-ae52-282d8e351b90">
+        <name xml:lang="en">heat, district or industrial, natural gas</name>
+        <unitName xml:lang="en">MJ</unitName>
+        <comment xml:lang="en">According to "Máša el at (2013),, the average heat energy consumption (kWh) per kg of  laundry is 0.91 kWh. This is equivalent to 3.276 MJ.   </comment>
+        <uncertainty>
+          <lognormal meanValue="3.276" mu="1.187" variance="0.0006" varianceWithPedigreeUncertainty="0.1346" />
+          <pedigreeMatrix reliability="3" completeness="5" temporalCorrelation="3" geographicalCorrelation="5" furtherTechnologyCorrelation="5" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <property propertyId="48c987bb-3144-4872-b5c7-b1389c40be25" amount="1" mathematicalRelation="" unitId="980b811e-3905-4797-82a5-173f5568bc7e">
+          <name xml:lang="en">heating value, net</name>
+          <unitName xml:lang="en">MJ</unitName>
+        </property>
+        <classification classificationId="da9e0ee4-0a34-499e-9f51-82a5235d243c">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17300: Steam and hot water</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="2fd273b0-cd7a-434e-bb1f-ad8157290482" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.15" isCalculatedAmount="false" mathematicalRelation="" intermediateExchangeId="d69294d7-8d64-4915-a896-9996a014c410" activityLinkId="ab001d87-6d02-4579-8ae6-9502fd4c2a75">
+        <name xml:lang="en">electricity, low voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">According to "Máša, V., Bobák, P., Kuba, P., &amp; Stehlík, P. (2013). Analysis of energy efficient and environmentally friendly technologies in professional laundry service. Clean Technologies and Environmental Policy, 15(3), 445-457", the average electrical energy (kWh) consumption per kg washed, dryed, and ironed laundry is 0.15 kWh. This includes the total electricty consumption during the different stages of the  process. </comment>
+        <uncertainty>
+          <lognormal meanValue="0.15" mu="-1.897" variance="0.0006" varianceWithPedigreeUncertainty="0.1346" />
+          <pedigreeMatrix reliability="3" completeness="5" temporalCorrelation="3" geographicalCorrelation="5" furtherTechnologyCorrelation="5" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="4ec9c513-f6c2-4ab4-8e44-523949971cb7" unitId="de5b3c87-0e35-4fb0-9765-4f3ba34c99e5" amount="-0.000100048" isCalculatedAmount="true" mathematicalRelation="" intermediateExchangeId="f33b4dc5-f3af-4ca8-aeff-3deeb7159ec1" activityLinkId="23c4c495-425e-4d67-8d51-0cf18354ec9e" productionVolumeAmount="1940180.84" productionVolumeMathematicalRelation="">
+        <name xml:lang="en">wastewater, from residence</name>
+        <unitName xml:lang="en">m3</unitName>
+        <comment xml:lang="en">The amount of waste water generation was considered to be 96% of the water input, according to Máša et al (2013), with 4% of the water lost as steam during the process. </comment>
+        <uncertainty>
+          <lognormal meanValue="-0.000100048" mu="-9.21" variance="0.0006" varianceWithPedigreeUncertainty="0.1346" />
+          <pedigreeMatrix reliability="3" completeness="5" temporalCorrelation="3" geographicalCorrelation="5" furtherTechnologyCorrelation="5" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <property propertyId="38f94dd1-d5aa-41b8-b182-c0c42985d9dc" amount="0" unitId="7b75baf0-cbee-45e6-bf66-af119da06553">
+          <name xml:lang="en">price</name>
+          <unitName xml:lang="en">EUR2005</unitName>
+          <comment xml:lang="en">Waste products are assigned a price of zero as they are assumed to require further treatment.</comment>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="999.662523843921" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">wet mass-dry mass</comment>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="2962.17230710238" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water mass/dry mass</comment>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="0.33747615607878" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">Tap water dry mass was used as an estimation of the wastewater dry mass. This approach was chosen when the addition of compunds in wastewater was smaller than the mineral content estimated using the chemical properties of tap water in ecoinvent v2.2 report 8, Tab 93.1.</comment>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0.19942149626799" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">0.0673 kg TOC/m3 (Tab A.17, ecoinvent v2.2 report 13_I). TOC was considered as Total Carbon.</comment>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1000" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">Density of water was assumed that of tap water 1kg/L, that is 1000kg/m3.</comment>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.19942149626799" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0673" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <classification classificationId="ee3238ec-ca7a-4ddc-af1b-e7c35957b9b6">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">Waste</classificationValue>
+        </classification>
+        <classification classificationId="34f49fca-a18e-48df-a635-ee7e24ef6dbb">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">39920: Sewage sludge</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="42f301c7-6c87-48d2-9590-90bf4a9d95da" unitId="de5b3c87-0e35-4fb0-9765-4f3ba34c99e5" amount="-0.012405952" isCalculatedAmount="true" mathematicalRelation="" intermediateExchangeId="f33b4dc5-f3af-4ca8-aeff-3deeb7159ec1" activityLinkId="86b9270e-4a1b-4c13-b1af-0141d684adee" productionVolumeAmount="1940180.84" productionVolumeMathematicalRelation="">
+        <name xml:lang="en">wastewater, from residence</name>
+        <unitName xml:lang="en">m3</unitName>
+        <comment xml:lang="en">The amount of waste water generation was considered to be 96% of the water input, according to Máša et al (2013), with 4% of the water lost as steam during the process. </comment>
+        <uncertainty>
+          <lognormal meanValue="-0.012405952" mu="-4.39" variance="0.0006" varianceWithPedigreeUncertainty="0.1346" />
+          <pedigreeMatrix reliability="3" completeness="5" temporalCorrelation="3" geographicalCorrelation="5" furtherTechnologyCorrelation="5" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <property propertyId="38f94dd1-d5aa-41b8-b182-c0c42985d9dc" amount="0" unitId="7b75baf0-cbee-45e6-bf66-af119da06553">
+          <name xml:lang="en">price</name>
+          <unitName xml:lang="en">EUR2005</unitName>
+          <comment xml:lang="en">Waste products are assigned a price of zero as they are assumed to require further treatment.</comment>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="999.662523843921" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">wet mass-dry mass</comment>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="2962.17230710238" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water mass/dry mass</comment>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="0.33747615607878" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">Tap water dry mass was used as an estimation of the wastewater dry mass. This approach was chosen when the addition of compunds in wastewater was smaller than the mineral content estimated using the chemical properties of tap water in ecoinvent v2.2 report 8, Tab 93.1.</comment>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0.19942149626799" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">0.0673 kg TOC/m3 (Tab A.17, ecoinvent v2.2 report 13_I). TOC was considered as Total Carbon.</comment>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1000" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">Density of water was assumed that of tap water 1kg/L, that is 1000kg/m3.</comment>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.19942149626799" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0673" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <classification classificationId="ee3238ec-ca7a-4ddc-af1b-e7c35957b9b6">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">Waste</classificationValue>
+        </classification>
+        <classification classificationId="34f49fca-a18e-48df-a635-ee7e24ef6dbb">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">39920: Sewage sludge</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <elementaryExchange id="19889386-ddfa-4d6b-865d-3e8e3cd9d70b" unitId="de5b3c87-0e35-4fb0-9765-4f3ba34c99e5" casNumber="007732-18-5" amount="0.000494" isCalculatedAmount="true" mathematicalRelation="water_consumption_per_kg/1000* (1-.962)" elementaryExchangeId="075e433b-4be4-448e-9510-9a5029c1ce94" formula="H2O">
+        <name xml:lang="en">Water</name>
+        <unitName xml:lang="en">m3</unitName>
+        <comment xml:lang="en">considering 4% of water loss to air</comment>
+        <uncertainty>
+          <lognormal meanValue="0.000494" mu="-7.613" variance="0.0006" varianceWithPedigreeUncertainty="0.1346" />
+          <pedigreeMatrix reliability="3" completeness="5" temporalCorrelation="3" geographicalCorrelation="5" furtherTechnologyCorrelation="5" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <synonym xml:lang="en">oxidane</synonym>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="1000" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="0" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1000" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <compartment subcompartmentId="7011f0aa-f5f9-4901-8c10-884ad8296812">
+          <compartment xml:lang="en">air</compartment>
+          <subcompartment xml:lang="en">unspecified</subcompartment>
+        </compartment>
+        <outputGroup>4</outputGroup>
+      </elementaryExchange>
+    </flowData>
+    <modellingAndValidation>
+      <representativeness systemModelId="290c1f85-4cc4-4fa1-b0c8-2cb7f4276dce">
+        <systemModelName xml:lang="en">Allocation, cut-off by classification</systemModelName>
+        <samplingProcedure xml:lang="en">Data on average water and enegy consumption, as well as the size of wash load per washing cycle has been taken from Máša, V., Bobák, P., Kuba, P., &amp; Stehlík, P. (2013). Analysis of energy efficient and environmentally friendly technologies in professional laundry service. Clean Technologies and Environmental Policy, 15(3), 445-457.
+The composition of waste water was assumed as a generic waste water. 
+Data on average detergent use was estimated based on average supplier data. 
+</samplingProcedure>
+        <extrapolations xml:lang="en">This dataset has been extrapolated from year 2018 to the year of the calculation (2021). The uncertainty has been adjusted accordingly.</extrapolations>
+      </representativeness>
+      <review reviewerId="35d091e9-38c2-4037-9efe-a73673c57123" reviewerName="Emilia Moreno Ruiz" reviewerEmail="moreno@ecoinvent.org" reviewDate="2018-05-09" reviewedMajorRelease="3" reviewedMinorRelease="0" reviewedMajorRevision="0" reviewedMinorRevision="17">
+        <details>
+          <text xml:lang="en" index="0"></text>
+        </details>
+        <otherDetails xml:lang="en"></otherDetails>
+      </review>
+      <review reviewerId="c4597934-ecac-422c-b431-382e85fdcb83" reviewerName="[System]" reviewerEmail="support@ecoinvent.org" reviewDate="2018-05-16" reviewedMajorRelease="3" reviewedMinorRelease="0" reviewedMajorRevision="0" reviewedMinorRevision="17">
+        <details />
+        <otherDetails xml:lang="en">Validation warnings:
+
+- Mass and/or economic deficit in activity dataset exceeds either 0.1% of input or output sum:
+
+Property 'carbon content, non-fossil':
+ - Input='0', Output='0,0008416538'
+ - Input &lt; output by 0,0008416538 kg (100% of output)
+
+Property 'carbon content, fossil':
+ - Input='7,8526680950141E-06', Output='0'
+ - Input &gt; output by 7,8526680950141E-06 kg
+
+Property 'dry mass':
+ - Input='0,00438719002902414', Output='0,00422047680792122'
+ - Input &gt; output by 0,000166713221102917 kg (3,95% of output)
+
+
+- The dataset contains user added exchange master data entries. The following user added exchanges do not contain product information data. Please consider adding the appropriate data before submitting the dataset for review.
+ - washing, drying and finishing laundry
+
+- Uncertainty shall always be provided for all primary data inputs (exchange amounts, properties and parameters), except for the amount and properties of reference products.
+ -- Property(ies): carbon content, fossil=0, carbon content, non-fossil=0,19942149626799, dry mass=0,33747615607878, wet mass=1000, water content=2962,17230710238, water in wet mass=999,662523843921, water in wet mass=1000, carbon content, non-fossil=0, carbon content, fossil=0, dry mass=0, wet mass=1000
+
+- Pedigree information shall always be provided for all uncertainties of primary data inputs (exchange amounts, properties and parameters), except for the amount and properties of reference products.
+ -- Property(ies): carbon content, fossil=0, carbon content, non-fossil=0,19942149626799, dry mass=0,33747615607878, wet mass=1000, water content=2962,17230710238, water in wet mass=999,662523843921, water in wet mass=1000, carbon content, non-fossil=0, carbon content, fossil=0, dry mass=0, wet mass=1000
+
+- The input exchange 'washing machine' does not have an activity link and therefore requires a market for that input to be available. If the market is not available the dataset will be put on hold at the end of its review and will remain on hold until such a market has been accepted into the ecoinvent database.
+
+</otherDetails>
+      </review>
+    </modellingAndValidation>
+    <administrativeInformation>
+      <dataEntryBy personId="c0c866ac-ead0-4351-a0ea-6ff79da56c74" isActiveAuthor="true" personName="Amir Safaei" personEmail="safaei@ecoinvent.org" />
+      <dataGeneratorAndPublication personId="c0c866ac-ead0-4351-a0ea-6ff79da56c74" personName="Amir Safaei" personEmail="safaei@ecoinvent.org" dataPublishedIn="2" publishedSourceId="9d551a02-5636-4fdb-be47-7280b0838baf" publishedSourceYear="2013" publishedSourceFirstAuthor="Vítězslav Máša " isCopyrightProtected="true" accessRestrictedTo="1" />
+      <fileAttributes majorRelease="3" minorRelease="0" majorRevision="2" minorRevision="0" internalSchemaVersion="2.0.12" defaultLanguage="en" creationTimestamp="2018-04-04T14:59:42" lastEditTimestamp="2018-05-16T17:01:25" fileGenerator="EcoEditor 3.11.1000.30" fileTimestamp="2018-05-16T17:01:25" contextId="de659012-50c4-4e96-b54a-fc781bf987ab">
+        <contextName xml:lang="en">ecoinvent</contextName>
+      </fileAttributes>
+    </administrativeInformation>
+  </childActivityDataset>
+</ecoSpold>

@@ -1,0 +1,226 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ecoSpold xmlns="http://www.EcoInvent.org/EcoSpold02">
+  <childActivityDataset>
+    <activityDescription>
+      <activity id="df83287d-de94-4d73-b40f-2a09b345a41b" activityNameId="ba824c34-a83f-4991-a477-db5330e829c1" activityNameContextId="de659012-50c4-4e96-b54a-fc781bf987ab" parentActivityId="e1b9fa83-9f7b-5f98-8080-be84f12dabb3" inheritanceDepth="-1" type="1" specialActivityType="0">
+        <activityName xml:lang="en">electricity production, nuclear, aluminium industry</activityName>
+        <synonym xml:lang="en"></synonym>
+        <includedActivitiesStart xml:lang="en">Re-labelling dataset, not representing a real transformation activity. Conceptually, the activity can be said to start with the production of electricity.</includedActivitiesStart>
+        <includedActivitiesEnd xml:lang="en">Re-labelling dataset, not representing a real transformation activity. Conceptually, the activity can be said to end with a given amount of high voltage electricity labelled as specifically used for the production of electricity.</includedActivitiesEnd>
+        <generalComment>
+          <text xml:lang="en" index="5">Calculations are detailed in the report 'Calculating grid mixes for the aluminium industry in ecoinvent v3', available on the ecoinvent website.</text>
+          <text xml:lang="en" index="1">This is a dataset used to create a IAI Area, Russia &amp; RER w/o EU27 &amp; EFTA
+aluminium industry specific electricity market. The production volume represents the total amount of electricity from nuclear used in IAI Area, Russia &amp; RER w/o EU27 &amp; EFTA for aluminium production (electrolysis and ingot casting). </text>
+          <text xml:lang="en" index="4">The share of electricity produced using pressure water reactors and boiling water reactors is  is a weighted average of the share of each nuclear technology in aluminium-producing countries (weighted by nuclear power consumption for aluminium production). The share in each country is identical to the split used in ecoinvent v3.2. The share of each country in producing the global amount of nuclear power used in aluminium production was calculated regional data supplied by the International Aluminium Institute [IAI] and the European Aluminium Association [EAA], country-specific aluminium production volumes (source: EAA personal communication, IAI personnal communication) and general grid mix in the respective countries (sources: International Energy Agency or ecoinvent v3.2).</text>
+          <text xml:lang="en" index="3">It is assumed that the production of electricity in general and in aluminium industry specific power plants is identical. Details on actual electricity generation with each technology can be found in the corresponding datasets.</text>
+          <text xml:lang="en" index="2">Electricity markets specific to the aluminium-industry are needed in an LCI database because primary aluminium production is very energy intensive, and hence the location of production plants is often determined by access to large amounts of cheap electricity, which often results in an electricity mix that is different from the general grid mix of the countries where the production plants are located. </text>
+        </generalComment>
+        <tag>electricity, primary aluminium industry</tag>
+        <tag>re-labelling activity</tag>
+      </activity>
+      <classification classificationId="4c3b7870-d05d-41cf-9a2f-d901c183b0d8">
+        <classificationSystem xml:lang="en">ISIC rev.4 ecoinvent</classificationSystem>
+        <classificationValue xml:lang="en">3510:Electric power generation, transmission and distribution</classificationValue>
+      </classification>
+      <classification classificationId="a2151a25-4436-4100-b29b-85d910b709d4">
+        <classificationSystem xml:lang="en">EcoSpold01Categories</classificationSystem>
+        <classificationValue xml:lang="en">hard coal/power plants</classificationValue>
+      </classification>
+      <geography geographyId="0fc981f0-eb14-436c-834f-c6ce005a4dc4">
+        <shortname xml:lang="en">IAI Area, Russia &amp; RER w/o EU27 &amp; EFTA</shortname>
+        <comment>
+          <text xml:lang="en" index="1">All aluminium producing countries for which there is some nuclear power used for electrolysis.</text>
+        </comment>
+      </geography>
+      <technology technologyLevel="3" />
+      <timePeriod startDate="2015-01-01" endDate="2021-12-31" isDataValidForEntirePeriod="true">
+        <comment>
+          <text xml:lang="en" index="1">Production volume updated with 2015 data from IAI</text>
+        </comment>
+      </timePeriod>
+      <macroEconomicScenario macroEconomicScenarioId="d9f57f0a-a01f-42eb-a57b-8f18d6635801">
+        <name xml:lang="en">Business-as-Usual</name>
+      </macroEconomicScenario>
+    </activityDescription>
+    <flowData>
+      <intermediateExchange id="0f37f6cd-e886-5761-a3bd-aa4f0360a9db" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" variableName="Boil_RU" amount="0.430777401189262" mathematicalRelation="" intermediateExchangeId="66c93e71-f32b-4591-901c-55395db5c132" activityLinkId="5560a4bc-6aa8-430a-a5d3-d0a718327545">
+        <name xml:lang="en">electricity, high voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Calculated amount (see general comments).</comment>
+        <uncertainty>
+          <lognormal meanValue="0.430777401189262" mu="-0.8422" variance="0.0006" varianceWithPedigreeUncertainty="0.0053" />
+          <pedigreeMatrix reliability="3" completeness="2" temporalCorrelation="3" geographicalCorrelation="1" furtherTechnologyCorrelation="2" />
+        </uncertainty>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="26b50ab3-3ae8-5695-b2ee-578e4193d268" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" variableName="Boil" amount="8.76759000385204E-06" intermediateExchangeId="66c93e71-f32b-4591-901c-55395db5c132" activityLinkId="c10ce251-12c8-4cee-8dc6-f7a0708e95d3">
+        <name xml:lang="en">electricity, high voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Calculated amount (see general comments).</comment>
+        <uncertainty>
+          <lognormal meanValue="8.76759000385204E-06" mu="-11.64" variance="0.0006" varianceWithPedigreeUncertainty="0.0192" />
+          <pedigreeMatrix reliability="4" completeness="5" temporalCorrelation="3" geographicalCorrelation="1" furtherTechnologyCorrelation="2" />
+        </uncertainty>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="6d4302de-c759-5088-9db9-96dbeef10190" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" variableName="Pres" amount="0.00357986400157281" mathematicalRelation="" intermediateExchangeId="66c93e71-f32b-4591-901c-55395db5c132" activityLinkId="49d98f76-e911-48f8-98d5-0f11b525d4e9">
+        <name xml:lang="en">electricity, high voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Calculated amount (see general comments).</comment>
+        <uncertainty>
+          <lognormal meanValue="0.00357986400157281" mu="-5.632" variance="0.0006" varianceWithPedigreeUncertainty="0.0192" />
+          <pedigreeMatrix reliability="4" completeness="5" temporalCorrelation="3" geographicalCorrelation="1" furtherTechnologyCorrelation="2" />
+        </uncertainty>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="540085a2-ae2f-532f-a895-1b47f3fda063" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" variableName="PWHR" amount="0.000198137000087051" mathematicalRelation="" intermediateExchangeId="66c93e71-f32b-4591-901c-55395db5c132" activityLinkId="85634051-cecf-4176-b4ec-d7b3849f8592">
+        <name xml:lang="en">electricity, high voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Calculated amount (see general comments).</comment>
+        <uncertainty>
+          <lognormal meanValue="0.000198137000087051" mu="-8.527" variance="0.0006" varianceWithPedigreeUncertainty="0.0192" />
+          <pedigreeMatrix reliability="4" completeness="5" temporalCorrelation="3" geographicalCorrelation="1" furtherTechnologyCorrelation="2" />
+        </uncertainty>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="48c5d761-8361-55c4-b122-f3ffcdd92e5f" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="1" isCalculatedAmount="true" mathematicalRelation="Boil_RU+Pres+PWHR+Pres_RU+PWHR_RU+Boil" intermediateExchangeId="5d954e5c-1e6d-4f78-9fc3-d3857b7892cb" productionVolumeAmount="2598843568" productionVolumeMathematicalRelation="">
+        <name xml:lang="en">electricity, high voltage, aluminium industry</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Expressed as sum of contributing technologies (inputs) to allow uncertainty analysis: each technology share is uncertain, and in a Monte Carlo analysis will always be normalized by the sum contribution of each technology</comment>
+        <property propertyId="38f94dd1-d5aa-41b8-b182-c0c42985d9dc" amount="0.0977" isDefiningValue="false" mathematicalRelation="" unitId="7b75baf0-cbee-45e6-bf66-af119da06553">
+          <name xml:lang="en">price</name>
+          <unitName xml:lang="en">EUR2005</unitName>
+          <uncertainty>
+            <undefined minValue="0.0977" maxValue="0.0977" standardDeviation95="0" />
+            <pedigreeMatrix reliability="1" completeness="1" temporalCorrelation="3" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+          </uncertainty>
+          <comment xml:lang="en">Calculated in temporary price data. 94% of the average price (to account for a 6% loss in transformation and transmission) for electricity for industrial consumersin 2005 (excluded taxes). From IEA.</comment>
+        </property>
+        <productionVolumeComment xml:lang="en">The production volume, which is ultimately used to determine the share of nuclear-based electricity in the downstream market for aluminium industry specific high voltage electricity, is calculated by multiplying the following data:
+(1) public estimates of the electricity mix used to produce aluminium for different 'aluminium production regions' (more or less continent-sized) provided by the International Aluminium Institute (IAI), see http://www.world-aluminium.org/statistics/. These estimates are based on the subset of aluminium producers that provide information to the IAI.
+(2) primary aluminium production volumes, per aluminium production region, also compiled by the IAI.
+(3) electricity requirements, per tonne primary aluminium, for both Söderberg and prebake electrolysis technologies, as well as the proportion of aluminium produced by each technology.
+(4) electricity compensating line and transformation losses from production to consumption as medium voltage electricity, Losses estimated using ecoinvent v3.2 data.
+(5) Electricity consumption of ingot casting.</productionVolumeComment>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <outputGroup>0</outputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="be5b6424-fa0c-5197-b28f-c6cc7b9df8a1" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" variableName="Pres_RU" amount="0.565435824248424" intermediateExchangeId="66c93e71-f32b-4591-901c-55395db5c132" activityLinkId="902b41a2-ee5a-477b-a603-9c206302857e">
+        <name xml:lang="en">electricity, high voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Calculated amount (see general comments).</comment>
+        <uncertainty>
+          <lognormal meanValue="0.565435824248424" mu="-0.5702" variance="0.0006" varianceWithPedigreeUncertainty="0.0053" />
+          <pedigreeMatrix reliability="3" completeness="2" temporalCorrelation="3" geographicalCorrelation="1" furtherTechnologyCorrelation="2" />
+        </uncertainty>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="27206817-2b51-5ccd-b969-dd4cb31ba59e" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" variableName="PWHR_RU" amount="5.97065000262321E-09" intermediateExchangeId="66c93e71-f32b-4591-901c-55395db5c132" activityLinkId="bf23164c-9450-484c-8c92-5c8983edc736">
+        <name xml:lang="en">electricity, high voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Calculated amount (see general comments).</comment>
+        <uncertainty>
+          <lognormal meanValue="5.97065000262321E-09" mu="-18.94" variance="0.0006" varianceWithPedigreeUncertainty="0.0053" />
+          <pedigreeMatrix reliability="3" completeness="2" temporalCorrelation="3" geographicalCorrelation="1" furtherTechnologyCorrelation="2" />
+        </uncertainty>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+    </flowData>
+    <modellingAndValidation>
+      <representativeness systemModelId="290c1f85-4cc4-4fa1-b0c8-2cb7f4276dce">
+        <systemModelName xml:lang="en">Allocation, cut-off by classification</systemModelName>
+        <samplingProcedure xml:lang="en">IAI data used for total electricity used in the production of aluminium that is from nuclear power plants. ecoinvent data used to split nuclear-based electricity production to the respective technologies (pressure water reactor and boiling water reactor). The cited 93% representativeness is for IAI data (data based on 93% of global aluminium production). The percent representativeness of data used to split nuclear-based electricity production to different types of plants (national grid proxy) is 100%.</samplingProcedure>
+        <extrapolations xml:lang="en">This dataset has been extrapolated from year 2015 to the year of the calculation (2021). The uncertainty has been adjusted accordingly.</extrapolations>
+      </representativeness>
+      <review reviewerId="f86c02d3-2c12-4c25-ad03-33af05bcfe63" reviewerName="Tereza Levova" reviewerEmail="levova@ecoinvent.org" reviewDate="2018-06-12" reviewedMajorRelease="3" reviewedMinorRelease="0" reviewedMajorRevision="0" reviewedMinorRevision="8">
+        <details>
+          <text xml:lang="en" index="0"></text>
+        </details>
+        <otherDetails xml:lang="en"></otherDetails>
+      </review>
+      <review reviewerId="c4597934-ecac-422c-b431-382e85fdcb83" reviewerName="[System]" reviewerEmail="support@ecoinvent.org" reviewDate="2018-06-12" reviewedMajorRelease="3" reviewedMinorRelease="0" reviewedMajorRevision="0" reviewedMinorRevision="8">
+        <details>
+          <text xml:lang="en" index="0">Validation failed with errors:
+
+- Production volume of local datasets for a specific activity, time period, and macro-economic scenario must not exceed 99,5% of the production volume of the corresponding global.
+
+ Error: -  Exchange 'electricity, high voltage, aluminium industry', global (2012-2012) production volume 10991179382,7, sum of all non-global production volumes 13831535053. Local datasets used in calculation: IAI Area, EU27 &amp; EFTA (2012-2012) PV: 10546073145,6, RNA (2015-2015) PV: 686618339,4, IAI Area, Russia &amp; RER w/o EU27 &amp; EFTA (2015-2015) PV: 2598843568
+
+</text>
+        </details>
+        <otherDetails xml:lang="en">Validation warnings:
+
+- Mass and/or economic deficit in activity dataset exceeds either 0.1% of input or output sum:
+
+Property 'price':
+ - Input='0', Output='0,0976999999570755'
+ - Input &lt; output by 0,0976999999570755 EUR2005 (100% of output)
+
+
+</otherDetails>
+      </review>
+    </modellingAndValidation>
+    <administrativeInformation>
+      <dataEntryBy personId="ebf45305-b87c-4d3d-b74f-fbc6677bca1b" isActiveAuthor="false" personName="Lucia Valsasina" personEmail="valsasina@ecoinvent.org" />
+      <dataGeneratorAndPublication personId="ebf45305-b87c-4d3d-b74f-fbc6677bca1b" personName="Lucia Valsasina" personEmail="valsasina@ecoinvent.org" isCopyrightProtected="true" accessRestrictedTo="1" />
+      <fileAttributes majorRelease="3" minorRelease="0" majorRevision="1" minorRevision="0" internalSchemaVersion="2.0.12" defaultLanguage="en" lastEditTimestamp="2018-06-12T17:39:20" fileGenerator="EcoEditor 3.11.1000.30" fileTimestamp="2018-06-12T17:39:20" contextId="de659012-50c4-4e96-b54a-fc781bf987ab">
+        <contextName xml:lang="en">ecoinvent</contextName>
+      </fileAttributes>
+    </administrativeInformation>
+  </childActivityDataset>
+</ecoSpold>

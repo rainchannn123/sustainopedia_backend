@@ -1,0 +1,520 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ecoSpold xmlns="http://www.EcoInvent.org/EcoSpold02">
+  <childActivityDataset>
+    <activityDescription>
+      <activity id="052e38e6-6e7e-4d7a-9b8a-7ab6f69d17aa" activityNameId="2316f0a2-ef1a-43ea-9459-f280f1e421a0" parentActivityId="6147443a-49d4-45b7-af93-484d00aa9ffb" inheritanceDepth="-1" type="1" specialActivityType="0">
+        <activityName xml:lang="en">cement production, pozzolana and fly ash 36-55%</activityName>
+        <synonym xml:lang="en">Portland cement with additions</synonym>
+        <synonym xml:lang="en">type IP</synonym>
+        <includedActivitiesStart xml:lang="en">This activity starts with the reception of raw materials.</includedActivitiesStart>
+        <includedActivitiesEnd xml:lang="en">This activity ends with the cement produced in the cement mill. Packaging is not included and no production waste is assumed. </includedActivitiesEnd>
+        <generalComment>
+          <text xml:lang="en" index="1">The dataset describes the production of cement type IP according to NTP 334.009 / ASTM C150  for Portland cements.</text>
+          <text xml:lang="en" index="2">The weight composition of the cement is: 60% clinker, 2.4% gypsum and 37.6% pozzolana.</text>
+          <text xml:lang="en" index="4">The cement density is 3g/ml and the resitance is 35MPa according to the NTP 334.090 standard (product description of cement IP of UNACEM).</text>
+        </generalComment>
+      </activity>
+      <classification classificationId="36cd730c-4485-4fe9-8efe-8850f771796d">
+        <classificationSystem xml:lang="en">ISIC rev.4 ecoinvent</classificationSystem>
+        <classificationValue xml:lang="en">2394:Manufacture of cement, lime and plaster</classificationValue>
+      </classification>
+      <geography geographyId="11387d6c-7d7e-11de-9ae2-0019e336be3a">
+        <shortname xml:lang="en">PE</shortname>
+        <comment>
+          <text xml:lang="en" index="1">Representative production of cement type IP in Peru. Data based from main cement producers and personal comunications with local experts.</text>
+        </comment>
+      </geography>
+      <technology technologyLevel="3">
+        <comment>
+          <text xml:lang="en" index="1">Represent the current technology for cement production in Peru.</text>
+        </comment>
+      </technology>
+      <timePeriod startDate="2014-01-01" endDate="2021-12-31" isDataValidForEntirePeriod="false">
+        <comment>
+          <text xml:lang="en" index="1">The production volume of 2016 is considered. Data from sustainability reports of 2014 to 2017 is used.</text>
+        </comment>
+      </timePeriod>
+      <macroEconomicScenario macroEconomicScenarioId="d9f57f0a-a01f-42eb-a57b-8f18d6635801">
+        <name xml:lang="en">Business-as-Usual</name>
+      </macroEconomicScenario>
+    </activityDescription>
+    <flowData>
+      <intermediateExchange id="180d1ed0-7135-4868-a566-2cb592998896" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" variableName="clinker" amount="0.6" isCalculatedAmount="false" mathematicalRelation="" sourceId="ed0fe1c6-1df8-4e1d-b464-63d547c202de" sourceYear="2017" sourceFirstAuthor="Nicholas Myers" intermediateExchangeId="1f41586d-0d8a-4c7c-8473-dd8351bab538" activityLinkId="1000b933-63ca-4b89-9844-aa2654a814c3">
+        <name xml:lang="en">clinker</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">Estimated value. The most sold cement of Yura is TIPO IP according to NTP 334.090 / ASTM C595. The blending is 40% of highly reactive pozzolanas (Ing. Guerra, 2017)</comment>
+        <uncertainty>
+          <lognormal meanValue="0.6" mu="-0.5108" variance="0.0006" varianceWithPedigreeUncertainty="0.0052" />
+          <pedigreeMatrix reliability="3" completeness="3" temporalCorrelation="3" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en">Variance of log-transformed data was taken from ecoinvent report no 1, table 10.3. Value represents demand of products, electricity etc. for input/output group c.
+</comment>
+        </uncertainty>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water mass/dry mass</comment>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">Tab 3.2, part II ecoinvent v2.2 report 7</comment>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">Tab 3.2, part II ecoinvent v2.2 report 7</comment>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <classification classificationId="a0f60b94-6f93-418b-8d07-bf92b0588f21">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">37430: Cement clinkers</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="9605af46-b6ca-4abe-aa59-b2f9c9b774e3" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" variableName="cement" amount="1" intermediateExchangeId="b2c3a391-3842-4046-8955-8ae53160a676" productionVolumeAmount="2624440000" productionVolumeVariableName="cement_PV" productionVolumeMathematicalRelation="10094000000*.26">
+        <name xml:lang="en">cement, pozzolana and fly ash 36-55%</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">Refernce product with a density between 3-3.15 g/ml.</comment>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="38f94dd1-d5aa-41b8-b182-c0c42985d9dc" variableName="cement_price_EUR2005" amount="0.0615" unitId="7b75baf0-cbee-45e6-bf66-af119da06553">
+          <name xml:lang="en">price</name>
+          <unitName xml:lang="en">EUR2005</unitName>
+          <comment xml:lang="en">2005 import and export prices (total trades (USD) divided by total weight (kg) in China, India, USA, Japan, Russia and Europe, major producers and consumers (http://www.cementchina.net/freport/showfre.asp?id=749) from UN Commodity Trade Statistics Database  (http://data.un.org/Explorer.aspxDatabase [Accessed 2 July 2010]). Commodity: Cement (portland, aluminious, slag or hydraulic)</comment>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <productionVolumeComment xml:lang="en"> Calculated value. 
+The total production of cement for Peru was 10’094’000 tons in 2016 (ASOCEM, 2016) provided by 8 integrated clinker and cement plants (GCR, 2016). 
+ The most produced cements in Peru are portland cement (42%), type IP (26%) and type ICo (11%).</productionVolumeComment>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="ff592c08-adac-4b6c-b1da-69839f05c992">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">37440: Portland cement, aluminous cement, slag cement and similar hydraulic cements, except in the form of clinkers</classificationValue>
+        </classification>
+        <outputGroup>0</outputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="9fdfa894-fc2b-43f2-aa6a-7a49b8781490" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" amount="0.376" isCalculatedAmount="true" mathematicalRelation="(1-clinker-gypsum)" intermediateExchangeId="e89b4064-afcc-4f08-9481-651b7eaa90a1" activityLinkId="db39558b-4556-4063-8c23-3f67825f0836">
+        <name xml:lang="en">clay</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">Literature value. Approximation for Pozzolana.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.376" mu="-0.9782" variance="0.0006" varianceWithPedigreeUncertainty="0.0126" />
+          <pedigreeMatrix reliability="3" completeness="5" temporalCorrelation="3" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0.0362694300518135" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0.035" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="0.965" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <classification classificationId="dc751cdf-5b71-4c39-8708-66aa2b6f940b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">15400: Clays</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="69f7c94f-4295-4320-bce8-d2869de99c7c" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" casNumber="107-21-1" amount="0.00031" isCalculatedAmount="false" mathematicalRelation="" sourceId="efeb6874-be8d-49ac-b739-c64f98596010" sourceYear="2007" sourceFirstAuthor="Kellenberger D." intermediateExchangeId="4052f31f-cd94-4b86-b075-210914586a0f" activityLinkId="80cb4670-bd66-40b7-b84a-3dc350fbce80">
+        <name xml:lang="en">ethylene glycol</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">Literature value. Ancillary product for grinding. As no data from Peruvian producer was founded, the value of Global datastet (cement production, alternative constituents 21-35%) has been used.
+
+Source: 2007, Kellenberger D., Althaus H.-J., Jungbluth N., Künniger T., Life Cycle Inventories of Building Products, Final report ecoinvent data v2.0, 7, Dübendorf, CH, Swiss Centre for LCI, Empa - TSL, 3 - SeparatePublication, CD-ROM (Accessed on october 15th 2017)</comment>
+        <uncertainty>
+          <lognormal meanValue="0.00031" mu="-8.079" variance="0.0006" varianceWithPedigreeUncertainty="0.0132" />
+          <pedigreeMatrix reliability="3" completeness="3" temporalCorrelation="4" geographicalCorrelation="5" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en">Variance of log-transformed data was taken from ecoinvent report no 1, table 10.3. Value represents demand of products, electricity etc. for input/output group c.
+</comment>
+        </uncertainty>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">C2H6O2</comment>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0.387096774193548" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">C2H6O2</comment>
+        </property>
+        <property propertyId="48c987bb-3144-4872-b5c7-b1389c40be25" amount="23.44" mathematicalRelation="" unitId="980b811e-3905-4797-82a5-173f5568bc7e">
+          <name xml:lang="en">heating value, net</name>
+          <unitName xml:lang="en">MJ</unitName>
+          <comment xml:lang="en">LHV is calculated based on the elemental composition of the substance. Based on the CAS number of the substance (000107-21-1), the chemical formula of the substance is found to be: C2H6O2, (PubChem 2020).
+Reference: Kim, S., Chen, J., Cheng, T., Gindulyte, A., He, J., He, S., Li, Q., Shoemaker, B. A., Thiessen, P. A., Yu, B., Zaslavsky, L., Zhang, J., &amp; Bolton, E. E. (2019). PubChem 2019 update: improved access to chemical data. Nucleic acids research, 47(D1), D1102–D1109. https://doi.org/10.1093/nar/gky1033</comment>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water mass/dry mass</comment>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.387096774193548" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.387096774193548" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <classification classificationId="3576eab6-371d-4c87-96a2-f7bb71d66f45">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">34170: Ethers, alcohol peroxides, ether peroxides, epoxides, acetals and hemiacetals, and their halogenated, sulphona[…]</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="a7c882ab-7496-4293-a2da-b60a2e797336" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" variableName="gypsum" amount="0.024" isCalculatedAmount="true" mathematicalRelation="clinker*0.04" sourceId="d384ad15-baf3-40d7-a685-94ab7ea7875d" sourceYear="2017" sourceFirstAuthor="Manuel Lascarro" intermediateExchangeId="dd0cbafd-b176-4ba4-860a-25a2e0663d14" activityLinkId="f80fcaf5-d939-48cd-970a-6e84ff35c7ed">
+        <name xml:lang="en">gypsum, mineral</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">Literature Value. 4% of gypsum per clinker mass (2.4% of total weight).</comment>
+        <uncertainty>
+          <lognormal meanValue="0.024" mu="-3.73" variance="0.0006" varianceWithPedigreeUncertainty="0.0113" />
+          <pedigreeMatrix reliability="3" completeness="3" temporalCorrelation="4" geographicalCorrelation="3" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en">Variance of log-transformed data was taken from ecoinvent report no 1, table 10.3. Value represents demand of products, electricity etc. for input/output group c.</comment>
+        </uncertainty>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water mass/dry mass</comment>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">CaSO4-2H2O, Tab 5.2, ecoinvent v2.2 report 7, part VIII</comment>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">CaSO4-2H2O, Tab 5.2, ecoinvent v2.2 report 7, part VIII</comment>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="32a7d945-9669-498f-b623-03c083030c64">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">15200: Gypsum; anhydrite; limestone flux; limestone and other calcareous stone, of a kind used for the manufacture of[…]</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="a97352ae-8e36-457c-8f00-3716485fe31f" unitId="5b972631-34e3-4db7-a615-f6931770a0cb" amount="5.36E-11" isCalculatedAmount="true" mathematicalRelation="5.36e-11* cement" intermediateExchangeId="c08228bd-b9ab-4278-a40b-2139980899b3" activityLinkId="acdfef03-8bde-4df5-a903-f9a24c59ad5c">
+        <name xml:lang="en">cement factory</name>
+        <unitName xml:lang="en">unit</unitName>
+        <comment xml:lang="en">Literature Value. From the global dataset " alternative constituents 21-35%" (retrieved 2018/01/04)</comment>
+        <uncertainty>
+          <lognormal meanValue="5.36E-11" mu="-23.65" variance="0.0006" varianceWithPedigreeUncertainty="0.0146" />
+          <pedigreeMatrix reliability="3" completeness="5" temporalCorrelation="3" geographicalCorrelation="5" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en">Variance of log-transformed data was taken from ecoinvent report no 1, table 10.3. Value represents demand of products, electricity etc. for input/output group c.
+</comment>
+        </uncertainty>
+        <classification classificationId="f986e611-0d52-4a9c-a8c2-1329b9fee31f">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">53269: Other constructions for manufacturing</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="65535919-bcef-4c30-931e-3dd7948143d1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" variableName="steel" amount="0.00011" isCalculatedAmount="false" mathematicalRelation="" sourceId="efeb6874-be8d-49ac-b739-c64f98596010" sourceYear="2007" sourceFirstAuthor="Kellenberger D." intermediateExchangeId="817c3650-4fed-4ef2-b9b6-404a198834e6" activityLinkId="57879c49-5349-4a5f-adff-a43ee572ce46">
+        <name xml:lang="en">steel, low-alloyed</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">Literature value. As no data from Peruvian producer was founded, the value of Global datastet (cement production, alternative constituents 21-35%) has been used.
+
+Source: 2007, Kellenberger D., Althaus H.-J., Jungbluth N., Künniger T., Life Cycle Inventories of Building Products, Final report ecoinvent data v2.0, 7, Dübendorf, CH, Swiss Centre for LCI, Empa - TSL, 3 - SeparatePublication, CD-ROM (Accessed on october 15th 2017)</comment>
+        <uncertainty>
+          <lognormal meanValue="0.00011" mu="-9.115" variance="0.0006" varianceWithPedigreeUncertainty="0.0146" />
+          <pedigreeMatrix reliability="3" completeness="5" temporalCorrelation="3" geographicalCorrelation="5" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en">Variance of log-transformed data was taken from ecoinvent report no 1, table 10.3. Value represents demand of products, electricity etc. for input/output group c.
+</comment>
+        </uncertainty>
+        <property propertyId="48c987bb-3144-4872-b5c7-b1389c40be25" amount="0" mathematicalRelation="" unitId="980b811e-3905-4797-82a5-173f5568bc7e">
+          <name xml:lang="en">heating value, net</name>
+          <unitName xml:lang="en">MJ</unitName>
+          <comment xml:lang="en">Non combustible products are assumed to have an LHV equal to zero (0).</comment>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0.005" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.005" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.005" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="012af131-55e8-448d-a147-251ce352304e">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">41122: Alloy steel in ingots or other primary forms and semi-finished products of alloy steel</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="48dd1f85-d058-4c54-b29f-329c7665e0ba" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" variableName="electricity" amount="0.037" isCalculatedAmount="false" mathematicalRelation="" intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d" activityLinkId="18e24bb3-bf66-46ac-915a-83bb26ef13c3">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Literature value. the electricity considered for cement production is 37kWh per ton of cement, which is aligned with the current ecoinvent datasets.
+
+Source: Boesch &amp; Hellweg 2010, 2010, Boesch, M.E., Hellweg, S., Identifying Improvement Potentials in Cement Production with Life Cycle Assessment, Environmental Science &amp; Technology, 44, 23, 9143-9149, 1 - Article, Supporting information is available via http://pubs.acs.org (accessed on october 15th 2017)</comment>
+        <uncertainty>
+          <lognormal meanValue="0.037" mu="-3.297" variance="0.0006" varianceWithPedigreeUncertainty="0.0113" />
+          <pedigreeMatrix reliability="3" completeness="3" temporalCorrelation="4" geographicalCorrelation="3" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en">Variance of log-transformed data was taken from ecoinvent report no 1, table 10.3. Value represents demand of products, electricity etc. for input/output group c.
+</comment>
+        </uncertainty>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+    </flowData>
+    <modellingAndValidation>
+      <representativeness percent="67" systemModelId="290c1f85-4cc4-4fa1-b0c8-2cb7f4276dce">
+        <systemModelName xml:lang="en">Allocation, cut-off by classification</systemModelName>
+        <samplingProcedure xml:lang="en">The data is compiled based on different data sources, including sustainability reports, literature values and expert judgements. Most data is derived from sustainability reports of two principal cement producers of Peru (Pacasmayo and UNACEM). The data is checked, completed and validated by local experts. In total, it is estimated that the data considered is representative for 67% of cement production in all the country (market share of the three main cement producers).
+Unit flows were calculated by dividing the amounts of inputs and outputs by the total clinker production in mass.
+The amount of the exchanges were calculated considering the arithmetic [weighted] average of the sample. No conversion to the geometric mean of the lognormal distribution was done, for consistency reasons with other Ecoinvent datasets.</samplingProcedure>
+        <extrapolations xml:lang="en">This dataset has been extrapolated from year 2017 to the year of the calculation (2021). The uncertainty has been adjusted accordingly.</extrapolations>
+      </representativeness>
+      <review reviewerId="f86c02d3-2c12-4c25-ad03-33af05bcfe63" reviewerName="Tereza Levova" reviewerEmail="levova@ecoinvent.org" reviewDate="2017-11-30" reviewedMajorRelease="3" reviewedMinorRelease="0" reviewedMajorRevision="0" reviewedMinorRevision="31">
+        <details>
+          <text xml:lang="en" index="0"></text>
+        </details>
+        <otherDetails xml:lang="en"></otherDetails>
+      </review>
+      <review reviewerId="35d091e9-38c2-4037-9efe-a73673c57123" reviewerName="Emilia Moreno Ruiz" reviewerEmail="moreno@ecoinvent.org" reviewDate="2019-04-24" reviewedMajorRelease="3" reviewedMinorRelease="0" reviewedMajorRevision="1" reviewedMinorRevision="2">
+        <details>
+          <text xml:lang="en" index="0"></text>
+        </details>
+        <otherDetails xml:lang="en"></otherDetails>
+      </review>
+      <review reviewerId="35d091e9-38c2-4037-9efe-a73673c57123" reviewerName="Emilia Moreno Ruiz" reviewerEmail="moreno@ecoinvent.org" reviewDate="2017-11-30" reviewedMajorRelease="3" reviewedMinorRelease="0" reviewedMajorRevision="0" reviewedMinorRevision="31">
+        <details>
+          <text xml:lang="en" index="0"></text>
+        </details>
+        <otherDetails xml:lang="en"></otherDetails>
+      </review>
+      <review reviewerId="c4597934-ecac-422c-b431-382e85fdcb83" reviewerName="[System]" reviewerEmail="support@ecoinvent.org" reviewDate="2019-04-24" reviewedMajorRelease="3" reviewedMinorRelease="0" reviewedMajorRevision="1" reviewedMinorRevision="2">
+        <details />
+        <otherDetails xml:lang="en">Validation warnings:
+
+- Mass and/or economic deficit in activity dataset exceeds either 0.1% of input or output sum:
+
+Property 'dry mass':
+ - Input='0,98726', Output='1'
+ - Input &lt; output by 0,01274 kg (1,27% of output)
+
+Property 'carbon content, fossil':
+ - Input='0,00012055', Output='0'
+ - Input &gt; output by 0,00012055 kg
+
+Property 'water in wet mass':
+ - Input='0,01316', Output='0'
+ - Input &gt; output by 0,01316 kg
+
+
+- The total water in wet mass of all input exchanges (0,01316) and output exchanges (0) is unbalanced.
+
+</otherDetails>
+      </review>
+      <review reviewerId="c4597934-ecac-422c-b431-382e85fdcb83" reviewerName="[System]" reviewerEmail="support@ecoinvent.org" reviewDate="2018-03-06" reviewedMajorRelease="3" reviewedMinorRelease="0" reviewedMajorRevision="0" reviewedMinorRevision="31">
+        <details />
+        <otherDetails xml:lang="en">Validation warnings:
+
+- Mass and/or economic deficit in activity dataset exceeds either 0.1% of input or output sum:
+
+Property 'dry mass':
+ - Input='0,98726', Output='1'
+ - Input &lt; output by 0,01274 kg (1,27% of output)
+
+Property 'carbon content, fossil':
+ - Input='0,00012055', Output='0'
+ - Input &gt; output by 0,00012055 kg
+
+Property 'water in wet mass':
+ - Input='0,01316', Output='0'
+ - Input &gt; output by 0,01316 kg
+
+
+- The total water in wet mass of all input exchanges (0,01316) and output exchanges (0) is unbalanced.
+
+</otherDetails>
+      </review>
+      <review reviewerId="a7bfdeb7-32da-428a-9be3-12e2dbdcd1fc" reviewerName="Marion Sié" reviewerEmail="marion.sie@gmail.com" reviewDate="2017-11-30" reviewedMajorRelease="3" reviewedMinorRelease="0" reviewedMajorRevision="0" reviewedMinorRevision="31">
+        <details>
+          <text xml:lang="en" index="0"></text>
+        </details>
+        <otherDetails xml:lang="en"></otherDetails>
+      </review>
+    </modellingAndValidation>
+    <administrativeInformation>
+      <dataEntryBy personId="4306be76-15cc-426b-8ee1-0cfe672e3bd9" isActiveAuthor="true" personName="Simon Gmunder" personEmail="simon.gmuender@gmail.com" />
+      <dataGeneratorAndPublication personId="c75786e1-4f99-4021-94f3-3c57b16ea0b1" personName="Simon Gmünder" personEmail="simon.gmuender@gmail.com" dataPublishedIn="1" publishedSourceId="fb5dbd0f-bb14-41ce-aefb-06ffc9938145" publishedSourceYear="2017" publishedSourceFirstAuthor="Silva, F. B." isCopyrightProtected="true" accessRestrictedTo="1" />
+      <fileAttributes majorRelease="3" minorRelease="0" majorRevision="4" minorRevision="0" internalSchemaVersion="2.0.8" defaultLanguage="en" creationTimestamp="2017-11-14T18:17:02" lastEditTimestamp="2019-04-24T16:28:10" fileGenerator="EcoEditor 3.11.1000.19016" fileTimestamp="2019-04-24T16:28:10" contextId="de659012-50c4-4e96-b54a-fc781bf987ab">
+        <contextName xml:lang="en">ecoinvent</contextName>
+      </fileAttributes>
+    </administrativeInformation>
+  </childActivityDataset>
+</ecoSpold>

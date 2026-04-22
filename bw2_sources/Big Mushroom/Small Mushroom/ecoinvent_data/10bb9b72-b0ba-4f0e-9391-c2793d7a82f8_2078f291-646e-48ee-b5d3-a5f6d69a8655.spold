@@ -1,0 +1,1805 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ecoSpold xmlns="http://www.EcoInvent.org/EcoSpold02">
+  <childActivityDataset>
+    <activityDescription>
+      <activity id="10bb9b72-b0ba-4f0e-9391-c2793d7a82f8" activityNameId="e80e53c8-7b59-419b-bd49-4f20a24ab02f" parentActivityId="40af5163-5d60-45c2-9c50-accce4e82974" inheritanceDepth="-1" type="1" specialActivityType="0">
+        <activityName xml:lang="en">electrolysis of magnesium chloride, from titanium sponge production</activityName>
+        <includedActivitiesStart xml:lang="en">The activity starts with the reception of magnesium chloride, obtained from the production of titanium sponge using the Kroll process.</includedActivitiesStart>
+        <includedActivitiesEnd xml:lang="en">The activity ends with the recovery of magnesium and chlorine.
+
+Infrastructure use is not included as this process is assumed to take place in the same facility as titanium spong production.</includedActivitiesEnd>
+        <allocationComment />
+        <generalComment>
+          <text xml:lang="en" index="3">Reference: </text>
+          <text xml:lang="en" index="1">This dataset models the electrolysis of 1 kg of magnesium chloride produced during the production of titanium sponge using the Kroll process, which is modelled by the following reaction: TiCl4+ 2Mg -&gt; Ti + 2MgCl2. The electrolysis of magnesium chloride separates the magnesium from the chlorine through the following reaction: MgCl2 -&gt; Mg + Cl2. The recovered Mg is fed back to the reduction and distillation process (which produces titanium sponge) and the chlorine is fed back to the chlorination and refining process (which produces titanium tetrachloride).</text>
+          <text xml:lang="en" index="4">Gao, F., Nie, Z., Yang, D., Sun, B., Liu, Y., Gong, X., &amp; Wang, Z. (2018). Environmental impacts analysis of titanium sponge production using Kroll process in China. Journal of Cleaner Production, 174, 771-779. doi:https://doi.org/10.1016/j.jclepro.2017.09.240.</text>
+          <text xml:lang="en" index="2">This dataset is a copy of the dataset covering the geography of China (CN), which is based on Gao et al. (2018). The data is assumed to be representative also of the global situation, since the Kroll process is the most commonly used method for the production of titanium sponge.</text>
+        </generalComment>
+      </activity>
+      <classification classificationId="6fe7bc2b-4be4-48f7-92b0-f27dea9053ce">
+        <classificationSystem xml:lang="en">ISIC rev.4 ecoinvent</classificationSystem>
+        <classificationValue xml:lang="en">2420:Manufacture of basic precious and other non-ferrous metals</classificationValue>
+      </classification>
+      <geography geographyId="7846b897-7c04-4f9f-b607-2b83fcd9a74c">
+        <shortname xml:lang="en">RoW</shortname>
+        <comment>
+          <text xml:lang="en" index="1">The dataset has been approximated from the respective dataset for CN. The data is assumed to be representative also of the global situation.</text>
+        </comment>
+      </geography>
+      <technology technologyLevel="3">
+        <comment>
+          <text xml:lang="en" index="2">After refining, the magnesium is recycled and serves again as input to the reduction and distillation process, while chlorine (after it is filtrated and purified) is recycled and sent back to the chlorination process as an input.</text>
+          <text xml:lang="en" index="1">The reduction and distillation step of the Kroll process produces titanium sponge and magnesium chloride as a byproduct based on the following stoichiometric equation: TiCl4 + 2Mg -&gt; Ti + 2MgCl2. The magnesium chloride is then separated via electrolysis in order to recover the magnesium and chlorine through the following reaction: MgCl2 -&gt; Mg + Cl2.</text>
+          <text xml:lang="en" index="5">Based on the stoichiometric reaction of the reduction and distillation step, roughly 1.016 kg of Mg are required as input. Gao et al. (2018) report an input of 41 kg per metric ton of titanium sponge. The overall recovery rate of Mg is therefore approximately 96%.</text>
+          <text xml:lang="en" index="4">Because 0.093 kg of MgCl2 is lost in the reduction and distillation step, this means that 3.885 kg of MgCl2 per kg Ti are sent to electrolysis, out of which 1.342 kg of Cl are recovered. The amount of Cl recovered per kg of MgCl2 entering the electrolysis step is therefore 0.3455 kg and corresponds to a recovery rate of 46.4% in this step.</text>
+          <text xml:lang="en" index="3">According to Gao et al. (2018), the chlorination step (2TiO2 + 4Cl2 + 3C -&gt; 2TiCl4 + 2CO + CO2) requires 1620 kg of chlorine per metric ton of titanium sponge to compensate for the chlorine that is not recovered by the electrolysis of magnesium chloride. Based on stoichiometry, roughly 2962 kg of Cl2 are required to produce 1 metric ton of titanium sponge. This means the overall recovery rate of Cl is roughly 45%.</text>
+          <text xml:lang="en" index="6">0.97 kg of Mg is recovered out of the 3.885 kg of MgCl2 that goes to electrolysis. The amount of Mg recovered per kg of MgCl2 entering the electrolysis step is therefore 0.2509 kg and corresponds to a recovery rate of 98.3% in this step.</text>
+        </comment>
+      </technology>
+      <timePeriod startDate="2020-01-01" endDate="2024-12-31" isDataValidForEntirePeriod="true">
+        <comment>
+          <text xml:lang="en" index="1">Data are considered representative of current production practices. The data are assumed to be valid on average for 5 years after the publication of that article. </text>
+        </comment>
+      </timePeriod>
+      <macroEconomicScenario macroEconomicScenarioId="d9f57f0a-a01f-42eb-a57b-8f18d6635801">
+        <name xml:lang="en">Business-as-Usual</name>
+      </macroEconomicScenario>
+    </activityDescription>
+    <flowData>
+      <intermediateExchange id="ae09c28e-73ba-41be-93ee-916cd85de660" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0" isCalculatedAmount="true" mathematicalRelation="" intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d" productionVolumeAmount="0">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Value from Table 2 (column "Electrolysis of MgCl2") in Gao et al. (2018). The amount of electricity consumed in the electrolysis process is 1.45E+04 kWh per metric ton of titanium sponge. This value was adjusted considering that for 1 kg of titanium sponge produced, 3.885 kg of MgCl2 is sent to the electrolysis step.
+
+Reference:
+Gao, F., Nie, Z., Yang, D., Sun, B., Liu, Y., Gong, X., &amp; Wang, Z. (2018). Environmental impacts analysis of titanium sponge production using Kroll process in China. Journal of Cleaner Production, 174, 771-779. doi:https://doi.org/10.1016/j.jclepro.2017.09.240.</comment>
+        <uncertainty>
+          <undefined minValue="0" maxValue="0" standardDeviation95="0" />
+          <pedigreeMatrix reliability="1" completeness="1" temporalCorrelation="1" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="ee9f7b5d-5208-4012-afd8-00bddd51f419" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" variableName="" casNumber="7786-30-3" amount="0" mathematicalRelation="" intermediateExchangeId="27406b61-9f47-4647-bf10-c3f60c69ee91" productionVolumeAmount="0" productionVolumeVariableName="RP_PV" productionVolumeMathematicalRelation="200000000*3.885">
+        <name xml:lang="en">magnesium chloride, from titanium sponge production</name>
+        <unitName xml:lang="en">kg</unitName>
+        <synonym xml:lang="en">Magnesium dichloride</synonym>
+        <synonym xml:lang="en">magnesium;dichloride</synonym>
+        <property propertyId="38f94dd1-d5aa-41b8-b182-c0c42985d9dc" variableName="RP_amount_price_EUR2005" amount="0.0935471194896477" unitId="7b75baf0-cbee-45e6-bf66-af119da06553">
+          <name xml:lang="en">price</name>
+          <unitName xml:lang="en">EUR2005</unitName>
+          <comment xml:lang="en">Price calculated based on prices from wholesalers on alibaba.com (accessed on 2021-09-03). The average price based on 5 sellers is 139 $/Ton (assumed to be metric ton). This price was converted to EUR based on the annual exchange rates published by the European Central Bank (https://sdw.ecb.europa.eu/quickview.do?SERIES_KEY=120.EXR.A.USD.EUR.SP00.A), and then adjusted for inflation relative to 2005 by using the Harmonised Index of Consumer Prices (HICP) of the euro area, published by eurostat (https://ec.europa.eu/eurostat/databrowser/view/PRC_HICP_AIND/default/table).</comment>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">biogene carbon content on a dry matter basis</comment>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">water content on a wet matter basis</comment>
+        </property>
+        <property propertyId="66d4c921-658a-4ba0-b190-c6e09e57d74a" amount="0.7447" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">chlorine content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">chlorine content on a dry matter basis</comment>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">fossil carbon content on a dry matter basis</comment>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water content on a dry matter basis</comment>
+        </property>
+        <property propertyId="8aedc313-f49b-42cd-8d54-fc877ec03017" amount="0.255299036" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">magnesium content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">magnesium content on a dry matter basis</comment>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <productionVolumeComment xml:lang="en">Equal to the amount of magnesium chloride produced in titanium sponge production (GLO).</productionVolumeComment>
+        <classification classificationId="a611a303-a730-4721-8385-b0fa926ece41">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">342: Basic inorganic chemicals n.e.c.</classificationValue>
+        </classification>
+        <classification classificationId="a20a9e2f-b3f0-40fd-8358-f8adf7f419c4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">Recyclable</classificationValue>
+        </classification>
+        <outputGroup>0</outputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="7dbb52e1-4973-440c-82e0-25709e4c197d" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" variableName="inert_waste_amount" amount="0" isCalculatedAmount="true" mathematicalRelation="" intermediateExchangeId="3a91cb7d-843b-495d-9973-33ba5efee877" productionVolumeAmount="0" productionVolumeMathematicalRelation="">
+        <name xml:lang="en">inert waste</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">Based on mass balance calculation. According to Table 2 (column "Electrolysis of MgCl2") in Gao et al. (2018), 1.62E-01 kg of "other residue" is produced in the electrolysis step per metric ton of titanium sponge. However, neither this amount nor the amount reported in the reduction and distillation step are large enough to account for the amounts of Mg and Cl that are not recovered by the electrolysis of MgCl2. Therefore, the amount of inert waste is calculated such that the mass of the inputs is equal to the mass of the outputs.
+
+Reference:
+Gao, F., Nie, Z., Yang, D., Sun, B., Liu, Y., Gong, X., &amp; Wang, Z. (2018). Environmental impacts analysis of titanium sponge production using Kroll process in China. Journal of Cleaner Production, 174, 771-779. doi:https://doi.org/10.1016/j.jclepro.2017.09.240.</comment>
+        <uncertainty>
+          <undefined minValue="0" maxValue="0" standardDeviation95="0" />
+          <pedigreeMatrix reliability="1" completeness="1" temporalCorrelation="1" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <property propertyId="38f94dd1-d5aa-41b8-b182-c0c42985d9dc" variableName="inert_waste_amount_price_EUR2005" amount="0" unitId="7b75baf0-cbee-45e6-bf66-af119da06553">
+          <name xml:lang="en">price</name>
+          <unitName xml:lang="en">EUR2005</unitName>
+          <comment xml:lang="en">Waste products are assigned a price of zero as they are assumed to require further treatment.</comment>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <productionVolumeComment xml:lang="en">Calculated from production volume of reference product using the relative outputs.</productionVolumeComment>
+        <classification classificationId="91f26c38-f56f-4179-9862-3c94bcfb6677">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">39: Wastes or scraps</classificationValue>
+        </classification>
+        <classification classificationId="ee3238ec-ca7a-4ddc-af1b-e7c35957b9b6">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">Waste</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="44291dc9-5222-47d5-bd17-f8e6a9b72796" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" variableName="magnesium_amount" casNumber="007439-95-4" amount="0" isCalculatedAmount="true" mathematicalRelation="" intermediateExchangeId="bef7d0b3-c9d9-46db-a67d-2c9e550f2c12" productionVolumeAmount="64350000" productionVolumeMathematicalRelation="RP_PV*ABS(magnesium_amount/RP_amount)">
+        <name xml:lang="en">magnesium, for reuse in titanium sponge production</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">Value calculated based on value given Table 2 (column "Electrolysis of MgCl2") in Gao et al. (2018). Based on the stoichiometric reaction of the reduction and distillation step used for titanium sponge production (TiCl4 + 2Mg -&gt; Ti + 2MgCl2), roughly 1.016 kg of Mg are required as input. Gao et al. (2018) report an input of 41 kg per metric ton of titanium sponge to compensate for the amount of Mg that is not recycled. The overall recovery rate of Mg is therefore approximately 96%.
+
+Because 0.093 kg of MgCl2 is lost in the reduction and distillation step, this means that 3.885 kg of MgCl2 per kg Ti are sent to electrolysis. Out of that amount, 0.97 kg of Mg is recovered. The amount of Mg recovered per kg of MgCl2 entering the electrolysis step is therefore roughly 0.251 kg and corresponds to a recovery rate of 98.3% in this step.
+
+Reference:
+Gao, F., Nie, Z., Yang, D., Sun, B., Liu, Y., Gong, X., &amp; Wang, Z. (2018). Environmental impacts analysis of titanium sponge production using Kroll process in China. Journal of Cleaner Production, 174, 771-779. doi:https://doi.org/10.1016/j.jclepro.2017.09.240.</comment>
+        <uncertainty>
+          <undefined minValue="0" maxValue="0" standardDeviation95="0" />
+          <pedigreeMatrix reliability="1" completeness="1" temporalCorrelation="1" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">biogene carbon content on a dry matter basis</comment>
+        </property>
+        <property propertyId="8aedc313-f49b-42cd-8d54-fc877ec03017" amount="1" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">magnesium content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">magnesium content on a dry matter basis</comment>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water content on a dry matter basis</comment>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">fossil carbon content on a dry matter basis</comment>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">water content on a wet matter basis</comment>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="38f94dd1-d5aa-41b8-b182-c0c42985d9dc" variableName="magnesium_amount_price_EUR2005" amount="11" unitId="7b75baf0-cbee-45e6-bf66-af119da06553">
+          <name xml:lang="en">price</name>
+          <unitName xml:lang="en">EUR2005</unitName>
+          <comment xml:lang="en">The price is set equal to that of the product "magnesium".</comment>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="2dec5fcb-b303-4bfa-8e30-0e043c523163" variableName="magnesium_amount_true_value" amount="2.76061776061776" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">true value</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">allocation property applied in "true value" allocation // value calculated from revenue</comment>
+        </property>
+        <productionVolumeComment xml:lang="en">Calculated from production volume of reference product using the relative outputs.</productionVolumeComment>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="0ff66513-6abd-45d9-9efc-906a8c304bdf">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">41601: Tungsten, molybdenum, tantalum, magnesium, cobalt, cadmium, titanium, zirconium, beryllium, gallium, hafnium, […]</classificationValue>
+        </classification>
+        <outputGroup>2</outputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="539195ed-6062-4f1c-9dc0-063e7aaad5fe" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" variableName="sulfuric_acid_amount" casNumber="007664-93-9" amount="0.000945694173065038" isCalculatedAmount="true" mathematicalRelation="6.98E+01/1000/3.885" intermediateExchangeId="9d63da75-8289-4b96-a900-67ec3bd40a16" activityLinkId="85100854-869d-439c-9925-2bfb8a6f2194">
+        <name xml:lang="en">sulfuric acid</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">Value from Table 2 (column "Electrolysis of MgCl2") in Gao et al. (2018). The amount of sulfuric acid required in the electrolysis process is 6.98E+01 kg per metric ton of titanium sponge. This value was adjusted considering that for 1 kg of titanium sponge produced, 3.885 kg of MgCl2 is sent to the electrolysis step.
+
+Reference:
+Gao, F., Nie, Z., Yang, D., Sun, B., Liu, Y., Gong, X., &amp; Wang, Z. (2018). Environmental impacts analysis of titanium sponge production using Kroll process in China. Journal of Cleaner Production, 174, 771-779. doi:https://doi.org/10.1016/j.jclepro.2017.09.240.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.000945694173065038" mu="-6.964" variance="0.0006" varianceWithPedigreeUncertainty="0.0052" />
+          <pedigreeMatrix reliability="3" completeness="3" temporalCorrelation="1" geographicalCorrelation="5" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">H2SO4</comment>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">H2SO4</comment>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water mass/dry mass</comment>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <classification classificationId="d3d4d040-0471-45ee-aef2-3c034a9de7b7">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">34231: Chemical elements n.e.c.; inorganic acids except phosphoric, nitric and sulphonitric; inorganic oxygen compoun[…]</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="69db0642-241c-4e61-884f-4af16946c661" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" variableName="" casNumber="007782-50-5" amount="0" isCalculatedAmount="true" mathematicalRelation="" intermediateExchangeId="2078f291-646e-48ee-b5d3-a5f6d69a8655" productionVolumeAmount="0" productionVolumeMathematicalRelation="RP_PV*ABS(chlorine_amount/RP_amount)">
+        <name xml:lang="en">chlorine, for reuse in titanium tetrachloride production</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">Value calculated based on value given Table 2 (column "Electrolysis of MgCl2") in Gao et al. (2018). According to that table, the chlorination step (2TiO2 + 4Cl2 + 3C -&gt; 2TiCl4 + 2CO + CO2) requires 1620 kg of chlorine per metric ton of titanium sponge to compensate for the chlorine that is not recovered by the electrolysis of magnesium chloride. Based on stoichiometry, roughly 2962 kg of Cl2 are required to produce 1 metric ton of titanium sponge. This means the overall recovery rate of Cl is roughly 45%.
+
+Because 0.093 kg of MgCl2 is lost in the reduction and distillation step, this means that 3.885 kg of MgCl2 per kg Ti are sent to electrolysis, out of which 1.342 kg of Cl are recovered. The amount of Cl recovered per kg of MgCl2 entering the electrolysis step is therefore roughly 0.345 kg and corresponds to a recovery rate of 46% in this step.
+
+Reference:
+Gao, F., Nie, Z., Yang, D., Sun, B., Liu, Y., Gong, X., &amp; Wang, Z. (2018). Environmental impacts analysis of titanium sponge production using Kroll process in China. Journal of Cleaner Production, 174, 771-779. doi:https://doi.org/10.1016/j.jclepro.2017.09.240.</comment>
+        <uncertainty>
+          <undefined minValue="0" maxValue="0" standardDeviation95="0" />
+          <pedigreeMatrix reliability="1" completeness="1" temporalCorrelation="1" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <property propertyId="38f94dd1-d5aa-41b8-b182-c0c42985d9dc" variableName="chlorine_amount_price_EUR2005" amount="0.148" unitId="7b75baf0-cbee-45e6-bf66-af119da06553">
+          <name xml:lang="en">price</name>
+          <unitName xml:lang="en">EUR2005</unitName>
+          <comment xml:lang="en">The price is set equal to that of the product "chlorine, liquid".</comment>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">water content on a wet matter basis</comment>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">biogene carbon content on a dry matter basis</comment>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">fossil carbon content on a dry matter basis</comment>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water content on a dry matter basis</comment>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <productionVolumeComment xml:lang="en">Calculated from production volume of reference product using the relative outputs.</productionVolumeComment>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="d3d4d040-0471-45ee-aef2-3c034a9de7b7">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">34231: Chemical elements n.e.c.; inorganic acids except phosphoric, nitric and sulphonitric; inorganic oxygen compoun[…]</classificationValue>
+        </classification>
+        <outputGroup>2</outputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="d186b0b3-d515-4366-a2fd-969d320e5bb9" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" casNumber="7786-30-3" amount="0.0526364163661557" intermediateExchangeId="27406b61-9f47-4647-bf10-c3f60c69ee91" activityLinkId="12782586-51a1-4046-8906-60738bc7d767" productionVolumeAmount="256410000">
+        <name xml:lang="en">magnesium chloride, from titanium sponge production</name>
+        <unitName xml:lang="en">kg</unitName>
+        <synonym xml:lang="en">Magnesium dichloride</synonym>
+        <synonym xml:lang="en">magnesium;dichloride</synonym>
+        <property propertyId="38f94dd1-d5aa-41b8-b182-c0c42985d9dc" variableName="RP_amount_price_EUR2005" amount="0.0935471194896477" unitId="7b75baf0-cbee-45e6-bf66-af119da06553">
+          <name xml:lang="en">price</name>
+          <unitName xml:lang="en">EUR2005</unitName>
+          <comment xml:lang="en">Price calculated based on prices from wholesalers on alibaba.com (accessed on 2021-09-03). The average price based on 5 sellers is 139 $/Ton (assumed to be metric ton). This price was converted to EUR based on the annual exchange rates published by the European Central Bank (https://sdw.ecb.europa.eu/quickview.do?SERIES_KEY=120.EXR.A.USD.EUR.SP00.A), and then adjusted for inflation relative to 2005 by using the Harmonised Index of Consumer Prices (HICP) of the euro area, published by eurostat (https://ec.europa.eu/eurostat/databrowser/view/PRC_HICP_AIND/default/table).</comment>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">biogene carbon content on a dry matter basis</comment>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">water content on a wet matter basis</comment>
+        </property>
+        <property propertyId="66d4c921-658a-4ba0-b190-c6e09e57d74a" amount="0.7447" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">chlorine content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">chlorine content on a dry matter basis</comment>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">fossil carbon content on a dry matter basis</comment>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water content on a dry matter basis</comment>
+        </property>
+        <property propertyId="8aedc313-f49b-42cd-8d54-fc877ec03017" amount="0.255299036" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">magnesium content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">magnesium content on a dry matter basis</comment>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <classification classificationId="a611a303-a730-4721-8385-b0fa926ece41">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">342: Basic inorganic chemicals n.e.c.</classificationValue>
+        </classification>
+        <classification classificationId="a20a9e2f-b3f0-40fd-8358-f8adf7f419c4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">Recyclable</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="1717d723-3101-42b9-8b14-fee1e48e192b" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" variableName="chlorine_amount" casNumber="007782-50-5" amount="1" isCalculatedAmount="true" mathematicalRelation="(2962 - 1620)/1000/3.885" intermediateExchangeId="2078f291-646e-48ee-b5d3-a5f6d69a8655" productionVolumeAmount="88572000.0000001" productionVolumeMathematicalRelation="RP_PV*ABS(chlorine_amount/RP_amount)">
+        <name xml:lang="en">chlorine, for reuse in titanium tetrachloride production</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">Value calculated based on value given Table 2 (column "Electrolysis of MgCl2") in Gao et al. (2018). According to that table, the chlorination step (2TiO2 + 4Cl2 + 3C -&gt; 2TiCl4 + 2CO + CO2) requires 1620 kg of chlorine per metric ton of titanium sponge to compensate for the chlorine that is not recovered by the electrolysis of magnesium chloride. Based on stoichiometry, roughly 2962 kg of Cl2 are required to produce 1 metric ton of titanium sponge. This means the overall recovery rate of Cl is roughly 45%.
+
+Because 0.093 kg of MgCl2 is lost in the reduction and distillation step, this means that 3.885 kg of MgCl2 per kg Ti are sent to electrolysis, out of which 1.342 kg of Cl are recovered. The amount of Cl recovered per kg of MgCl2 entering the electrolysis step is therefore roughly 0.345 kg and corresponds to a recovery rate of 46% in this step.
+
+Reference:
+Gao, F., Nie, Z., Yang, D., Sun, B., Liu, Y., Gong, X., &amp; Wang, Z. (2018). Environmental impacts analysis of titanium sponge production using Kroll process in China. Journal of Cleaner Production, 174, 771-779. doi:https://doi.org/10.1016/j.jclepro.2017.09.240.</comment>
+        <uncertainty>
+          <undefined minValue="0" maxValue="0" standardDeviation95="0" />
+          <pedigreeMatrix reliability="1" completeness="1" temporalCorrelation="1" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <property propertyId="38f94dd1-d5aa-41b8-b182-c0c42985d9dc" variableName="chlorine_amount_price_EUR2005" amount="0.148" unitId="7b75baf0-cbee-45e6-bf66-af119da06553">
+          <name xml:lang="en">price</name>
+          <unitName xml:lang="en">EUR2005</unitName>
+          <comment xml:lang="en">The price is set equal to that of the product "chlorine, liquid".</comment>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">water content on a wet matter basis</comment>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">biogene carbon content on a dry matter basis</comment>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">fossil carbon content on a dry matter basis</comment>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water content on a dry matter basis</comment>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="2dec5fcb-b303-4bfa-8e30-0e043c523163" variableName="chlorine_amount_true_value" amount="0.0511238095238095" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">true value</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">allocation property applied in "true value" allocation // value calculated from revenue</comment>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="d3d4d040-0471-45ee-aef2-3c034a9de7b7">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">34231: Chemical elements n.e.c.; inorganic acids except phosphoric, nitric and sulphonitric; inorganic oxygen compoun[…]</classificationValue>
+        </classification>
+        <outputGroup>0</outputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="38fbbe96-00c8-4eed-a232-7e5bdeadd966" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="7.34525252498017E-05" isCalculatedAmount="true" mathematicalRelation="" intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d" activityLinkId="c0c80ab8-7e6a-4493-8452-c838b0e9453e">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Value from Table 2 (column "Electrolysis of MgCl2") in Gao et al. (2018). The amount of electricity consumed in the electrolysis process is 1.45E+04 kWh per metric ton of titanium sponge. This value was adjusted considering that for 1 kg of titanium sponge produced, 3.885 kg of MgCl2 is sent to the electrolysis step.
+
+Reference:
+Gao, F., Nie, Z., Yang, D., Sun, B., Liu, Y., Gong, X., &amp; Wang, Z. (2018). Environmental impacts analysis of titanium sponge production using Kroll process in China. Journal of Cleaner Production, 174, 771-779. doi:https://doi.org/10.1016/j.jclepro.2017.09.240.</comment>
+        <uncertainty>
+          <lognormal meanValue="7.34525252498017E-05" mu="-9.519" variance="0.0006" varianceWithPedigreeUncertainty="0.0052" />
+          <pedigreeMatrix reliability="3" completeness="3" temporalCorrelation="1" geographicalCorrelation="5" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="218d0425-551d-481a-b987-ef5381265b51" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.00271052752795894" isCalculatedAmount="true" mathematicalRelation="" intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d" activityLinkId="30c82d5d-1408-4266-bc67-63b9259f4127">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Value from Table 2 (column "Electrolysis of MgCl2") in Gao et al. (2018). The amount of electricity consumed in the electrolysis process is 1.45E+04 kWh per metric ton of titanium sponge. This value was adjusted considering that for 1 kg of titanium sponge produced, 3.885 kg of MgCl2 is sent to the electrolysis step.
+
+Reference:
+Gao, F., Nie, Z., Yang, D., Sun, B., Liu, Y., Gong, X., &amp; Wang, Z. (2018). Environmental impacts analysis of titanium sponge production using Kroll process in China. Journal of Cleaner Production, 174, 771-779. doi:https://doi.org/10.1016/j.jclepro.2017.09.240.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.00271052752795894" mu="-5.911" variance="0.0006" varianceWithPedigreeUncertainty="0.0052" />
+          <pedigreeMatrix reliability="3" completeness="3" temporalCorrelation="1" geographicalCorrelation="5" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="ddb5d034-9958-4660-9b97-a7907557c496" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.000250171179193646" isCalculatedAmount="true" mathematicalRelation="" intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d" activityLinkId="f67a1102-6526-447d-a230-774ada70c558">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Value from Table 2 (column "Electrolysis of MgCl2") in Gao et al. (2018). The amount of electricity consumed in the electrolysis process is 1.45E+04 kWh per metric ton of titanium sponge. This value was adjusted considering that for 1 kg of titanium sponge produced, 3.885 kg of MgCl2 is sent to the electrolysis step.
+
+Reference:
+Gao, F., Nie, Z., Yang, D., Sun, B., Liu, Y., Gong, X., &amp; Wang, Z. (2018). Environmental impacts analysis of titanium sponge production using Kroll process in China. Journal of Cleaner Production, 174, 771-779. doi:https://doi.org/10.1016/j.jclepro.2017.09.240.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.000250171179193646" mu="-8.293" variance="0.0006" varianceWithPedigreeUncertainty="0.0052" />
+          <pedigreeMatrix reliability="3" completeness="3" temporalCorrelation="1" geographicalCorrelation="5" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="4a377139-a771-4eef-96c1-d320a214298f" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.000762054721338649" isCalculatedAmount="true" mathematicalRelation="" intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d" activityLinkId="7dc7fa97-0e16-46b9-9a56-82a8d4c020fa">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Value from Table 2 (column "Electrolysis of MgCl2") in Gao et al. (2018). The amount of electricity consumed in the electrolysis process is 1.45E+04 kWh per metric ton of titanium sponge. This value was adjusted considering that for 1 kg of titanium sponge produced, 3.885 kg of MgCl2 is sent to the electrolysis step.
+
+Reference:
+Gao, F., Nie, Z., Yang, D., Sun, B., Liu, Y., Gong, X., &amp; Wang, Z. (2018). Environmental impacts analysis of titanium sponge production using Kroll process in China. Journal of Cleaner Production, 174, 771-779. doi:https://doi.org/10.1016/j.jclepro.2017.09.240.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.000762054721338649" mu="-7.179" variance="0.0006" varianceWithPedigreeUncertainty="0.0052" />
+          <pedigreeMatrix reliability="3" completeness="3" temporalCorrelation="1" geographicalCorrelation="5" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="99e29fb1-9fe1-4728-8443-e38af97d71fe" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.000215789942952981" isCalculatedAmount="true" mathematicalRelation="" intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d" activityLinkId="8ed1cae1-bdd8-4249-9f69-8667c3e26f02">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Value from Table 2 (column "Electrolysis of MgCl2") in Gao et al. (2018). The amount of electricity consumed in the electrolysis process is 1.45E+04 kWh per metric ton of titanium sponge. This value was adjusted considering that for 1 kg of titanium sponge produced, 3.885 kg of MgCl2 is sent to the electrolysis step.
+
+Reference:
+Gao, F., Nie, Z., Yang, D., Sun, B., Liu, Y., Gong, X., &amp; Wang, Z. (2018). Environmental impacts analysis of titanium sponge production using Kroll process in China. Journal of Cleaner Production, 174, 771-779. doi:https://doi.org/10.1016/j.jclepro.2017.09.240.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.000215789942952981" mu="-8.441" variance="0.0006" varianceWithPedigreeUncertainty="0.0052" />
+          <pedigreeMatrix reliability="3" completeness="3" temporalCorrelation="1" geographicalCorrelation="5" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="8c19be97-b67d-4474-b895-cecba344993e" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="4.37846844968285E-05" isCalculatedAmount="true" mathematicalRelation="" intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d" activityLinkId="80570656-24d8-484b-b0ad-9dcbc13350d3">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Value from Table 2 (column "Electrolysis of MgCl2") in Gao et al. (2018). The amount of electricity consumed in the electrolysis process is 1.45E+04 kWh per metric ton of titanium sponge. This value was adjusted considering that for 1 kg of titanium sponge produced, 3.885 kg of MgCl2 is sent to the electrolysis step.
+
+Reference:
+Gao, F., Nie, Z., Yang, D., Sun, B., Liu, Y., Gong, X., &amp; Wang, Z. (2018). Environmental impacts analysis of titanium sponge production using Kroll process in China. Journal of Cleaner Production, 174, 771-779. doi:https://doi.org/10.1016/j.jclepro.2017.09.240.</comment>
+        <uncertainty>
+          <lognormal meanValue="4.37846844968285E-05" mu="-10.04" variance="0.0006" varianceWithPedigreeUncertainty="0.0052" />
+          <pedigreeMatrix reliability="3" completeness="3" temporalCorrelation="1" geographicalCorrelation="5" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="00421cc0-64a4-4905-99dd-889e48ee5be1" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="5.70419328833415E-05" isCalculatedAmount="true" mathematicalRelation="" intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d" activityLinkId="1d6e32f8-5363-472c-8ef9-1d650d23cf4d">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Value from Table 2 (column "Electrolysis of MgCl2") in Gao et al. (2018). The amount of electricity consumed in the electrolysis process is 1.45E+04 kWh per metric ton of titanium sponge. This value was adjusted considering that for 1 kg of titanium sponge produced, 3.885 kg of MgCl2 is sent to the electrolysis step.
+
+Reference:
+Gao, F., Nie, Z., Yang, D., Sun, B., Liu, Y., Gong, X., &amp; Wang, Z. (2018). Environmental impacts analysis of titanium sponge production using Kroll process in China. Journal of Cleaner Production, 174, 771-779. doi:https://doi.org/10.1016/j.jclepro.2017.09.240.</comment>
+        <uncertainty>
+          <lognormal meanValue="5.70419328833415E-05" mu="-9.772" variance="0.0006" varianceWithPedigreeUncertainty="0.0052" />
+          <pedigreeMatrix reliability="3" completeness="3" temporalCorrelation="1" geographicalCorrelation="5" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="a23149e6-21e0-471c-9906-3f213f3b6e8a" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.000142043197618951" isCalculatedAmount="true" mathematicalRelation="" intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d" activityLinkId="651bccbc-5460-4541-883c-9278466a0bd9">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Value from Table 2 (column "Electrolysis of MgCl2") in Gao et al. (2018). The amount of electricity consumed in the electrolysis process is 1.45E+04 kWh per metric ton of titanium sponge. This value was adjusted considering that for 1 kg of titanium sponge produced, 3.885 kg of MgCl2 is sent to the electrolysis step.
+
+Reference:
+Gao, F., Nie, Z., Yang, D., Sun, B., Liu, Y., Gong, X., &amp; Wang, Z. (2018). Environmental impacts analysis of titanium sponge production using Kroll process in China. Journal of Cleaner Production, 174, 771-779. doi:https://doi.org/10.1016/j.jclepro.2017.09.240.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.000142043197618951" mu="-8.859" variance="0.0006" varianceWithPedigreeUncertainty="0.0052" />
+          <pedigreeMatrix reliability="3" completeness="3" temporalCorrelation="1" geographicalCorrelation="5" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="07894102-3f6a-48a8-a595-9c3f20e1aa58" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.000585007047064851" isCalculatedAmount="true" mathematicalRelation="" intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d" activityLinkId="87363d5e-efca-49c1-bdc1-4af299812095">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Value from Table 2 (column "Electrolysis of MgCl2") in Gao et al. (2018). The amount of electricity consumed in the electrolysis process is 1.45E+04 kWh per metric ton of titanium sponge. This value was adjusted considering that for 1 kg of titanium sponge produced, 3.885 kg of MgCl2 is sent to the electrolysis step.
+
+Reference:
+Gao, F., Nie, Z., Yang, D., Sun, B., Liu, Y., Gong, X., &amp; Wang, Z. (2018). Environmental impacts analysis of titanium sponge production using Kroll process in China. Journal of Cleaner Production, 174, 771-779. doi:https://doi.org/10.1016/j.jclepro.2017.09.240.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.000585007047064851" mu="-7.444" variance="0.0006" varianceWithPedigreeUncertainty="0.0052" />
+          <pedigreeMatrix reliability="3" completeness="3" temporalCorrelation="1" geographicalCorrelation="5" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="55c3d1b5-7e06-43a0-923f-e6952af84df0" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.00209620205919354" isCalculatedAmount="true" mathematicalRelation="" intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d" activityLinkId="4ccd3a32-ab3d-45ac-a2f1-de3b18a01b74">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Value from Table 2 (column "Electrolysis of MgCl2") in Gao et al. (2018). The amount of electricity consumed in the electrolysis process is 1.45E+04 kWh per metric ton of titanium sponge. This value was adjusted considering that for 1 kg of titanium sponge produced, 3.885 kg of MgCl2 is sent to the electrolysis step.
+
+Reference:
+Gao, F., Nie, Z., Yang, D., Sun, B., Liu, Y., Gong, X., &amp; Wang, Z. (2018). Environmental impacts analysis of titanium sponge production using Kroll process in China. Journal of Cleaner Production, 174, 771-779. doi:https://doi.org/10.1016/j.jclepro.2017.09.240.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.00209620205919354" mu="-6.168" variance="0.0006" varianceWithPedigreeUncertainty="0.0052" />
+          <pedigreeMatrix reliability="3" completeness="3" temporalCorrelation="1" geographicalCorrelation="5" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="7417f137-ea13-49a4-940c-b9a1a6f5fe96" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.000706933330211353" isCalculatedAmount="true" mathematicalRelation="" intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d" activityLinkId="7cfb0ce6-9a3e-40c8-b18f-c98d741bb7f0">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Value from Table 2 (column "Electrolysis of MgCl2") in Gao et al. (2018). The amount of electricity consumed in the electrolysis process is 1.45E+04 kWh per metric ton of titanium sponge. This value was adjusted considering that for 1 kg of titanium sponge produced, 3.885 kg of MgCl2 is sent to the electrolysis step.
+
+Reference:
+Gao, F., Nie, Z., Yang, D., Sun, B., Liu, Y., Gong, X., &amp; Wang, Z. (2018). Environmental impacts analysis of titanium sponge production using Kroll process in China. Journal of Cleaner Production, 174, 771-779. doi:https://doi.org/10.1016/j.jclepro.2017.09.240.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.000706933330211353" mu="-7.255" variance="0.0006" varianceWithPedigreeUncertainty="0.0052" />
+          <pedigreeMatrix reliability="3" completeness="3" temporalCorrelation="1" geographicalCorrelation="5" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="d32287a5-852e-48db-8f94-bcb6f5175dba" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.000209382274477544" isCalculatedAmount="true" mathematicalRelation="" intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d" activityLinkId="868baa49-6bd6-4353-96df-97de02d23121">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Value from Table 2 (column "Electrolysis of MgCl2") in Gao et al. (2018). The amount of electricity consumed in the electrolysis process is 1.45E+04 kWh per metric ton of titanium sponge. This value was adjusted considering that for 1 kg of titanium sponge produced, 3.885 kg of MgCl2 is sent to the electrolysis step.
+
+Reference:
+Gao, F., Nie, Z., Yang, D., Sun, B., Liu, Y., Gong, X., &amp; Wang, Z. (2018). Environmental impacts analysis of titanium sponge production using Kroll process in China. Journal of Cleaner Production, 174, 771-779. doi:https://doi.org/10.1016/j.jclepro.2017.09.240.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.000209382274477544" mu="-8.471" variance="0.0006" varianceWithPedigreeUncertainty="0.0052" />
+          <pedigreeMatrix reliability="3" completeness="3" temporalCorrelation="1" geographicalCorrelation="5" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="290f7205-e64a-4ddb-abbb-ce8a740378b0" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.000169924621358232" isCalculatedAmount="true" mathematicalRelation="" intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d" activityLinkId="89ef92da-dde3-4ad0-902b-5ce2b5e35449">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Value from Table 2 (column "Electrolysis of MgCl2") in Gao et al. (2018). The amount of electricity consumed in the electrolysis process is 1.45E+04 kWh per metric ton of titanium sponge. This value was adjusted considering that for 1 kg of titanium sponge produced, 3.885 kg of MgCl2 is sent to the electrolysis step.
+
+Reference:
+Gao, F., Nie, Z., Yang, D., Sun, B., Liu, Y., Gong, X., &amp; Wang, Z. (2018). Environmental impacts analysis of titanium sponge production using Kroll process in China. Journal of Cleaner Production, 174, 771-779. doi:https://doi.org/10.1016/j.jclepro.2017.09.240.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.000169924621358232" mu="-8.68" variance="0.0006" varianceWithPedigreeUncertainty="0.0052" />
+          <pedigreeMatrix reliability="3" completeness="3" temporalCorrelation="1" geographicalCorrelation="5" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="eb7106e0-782a-4b9c-84e7-b8c159f64564" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.00011536787080643" isCalculatedAmount="true" mathematicalRelation="" intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d" activityLinkId="6f287f23-6e33-4277-a02f-719da6e1b24a">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Value from Table 2 (column "Electrolysis of MgCl2") in Gao et al. (2018). The amount of electricity consumed in the electrolysis process is 1.45E+04 kWh per metric ton of titanium sponge. This value was adjusted considering that for 1 kg of titanium sponge produced, 3.885 kg of MgCl2 is sent to the electrolysis step.
+
+Reference:
+Gao, F., Nie, Z., Yang, D., Sun, B., Liu, Y., Gong, X., &amp; Wang, Z. (2018). Environmental impacts analysis of titanium sponge production using Kroll process in China. Journal of Cleaner Production, 174, 771-779. doi:https://doi.org/10.1016/j.jclepro.2017.09.240.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.00011536787080643" mu="-9.067" variance="0.0006" varianceWithPedigreeUncertainty="0.0052" />
+          <pedigreeMatrix reliability="3" completeness="3" temporalCorrelation="1" geographicalCorrelation="5" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="6dc2ac82-ba4c-45ad-ba9f-983980a0bea4" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.000180112492248789" isCalculatedAmount="true" mathematicalRelation="" intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d" activityLinkId="4656bf96-d138-416c-be48-c4607ebb7b46">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Value from Table 2 (column "Electrolysis of MgCl2") in Gao et al. (2018). The amount of electricity consumed in the electrolysis process is 1.45E+04 kWh per metric ton of titanium sponge. This value was adjusted considering that for 1 kg of titanium sponge produced, 3.885 kg of MgCl2 is sent to the electrolysis step.
+
+Reference:
+Gao, F., Nie, Z., Yang, D., Sun, B., Liu, Y., Gong, X., &amp; Wang, Z. (2018). Environmental impacts analysis of titanium sponge production using Kroll process in China. Journal of Cleaner Production, 174, 771-779. doi:https://doi.org/10.1016/j.jclepro.2017.09.240.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.000180112492248789" mu="-8.622" variance="0.0006" varianceWithPedigreeUncertainty="0.0052" />
+          <pedigreeMatrix reliability="3" completeness="3" temporalCorrelation="1" geographicalCorrelation="5" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="ffbf2da5-0b1b-45a3-aed2-15a0f15ff29b" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.00662672950847555" isCalculatedAmount="true" mathematicalRelation="" intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d" activityLinkId="037986ce-a94c-4044-865a-850b2770e5c6">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Value from Table 2 (column "Electrolysis of MgCl2") in Gao et al. (2018). The amount of electricity consumed in the electrolysis process is 1.45E+04 kWh per metric ton of titanium sponge. This value was adjusted considering that for 1 kg of titanium sponge produced, 3.885 kg of MgCl2 is sent to the electrolysis step.
+
+Reference:
+Gao, F., Nie, Z., Yang, D., Sun, B., Liu, Y., Gong, X., &amp; Wang, Z. (2018). Environmental impacts analysis of titanium sponge production using Kroll process in China. Journal of Cleaner Production, 174, 771-779. doi:https://doi.org/10.1016/j.jclepro.2017.09.240.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.00662672950847555" mu="-5.017" variance="0.0006" varianceWithPedigreeUncertainty="0.0052" />
+          <pedigreeMatrix reliability="3" completeness="3" temporalCorrelation="1" geographicalCorrelation="5" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="787bc3f9-f0c8-4f78-b570-9b7b52e78746" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.00118052831798156" isCalculatedAmount="true" mathematicalRelation="" intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d" activityLinkId="646dc08c-2e09-4b0a-91d8-723482db3296">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Value from Table 2 (column "Electrolysis of MgCl2") in Gao et al. (2018). The amount of electricity consumed in the electrolysis process is 1.45E+04 kWh per metric ton of titanium sponge. This value was adjusted considering that for 1 kg of titanium sponge produced, 3.885 kg of MgCl2 is sent to the electrolysis step.
+
+Reference:
+Gao, F., Nie, Z., Yang, D., Sun, B., Liu, Y., Gong, X., &amp; Wang, Z. (2018). Environmental impacts analysis of titanium sponge production using Kroll process in China. Journal of Cleaner Production, 174, 771-779. doi:https://doi.org/10.1016/j.jclepro.2017.09.240.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.00118052831798156" mu="-6.742" variance="0.0006" varianceWithPedigreeUncertainty="0.0052" />
+          <pedigreeMatrix reliability="3" completeness="3" temporalCorrelation="1" geographicalCorrelation="5" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="fbfd6f4e-4515-404d-90ee-2e925e572de1" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.000173957102822101" isCalculatedAmount="true" mathematicalRelation="" intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d" activityLinkId="d97065ee-e8ca-4f3c-ad41-e0c61f114eb7">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Value from Table 2 (column "Electrolysis of MgCl2") in Gao et al. (2018). The amount of electricity consumed in the electrolysis process is 1.45E+04 kWh per metric ton of titanium sponge. This value was adjusted considering that for 1 kg of titanium sponge produced, 3.885 kg of MgCl2 is sent to the electrolysis step.
+
+Reference:
+Gao, F., Nie, Z., Yang, D., Sun, B., Liu, Y., Gong, X., &amp; Wang, Z. (2018). Environmental impacts analysis of titanium sponge production using Kroll process in China. Journal of Cleaner Production, 174, 771-779. doi:https://doi.org/10.1016/j.jclepro.2017.09.240.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.000173957102822101" mu="-8.657" variance="0.0006" varianceWithPedigreeUncertainty="0.0052" />
+          <pedigreeMatrix reliability="3" completeness="3" temporalCorrelation="1" geographicalCorrelation="5" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="8b64c0a4-d5e8-4f5a-8428-e3c4ecbba681" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.000165640007895098" isCalculatedAmount="true" mathematicalRelation="" intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d" activityLinkId="c9125abd-b8dc-4444-b209-fe6c0d758cb1">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Value from Table 2 (column "Electrolysis of MgCl2") in Gao et al. (2018). The amount of electricity consumed in the electrolysis process is 1.45E+04 kWh per metric ton of titanium sponge. This value was adjusted considering that for 1 kg of titanium sponge produced, 3.885 kg of MgCl2 is sent to the electrolysis step.
+
+Reference:
+Gao, F., Nie, Z., Yang, D., Sun, B., Liu, Y., Gong, X., &amp; Wang, Z. (2018). Environmental impacts analysis of titanium sponge production using Kroll process in China. Journal of Cleaner Production, 174, 771-779. doi:https://doi.org/10.1016/j.jclepro.2017.09.240.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.000165640007895098" mu="-8.706" variance="0.0006" varianceWithPedigreeUncertainty="0.0052" />
+          <pedigreeMatrix reliability="3" completeness="3" temporalCorrelation="1" geographicalCorrelation="5" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="a6550166-05dc-4483-a499-529e0ec132c8" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.000254583443533253" isCalculatedAmount="true" mathematicalRelation="" intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d" activityLinkId="d922c01f-02a6-44f5-ab70-c2170c96f9f4">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Value from Table 2 (column "Electrolysis of MgCl2") in Gao et al. (2018). The amount of electricity consumed in the electrolysis process is 1.45E+04 kWh per metric ton of titanium sponge. This value was adjusted considering that for 1 kg of titanium sponge produced, 3.885 kg of MgCl2 is sent to the electrolysis step.
+
+Reference:
+Gao, F., Nie, Z., Yang, D., Sun, B., Liu, Y., Gong, X., &amp; Wang, Z. (2018). Environmental impacts analysis of titanium sponge production using Kroll process in China. Journal of Cleaner Production, 174, 771-779. doi:https://doi.org/10.1016/j.jclepro.2017.09.240.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.000254583443533253" mu="-8.276" variance="0.0006" varianceWithPedigreeUncertainty="0.0052" />
+          <pedigreeMatrix reliability="3" completeness="3" temporalCorrelation="1" geographicalCorrelation="5" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="bbe46d8b-cd3f-4afb-ac5f-8ef825c3e1f0" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="9.45363104612064E-05" isCalculatedAmount="true" mathematicalRelation="" intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d" activityLinkId="303c08c8-2496-41d3-8369-e79887b80b84">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Value from Table 2 (column "Electrolysis of MgCl2") in Gao et al. (2018). The amount of electricity consumed in the electrolysis process is 1.45E+04 kWh per metric ton of titanium sponge. This value was adjusted considering that for 1 kg of titanium sponge produced, 3.885 kg of MgCl2 is sent to the electrolysis step.
+
+Reference:
+Gao, F., Nie, Z., Yang, D., Sun, B., Liu, Y., Gong, X., &amp; Wang, Z. (2018). Environmental impacts analysis of titanium sponge production using Kroll process in China. Journal of Cleaner Production, 174, 771-779. doi:https://doi.org/10.1016/j.jclepro.2017.09.240.</comment>
+        <uncertainty>
+          <lognormal meanValue="9.45363104612064E-05" mu="-9.267" variance="0.0006" varianceWithPedigreeUncertainty="0.0052" />
+          <pedigreeMatrix reliability="3" completeness="3" temporalCorrelation="1" geographicalCorrelation="5" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="3a6e485f-8763-4370-a112-1fd80ecf5f53" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.00189001630132103" isCalculatedAmount="true" mathematicalRelation="" intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d" activityLinkId="5dc41439-1612-4dc7-83ad-104b23c8372d">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Value from Table 2 (column "Electrolysis of MgCl2") in Gao et al. (2018). The amount of electricity consumed in the electrolysis process is 1.45E+04 kWh per metric ton of titanium sponge. This value was adjusted considering that for 1 kg of titanium sponge produced, 3.885 kg of MgCl2 is sent to the electrolysis step.
+
+Reference:
+Gao, F., Nie, Z., Yang, D., Sun, B., Liu, Y., Gong, X., &amp; Wang, Z. (2018). Environmental impacts analysis of titanium sponge production using Kroll process in China. Journal of Cleaner Production, 174, 771-779. doi:https://doi.org/10.1016/j.jclepro.2017.09.240.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.00189001630132103" mu="-6.271" variance="0.0006" varianceWithPedigreeUncertainty="0.0052" />
+          <pedigreeMatrix reliability="3" completeness="3" temporalCorrelation="1" geographicalCorrelation="5" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="8336c147-58e9-4a1e-bc51-c03f3da74bc2" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="8.97146054198365E-05" isCalculatedAmount="true" mathematicalRelation="" intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d" activityLinkId="8837faff-0ea5-49ed-8254-33d50a5f4b72">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Value from Table 2 (column "Electrolysis of MgCl2") in Gao et al. (2018). The amount of electricity consumed in the electrolysis process is 1.45E+04 kWh per metric ton of titanium sponge. This value was adjusted considering that for 1 kg of titanium sponge produced, 3.885 kg of MgCl2 is sent to the electrolysis step.
+
+Reference:
+Gao, F., Nie, Z., Yang, D., Sun, B., Liu, Y., Gong, X., &amp; Wang, Z. (2018). Environmental impacts analysis of titanium sponge production using Kroll process in China. Journal of Cleaner Production, 174, 771-779. doi:https://doi.org/10.1016/j.jclepro.2017.09.240.</comment>
+        <uncertainty>
+          <lognormal meanValue="8.97146054198365E-05" mu="-9.319" variance="0.0006" varianceWithPedigreeUncertainty="0.0052" />
+          <pedigreeMatrix reliability="3" completeness="3" temporalCorrelation="1" geographicalCorrelation="5" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="c3b60056-eed3-4d09-889d-08d043a25c54" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.000519762531693706" isCalculatedAmount="true" mathematicalRelation="" intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d" activityLinkId="d44ed1a9-3f59-4b3f-b22b-3e5bb4658df8">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Value from Table 2 (column "Electrolysis of MgCl2") in Gao et al. (2018). The amount of electricity consumed in the electrolysis process is 1.45E+04 kWh per metric ton of titanium sponge. This value was adjusted considering that for 1 kg of titanium sponge produced, 3.885 kg of MgCl2 is sent to the electrolysis step.
+
+Reference:
+Gao, F., Nie, Z., Yang, D., Sun, B., Liu, Y., Gong, X., &amp; Wang, Z. (2018). Environmental impacts analysis of titanium sponge production using Kroll process in China. Journal of Cleaner Production, 174, 771-779. doi:https://doi.org/10.1016/j.jclepro.2017.09.240.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.000519762531693706" mu="-7.562" variance="0.0006" varianceWithPedigreeUncertainty="0.0052" />
+          <pedigreeMatrix reliability="3" completeness="3" temporalCorrelation="1" geographicalCorrelation="5" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="ca4eb09c-6cfb-4582-ac9f-92b602b22004" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.000431630437876677" isCalculatedAmount="true" mathematicalRelation="" intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d" activityLinkId="15736136-4b7c-4860-8a74-07bce9a578f8">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Value from Table 2 (column "Electrolysis of MgCl2") in Gao et al. (2018). The amount of electricity consumed in the electrolysis process is 1.45E+04 kWh per metric ton of titanium sponge. This value was adjusted considering that for 1 kg of titanium sponge produced, 3.885 kg of MgCl2 is sent to the electrolysis step.
+
+Reference:
+Gao, F., Nie, Z., Yang, D., Sun, B., Liu, Y., Gong, X., &amp; Wang, Z. (2018). Environmental impacts analysis of titanium sponge production using Kroll process in China. Journal of Cleaner Production, 174, 771-779. doi:https://doi.org/10.1016/j.jclepro.2017.09.240.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.000431630437876677" mu="-7.748" variance="0.0006" varianceWithPedigreeUncertainty="0.0052" />
+          <pedigreeMatrix reliability="3" completeness="3" temporalCorrelation="1" geographicalCorrelation="5" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="4bcf455a-38db-4112-9c37-f288d2f11bb4" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.00112975808373546" isCalculatedAmount="true" mathematicalRelation="" intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d" activityLinkId="ce14d75c-d099-4497-8be3-abba481d511a">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Value from Table 2 (column "Electrolysis of MgCl2") in Gao et al. (2018). The amount of electricity consumed in the electrolysis process is 1.45E+04 kWh per metric ton of titanium sponge. This value was adjusted considering that for 1 kg of titanium sponge produced, 3.885 kg of MgCl2 is sent to the electrolysis step.
+
+Reference:
+Gao, F., Nie, Z., Yang, D., Sun, B., Liu, Y., Gong, X., &amp; Wang, Z. (2018). Environmental impacts analysis of titanium sponge production using Kroll process in China. Journal of Cleaner Production, 174, 771-779. doi:https://doi.org/10.1016/j.jclepro.2017.09.240.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.00112975808373546" mu="-6.786" variance="0.0006" varianceWithPedigreeUncertainty="0.0052" />
+          <pedigreeMatrix reliability="3" completeness="3" temporalCorrelation="1" geographicalCorrelation="5" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="0f7b14a8-c3e1-41f5-8300-134a26d9ae72" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.00167839302389181" isCalculatedAmount="true" mathematicalRelation="" intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d" activityLinkId="fbbdc176-20ec-4bea-8e94-0090aaa03884">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Value from Table 2 (column "Electrolysis of MgCl2") in Gao et al. (2018). The amount of electricity consumed in the electrolysis process is 1.45E+04 kWh per metric ton of titanium sponge. This value was adjusted considering that for 1 kg of titanium sponge produced, 3.885 kg of MgCl2 is sent to the electrolysis step.
+
+Reference:
+Gao, F., Nie, Z., Yang, D., Sun, B., Liu, Y., Gong, X., &amp; Wang, Z. (2018). Environmental impacts analysis of titanium sponge production using Kroll process in China. Journal of Cleaner Production, 174, 771-779. doi:https://doi.org/10.1016/j.jclepro.2017.09.240.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.00167839302389181" mu="-6.39" variance="0.0006" varianceWithPedigreeUncertainty="0.0052" />
+          <pedigreeMatrix reliability="3" completeness="3" temporalCorrelation="1" geographicalCorrelation="5" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="b2c9a578-44db-47e5-b338-42186f3f14fc" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="1.81159461298539E-05" isCalculatedAmount="true" mathematicalRelation="" intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d" activityLinkId="3d60e7ea-2aee-41c0-a6ab-5c690c3b6103">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Value from Table 2 (column "Electrolysis of MgCl2") in Gao et al. (2018). The amount of electricity consumed in the electrolysis process is 1.45E+04 kWh per metric ton of titanium sponge. This value was adjusted considering that for 1 kg of titanium sponge produced, 3.885 kg of MgCl2 is sent to the electrolysis step.
+
+Reference:
+Gao, F., Nie, Z., Yang, D., Sun, B., Liu, Y., Gong, X., &amp; Wang, Z. (2018). Environmental impacts analysis of titanium sponge production using Kroll process in China. Journal of Cleaner Production, 174, 771-779. doi:https://doi.org/10.1016/j.jclepro.2017.09.240.</comment>
+        <uncertainty>
+          <lognormal meanValue="1.81159461298539E-05" mu="-10.92" variance="0.0006" varianceWithPedigreeUncertainty="0.0052" />
+          <pedigreeMatrix reliability="3" completeness="3" temporalCorrelation="1" geographicalCorrelation="5" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="1f72f437-35eb-4da7-8f89-bef6bc1d496c" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.0119345663411996" isCalculatedAmount="true" mathematicalRelation="" intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d" activityLinkId="9a86b1ca-fa83-4352-9859-92e04d866619">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Value from Table 2 (column "Electrolysis of MgCl2") in Gao et al. (2018). The amount of electricity consumed in the electrolysis process is 1.45E+04 kWh per metric ton of titanium sponge. This value was adjusted considering that for 1 kg of titanium sponge produced, 3.885 kg of MgCl2 is sent to the electrolysis step.
+
+Reference:
+Gao, F., Nie, Z., Yang, D., Sun, B., Liu, Y., Gong, X., &amp; Wang, Z. (2018). Environmental impacts analysis of titanium sponge production using Kroll process in China. Journal of Cleaner Production, 174, 771-779. doi:https://doi.org/10.1016/j.jclepro.2017.09.240.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.0119345663411996" mu="-4.428" variance="0.0006" varianceWithPedigreeUncertainty="0.0052" />
+          <pedigreeMatrix reliability="3" completeness="3" temporalCorrelation="1" geographicalCorrelation="5" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="dad16494-76fb-466e-ac59-6c4cd620b148" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.000548086073515511" isCalculatedAmount="true" mathematicalRelation="" intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d" activityLinkId="4c98d4bd-ab31-4877-abf2-4e8923e8254e">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Value from Table 2 (column "Electrolysis of MgCl2") in Gao et al. (2018). The amount of electricity consumed in the electrolysis process is 1.45E+04 kWh per metric ton of titanium sponge. This value was adjusted considering that for 1 kg of titanium sponge produced, 3.885 kg of MgCl2 is sent to the electrolysis step.
+
+Reference:
+Gao, F., Nie, Z., Yang, D., Sun, B., Liu, Y., Gong, X., &amp; Wang, Z. (2018). Environmental impacts analysis of titanium sponge production using Kroll process in China. Journal of Cleaner Production, 174, 771-779. doi:https://doi.org/10.1016/j.jclepro.2017.09.240.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.000548086073515511" mu="-7.509" variance="0.0006" varianceWithPedigreeUncertainty="0.0052" />
+          <pedigreeMatrix reliability="3" completeness="3" temporalCorrelation="1" geographicalCorrelation="5" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="891c2e52-74c3-49f5-87b0-794e31815c2a" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.000190946774520054" isCalculatedAmount="true" mathematicalRelation="" intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d" activityLinkId="0dd40181-4714-4e83-80fa-d8d7673db69c">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Value from Table 2 (column "Electrolysis of MgCl2") in Gao et al. (2018). The amount of electricity consumed in the electrolysis process is 1.45E+04 kWh per metric ton of titanium sponge. This value was adjusted considering that for 1 kg of titanium sponge produced, 3.885 kg of MgCl2 is sent to the electrolysis step.
+
+Reference:
+Gao, F., Nie, Z., Yang, D., Sun, B., Liu, Y., Gong, X., &amp; Wang, Z. (2018). Environmental impacts analysis of titanium sponge production using Kroll process in China. Journal of Cleaner Production, 174, 771-779. doi:https://doi.org/10.1016/j.jclepro.2017.09.240.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.000190946774520054" mu="-8.564" variance="0.0006" varianceWithPedigreeUncertainty="0.0052" />
+          <pedigreeMatrix reliability="3" completeness="3" temporalCorrelation="1" geographicalCorrelation="5" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="214842af-93cf-44e1-97ac-c240bbe7f679" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.00135660205942994" isCalculatedAmount="true" mathematicalRelation="" intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d" activityLinkId="e4fbf08a-30da-4529-80b9-ff115868f9d6">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Value from Table 2 (column "Electrolysis of MgCl2") in Gao et al. (2018). The amount of electricity consumed in the electrolysis process is 1.45E+04 kWh per metric ton of titanium sponge. This value was adjusted considering that for 1 kg of titanium sponge produced, 3.885 kg of MgCl2 is sent to the electrolysis step.
+
+Reference:
+Gao, F., Nie, Z., Yang, D., Sun, B., Liu, Y., Gong, X., &amp; Wang, Z. (2018). Environmental impacts analysis of titanium sponge production using Kroll process in China. Journal of Cleaner Production, 174, 771-779. doi:https://doi.org/10.1016/j.jclepro.2017.09.240.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.00135660205942994" mu="-6.603" variance="0.0006" varianceWithPedigreeUncertainty="0.0052" />
+          <pedigreeMatrix reliability="3" completeness="3" temporalCorrelation="1" geographicalCorrelation="5" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="8296437b-274a-4c4c-8ae1-c29ab097797e" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.000202759091536178" isCalculatedAmount="true" mathematicalRelation="" intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d" activityLinkId="5d9f1014-f4b3-4bb8-a01a-8762ea6c7879">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Value from Table 2 (column "Electrolysis of MgCl2") in Gao et al. (2018). The amount of electricity consumed in the electrolysis process is 1.45E+04 kWh per metric ton of titanium sponge. This value was adjusted considering that for 1 kg of titanium sponge produced, 3.885 kg of MgCl2 is sent to the electrolysis step.
+
+Reference:
+Gao, F., Nie, Z., Yang, D., Sun, B., Liu, Y., Gong, X., &amp; Wang, Z. (2018). Environmental impacts analysis of titanium sponge production using Kroll process in China. Journal of Cleaner Production, 174, 771-779. doi:https://doi.org/10.1016/j.jclepro.2017.09.240.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.000202759091536178" mu="-8.503" variance="0.0006" varianceWithPedigreeUncertainty="0.0052" />
+          <pedigreeMatrix reliability="3" completeness="3" temporalCorrelation="1" geographicalCorrelation="5" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="94f06a5d-16cf-44cf-9ec5-88b7db8366ef" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.000212470985179316" isCalculatedAmount="true" mathematicalRelation="" intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d" activityLinkId="d8057c09-a026-43ef-89a6-8366d19a5d67">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Value from Table 2 (column "Electrolysis of MgCl2") in Gao et al. (2018). The amount of electricity consumed in the electrolysis process is 1.45E+04 kWh per metric ton of titanium sponge. This value was adjusted considering that for 1 kg of titanium sponge produced, 3.885 kg of MgCl2 is sent to the electrolysis step.
+
+Reference:
+Gao, F., Nie, Z., Yang, D., Sun, B., Liu, Y., Gong, X., &amp; Wang, Z. (2018). Environmental impacts analysis of titanium sponge production using Kroll process in China. Journal of Cleaner Production, 174, 771-779. doi:https://doi.org/10.1016/j.jclepro.2017.09.240.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.000212470985179316" mu="-8.457" variance="0.0006" varianceWithPedigreeUncertainty="0.0052" />
+          <pedigreeMatrix reliability="3" completeness="3" temporalCorrelation="1" geographicalCorrelation="5" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="0a855359-10d6-47ad-9ce4-8ae0a2e97dc9" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.00324600970046842" isCalculatedAmount="true" mathematicalRelation="" intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d" activityLinkId="2ab68ad3-5948-4346-ae79-cea2a3a5ceb8">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Value from Table 2 (column "Electrolysis of MgCl2") in Gao et al. (2018). The amount of electricity consumed in the electrolysis process is 1.45E+04 kWh per metric ton of titanium sponge. This value was adjusted considering that for 1 kg of titanium sponge produced, 3.885 kg of MgCl2 is sent to the electrolysis step.
+
+Reference:
+Gao, F., Nie, Z., Yang, D., Sun, B., Liu, Y., Gong, X., &amp; Wang, Z. (2018). Environmental impacts analysis of titanium sponge production using Kroll process in China. Journal of Cleaner Production, 174, 771-779. doi:https://doi.org/10.1016/j.jclepro.2017.09.240.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.00324600970046842" mu="-5.73" variance="0.0006" varianceWithPedigreeUncertainty="0.0052" />
+          <pedigreeMatrix reliability="3" completeness="3" temporalCorrelation="1" geographicalCorrelation="5" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="47aa6f5f-5d89-4594-a185-275543f59dfb" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.00275729533032396" isCalculatedAmount="true" mathematicalRelation="" intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d" activityLinkId="eac3b349-6c28-4aab-adc7-4d08a40d3733">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Value from Table 2 (column "Electrolysis of MgCl2") in Gao et al. (2018). The amount of electricity consumed in the electrolysis process is 1.45E+04 kWh per metric ton of titanium sponge. This value was adjusted considering that for 1 kg of titanium sponge produced, 3.885 kg of MgCl2 is sent to the electrolysis step.
+
+Reference:
+Gao, F., Nie, Z., Yang, D., Sun, B., Liu, Y., Gong, X., &amp; Wang, Z. (2018). Environmental impacts analysis of titanium sponge production using Kroll process in China. Journal of Cleaner Production, 174, 771-779. doi:https://doi.org/10.1016/j.jclepro.2017.09.240.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.00275729533032396" mu="-5.894" variance="0.0006" varianceWithPedigreeUncertainty="0.0052" />
+          <pedigreeMatrix reliability="3" completeness="3" temporalCorrelation="1" geographicalCorrelation="5" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="9e14e373-8fbe-4fde-9bb8-2e3ec101234c" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.000724600121735464" isCalculatedAmount="true" mathematicalRelation="" intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d" activityLinkId="42148a9c-3555-4c51-83e0-60bbe3b51774">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Value from Table 2 (column "Electrolysis of MgCl2") in Gao et al. (2018). The amount of electricity consumed in the electrolysis process is 1.45E+04 kWh per metric ton of titanium sponge. This value was adjusted considering that for 1 kg of titanium sponge produced, 3.885 kg of MgCl2 is sent to the electrolysis step.
+
+Reference:
+Gao, F., Nie, Z., Yang, D., Sun, B., Liu, Y., Gong, X., &amp; Wang, Z. (2018). Environmental impacts analysis of titanium sponge production using Kroll process in China. Journal of Cleaner Production, 174, 771-779. doi:https://doi.org/10.1016/j.jclepro.2017.09.240.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.000724600121735464" mu="-7.23" variance="0.0006" varianceWithPedigreeUncertainty="0.0052" />
+          <pedigreeMatrix reliability="3" completeness="3" temporalCorrelation="1" geographicalCorrelation="5" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="4208b913-9a32-462a-aba6-af400c2da553" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.00281378511298889" isCalculatedAmount="true" mathematicalRelation="" intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d" activityLinkId="cd59a501-f1be-4e20-936f-984060b4cafb">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Value from Table 2 (column "Electrolysis of MgCl2") in Gao et al. (2018). The amount of electricity consumed in the electrolysis process is 1.45E+04 kWh per metric ton of titanium sponge. This value was adjusted considering that for 1 kg of titanium sponge produced, 3.885 kg of MgCl2 is sent to the electrolysis step.
+
+Reference:
+Gao, F., Nie, Z., Yang, D., Sun, B., Liu, Y., Gong, X., &amp; Wang, Z. (2018). Environmental impacts analysis of titanium sponge production using Kroll process in China. Journal of Cleaner Production, 174, 771-779. doi:https://doi.org/10.1016/j.jclepro.2017.09.240.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.00281378511298889" mu="-5.873" variance="0.0006" varianceWithPedigreeUncertainty="0.0052" />
+          <pedigreeMatrix reliability="3" completeness="3" temporalCorrelation="1" geographicalCorrelation="5" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="e3a8402f-b5a7-4074-b838-ae868f0fb9e7" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="3.03044763471243E-05" isCalculatedAmount="true" mathematicalRelation="" intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d" activityLinkId="a443fa49-05cc-4bec-accb-551026c6276b">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Value from Table 2 (column "Electrolysis of MgCl2") in Gao et al. (2018). The amount of electricity consumed in the electrolysis process is 1.45E+04 kWh per metric ton of titanium sponge. This value was adjusted considering that for 1 kg of titanium sponge produced, 3.885 kg of MgCl2 is sent to the electrolysis step.
+
+Reference:
+Gao, F., Nie, Z., Yang, D., Sun, B., Liu, Y., Gong, X., &amp; Wang, Z. (2018). Environmental impacts analysis of titanium sponge production using Kroll process in China. Journal of Cleaner Production, 174, 771-779. doi:https://doi.org/10.1016/j.jclepro.2017.09.240.</comment>
+        <uncertainty>
+          <lognormal meanValue="3.03044763471243E-05" mu="-10.4" variance="0.0006" varianceWithPedigreeUncertainty="0.0052" />
+          <pedigreeMatrix reliability="3" completeness="3" temporalCorrelation="1" geographicalCorrelation="5" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="3643ef6e-8034-46d6-901b-aa9b6478b0a2" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.0150526279293384" isCalculatedAmount="true" mathematicalRelation="" intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d" activityLinkId="4d20118d-9fa9-48cd-9079-c54e1b6c5c7e">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Value from Table 2 (column "Electrolysis of MgCl2") in Gao et al. (2018). The amount of electricity consumed in the electrolysis process is 1.45E+04 kWh per metric ton of titanium sponge. This value was adjusted considering that for 1 kg of titanium sponge produced, 3.885 kg of MgCl2 is sent to the electrolysis step.
+
+Reference:
+Gao, F., Nie, Z., Yang, D., Sun, B., Liu, Y., Gong, X., &amp; Wang, Z. (2018). Environmental impacts analysis of titanium sponge production using Kroll process in China. Journal of Cleaner Production, 174, 771-779. doi:https://doi.org/10.1016/j.jclepro.2017.09.240.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.0150526279293384" mu="-4.196" variance="0.0006" varianceWithPedigreeUncertainty="0.0052" />
+          <pedigreeMatrix reliability="3" completeness="3" temporalCorrelation="1" geographicalCorrelation="5" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="36fb35da-8bf3-4b13-b76c-3da6000edc01" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.00872573230743421" isCalculatedAmount="true" mathematicalRelation="" intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d" activityLinkId="b721fd14-0094-466d-9ca4-94d34737aefb">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Value from Table 2 (column "Electrolysis of MgCl2") in Gao et al. (2018). The amount of electricity consumed in the electrolysis process is 1.45E+04 kWh per metric ton of titanium sponge. This value was adjusted considering that for 1 kg of titanium sponge produced, 3.885 kg of MgCl2 is sent to the electrolysis step.
+
+Reference:
+Gao, F., Nie, Z., Yang, D., Sun, B., Liu, Y., Gong, X., &amp; Wang, Z. (2018). Environmental impacts analysis of titanium sponge production using Kroll process in China. Journal of Cleaner Production, 174, 771-779. doi:https://doi.org/10.1016/j.jclepro.2017.09.240.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.00872573230743421" mu="-4.741" variance="0.0006" varianceWithPedigreeUncertainty="0.0052" />
+          <pedigreeMatrix reliability="3" completeness="3" temporalCorrelation="1" geographicalCorrelation="5" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="64c1086c-c0ea-4443-8fa7-cec44429df48" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.0402279313522578" isCalculatedAmount="true" mathematicalRelation="" intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d" activityLinkId="6b196b75-14ca-45a8-8a3c-ef21c9623784">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Value from Table 2 (column "Electrolysis of MgCl2") in Gao et al. (2018). The amount of electricity consumed in the electrolysis process is 1.45E+04 kWh per metric ton of titanium sponge. This value was adjusted considering that for 1 kg of titanium sponge produced, 3.885 kg of MgCl2 is sent to the electrolysis step.
+
+Reference:
+Gao, F., Nie, Z., Yang, D., Sun, B., Liu, Y., Gong, X., &amp; Wang, Z. (2018). Environmental impacts analysis of titanium sponge production using Kroll process in China. Journal of Cleaner Production, 174, 771-779. doi:https://doi.org/10.1016/j.jclepro.2017.09.240.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.0402279313522578" mu="-3.213" variance="0.0006" varianceWithPedigreeUncertainty="0.0052" />
+          <pedigreeMatrix reliability="3" completeness="3" temporalCorrelation="1" geographicalCorrelation="5" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="05d99988-1584-41ea-83db-c16d13a1b185" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.0178877399085087" isCalculatedAmount="true" mathematicalRelation="" intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d" activityLinkId="6f16c7ee-701d-444e-ada9-b9389a61d2fd">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Value from Table 2 (column "Electrolysis of MgCl2") in Gao et al. (2018). The amount of electricity consumed in the electrolysis process is 1.45E+04 kWh per metric ton of titanium sponge. This value was adjusted considering that for 1 kg of titanium sponge produced, 3.885 kg of MgCl2 is sent to the electrolysis step.
+
+Reference:
+Gao, F., Nie, Z., Yang, D., Sun, B., Liu, Y., Gong, X., &amp; Wang, Z. (2018). Environmental impacts analysis of titanium sponge production using Kroll process in China. Journal of Cleaner Production, 174, 771-779. doi:https://doi.org/10.1016/j.jclepro.2017.09.240.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.0178877399085087" mu="-4.024" variance="0.0006" varianceWithPedigreeUncertainty="0.0052" />
+          <pedigreeMatrix reliability="3" completeness="3" temporalCorrelation="1" geographicalCorrelation="5" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="2d25c35a-9ca4-412d-a213-b956d3d1e200" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.00969152865355729" isCalculatedAmount="true" mathematicalRelation="" intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d" activityLinkId="0b122705-c0d1-4b39-8f80-193f7cb497b2">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Value from Table 2 (column "Electrolysis of MgCl2") in Gao et al. (2018). The amount of electricity consumed in the electrolysis process is 1.45E+04 kWh per metric ton of titanium sponge. This value was adjusted considering that for 1 kg of titanium sponge produced, 3.885 kg of MgCl2 is sent to the electrolysis step.
+
+Reference:
+Gao, F., Nie, Z., Yang, D., Sun, B., Liu, Y., Gong, X., &amp; Wang, Z. (2018). Environmental impacts analysis of titanium sponge production using Kroll process in China. Journal of Cleaner Production, 174, 771-779. doi:https://doi.org/10.1016/j.jclepro.2017.09.240.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.00969152865355729" mu="-4.637" variance="0.0006" varianceWithPedigreeUncertainty="0.0052" />
+          <pedigreeMatrix reliability="3" completeness="3" temporalCorrelation="1" geographicalCorrelation="5" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="b396df60-0683-4c31-9f14-880347fa7a90" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.0582809460118641" isCalculatedAmount="true" mathematicalRelation="" intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d" activityLinkId="f0b45a84-bec0-41c7-92cf-1e10db019f11">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Value from Table 2 (column "Electrolysis of MgCl2") in Gao et al. (2018). The amount of electricity consumed in the electrolysis process is 1.45E+04 kWh per metric ton of titanium sponge. This value was adjusted considering that for 1 kg of titanium sponge produced, 3.885 kg of MgCl2 is sent to the electrolysis step.
+
+Reference:
+Gao, F., Nie, Z., Yang, D., Sun, B., Liu, Y., Gong, X., &amp; Wang, Z. (2018). Environmental impacts analysis of titanium sponge production using Kroll process in China. Journal of Cleaner Production, 174, 771-779. doi:https://doi.org/10.1016/j.jclepro.2017.09.240.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.0582809460118641" mu="-2.842" variance="0.0006" varianceWithPedigreeUncertainty="0.0052" />
+          <pedigreeMatrix reliability="3" completeness="3" temporalCorrelation="1" geographicalCorrelation="5" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="ed607091-b438-4fbf-85db-3064a7b4a681" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" amount="-0.000188956016620046" isCalculatedAmount="true" mathematicalRelation="" intermediateExchangeId="3a91cb7d-843b-495d-9973-33ba5efee877" activityLinkId="f5b38365-023c-4c0e-b4be-21de4d1d5e0c" productionVolumeAmount="107794104" productionVolumeMathematicalRelation="">
+        <name xml:lang="en">inert waste</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">Based on mass balance calculation. According to Table 2 (column "Electrolysis of MgCl2") in Gao et al. (2018), 1.62E-01 kg of "other residue" is produced in the electrolysis step per metric ton of titanium sponge. However, neither this amount nor the amount reported in the reduction and distillation step are large enough to account for the amounts of Mg and Cl that are not recovered by the electrolysis of MgCl2. Therefore, the amount of inert waste is calculated such that the mass of the inputs is equal to the mass of the outputs.
+
+Reference:
+Gao, F., Nie, Z., Yang, D., Sun, B., Liu, Y., Gong, X., &amp; Wang, Z. (2018). Environmental impacts analysis of titanium sponge production using Kroll process in China. Journal of Cleaner Production, 174, 771-779. doi:https://doi.org/10.1016/j.jclepro.2017.09.240.</comment>
+        <uncertainty>
+          <lognormal meanValue="-0.000188956016620046" mu="-8.574" variance="0.0006" varianceWithPedigreeUncertainty="0.0432" />
+          <pedigreeMatrix reliability="5" completeness="3" temporalCorrelation="1" geographicalCorrelation="5" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <property propertyId="38f94dd1-d5aa-41b8-b182-c0c42985d9dc" amount="0" unitId="7b75baf0-cbee-45e6-bf66-af119da06553">
+          <name xml:lang="en">price</name>
+          <unitName xml:lang="en">EUR2005</unitName>
+          <comment xml:lang="en">Waste products are assigned a price of zero as they are assumed to require further treatment.</comment>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <classification classificationId="91f26c38-f56f-4179-9862-3c94bcfb6677">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">39: Wastes or scraps</classificationValue>
+        </classification>
+        <classification classificationId="ee3238ec-ca7a-4ddc-af1b-e7c35957b9b6">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">Waste</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="4c7f1799-eefa-4849-99e2-c5b65a23d23c" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" amount="-0.0219392579374406" isCalculatedAmount="true" mathematicalRelation="" intermediateExchangeId="3a91cb7d-843b-495d-9973-33ba5efee877" activityLinkId="041737ff-0410-4464-8747-7ac38ff75d4b" productionVolumeAmount="107794104" productionVolumeMathematicalRelation="">
+        <name xml:lang="en">inert waste</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">Based on mass balance calculation. According to Table 2 (column "Electrolysis of MgCl2") in Gao et al. (2018), 1.62E-01 kg of "other residue" is produced in the electrolysis step per metric ton of titanium sponge. However, neither this amount nor the amount reported in the reduction and distillation step are large enough to account for the amounts of Mg and Cl that are not recovered by the electrolysis of MgCl2. Therefore, the amount of inert waste is calculated such that the mass of the inputs is equal to the mass of the outputs.
+
+Reference:
+Gao, F., Nie, Z., Yang, D., Sun, B., Liu, Y., Gong, X., &amp; Wang, Z. (2018). Environmental impacts analysis of titanium sponge production using Kroll process in China. Journal of Cleaner Production, 174, 771-779. doi:https://doi.org/10.1016/j.jclepro.2017.09.240.</comment>
+        <uncertainty>
+          <lognormal meanValue="-0.0219392579374406" mu="-3.819" variance="0.0006" varianceWithPedigreeUncertainty="0.0432" />
+          <pedigreeMatrix reliability="5" completeness="3" temporalCorrelation="1" geographicalCorrelation="5" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <property propertyId="38f94dd1-d5aa-41b8-b182-c0c42985d9dc" amount="0" unitId="7b75baf0-cbee-45e6-bf66-af119da06553">
+          <name xml:lang="en">price</name>
+          <unitName xml:lang="en">EUR2005</unitName>
+          <comment xml:lang="en">Waste products are assigned a price of zero as they are assumed to require further treatment.</comment>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <classification classificationId="91f26c38-f56f-4179-9862-3c94bcfb6677">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">39: Wastes or scraps</classificationValue>
+        </classification>
+        <classification classificationId="ee3238ec-ca7a-4ddc-af1b-e7c35957b9b6">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">Waste</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <elementaryExchange id="a37b3534-c5d9-445b-ae78-a61ba5e17534" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" variableName="HF_amount" casNumber="007664-39-3" amount="8.61692684913129E-06" isCalculatedAmount="true" mathematicalRelation="6.36E-01/1000/3.885" elementaryExchangeId="ac15536a-92f5-48d7-9560-cba0ca43b526" formula="FH">
+        <name xml:lang="en">Hydrogen fluoride</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">Value from Table 2 (column "Electrolysis of MgCl2") in Gao et al. (2018). An emission of HF is reported to occur in the electrolysis process. It is assumed to be an emission to air. The reported amount is 6.36E-01 kg per metric ton of titanium sponge. This value was adjusted considering that for 1 kg of titanium sponge produced, 3.885 kg of MgCl2 is sent to the electrolysis step.
+
+Reference:
+Gao, F., Nie, Z., Yang, D., Sun, B., Liu, Y., Gong, X., &amp; Wang, Z. (2018). Environmental impacts analysis of titanium sponge production using Kroll process in China. Journal of Cleaner Production, 174, 771-779. doi:https://doi.org/10.1016/j.jclepro.2017.09.240.</comment>
+        <uncertainty>
+          <lognormal meanValue="8.61692684913129E-06" mu="-11.66" variance="0.04" varianceWithPedigreeUncertainty="0.0446" />
+          <pedigreeMatrix reliability="3" completeness="3" temporalCorrelation="1" geographicalCorrelation="5" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <synonym xml:lang="en">fluorane</synonym>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <compartment subcompartmentId="23dbff79-8037-43e7-b270-5a3da416a284">
+          <compartment xml:lang="en">air</compartment>
+          <subcompartment xml:lang="en">low population density, long-term</subcompartment>
+        </compartment>
+        <outputGroup>4</outputGroup>
+      </elementaryExchange>
+      <elementaryExchange id="968691c4-b978-4b73-bf84-f504194acd89" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" variableName="HCl_amount" casNumber="007647-01-0" amount="5.31106183154004E-05" isCalculatedAmount="true" mathematicalRelation="3.92/1000/3.885" elementaryExchangeId="97178ead-47ba-406f-bd68-27d5fc6aa6f8" formula="ClH">
+        <name xml:lang="en">Hydrogen chloride</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">Value from Table 2 (column "Electrolysis of MgCl2") in Gao et al. (2018). An emission of HCl is reported to occur in the electrolysis process. It is assumed to be an emission to air. The reported amount is 3.92 kg per metric ton of titanium sponge. This value was adjusted considering that for 1 kg of titanium sponge produced, 3.885 kg of MgCl2 is sent to the electrolysis step.
+
+Reference:
+Gao, F., Nie, Z., Yang, D., Sun, B., Liu, Y., Gong, X., &amp; Wang, Z. (2018). Environmental impacts analysis of titanium sponge production using Kroll process in China. Journal of Cleaner Production, 174, 771-779. doi:https://doi.org/10.1016/j.jclepro.2017.09.240.</comment>
+        <uncertainty>
+          <lognormal meanValue="5.31106183154004E-05" mu="-9.843" variance="0.04" varianceWithPedigreeUncertainty="0.0446" />
+          <pedigreeMatrix reliability="3" completeness="3" temporalCorrelation="1" geographicalCorrelation="5" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <synonym xml:lang="en">chlorane</synonym>
+        <synonym xml:lang="en">Salzsäure</synonym>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <compartment subcompartmentId="23dbff79-8037-43e7-b270-5a3da416a284">
+          <compartment xml:lang="en">air</compartment>
+          <subcompartment xml:lang="en">low population density, long-term</subcompartment>
+        </compartment>
+        <outputGroup>4</outputGroup>
+      </elementaryExchange>
+    </flowData>
+    <modellingAndValidation>
+      <representativeness systemModelId="290c1f85-4cc4-4fa1-b0c8-2cb7f4276dce">
+        <systemModelName xml:lang="en">Allocation, cut-off by classification</systemModelName>
+        <samplingProcedure xml:lang="en">The individual exchanges have been taken from Table 2 (column "Electrolysis of MgCl2") of Gao et al. (2018). The amounts are based on those reported in that table while considering the stoichiometric reactions. The amounts have been scaled for 1 kg of MgCl2 that is fed to the electrolysis process (instead of 1 metric ton of titanium sponge as reported in Table 2 in Gao et al. (2018)). Additionally, the amounts take into account the fact that 0.093 kg of MgCl2 is assumed to be lost in the titanium sponge production step. This means that for one kg of titanium sponge produced, 3.885 kg of MgCl2 is sent to the electrolysis process.
+
+The individual emissions reported in Gao et al. (2018) (apart from HCl and HF) are all assumed to be related to energy production. Therefore they are not considered here because they are modelled in the ecoinvent dataset for electricity production.
+
+Reference:
+Gao, F., Nie, Z., Yang, D., Sun, B., Liu, Y., Gong, X., &amp; Wang, Z. (2018). Environmental impacts analysis of titanium sponge production using Kroll process in China. Journal of Cleaner Production, 174, 771-779. doi:https://doi.org/10.1016/j.jclepro.2017.09.240.</samplingProcedure>
+        <extrapolations xml:lang="en">This dataset has been extrapolated from the respective dataset from CN. The uncertainty has been adjusted accordingly. According to the authors of the publication used as a source for this dataset, data were collected from titanium sponge manufacturing companies in the province of Sichuan and Shaanxi through surveys, but considering at the same time average national production statistics. Therefore, the data are assumed to represent the average production of titanium metal in China through the Kroll process. The data is assumed to be representative also of the global situation, since the Kroll process is the most common method for the production of titanium sponge. </extrapolations>
+      </representativeness>
+      <review reviewerId="44a0bdd8-6624-4a73-a661-7190ddf070b3" reviewerName="David FitzGerald" reviewerEmail="fitzgerald@ecoinvent.org" reviewDate="2021-07-29" reviewedMajorRelease="3" reviewedMinorRelease="0" reviewedMajorRevision="0" reviewedMinorRevision="8">
+        <details>
+          <text xml:lang="en" index="0"></text>
+        </details>
+        <otherDetails xml:lang="en"></otherDetails>
+      </review>
+      <review reviewerId="c4597934-ecac-422c-b431-382e85fdcb83" reviewerName="[System]" reviewerEmail="support@ecoinvent.org" reviewDate="2021-07-29" reviewedMajorRelease="3" reviewedMinorRelease="0" reviewedMajorRevision="0" reviewedMinorRevision="8">
+        <details />
+        <otherDetails xml:lang="en">Validation warnings:
+
+- Uncertainty shall always be provided for all primary data inputs (exchange amounts, properties and parameters), except for the amount and properties of reference products.
+ -- Property(ies): wet mass=1, carbon content, fossil=0, carbon content, non-fossil=0, water content=0, water in wet mass=0, dry mass=1, dry mass=1, wet mass=1, water content=0, water in wet mass=0, carbon content, fossil=0, carbon content, non-fossil=0, dry mass=1, wet mass=1, water content=0, water in wet mass=0, carbon content, fossil=0, carbon content, non-fossil=0, magnesium content=1, water in wet mass=0, carbon content, non-fossil=0, water content=0, carbon content, fossil=0, dry mass=1, wet mass=1, carbon content, fossil=0, carbon content, non-fossil=0, water content=0, water in wet mass=0, wet mass=1, dry mass=1
+
+- Pedigree information shall always be provided for all uncertainties of primary data inputs (exchange amounts, properties and parameters), except for the amount and properties of reference products.
+ -- Property(ies): wet mass=1, carbon content, fossil=0, carbon content, non-fossil=0, water content=0, water in wet mass=0, dry mass=1, dry mass=1, wet mass=1, water content=0, water in wet mass=0, carbon content, fossil=0, carbon content, non-fossil=0, dry mass=1, wet mass=1, water content=0, water in wet mass=0, carbon content, fossil=0, carbon content, non-fossil=0, magnesium content=1, water in wet mass=0, carbon content, non-fossil=0, water content=0, carbon content, fossil=0, dry mass=1, wet mass=1, carbon content, fossil=0, carbon content, non-fossil=0, water content=0, water in wet mass=0, wet mass=1, dry mass=1
+
+</otherDetails>
+      </review>
+    </modellingAndValidation>
+    <administrativeInformation>
+      <dataEntryBy personId="44a0bdd8-6624-4a73-a661-7190ddf070b3" isActiveAuthor="false" personName="David FitzGerald" personEmail="fitzgerald@ecoinvent.org" />
+      <dataGeneratorAndPublication personId="44a0bdd8-6624-4a73-a661-7190ddf070b3" personName="David FitzGerald" personEmail="fitzgerald@ecoinvent.org" dataPublishedIn="2" publishedSourceId="dd1fa56b-e449-4b99-aa03-d28fc2e1b149" publishedSourceYear="2018" publishedSourceFirstAuthor="Gao Feng" isCopyrightProtected="true" accessRestrictedTo="1" />
+      <fileAttributes majorRelease="3" minorRelease="0" majorRevision="1" minorRevision="0" internalSchemaVersion="2.0.12" defaultLanguage="en" creationTimestamp="2021-07-27T17:55:42" lastEditTimestamp="2021-07-28T01:02:33" fileGenerator="EcoEditor 3.12.6000.6006" fileTimestamp="2021-07-28T01:02:33" contextId="de659012-50c4-4e96-b54a-fc781bf987ab">
+        <contextName xml:lang="en">ecoinvent</contextName>
+      </fileAttributes>
+    </administrativeInformation>
+  </childActivityDataset>
+</ecoSpold>

@@ -1,0 +1,854 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ecoSpold xmlns="http://www.EcoInvent.org/EcoSpold02">
+  <childActivityDataset>
+    <activityDescription>
+      <activity id="fe528ec2-e2ba-49a3-896c-9b739bd4702f" activityNameId="d18d26ab-f2e2-4888-a0d2-8670c34fa846" parentActivityId="d681ff17-275b-51ad-be12-27f2bc9a6071" inheritanceDepth="-1" type="1" specialActivityType="1">
+        <activityName xml:lang="en">market for wood chips, wet, measured as dry mass</activityName>
+        <includedActivitiesStart xml:lang="en">Activity starts with the product leaving the factory gate, ready for shipment.</includedActivitiesStart>
+        <includedActivitiesEnd xml:lang="en">Activity ends with the reception of the product at the consuming entity. Average transportation requirements from producer to consuming entity are covered.</includedActivitiesEnd>
+        <generalComment>
+          <text xml:lang="en" index="2">This dataset represents the market for wet wood chips in Europe without Switzerland. Transport distances are based on ecoinvent report 'Holzenergie', Tab. 6.1. Specific regional consumption mixes for wood chips, wet are needed as this product is consumed normally not far from where it is produced.</text>
+          <text xml:lang="en" index="1">This is a market activity. Each market represents the consumption mix of a product in a given geography, connecting suppliers with consumers of the same product in the same geographical area. Markets group the producers and also the imports of the product (if relevant) within the same geographical area. They also account for transport to the consumer and for the losses during that process, when relevant.</text>
+        </generalComment>
+      </activity>
+      <classification classificationId="30e36ded-b8a3-4eb1-b5f5-edbe571c8c29">
+        <classificationSystem xml:lang="en">ISIC rev.4 ecoinvent</classificationSystem>
+        <classificationValue xml:lang="en">0220:Logging</classificationValue>
+      </classification>
+      <geography geographyId="f9221622-cc45-11de-98ed-0019e336be3a">
+        <shortname xml:lang="en">Europe without Switzerland</shortname>
+      </geography>
+      <technology />
+      <timePeriod startDate="2019-01-01" endDate="2021-12-31" isDataValidForEntirePeriod="true" />
+      <macroEconomicScenario macroEconomicScenarioId="d9f57f0a-a01f-42eb-a57b-8f18d6635801">
+        <name xml:lang="en">Business-as-Usual</name>
+      </macroEconomicScenario>
+    </activityDescription>
+    <flowData>
+      <intermediateExchange id="f3d0e041-482b-452b-8d3c-fb8ed169134a" unitId="2f4daad7-5331-4f14-930c-d8bca924557d" amount="0.105" isCalculatedAmount="true" mathematicalRelation="0.05*(WM)" sourceId="1c44de9d-ddf9-4061-9e55-378109e70156" sourceYear="2007" sourceFirstAuthor="Bauer, C." intermediateExchangeId="cfbce515-3f54-4411-ad9d-3d26b7faa15a" activityLinkId="f632c141-a309-4673-8453-e2c9929dbea5">
+        <name xml:lang="en">transport, freight, lorry, unspecified</name>
+        <unitName xml:lang="en">metric ton*km</unitName>
+        <comment xml:lang="en">Literature value. ecoinvent report 'Holzenergie', Tab. 6.1.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.105" mu="-2.254" variance="0.12" varianceWithPedigreeUncertainty="0.148" />
+          <pedigreeMatrix reliability="4" completeness="4" temporalCorrelation="4" geographicalCorrelation="5" furtherTechnologyCorrelation="3" />
+        </uncertainty>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="951f8f36-8fb0-47a1-b6f8-acb10713cca2">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">6511: Road transport services of freight</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="886bf0ff-aad9-4b63-9097-ea8bcad34a3a" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" amount="1" intermediateExchangeId="7fe99768-d571-4bc2-a272-7df585bd0d48" productionVolumeAmount="10494937946.0158">
+        <name xml:lang="en">wood chips, wet, measured as dry mass</name>
+        <unitName xml:lang="en">kg</unitName>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0.746557778439054" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" variableName="DM" amount="1" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="48c987bb-3144-4872-b5c7-b1389c40be25" amount="10.3280971632245" mathematicalRelation="" unitId="980b811e-3905-4797-82a5-173f5568bc7e">
+          <name xml:lang="en">heating value, net</name>
+          <unitName xml:lang="en">MJ</unitName>
+          <comment xml:lang="en">Value based on the dataset 'softwood forestry, mixed species, sustainable forest management'</comment>
+        </property>
+        <property propertyId="38f94dd1-d5aa-41b8-b182-c0c42985d9dc" amount="0.107" unitId="7b75baf0-cbee-45e6-bf66-af119da06553">
+          <name xml:lang="en">price</name>
+          <unitName xml:lang="en">EUR2005</unitName>
+          <comment xml:lang="en">Expert judgement (Urs Luginbühl, Swiss Sawmilling industry, personal communication in June 2014). Wood chips from softwood should have a price of 0.101 EUR/kg. Woodchips from hardwood should have a price of 0.112 EUR/kg. Average of these two values is used. Cross-reference; FAOSTAT database; http://faostat.fao.org/site/626/DesktopDefault.aspx?PageID=626#ancor; Average import/export prices of EU for 'chips and particles'. Price: 48.76 Euro/m3. The density of the wood chips is 650 kg/m3. The price is recalculated accordingly.</comment>
+        </property>
+        <property propertyId="d61b8768-8ef6-4a99-ae16-9e51f24ad5b5" amount="9.28799221599595" isDefiningValue="false" unitId="980b811e-3905-4797-82a5-173f5568bc7e">
+          <name xml:lang="en">heating value, gross</name>
+          <unitName xml:lang="en">MJ</unitName>
+          <comment xml:lang="en">gross (upper) heating (calorific) value</comment>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0.494" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0.746557778439054" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" variableName="WM" amount="1.74655777843905" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.494" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.494" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="7c39364d-1d7f-4931-bfb7-fe79d7f6ede0">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">31230: Wood in chips or particles</classificationValue>
+        </classification>
+        <outputGroup>0</outputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="a112b8d5-b7bb-414c-aad9-0c013bac83b3" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" amount="0.103510768364318" intermediateExchangeId="7fe99768-d571-4bc2-a272-7df585bd0d48" activityLinkId="0c48a850-8d55-48b4-8894-78eca901d5fa" productionVolumeAmount="1086339090.72794">
+        <name xml:lang="en">wood chips, wet, measured as dry mass</name>
+        <unitName xml:lang="en">kg</unitName>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="d61b8768-8ef6-4a99-ae16-9e51f24ad5b5" amount="0" isDefiningValue="false" unitId="980b811e-3905-4797-82a5-173f5568bc7e">
+          <name xml:lang="en">heating value, gross</name>
+          <unitName xml:lang="en">MJ</unitName>
+          <comment xml:lang="en">gross (upper) heating (calorific) value</comment>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0.494" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">biogene carbon content on a dry matter basis</comment>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1.7" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0.7" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">water content on a wet matter basis</comment>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0.7" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water content on a dry matter basis</comment>
+        </property>
+        <property propertyId="38f94dd1-d5aa-41b8-b182-c0c42985d9dc" amount="0.107" isDefiningValue="false" unitId="7b75baf0-cbee-45e6-bf66-af119da06553">
+          <name xml:lang="en">price</name>
+          <unitName xml:lang="en">EUR2005</unitName>
+          <comment xml:lang="en">Expert judgement (Urs Luginbühl, Swiss Sawmilling industry, personal communication in June 2014). Wood chips from softwood should have a price of 0.101 EUR/kg. Woodchips from hardwood should have a price of 0.112 EUR/kg. Average of these two values is used. Cross-reference; FAOSTAT database; http://faostat.fao.org/site/626/DesktopDefault.aspx?PageID=626#ancor; Average import/export prices of EU for 'chips and particles'. Price: 48.76 Euro/m3. The density of the wood chips is 650 kg/m3. The price is recalculated accordingly.</comment>
+        </property>
+        <property propertyId="48c987bb-3144-4872-b5c7-b1389c40be25" amount="10.84" mathematicalRelation="" unitId="980b811e-3905-4797-82a5-173f5568bc7e">
+          <name xml:lang="en">heating value, net</name>
+          <unitName xml:lang="en">MJ</unitName>
+          <comment xml:lang="en">Value based on the dataset 'softwood forestry, mixed species, sustainable forest management'</comment>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.494" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.494" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="7c39364d-1d7f-4931-bfb7-fe79d7f6ede0">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">31230: Wood in chips or particles</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="39625d5d-d1ea-4830-861b-721ddb5f6adc" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" amount="0.430911447245145" intermediateExchangeId="7fe99768-d571-4bc2-a272-7df585bd0d48" activityLinkId="39fcffc5-cf0a-409a-8876-e88fa458512f" productionVolumeAmount="4522388899.06567">
+        <name xml:lang="en">wood chips, wet, measured as dry mass</name>
+        <unitName xml:lang="en">kg</unitName>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0.7" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water content on a dry matter basis</comment>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1.7" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0.7" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">water content on a wet matter basis</comment>
+        </property>
+        <property propertyId="d61b8768-8ef6-4a99-ae16-9e51f24ad5b5" amount="0" isDefiningValue="false" unitId="980b811e-3905-4797-82a5-173f5568bc7e">
+          <name xml:lang="en">heating value, gross</name>
+          <unitName xml:lang="en">MJ</unitName>
+          <comment xml:lang="en">gross (upper) heating (calorific) value</comment>
+        </property>
+        <property propertyId="38f94dd1-d5aa-41b8-b182-c0c42985d9dc" amount="0.107" isDefiningValue="false" unitId="7b75baf0-cbee-45e6-bf66-af119da06553">
+          <name xml:lang="en">price</name>
+          <unitName xml:lang="en">EUR2005</unitName>
+          <comment xml:lang="en">Expert judgement (Urs Luginbühl, Swiss Sawmilling industry, personal communication in June 2014). Wood chips from softwood should have a price of 0.101 EUR/kg. Woodchips from hardwood should have a price of 0.112 EUR/kg. Average of these two values is used. Cross-reference; FAOSTAT database; http://faostat.fao.org/site/626/DesktopDefault.aspx?PageID=626#ancor; Average import/export prices of EU for 'chips and particles'. Price: 48.76 Euro/m3. The density of the wood chips is 650 kg/m3. The price is recalculated accordingly.</comment>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0.494" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">biogene carbon content on a dry matter basis</comment>
+        </property>
+        <property propertyId="48c987bb-3144-4872-b5c7-b1389c40be25" amount="10.84" mathematicalRelation="" unitId="980b811e-3905-4797-82a5-173f5568bc7e">
+          <name xml:lang="en">heating value, net</name>
+          <unitName xml:lang="en">MJ</unitName>
+          <comment xml:lang="en">Value based on the dataset 'softwood forestry, mixed species, sustainable forest management'</comment>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.494" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.494" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="7c39364d-1d7f-4931-bfb7-fe79d7f6ede0">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">31230: Wood in chips or particles</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="34a74c32-e18f-46d3-8348-9938ff089fea" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" amount="0.0640012677338721" intermediateExchangeId="7fe99768-d571-4bc2-a272-7df585bd0d48" activityLinkId="2aec3940-9625-48fc-b6b2-5a2c8805a9e1" productionVolumeAmount="671689333.333333">
+        <name xml:lang="en">wood chips, wet, measured as dry mass</name>
+        <unitName xml:lang="en">kg</unitName>
+        <property propertyId="38f94dd1-d5aa-41b8-b182-c0c42985d9dc" amount="0.107" isDefiningValue="false" unitId="7b75baf0-cbee-45e6-bf66-af119da06553">
+          <name xml:lang="en">price</name>
+          <unitName xml:lang="en">EUR2005</unitName>
+          <comment xml:lang="en">Expert judgement (Urs Luginbühl, Swiss Sawmilling industry, personal communication in June 2014). Wood chips from softwood should have a price of 0.101 EUR/kg. Woodchips from hardwood should have a price of 0.112 EUR/kg. Average of these two values is used. Cross-reference; FAOSTAT database; http://faostat.fao.org/site/626/DesktopDefault.aspx?PageID=626#ancor; Average import/export prices of EU for 'chips and particles'. Price: 48.76 Euro/m3. The density of the wood chips is 650 kg/m3. The price is recalculated accordingly.</comment>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">including bark</comment>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0.494" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0.8" isDefiningValue="false" mathematicalRelation="" isCalculatedAmount="true" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">water in wet mass = wet mass - dry mass</comment>
+        </property>
+        <property propertyId="48c987bb-3144-4872-b5c7-b1389c40be25" amount="9.39111111111111" isDefiningValue="false" mathematicalRelation="" isCalculatedAmount="true" unitId="980b811e-3905-4797-82a5-173f5568bc7e">
+          <name xml:lang="en">heating value, net</name>
+          <unitName xml:lang="en">MJ</unitName>
+          <comment xml:lang="en">net (lower) heating (calorific) value</comment>
+        </property>
+        <property propertyId="a264a1a8-0ec9-4671-bc2d-336d5a0b99dd" amount="660" isDefiningValue="false" mathematicalRelation="" isCalculatedAmount="true" unitId="cacb6d36-694d-4e4f-9e79-6c9c73146839">
+          <name xml:lang="en">dry wood density</name>
+          <unitName xml:lang="en">kg/m3</unitName>
+          <comment xml:lang="en">kg dry matter/ dry volume</comment>
+        </property>
+        <property propertyId="2520c12c-a34f-40e5-ac7d-37a325d01311" amount="541.2" isDefiningValue="false" mathematicalRelation="" isCalculatedAmount="true" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">basic wood density</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">dry mass/wet volume</comment>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0.8" isDefiningValue="false" mathematicalRelation="" isCalculatedAmount="true" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water content is equivalent to moisture content (kg water/kg dry mass)</comment>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1.8" isDefiningValue="false" mathematicalRelation="" isCalculatedAmount="true" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">no comment</comment>
+        </property>
+        <property propertyId="d61b8768-8ef6-4a99-ae16-9e51f24ad5b5" amount="19.6" isDefiningValue="false" unitId="980b811e-3905-4797-82a5-173f5568bc7e">
+          <name xml:lang="en">heating value, gross</name>
+          <unitName xml:lang="en">MJ</unitName>
+          <comment xml:lang="en">gross (upper) heating (calorific) value</comment>
+        </property>
+        <property propertyId="831cecb4-2de9-46fd-bbc5-22661e104beb" amount="974.16" isDefiningValue="false" mathematicalRelation="" isCalculatedAmount="true" unitId="cacb6d36-694d-4e4f-9e79-6c9c73146839">
+          <name xml:lang="en">apparent wood density</name>
+          <unitName xml:lang="en">kg/m3</unitName>
+          <comment xml:lang="en">wet mass/wet volume</comment>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.494" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.494" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="7c39364d-1d7f-4931-bfb7-fe79d7f6ede0">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">31230: Wood in chips or particles</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="30f03abc-3f2d-425f-baba-5721a4200ef6" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" amount="0.185703635899151" intermediateExchangeId="7fe99768-d571-4bc2-a272-7df585bd0d48" activityLinkId="28db0453-c596-4e68-b302-deb4bb92119b" productionVolumeAmount="1948948135.11111">
+        <name xml:lang="en">wood chips, wet, measured as dry mass</name>
+        <unitName xml:lang="en">kg</unitName>
+        <property propertyId="831cecb4-2de9-46fd-bbc5-22661e104beb" amount="1010.304" isDefiningValue="false" mathematicalRelation="" isCalculatedAmount="true" unitId="cacb6d36-694d-4e4f-9e79-6c9c73146839">
+          <name xml:lang="en">apparent wood density</name>
+          <unitName xml:lang="en">kg/m3</unitName>
+          <comment xml:lang="en">wet mass/wet volume</comment>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0.8" isDefiningValue="false" mathematicalRelation="" isCalculatedAmount="true" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">water in wet mass = wet mass - dry mass</comment>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0.494" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0.8" isDefiningValue="false" mathematicalRelation="" isCalculatedAmount="true" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water content is equivalent to moisture content (kg water/kg dry mass)</comment>
+        </property>
+        <property propertyId="2520c12c-a34f-40e5-ac7d-37a325d01311" amount="561.28" isDefiningValue="false" mathematicalRelation="" isCalculatedAmount="true" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">basic wood density</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">dry mass/wet volume</comment>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">including bark</comment>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1.8" isDefiningValue="false" mathematicalRelation="" isCalculatedAmount="true" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">no comment</comment>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="38f94dd1-d5aa-41b8-b182-c0c42985d9dc" amount="0.107" isDefiningValue="false" unitId="7b75baf0-cbee-45e6-bf66-af119da06553">
+          <name xml:lang="en">price</name>
+          <unitName xml:lang="en">EUR2005</unitName>
+          <comment xml:lang="en">Expert judgement (Urs Luginbühl, Swiss Sawmilling industry, personal communication in June 2014). Wood chips from softwood should have a price of 0.101 EUR/kg. Woodchips from hardwood should have a price of 0.112 EUR/kg. Average of these two values is used. Cross-reference; FAOSTAT database; http://faostat.fao.org/site/626/DesktopDefault.aspx?PageID=626#ancor; Average import/export prices of EU for 'chips and particles'. Price: 48.76 Euro/m3. The density of the wood chips is 650 kg/m3. The price is recalculated accordingly.</comment>
+        </property>
+        <property propertyId="a264a1a8-0ec9-4671-bc2d-336d5a0b99dd" amount="640" isDefiningValue="false" mathematicalRelation="" isCalculatedAmount="true" unitId="cacb6d36-694d-4e4f-9e79-6c9c73146839">
+          <name xml:lang="en">dry wood density</name>
+          <unitName xml:lang="en">kg/m3</unitName>
+          <comment xml:lang="en">kg dry matter/ dry volume</comment>
+        </property>
+        <property propertyId="48c987bb-3144-4872-b5c7-b1389c40be25" amount="9.39111111111111" isDefiningValue="false" mathematicalRelation="" isCalculatedAmount="true" unitId="980b811e-3905-4797-82a5-173f5568bc7e">
+          <name xml:lang="en">heating value, net</name>
+          <unitName xml:lang="en">MJ</unitName>
+          <comment xml:lang="en">net (lower) heating (calorific) value</comment>
+        </property>
+        <property propertyId="d61b8768-8ef6-4a99-ae16-9e51f24ad5b5" amount="19.6" isDefiningValue="false" unitId="980b811e-3905-4797-82a5-173f5568bc7e">
+          <name xml:lang="en">heating value, gross</name>
+          <unitName xml:lang="en">MJ</unitName>
+          <comment xml:lang="en">gross (upper) heating (calorific) value</comment>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.494" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.494" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="7c39364d-1d7f-4931-bfb7-fe79d7f6ede0">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">31230: Wood in chips or particles</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="5719929f-ba2c-4117-b2cf-f15418a67e97" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" amount="0.0125383283307295" intermediateExchangeId="7fe99768-d571-4bc2-a272-7df585bd0d48" activityLinkId="670f2585-4242-4f4f-a901-d5b32b262d30" productionVolumeAmount="131588977.777778">
+        <name xml:lang="en">wood chips, wet, measured as dry mass</name>
+        <unitName xml:lang="en">kg</unitName>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0.494" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="2520c12c-a34f-40e5-ac7d-37a325d01311" amount="561.28" isDefiningValue="false" mathematicalRelation="" isCalculatedAmount="true" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">basic wood density</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">dry mass/wet volume</comment>
+        </property>
+        <property propertyId="a264a1a8-0ec9-4671-bc2d-336d5a0b99dd" amount="640" isDefiningValue="false" mathematicalRelation="" isCalculatedAmount="true" unitId="cacb6d36-694d-4e4f-9e79-6c9c73146839">
+          <name xml:lang="en">dry wood density</name>
+          <unitName xml:lang="en">kg/m3</unitName>
+          <comment xml:lang="en">kg dry matter/ dry volume</comment>
+        </property>
+        <property propertyId="831cecb4-2de9-46fd-bbc5-22661e104beb" amount="1010.304" isDefiningValue="false" mathematicalRelation="" isCalculatedAmount="true" unitId="cacb6d36-694d-4e4f-9e79-6c9c73146839">
+          <name xml:lang="en">apparent wood density</name>
+          <unitName xml:lang="en">kg/m3</unitName>
+          <comment xml:lang="en">wet mass/wet volume</comment>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0.8" isDefiningValue="false" mathematicalRelation="" isCalculatedAmount="true" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">water in wet mass = wet mass - dry mass</comment>
+        </property>
+        <property propertyId="38f94dd1-d5aa-41b8-b182-c0c42985d9dc" amount="0.107" isDefiningValue="false" unitId="7b75baf0-cbee-45e6-bf66-af119da06553">
+          <name xml:lang="en">price</name>
+          <unitName xml:lang="en">EUR2005</unitName>
+          <comment xml:lang="en">Expert judgement (Urs Luginbühl, Swiss Sawmilling industry, personal communication in June 2014). Wood chips from softwood should have a price of 0.101 EUR/kg. Woodchips from hardwood should have a price of 0.112 EUR/kg. Average of these two values is used. Cross-reference; FAOSTAT database; http://faostat.fao.org/site/626/DesktopDefault.aspx?PageID=626#ancor; Average import/export prices of EU for 'chips and particles'. Price: 48.76 Euro/m3. The density of the wood chips is 650 kg/m3. The price is recalculated accordingly.</comment>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="d61b8768-8ef6-4a99-ae16-9e51f24ad5b5" amount="19.6" isDefiningValue="false" unitId="980b811e-3905-4797-82a5-173f5568bc7e">
+          <name xml:lang="en">heating value, gross</name>
+          <unitName xml:lang="en">MJ</unitName>
+          <comment xml:lang="en">gross (upper) heating (calorific) value</comment>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1.8" isDefiningValue="false" mathematicalRelation="" isCalculatedAmount="true" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">no comment</comment>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0.8" isDefiningValue="false" mathematicalRelation="" isCalculatedAmount="true" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water content is equivalent to moisture content (kg water/kg dry mass)</comment>
+        </property>
+        <property propertyId="48c987bb-3144-4872-b5c7-b1389c40be25" amount="9.39111111111111" isDefiningValue="false" mathematicalRelation="" isCalculatedAmount="true" unitId="980b811e-3905-4797-82a5-173f5568bc7e">
+          <name xml:lang="en">heating value, net</name>
+          <unitName xml:lang="en">MJ</unitName>
+          <comment xml:lang="en">net (lower) heating (calorific) value</comment>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">including bark</comment>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.494" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.494" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="7c39364d-1d7f-4931-bfb7-fe79d7f6ede0">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">31230: Wood in chips or particles</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="e5aea2c7-32d4-4daa-96b1-c1c97080007f" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" amount="0.0195160753740097" intermediateExchangeId="7fe99768-d571-4bc2-a272-7df585bd0d48" activityLinkId="cf5cb5e2-198c-422d-9e74-bc61586f662a" productionVolumeAmount="204820000">
+        <name xml:lang="en">wood chips, wet, measured as dry mass</name>
+        <unitName xml:lang="en">kg</unitName>
+        <property propertyId="38f94dd1-d5aa-41b8-b182-c0c42985d9dc" amount="0.107" isDefiningValue="false" unitId="7b75baf0-cbee-45e6-bf66-af119da06553">
+          <name xml:lang="en">price</name>
+          <unitName xml:lang="en">EUR2005</unitName>
+          <comment xml:lang="en">Expert judgement (Urs Luginbühl, Swiss Sawmilling industry, personal communication in June 2014). Wood chips from softwood should have a price of 0.101 EUR/kg. Woodchips from hardwood should have a price of 0.112 EUR/kg. Average of these two values is used. Cross-reference; FAOSTAT database; http://faostat.fao.org/site/626/DesktopDefault.aspx?PageID=626#ancor; Average import/export prices of EU for 'chips and particles'. Price: 48.76 Euro/m3. The density of the wood chips is 650 kg/m3. The price is recalculated accordingly.</comment>
+        </property>
+        <property propertyId="a264a1a8-0ec9-4671-bc2d-336d5a0b99dd" amount="490" isDefiningValue="false" mathematicalRelation="" isCalculatedAmount="true" unitId="cacb6d36-694d-4e4f-9e79-6c9c73146839">
+          <name xml:lang="en">dry wood density</name>
+          <unitName xml:lang="en">kg/m3</unitName>
+          <comment xml:lang="en">kg dry matter/ dry volume</comment>
+        </property>
+        <property propertyId="d61b8768-8ef6-4a99-ae16-9e51f24ad5b5" amount="20.4" isDefiningValue="false" unitId="980b811e-3905-4797-82a5-173f5568bc7e">
+          <name xml:lang="en">heating value, gross</name>
+          <unitName xml:lang="en">MJ</unitName>
+          <comment xml:lang="en">gross (upper) heating (calorific) value</comment>
+        </property>
+        <property propertyId="48c987bb-3144-4872-b5c7-b1389c40be25" amount="10.1911111111111" isDefiningValue="false" mathematicalRelation="" isCalculatedAmount="true" unitId="980b811e-3905-4797-82a5-173f5568bc7e">
+          <name xml:lang="en">heating value, net</name>
+          <unitName xml:lang="en">MJ</unitName>
+          <comment xml:lang="en">net (lower) heating (calorific) value</comment>
+        </property>
+        <property propertyId="831cecb4-2de9-46fd-bbc5-22661e104beb" amount="776.16" isDefiningValue="false" mathematicalRelation="" isCalculatedAmount="true" unitId="cacb6d36-694d-4e4f-9e79-6c9c73146839">
+          <name xml:lang="en">apparent wood density</name>
+          <unitName xml:lang="en">kg/m3</unitName>
+          <comment xml:lang="en">wet mass/wet volume</comment>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">including bark</comment>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1.8" isDefiningValue="false" mathematicalRelation="" isCalculatedAmount="true" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">no comment</comment>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0.8" isDefiningValue="false" mathematicalRelation="" isCalculatedAmount="true" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water content is equivalent to moisture content (kg water/kg dry mass)</comment>
+        </property>
+        <property propertyId="2520c12c-a34f-40e5-ac7d-37a325d01311" amount="431.2" isDefiningValue="false" mathematicalRelation="" isCalculatedAmount="true" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">basic wood density</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">dry mass/wet volume</comment>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0.8" isDefiningValue="false" mathematicalRelation="" isCalculatedAmount="true" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">water in wet mass = wet mass - dry mass</comment>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0.494" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.494" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.494" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="7c39364d-1d7f-4931-bfb7-fe79d7f6ede0">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">31230: Wood in chips or particles</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="0697186e-02cc-4ff6-b910-528b76d9bada" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" amount="0.0730671123492552" intermediateExchangeId="7fe99768-d571-4bc2-a272-7df585bd0d48" activityLinkId="b0e790e5-27b0-4fb3-aad3-c5ae3a6a910d" productionVolumeAmount="766834810">
+        <name xml:lang="en">wood chips, wet, measured as dry mass</name>
+        <unitName xml:lang="en">kg</unitName>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0.8" isDefiningValue="false" mathematicalRelation="" isCalculatedAmount="true" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water content is equivalent to moisture content (kg water/kg dry mass)</comment>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">including bark</comment>
+        </property>
+        <property propertyId="a264a1a8-0ec9-4671-bc2d-336d5a0b99dd" amount="490" isDefiningValue="false" mathematicalRelation="" isCalculatedAmount="true" unitId="cacb6d36-694d-4e4f-9e79-6c9c73146839">
+          <name xml:lang="en">dry wood density</name>
+          <unitName xml:lang="en">kg/m3</unitName>
+          <comment xml:lang="en">kg dry matter/ dry volume</comment>
+        </property>
+        <property propertyId="d61b8768-8ef6-4a99-ae16-9e51f24ad5b5" amount="20.4" isDefiningValue="false" unitId="980b811e-3905-4797-82a5-173f5568bc7e">
+          <name xml:lang="en">heating value, gross</name>
+          <unitName xml:lang="en">MJ</unitName>
+          <comment xml:lang="en">gross (upper) heating (calorific) value</comment>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1.8" isDefiningValue="false" mathematicalRelation="" isCalculatedAmount="true" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">no comment</comment>
+        </property>
+        <property propertyId="2520c12c-a34f-40e5-ac7d-37a325d01311" amount="431.2" isDefiningValue="false" mathematicalRelation="" isCalculatedAmount="true" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">basic wood density</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">dry mass/wet volume</comment>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0.8" isDefiningValue="false" mathematicalRelation="" isCalculatedAmount="true" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">water in wet mass = wet mass - dry mass</comment>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0.494" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="38f94dd1-d5aa-41b8-b182-c0c42985d9dc" amount="0.107" isDefiningValue="false" unitId="7b75baf0-cbee-45e6-bf66-af119da06553">
+          <name xml:lang="en">price</name>
+          <unitName xml:lang="en">EUR2005</unitName>
+          <comment xml:lang="en">Expert judgement (Urs Luginbühl, Swiss Sawmilling industry, personal communication in June 2014). Wood chips from softwood should have a price of 0.101 EUR/kg. Woodchips from hardwood should have a price of 0.112 EUR/kg. Average of these two values is used. Cross-reference; FAOSTAT database; http://faostat.fao.org/site/626/DesktopDefault.aspx?PageID=626#ancor; Average import/export prices of EU for 'chips and particles'. Price: 48.76 Euro/m3. The density of the wood chips is 650 kg/m3. The price is recalculated accordingly.</comment>
+        </property>
+        <property propertyId="48c987bb-3144-4872-b5c7-b1389c40be25" amount="10.1911111111111" isDefiningValue="false" mathematicalRelation="" isCalculatedAmount="true" unitId="980b811e-3905-4797-82a5-173f5568bc7e">
+          <name xml:lang="en">heating value, net</name>
+          <unitName xml:lang="en">MJ</unitName>
+          <comment xml:lang="en">net (lower) heating (calorific) value</comment>
+        </property>
+        <property propertyId="831cecb4-2de9-46fd-bbc5-22661e104beb" amount="776.16" isDefiningValue="false" mathematicalRelation="" isCalculatedAmount="true" unitId="cacb6d36-694d-4e4f-9e79-6c9c73146839">
+          <name xml:lang="en">apparent wood density</name>
+          <unitName xml:lang="en">kg/m3</unitName>
+          <comment xml:lang="en">wet mass/wet volume</comment>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.494" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.494" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="7c39364d-1d7f-4931-bfb7-fe79d7f6ede0">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">31230: Wood in chips or particles</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="750dbdd7-b549-47e4-8ccd-e1a5c32984c4" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" amount="0.0315485428978353" intermediateExchangeId="7fe99768-d571-4bc2-a272-7df585bd0d48" activityLinkId="58b41ebf-aaa5-4e15-b9d0-05bb8e02d01c" productionVolumeAmount="331100000">
+        <name xml:lang="en">wood chips, wet, measured as dry mass</name>
+        <unitName xml:lang="en">kg</unitName>
+        <property propertyId="38f94dd1-d5aa-41b8-b182-c0c42985d9dc" amount="0.107" isDefiningValue="false" unitId="7b75baf0-cbee-45e6-bf66-af119da06553">
+          <name xml:lang="en">price</name>
+          <unitName xml:lang="en">EUR2005</unitName>
+          <comment xml:lang="en">Expert judgement (Urs Luginbühl, Swiss Sawmilling industry, personal communication in June 2014). Wood chips from softwood should have a price of 0.101 EUR/kg. Woodchips from hardwood should have a price of 0.112 EUR/kg. Average of these two values is used. Cross-reference; FAOSTAT database; http://faostat.fao.org/site/626/DesktopDefault.aspx?PageID=626#ancor; Average import/export prices of EU for 'chips and particles'. Price: 48.76 Euro/m3. The density of the wood chips is 650 kg/m3. The price is recalculated accordingly.</comment>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1.8" isDefiningValue="false" mathematicalRelation="" isCalculatedAmount="true" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">no comment</comment>
+        </property>
+        <property propertyId="831cecb4-2de9-46fd-bbc5-22661e104beb" amount="681.12" isDefiningValue="false" mathematicalRelation="" isCalculatedAmount="true" unitId="cacb6d36-694d-4e4f-9e79-6c9c73146839">
+          <name xml:lang="en">apparent wood density</name>
+          <unitName xml:lang="en">kg/m3</unitName>
+          <comment xml:lang="en">wet mass/wet volume</comment>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">including bark</comment>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0.8" isDefiningValue="false" mathematicalRelation="" isCalculatedAmount="true" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">water in wet mass = wet mass - dry mass</comment>
+        </property>
+        <property propertyId="d61b8768-8ef6-4a99-ae16-9e51f24ad5b5" amount="20.4" isDefiningValue="false" unitId="980b811e-3905-4797-82a5-173f5568bc7e">
+          <name xml:lang="en">heating value, gross</name>
+          <unitName xml:lang="en">MJ</unitName>
+          <comment xml:lang="en">gross (upper) heating (calorific) value</comment>
+        </property>
+        <property propertyId="2520c12c-a34f-40e5-ac7d-37a325d01311" amount="378.4" isDefiningValue="false" mathematicalRelation="" isCalculatedAmount="true" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">basic wood density</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">dry mass/wet volume</comment>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0.494" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="a264a1a8-0ec9-4671-bc2d-336d5a0b99dd" amount="430" isDefiningValue="false" mathematicalRelation="" isCalculatedAmount="true" unitId="cacb6d36-694d-4e4f-9e79-6c9c73146839">
+          <name xml:lang="en">dry wood density</name>
+          <unitName xml:lang="en">kg/m3</unitName>
+          <comment xml:lang="en">kg dry matter/ dry volume</comment>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0.8" isDefiningValue="false" mathematicalRelation="" isCalculatedAmount="true" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water content is equivalent to moisture content (kg water/kg dry mass)</comment>
+        </property>
+        <property propertyId="48c987bb-3144-4872-b5c7-b1389c40be25" amount="10.1911111111111" isDefiningValue="false" mathematicalRelation="" isCalculatedAmount="true" unitId="980b811e-3905-4797-82a5-173f5568bc7e">
+          <name xml:lang="en">heating value, net</name>
+          <unitName xml:lang="en">MJ</unitName>
+          <comment xml:lang="en">net (lower) heating (calorific) value</comment>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.494" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.494" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="7c39364d-1d7f-4931-bfb7-fe79d7f6ede0">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">31230: Wood in chips or particles</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="b066ac58-3d87-48b6-a8df-f400de77473f" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" amount="0.0792028218056837" intermediateExchangeId="7fe99768-d571-4bc2-a272-7df585bd0d48" activityLinkId="cbfb5887-69c8-4760-9f36-b02c2a582a58" productionVolumeAmount="831228700">
+        <name xml:lang="en">wood chips, wet, measured as dry mass</name>
+        <unitName xml:lang="en">kg</unitName>
+        <property propertyId="38f94dd1-d5aa-41b8-b182-c0c42985d9dc" amount="0.107" isDefiningValue="false" unitId="7b75baf0-cbee-45e6-bf66-af119da06553">
+          <name xml:lang="en">price</name>
+          <unitName xml:lang="en">EUR2005</unitName>
+          <comment xml:lang="en">Expert judgement (Urs Luginbühl, Swiss Sawmilling industry, personal communication in June 2014). Wood chips from softwood should have a price of 0.101 EUR/kg. Woodchips from hardwood should have a price of 0.112 EUR/kg. Average of these two values is used. Cross-reference; FAOSTAT database; http://faostat.fao.org/site/626/DesktopDefault.aspx?PageID=626#ancor; Average import/export prices of EU for 'chips and particles'. Price: 48.76 Euro/m3. The density of the wood chips is 650 kg/m3. The price is recalculated accordingly.</comment>
+        </property>
+        <property propertyId="48c987bb-3144-4872-b5c7-b1389c40be25" amount="10.1911111111111" isDefiningValue="false" mathematicalRelation="" isCalculatedAmount="true" unitId="980b811e-3905-4797-82a5-173f5568bc7e">
+          <name xml:lang="en">heating value, net</name>
+          <unitName xml:lang="en">MJ</unitName>
+          <comment xml:lang="en">net (lower) heating (calorific) value</comment>
+        </property>
+        <property propertyId="831cecb4-2de9-46fd-bbc5-22661e104beb" amount="681.12" isDefiningValue="false" mathematicalRelation="" isCalculatedAmount="true" unitId="cacb6d36-694d-4e4f-9e79-6c9c73146839">
+          <name xml:lang="en">apparent wood density</name>
+          <unitName xml:lang="en">kg/m3</unitName>
+          <comment xml:lang="en">wet mass/wet volume</comment>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1.8" isDefiningValue="false" mathematicalRelation="" isCalculatedAmount="true" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">no comment</comment>
+        </property>
+        <property propertyId="a264a1a8-0ec9-4671-bc2d-336d5a0b99dd" amount="430" isDefiningValue="false" mathematicalRelation="" isCalculatedAmount="true" unitId="cacb6d36-694d-4e4f-9e79-6c9c73146839">
+          <name xml:lang="en">dry wood density</name>
+          <unitName xml:lang="en">kg/m3</unitName>
+          <comment xml:lang="en">kg dry matter/ dry volume</comment>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0.8" isDefiningValue="false" mathematicalRelation="" isCalculatedAmount="true" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water content is equivalent to moisture content (kg water/kg dry mass)</comment>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">including bark</comment>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0.494" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="d61b8768-8ef6-4a99-ae16-9e51f24ad5b5" amount="20.4" isDefiningValue="false" unitId="980b811e-3905-4797-82a5-173f5568bc7e">
+          <name xml:lang="en">heating value, gross</name>
+          <unitName xml:lang="en">MJ</unitName>
+          <comment xml:lang="en">gross (upper) heating (calorific) value</comment>
+        </property>
+        <property propertyId="2520c12c-a34f-40e5-ac7d-37a325d01311" amount="378.4" isDefiningValue="false" mathematicalRelation="" isCalculatedAmount="true" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">basic wood density</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">dry mass/wet volume</comment>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0.8" isDefiningValue="false" mathematicalRelation="" isCalculatedAmount="true" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">water in wet mass = wet mass - dry mass</comment>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.494" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.494" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="7c39364d-1d7f-4931-bfb7-fe79d7f6ede0">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">31230: Wood in chips or particles</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+    </flowData>
+    <modellingAndValidation>
+      <representativeness systemModelId="290c1f85-4cc4-4fa1-b0c8-2cb7f4276dce">
+        <systemModelName xml:lang="en">Allocation, cut-off by classification</systemModelName>
+        <extrapolations xml:lang="en">This dataset has been extrapolated from year 2019 to the year of the calculation (2021). The uncertainty has been adjusted accordingly.</extrapolations>
+      </representativeness>
+      <review reviewerId="c4597934-ecac-422c-b431-382e85fdcb83" reviewerName="[System]" reviewerEmail="support@ecoinvent.org" reviewDate="2020-07-29" reviewedMajorRelease="3" reviewedMinorRelease="0" reviewedMajorRevision="2" reviewedMinorRevision="5">
+        <details />
+        <otherDetails xml:lang="en">Validation warnings:
+
+- Due to the use of the reference product property(s) 'wet mass' by other exchanges this dataset will be subdivided by linking rule 3 (see Data Quality Guidelines for details) prior to the calculation of the database. If this is not intended, do not use the properties in question in mathematical relations of other exchanges.
+
+- The total water in wet mass of all input exchanges (0) and output exchanges (1.1) is unbalanced.
+
+- Non-global market activities should have a geography comment.
+</otherDetails>
+      </review>
+      <review reviewerId="35d091e9-38c2-4037-9efe-a73673c57123" reviewerName="Emilia Moreno Ruiz" reviewerEmail="moreno@ecoinvent.org" reviewDate="2020-07-29" reviewedMajorRelease="3" reviewedMinorRelease="0" reviewedMajorRevision="2" reviewedMinorRevision="5">
+        <details>
+          <text xml:lang="en" index="0"></text>
+        </details>
+        <otherDetails xml:lang="en"></otherDetails>
+      </review>
+      <review reviewerId="c4597934-ecac-422c-b431-382e85fdcb83" reviewerName="[System]" reviewerEmail="support@ecoinvent.org" reviewDate="2020-07-23" reviewedMajorRelease="3" reviewedMinorRelease="0" reviewedMajorRevision="1" reviewedMinorRevision="3">
+        <details />
+        <otherDetails xml:lang="en">Validation warnings:
+
+- Due to the use of the reference product property(s) 'dry mass', 'wet mass' by other exchanges this dataset will be subdivided by linking rule 3 (see Data Quality Guidelines for details) prior to the calculation of the database. If this is not intended, do not use the properties in question in mathematical relations of other exchanges.
+
+- The total water in wet mass of all input exchanges (0) and output exchanges (1.1) is unbalanced.
+
+- Non-global market activities should have a geography comment.
+</otherDetails>
+      </review>
+      <review reviewerId="35d091e9-38c2-4037-9efe-a73673c57123" reviewerName="Emilia Moreno Ruiz" reviewerEmail="moreno@ecoinvent.org" reviewDate="2020-07-23" reviewedMajorRelease="3" reviewedMinorRelease="0" reviewedMajorRevision="1" reviewedMinorRevision="3">
+        <details>
+          <text xml:lang="en" index="0"></text>
+        </details>
+        <otherDetails xml:lang="en"></otherDetails>
+      </review>
+    </modellingAndValidation>
+    <administrativeInformation>
+      <dataEntryBy personId="00c7a068-1730-48bf-a7b3-275340049de5" isActiveAuthor="true" personName="Frank Werner" personEmail="frank@frankwerner.ch" />
+      <dataGeneratorAndPublication personId="00c7a068-1730-48bf-a7b3-275340049de5" personName="Frank Werner" personEmail="frank@frankwerner.ch" isCopyrightProtected="true" accessRestrictedTo="1" />
+      <fileAttributes majorRelease="3" minorRelease="0" majorRevision="7" minorRevision="0" internalSchemaVersion="2.0.12" defaultLanguage="en" creationTimestamp="2020-07-23T10:39:07" lastEditTimestamp="2020-07-29T16:20:20" fileGenerator="EcoEditor 3.12.6000.6006" fileTimestamp="2020-07-29T16:20:20" contextId="de659012-50c4-4e96-b54a-fc781bf987ab">
+        <contextName xml:lang="en">ecoinvent</contextName>
+      </fileAttributes>
+    </administrativeInformation>
+  </childActivityDataset>
+</ecoSpold>

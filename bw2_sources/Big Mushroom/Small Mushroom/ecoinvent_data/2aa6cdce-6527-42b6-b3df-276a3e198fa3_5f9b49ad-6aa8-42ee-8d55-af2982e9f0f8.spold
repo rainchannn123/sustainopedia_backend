@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ecoSpold xmlns="http://www.EcoInvent.org/EcoSpold02">
+  <childActivityDataset>
+    <activityDescription>
+      <activity id="2aa6cdce-6527-42b6-b3df-276a3e198fa3" activityNameId="09f7d248-428c-4fb3-9e6f-f44926b9e32c" parentActivityId="b831aa24-1394-4806-a361-3fc102cb214c" inheritanceDepth="-1" type="1" specialActivityType="0">
+        <activityName xml:lang="en">electricity, high voltage, hydro, run-of-river, import from France, renewable energy products</activityName>
+        <includedActivitiesStart xml:lang="en">This activity represents the point of "handing over" the electricity from one country to the other at the border.</includedActivitiesStart>
+        <includedActivitiesEnd xml:lang="en">This dataset doesn't include any electricity losses or transmission infrastructure as these are accounted for in the market datasets. </includedActivitiesEnd>
+        <generalComment>
+          <text xml:lang="en" index="1">This dataset represents  imported electricity from hydro power, run-of-river, from France to CH to the market fo rrenewable energy products CH. The import value includes all electricity imports, independently whether used within the importing country, or re-exported. For a discussion of different ways of modeling electricity trade in LCI, please refer to (Itten &amp; Frischknecht 2012).</text>
+        </generalComment>
+      </activity>
+      <classification classificationId="4c3b7870-d05d-41cf-9a2f-d901c183b0d8">
+        <classificationSystem xml:lang="en">ISIC rev.4 ecoinvent</classificationSystem>
+        <classificationValue xml:lang="en">3510:Electric power generation, transmission and distribution</classificationValue>
+      </classification>
+      <geography geographyId="131278d6-7d7e-11de-9ae2-0019e336be3a">
+        <shortname xml:lang="en">CH</shortname>
+      </geography>
+      <technology technologyLevel="3" />
+      <timePeriod startDate="2010-01-01" endDate="2021-12-31" isDataValidForEntirePeriod="true">
+        <comment>
+          <text xml:lang="en" index="1"></text>
+        </comment>
+      </timePeriod>
+      <macroEconomicScenario macroEconomicScenarioId="d9f57f0a-a01f-42eb-a57b-8f18d6635801">
+        <name xml:lang="en">Business-as-Usual</name>
+      </macroEconomicScenario>
+    </activityDescription>
+    <flowData>
+      <intermediateExchange id="02fe7358-80c0-494c-bf4e-0bd832eef443" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="1" intermediateExchangeId="66c93e71-f32b-4591-901c-55395db5c132" activityLinkId="8f3e9d2a-e567-40f3-a69d-827e374ad7ed">
+        <name xml:lang="en">electricity, high voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">activityLink added to better reflect the reality of the supply chain</comment>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="bf02aa15-a61e-4023-a6b1-4c00cc277cf9" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="1" intermediateExchangeId="5f9b49ad-6aa8-42ee-8d55-af2982e9f0f8" productionVolumeAmount="6896000000" productionVolumeSourceId="e5c28d59-2abe-4005-ad85-433ffc9ca8e6">
+        <name xml:lang="en">electricity, high voltage, renewable energy products</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <property propertyId="38f94dd1-d5aa-41b8-b182-c0c42985d9dc" amount="0.101" unitId="7b75baf0-cbee-45e6-bf66-af119da06553">
+          <name xml:lang="en">price</name>
+          <unitName xml:lang="en">EUR2005</unitName>
+          <comment xml:lang="en">Temporary price data. Calculated as 90% of purchasers price based on: 94% of the average price (to account for a 6% loss in transformation and transmission) for electricity for industrial consumersin 2005 (excluded taxes). From IEA. In addition, regarding label-certified electricity, the Swiss government has a market instrument for renewable energy which is calculated as the difference between the market price and the production price. This was started in 2009 and is 0.45 Rp/kWh. Therefore, the production price of label certified energy is assumed to be the supplyer price plus the 0.45Rp/kWh (http://www.bfe.admin.ch/themen/00612/02073/index.html?lang=de).The unit conversion from CH to EUR is based on the ecoinvent unit conversion file (1 CHF2005 = 0.644 EUR2005). As an approximation, this is also used for global electricity production</comment>
+        </property>
+        <productionVolumeComment xml:lang="en">Literature data/calculated data. Based on Tab. 3.7 in Stolz, P., Frischnkecht, R. 2015. Umweltbilanz Strommix Schweiz 2011. Issued by treeze Ltd. for the Federal Office for the Environment, Switzerland.</productionVolumeComment>
+        <productionVolumeUncertainty>
+          <lognormal meanValue="6896000000" mu="21" variance="0.0006" varianceWithPedigreeUncertainty="0.0013" />
+          <pedigreeMatrix reliability="2" completeness="2" temporalCorrelation="1" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </productionVolumeUncertainty>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <outputGroup>0</outputGroup>
+      </intermediateExchange>
+    </flowData>
+    <modellingAndValidation>
+      <representativeness systemModelId="290c1f85-4cc4-4fa1-b0c8-2cb7f4276dce">
+        <systemModelName xml:lang="en">Allocation, cut-off by classification</systemModelName>
+        <extrapolations xml:lang="en">This dataset has been extrapolated from year 2010 to the year of the calculation (2021). The uncertainty has been adjusted accordingly.</extrapolations>
+      </representativeness>
+      <review reviewerId="c4597934-ecac-422c-b431-382e85fdcb83" reviewerName="[System]" reviewerEmail="support@ecoinvent.org" reviewDate="2021-08-04" reviewedMajorRelease="3" reviewedMinorRelease="0" reviewedMajorRevision="0" reviewedMinorRevision="4">
+        <details>
+          <text xml:lang="en" index="0">Validation failed with errors:
+
+- No GLO dataset found! Related datasets: 
+</text>
+        </details>
+        <otherDetails xml:lang="en">Validation warnings:
+
+- Uncertainty shall always be provided for all primary data inputs (exchange amounts, properties and parameters), except for the amount and properties of reference products.
+ -- Exchange(s): electricity, high voltage
+
+- Pedigree information shall always be provided for all uncertainties of primary data inputs (exchange amounts, properties and parameters), except for the amount and properties of reference products.
+ -- Exchange(s): electricity, high voltage
+
+</otherDetails>
+      </review>
+      <review reviewerId="44a0bdd8-6624-4a73-a661-7190ddf070b3" reviewerName="David FitzGerald" reviewerEmail="fitzgerald@ecoinvent.org" reviewDate="2021-08-04" reviewedMajorRelease="3" reviewedMinorRelease="0" reviewedMajorRevision="0" reviewedMinorRevision="4">
+        <details>
+          <text xml:lang="en" index="0"></text>
+        </details>
+        <otherDetails xml:lang="en"></otherDetails>
+      </review>
+    </modellingAndValidation>
+    <administrativeInformation>
+      <dataEntryBy personId="52f4f2ad-0a8b-44b5-86eb-7fb567d703d4" isActiveAuthor="false" personName="Johannes Müller" personEmail="mueller@ecoinvent.org" />
+      <dataGeneratorAndPublication personId="52f4f2ad-0a8b-44b5-86eb-7fb567d703d4" personName="Johannes Müller" personEmail="mueller@ecoinvent.org" dataPublishedIn="0" isCopyrightProtected="true" accessRestrictedTo="1" />
+      <fileAttributes majorRelease="3" minorRelease="0" majorRevision="1" minorRevision="0" internalSchemaVersion="2.0.8" defaultLanguage="en" creationTimestamp="2021-08-03T16:14:37" lastEditTimestamp="2021-08-03T16:34:08" fileGenerator="EcoEditor 3.13.3000.19229" fileTimestamp="2021-08-03T16:34:08" contextId="de659012-50c4-4e96-b54a-fc781bf987ab">
+        <contextName xml:lang="en">ecoinvent</contextName>
+      </fileAttributes>
+    </administrativeInformation>
+  </childActivityDataset>
+</ecoSpold>

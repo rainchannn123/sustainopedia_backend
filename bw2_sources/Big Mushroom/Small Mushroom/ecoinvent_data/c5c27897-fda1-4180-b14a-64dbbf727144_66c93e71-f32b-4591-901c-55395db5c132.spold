@@ -1,0 +1,308 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ecoSpold xmlns="http://www.EcoInvent.org/EcoSpold02">
+  <childActivityDataset>
+    <activityDescription>
+      <activity id="c5c27897-fda1-4180-b14a-64dbbf727144" activityNameId="c3bd0394-c275-40e4-9780-6430e33a8694" parentActivityId="ea8eba77-edb6-4578-b759-d78f9c8ca166" inheritanceDepth="-1" type="1" specialActivityType="0">
+        <activityName xml:lang="en">electricity production, compressed air energy storage, adiabatic</activityName>
+        <includedActivitiesStart xml:lang="en">From the constructed ACAES plant ready to produce or store electricity. </includedActivitiesStart>
+        <includedActivitiesEnd xml:lang="en">This activity ends with 1kWh of high voltage electricity produced at the power plant and arrival at the busbar. The dataset includes electricity input, which is stored and natural gas input for turbine operation. Emissions of natural gas combustion are included.</includedActivitiesEnd>
+        <generalComment>
+          <text xml:lang="en" index="1">The dataset represents elecctricity production by adiabatic compressed air energy storage. This energy storage system is based on using electricity to compress air and store it in underground caverns. The air is released when needed and passed through a turbine to generate electricity.The adiabatic compressed air energy storage (ACAES) system makes use of a thermal energy storage for heating up the outflow of air from the storage location. This is different to the (non-adiabatic) CAES (also available in the database) which uses a gas turbine burning natural gas. 
+The dataset entirely refers to Bouman, Evert A.; Øberg, Martha M.; Hertwich, Edgar G. (2016): Environmental impacts of balancing offshore wind power with compressed air energy storage (CAES). In: Energy 95, S. 91–98. DOI: 10.1016/j.energy.2015.11.041.
+</text>
+        </generalComment>
+      </activity>
+      <classification classificationId="4c3b7870-d05d-41cf-9a2f-d901c183b0d8">
+        <classificationSystem xml:lang="en">ISIC rev.4 ecoinvent</classificationSystem>
+        <classificationValue xml:lang="en">3510:Electric power generation, transmission and distribution</classificationValue>
+      </classification>
+      <geography geographyId="7846b897-7c04-4f9f-b607-2b83fcd9a74c">
+        <shortname xml:lang="en">RoW</shortname>
+        <comment>
+          <text xml:lang="en" index="1">The scope of the underlying literature source is Europe. Uncertainty was adjusted accordingly.</text>
+        </comment>
+      </geography>
+      <technology technologyLevel="1">
+        <comment>
+          <text xml:lang="en" index="1">Power rating: 150 MW. Storage capacity: 19.2 MWh. Annual production: 1150 GWh
+</text>
+        </comment>
+      </technology>
+      <timePeriod startDate="1998-01-01" endDate="2021-12-31" isDataValidForEntirePeriod="true">
+        <comment>
+          <text xml:lang="en" index="1">refers to date of publicaton</text>
+        </comment>
+      </timePeriod>
+      <macroEconomicScenario macroEconomicScenarioId="d9f57f0a-a01f-42eb-a57b-8f18d6635801">
+        <name xml:lang="en">Business-as-Usual</name>
+      </macroEconomicScenario>
+    </activityDescription>
+    <flowData>
+      <intermediateExchange id="9a39a493-9345-410a-b064-be450f2e0672" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0" isCalculatedAmount="false" mathematicalRelation="" intermediateExchangeId="66c93e71-f32b-4591-901c-55395db5c132" productionVolumeAmount="0">
+        <name xml:lang="en">electricity, high voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Literature value.</comment>
+        <uncertainty>
+          <undefined minValue="0" maxValue="0" standardDeviation95="0" />
+          <pedigreeMatrix reliability="1" completeness="1" temporalCorrelation="1" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="90e8e3fc-7f66-4b96-a7e7-34473bac18c3" unitId="5b972631-34e3-4db7-a615-f6931770a0cb" amount="8.69565217391304E-12" isCalculatedAmount="true" mathematicalRelation="1/(lifetime*1150000000)" intermediateExchangeId="ea3923d2-4c54-49e2-92f4-e1f1baa4ed17" activityLinkId="b23a64b5-6506-45e9-8769-418673b184f0">
+        <name xml:lang="en">compressed air energy storage plant, adiabatic, 150 MW electrical</name>
+        <unitName xml:lang="en">unit</unitName>
+        <comment xml:lang="en">Calculated value. Annual production: 1150 GWh. System capacity factor: 88 %</comment>
+        <uncertainty>
+          <lognormal meanValue="8.69565217391304E-12" mu="-25.47" variance="0.3" varianceWithPedigreeUncertainty="0.3126" />
+          <pedigreeMatrix reliability="2" completeness="5" temporalCorrelation="3" geographicalCorrelation="5" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <synonym xml:lang="en">ACAES</synonym>
+        <classification classificationId="58c43590-9d63-402c-98e5-399314aa3fdf">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">53262: Power plants</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="47c1fecb-48b9-4014-9489-f184b1797512" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="1" intermediateExchangeId="66c93e71-f32b-4591-901c-55395db5c132" productionVolumeAmount="3" productionVolumeMathematicalRelation="">
+        <name xml:lang="en">electricity, high voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <property propertyId="38f94dd1-d5aa-41b8-b182-c0c42985d9dc" amount="0.0977" unitId="7b75baf0-cbee-45e6-bf66-af119da06553">
+          <name xml:lang="en">price</name>
+          <unitName xml:lang="en">EUR2005</unitName>
+          <comment xml:lang="en">Temporary price data. Calculated as 90% of purchasers price based on: 94% of the average price (to account for a 6% loss in transformation and transmission) for electricity for industrial consumersin 2005 (excluded taxes). From IEA.</comment>
+        </property>
+        <productionVolumeComment xml:lang="en">In the time frame of the dataset no plant was realized.</productionVolumeComment>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <outputGroup>0</outputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="e7f542b4-d448-4d00-92c1-95967fac099d" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.0163345031488731" isCalculatedAmount="false" mathematicalRelation="" intermediateExchangeId="66c93e71-f32b-4591-901c-55395db5c132" activityLinkId="8d85f32d-4189-4af6-be11-b6a58a451815">
+        <name xml:lang="en">electricity, high voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Literature value.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.0163345031488731" mu="-4.114" variance="0.0006" varianceWithPedigreeUncertainty="0.0132" />
+          <pedigreeMatrix reliability="2" completeness="5" temporalCorrelation="3" geographicalCorrelation="5" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="8b39ee5b-e91d-4362-bd81-c48682712325" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.00313148134086771" isCalculatedAmount="false" mathematicalRelation="" intermediateExchangeId="66c93e71-f32b-4591-901c-55395db5c132" activityLinkId="a2ff62f4-d123-4cca-a240-beaac19382e1">
+        <name xml:lang="en">electricity, high voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Literature value.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.00313148134086771" mu="-5.766" variance="0.0006" varianceWithPedigreeUncertainty="0.0132" />
+          <pedigreeMatrix reliability="2" completeness="5" temporalCorrelation="3" geographicalCorrelation="5" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="78805e7f-5879-4d65-be75-d11e581742b1" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.072129318943801" isCalculatedAmount="false" mathematicalRelation="" intermediateExchangeId="66c93e71-f32b-4591-901c-55395db5c132" activityLinkId="0936c4eb-3ba5-4fc5-b501-9676da57d194">
+        <name xml:lang="en">electricity, high voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Literature value.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.072129318943801" mu="-2.629" variance="0.0006" varianceWithPedigreeUncertainty="0.0132" />
+          <pedigreeMatrix reliability="2" completeness="5" temporalCorrelation="3" geographicalCorrelation="5" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="486865f4-e7fb-4241-9195-daddceac2658" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.0530942296778766" isCalculatedAmount="false" mathematicalRelation="" intermediateExchangeId="66c93e71-f32b-4591-901c-55395db5c132" activityLinkId="de3f3806-e51e-41dd-bcca-818c8d58310f">
+        <name xml:lang="en">electricity, high voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Literature value.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.0530942296778766" mu="-2.936" variance="0.0006" varianceWithPedigreeUncertainty="0.0132" />
+          <pedigreeMatrix reliability="2" completeness="5" temporalCorrelation="3" geographicalCorrelation="5" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="e78ea34c-782a-4c6a-bd79-420f54a760f5" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.76453638731708" isCalculatedAmount="false" mathematicalRelation="" intermediateExchangeId="66c93e71-f32b-4591-901c-55395db5c132" activityLinkId="fe52e896-d1fb-47ba-9e6c-f5653004c998">
+        <name xml:lang="en">electricity, high voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Literature value.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.76453638731708" mu="-0.2685" variance="0.0006" varianceWithPedigreeUncertainty="0.0132" />
+          <pedigreeMatrix reliability="2" completeness="5" temporalCorrelation="3" geographicalCorrelation="5" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="cdde505f-ad85-4436-bba5-237ec0cbc057" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.121248590128821" isCalculatedAmount="false" mathematicalRelation="" intermediateExchangeId="66c93e71-f32b-4591-901c-55395db5c132" activityLinkId="e899e599-232f-4f55-81c8-7c5cbd2294fc">
+        <name xml:lang="en">electricity, high voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Literature value.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.121248590128821" mu="-2.11" variance="0.0006" varianceWithPedigreeUncertainty="0.0132" />
+          <pedigreeMatrix reliability="2" completeness="5" temporalCorrelation="3" geographicalCorrelation="5" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="f83008fd-fe83-4d70-b3b5-8d618a039ba8" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.349525489442681" isCalculatedAmount="false" mathematicalRelation="" intermediateExchangeId="66c93e71-f32b-4591-901c-55395db5c132" activityLinkId="f732d2ce-5a80-4268-9c23-5f30f9650788">
+        <name xml:lang="en">electricity, high voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Literature value.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.349525489442681" mu="-1.051" variance="0.0006" varianceWithPedigreeUncertainty="0.0132" />
+          <pedigreeMatrix reliability="2" completeness="5" temporalCorrelation="3" geographicalCorrelation="5" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <parameter parameterId="902d8a9c-c2b3-4b9e-855c-94bbe44f79db" variableName="lifetime" amount="100">
+        <name xml:lang="en">lifetime</name>
+        <unitName xml:lang="en">year</unitName>
+      </parameter>
+    </flowData>
+    <modellingAndValidation>
+      <representativeness systemModelId="290c1f85-4cc4-4fa1-b0c8-2cb7f4276dce">
+        <systemModelName xml:lang="en">Allocation, cut-off by classification</systemModelName>
+        <samplingProcedure xml:lang="en">according to literature values</samplingProcedure>
+        <extrapolations xml:lang="en">The dataset is extrapolated from the respective regional dataset with uncertainty adjusted.</extrapolations>
+      </representativeness>
+      <review reviewerId="847a56f5-d9e5-4a65-ab51-b056e0039130" reviewerName="Avraam Symeonidis" reviewerEmail="Symeonidis@ecoinvent.org" reviewDate="2021-01-19" reviewedMajorRelease="3" reviewedMinorRelease="0" reviewedMajorRevision="0" reviewedMinorRevision="23">
+        <details>
+          <text xml:lang="en" index="0"></text>
+        </details>
+        <otherDetails xml:lang="en"></otherDetails>
+      </review>
+      <review reviewerId="44a0bdd8-6624-4a73-a661-7190ddf070b3" reviewerName="David FitzGerald" reviewerEmail="fitzgerald@ecoinvent.org" reviewDate="2021-06-08" reviewedMajorRelease="3" reviewedMinorRelease="0" reviewedMajorRevision="1" reviewedMinorRevision="3">
+        <details>
+          <text xml:lang="en" index="0"></text>
+        </details>
+        <otherDetails xml:lang="en"></otherDetails>
+      </review>
+      <review reviewerId="c4597934-ecac-422c-b431-382e85fdcb83" reviewerName="[System]" reviewerEmail="support@ecoinvent.org" reviewDate="2021-05-06" reviewedMajorRelease="3" reviewedMinorRelease="0" reviewedMajorRevision="0" reviewedMinorRevision="23">
+        <details />
+        <otherDetails xml:lang="en">Validation warnings:
+
+- Uncertainty shall always be provided for all primary data inputs (exchange amounts, properties and parameters), except for the amount and properties of reference products.
+ -- Parameter(s): lifetime
+
+- Pedigree information shall always be provided for all uncertainties of primary data inputs (exchange amounts, properties and parameters), except for the amount and properties of reference products.
+ -- Parameter(s): lifetime
+
+- A non-global market exists for the reference product 'electricity, high voltage' but is not supplied by any instances of the activity 'electricity production, compressed air energy storage, adiabatic'.
+- Production volume of local datasets for a specific activity, time period, and macro-economic scenario must not exceed 99.5% of the production volume of the corresponding global.
+
+ Warning: -  Exchange 'electricity, high voltage', global (1998-2015) production volume 1, sum of all non-global production volumes 1. Local datasets used in calculation: RER (1998-2015) PV: 1
+
+- The input exchange 'compressed air energy storage plant, adiabatic, 150 MW electrical' does not have an activity link and therefore requires a market for that input to be available. If the market is not available the dataset will be put on hold at the end of its review and will remain on hold until such a market has been accepted into the ecoinvent database.
+
+</otherDetails>
+      </review>
+      <review reviewerId="610bd1b2-fec3-4e8e-84a6-76fef8b6b7b8" reviewerName="Karin Treyer" reviewerEmail="karin.treyer@psi.ch" reviewDate="2021-01-19" reviewedMajorRelease="3" reviewedMinorRelease="0" reviewedMajorRevision="0" reviewedMinorRevision="23">
+        <details>
+          <text xml:lang="en" index="0"></text>
+        </details>
+        <otherDetails xml:lang="en"></otherDetails>
+      </review>
+      <review reviewerId="c4597934-ecac-422c-b431-382e85fdcb83" reviewerName="[System]" reviewerEmail="support@ecoinvent.org" reviewDate="2021-06-08" reviewedMajorRelease="3" reviewedMinorRelease="0" reviewedMajorRevision="1" reviewedMinorRevision="3">
+        <details />
+        <otherDetails xml:lang="en">Validation warnings:
+
+- Uncertainty shall always be provided for all primary data inputs (exchange amounts, properties and parameters), except for the amount and properties of reference products.
+ -- Parameter(s): lifetime
+
+- Pedigree information shall always be provided for all uncertainties of primary data inputs (exchange amounts, properties and parameters), except for the amount and properties of reference products.
+ -- Parameter(s): lifetime
+
+- A non-global market exists for the reference product 'electricity, high voltage' but is not supplied by any instances of the activity 'electricity production, compressed air energy storage, adiabatic'.
+</otherDetails>
+      </review>
+      <review reviewerId="35d1edf5-ec28-46e2-bdf5-a2661eb61435" reviewerName="Carl Vadenbo" reviewerEmail="vadenbo@ecoinvent.org" reviewDate="2021-01-19" reviewedMajorRelease="3" reviewedMinorRelease="0" reviewedMajorRevision="0" reviewedMinorRevision="23">
+        <details>
+          <text xml:lang="en" index="0"></text>
+        </details>
+        <otherDetails xml:lang="en"></otherDetails>
+      </review>
+    </modellingAndValidation>
+    <administrativeInformation>
+      <dataEntryBy personId="f69490bf-ebfe-499e-829a-ed3f04b45f3c" isActiveAuthor="false" personName="Heidi Hottenroth" personEmail="heidi.hottenroth@hs-pforzheim.de" />
+      <dataGeneratorAndPublication personId="f69490bf-ebfe-499e-829a-ed3f04b45f3c" personName="Heidi Hottenroth" personEmail="heidi.hottenroth@hs-pforzheim.de" dataPublishedIn="2" publishedSourceId="e8e3d689-6979-4341-a2bc-aa172344c7ae" publishedSourceYear="2016" publishedSourceFirstAuthor="Bouman, Evert A." isCopyrightProtected="true" pageNumbers="93" accessRestrictedTo="1" />
+      <fileAttributes majorRelease="3" minorRelease="0" majorRevision="2" minorRevision="0" internalSchemaVersion="2.0.12" defaultLanguage="en" creationTimestamp="2021-01-19T09:41:55" lastEditTimestamp="2021-06-08T17:10:37" fileGenerator="EcoEditor 3.12.6000.6006" fileTimestamp="2021-06-08T17:10:37" contextId="de659012-50c4-4e96-b54a-fc781bf987ab">
+        <contextName xml:lang="en">ecoinvent</contextName>
+      </fileAttributes>
+    </administrativeInformation>
+  </childActivityDataset>
+</ecoSpold>

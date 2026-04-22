@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ecoSpold xmlns="http://www.EcoInvent.org/EcoSpold02">
+  <childActivityDataset>
+    <activityDescription>
+      <activity id="d2669d74-1b82-4939-8675-28ca4b084f5f" activityNameId="6700efd6-768e-476c-95ba-2d070fd322a8" activityNameContextId="de659012-50c4-4e96-b54a-fc781bf987ab" parentActivityId="e18abc30-bc47-47db-84d8-dbf53f824fd9" inheritanceDepth="-1" type="1" specialActivityType="0">
+        <activityName xml:lang="en">electricity, high voltage, import from BR-North-eastern grid</activityName>
+        <includedActivitiesStart xml:lang="en">This activity represents the point of 'handing over' the electricity from one electricity grid to the other at the border.</includedActivitiesStart>
+        <includedActivitiesEnd xml:lang="en">This dataset doesn't include any electricity losses or transmission infrastructure as these are accounted for in the market datasets.</includedActivitiesEnd>
+        <generalComment>
+          <text xml:lang="en" index="1">This dataset represents the amount of imported electricity from the Brazilian Southern electricity grid to the Brazilian South-eastern electricity grid. The import value is valid for 2014.  and includes all electricity imports, independently whether used within the importing country, or re-exported. For a discussion of different ways of modeling electricity trade in LCI, please refer to Itten et al. 2014.
+
+Itten R., Frischknecht R. and Stucki M. (2014) Life Cycle Inventories of Electricity Mixes and Grid. Version 1.3 Report issued on behalf of Paul Scherrer Institut (PSI). treeze Ltd., Uster, Switzerland, retrieved from: www.lc-inventories.ch</text>
+        </generalComment>
+      </activity>
+      <classification classificationId="4c3b7870-d05d-41cf-9a2f-d901c183b0d8">
+        <classificationSystem xml:lang="en">ISIC rev.4 ecoinvent</classificationSystem>
+        <classificationValue xml:lang="en">3510:Electric power generation, transmission and distribution</classificationValue>
+      </classification>
+      <geography geographyId="df7d08ae-6f20-4095-96e6-3d9cc6f49263">
+        <shortname xml:lang="en">BR-South-eastern grid</shortname>
+      </geography>
+      <technology technologyLevel="3" />
+      <timePeriod startDate="2014-01-01" endDate="2021-12-31" isDataValidForEntirePeriod="true">
+        <comment>
+          <text xml:lang="en" index="1">The production volume is valid for the year 2014</text>
+        </comment>
+      </timePeriod>
+      <macroEconomicScenario macroEconomicScenarioId="d9f57f0a-a01f-42eb-a57b-8f18d6635801">
+        <name xml:lang="en">Business-as-Usual</name>
+      </macroEconomicScenario>
+    </activityDescription>
+    <flowData>
+      <intermediateExchange id="8673f367-1da3-4a12-b709-5188007edf59" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="1" intermediateExchangeId="66c93e71-f32b-4591-901c-55395db5c132" activityLinkId="b2b4e69a-21ec-419a-ba10-4b696903708e">
+        <name xml:lang="en">electricity, high voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">activityLink added to better reflect the reality of the supply chain</comment>
+        <uncertainty>
+          <undefined minValue="0.71" maxValue="0.71" standardDeviation95="0" />
+          <pedigreeMatrix reliability="1" completeness="1" temporalCorrelation="3" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+        </uncertainty>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="61309d2c-147f-4512-891c-dbdc83902e34" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="1" intermediateExchangeId="66c93e71-f32b-4591-901c-55395db5c132" productionVolumeAmount="28200000000" productionVolumeMathematicalRelation="">
+        <name xml:lang="en">electricity, high voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <property propertyId="38f94dd1-d5aa-41b8-b182-c0c42985d9dc" amount="0.0977" unitId="7b75baf0-cbee-45e6-bf66-af119da06553">
+          <name xml:lang="en">price</name>
+          <unitName xml:lang="en">EUR2005</unitName>
+          <comment xml:lang="en">Temporary price data. Calculated as 90% of purchasers price based on: 94% of the average price (to account for a 6% loss in transformation and transmission) for electricity for industrial consumersin 2005 (excluded taxes). From IEA.</comment>
+        </property>
+        <productionVolumeComment xml:lang="en">Production volume valid for 2014. Calculated as follows: the amount of electricity imported by each of the two net-importing Brazilian grids (South-eastern and North-eastern) is reported by MME, 2016. This amount was divided over the supplying Brazilian grids according to the share of installed transmission capacity between grids (retrieved from Gils et al., 2017). 
+
+MME (2016). Matrizes Elétricas Estaduais: Ano Referência 2015. Edição de 23 de novembro de 2016. Ministério De Minas E Energia - MME. Secretaria De Planejamento E Desenvolvimento Energético. Núcleo De Estudos Estratégicos De Energia. Available in: &lt;http://www.mme.gov.br/documents/10584/3580498/03+-+Matrizes+El%C3%A9tricas+Estaduais+2016+-+ano+ref.+2015+%28PDF%29/ddfaad8c-a436-4aa8-b619-f95dd2cf689c?version=1.0&gt; Access at 03-2018
+
+Gils, H. C., Simon, S., Soria, R., 2017: 100% Renewable Energy Supply for Brazil-The Role of Sector Coupling and Regional Development. energies. Accessible online at http://www.mdpi.com/1996-1073/10/11/1859/pdf, 26.04.2018</productionVolumeComment>
+        <productionVolumeUncertainty>
+          <lognormal meanValue="28200000000" mu="24.06" variance="0.001" varianceWithPedigreeUncertainty="0.0031" />
+          <pedigreeMatrix reliability="3" completeness="2" temporalCorrelation="1" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </productionVolumeUncertainty>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <outputGroup>0</outputGroup>
+      </intermediateExchange>
+    </flowData>
+    <modellingAndValidation>
+      <representativeness systemModelId="290c1f85-4cc4-4fa1-b0c8-2cb7f4276dce">
+        <systemModelName xml:lang="en">Allocation, cut-off by classification</systemModelName>
+        <samplingProcedure xml:lang="en">Literature data: The total amount of electricity imported to the BR South-eastern grid in 2014 was found in literature. The split of this amount between the supplying grids was done based on the share of the installed transmission capacities between the grids.</samplingProcedure>
+        <extrapolations xml:lang="en">This dataset has been extrapolated from year 2014 to the year of the calculation (2021). The uncertainty has been adjusted accordingly.</extrapolations>
+      </representativeness>
+      <review reviewerId="610bd1b2-fec3-4e8e-84a6-76fef8b6b7b8" reviewerName="Karin Treyer" reviewerEmail="karin.treyer@psi.ch" reviewDate="2018-04-27" reviewedMajorRelease="3" reviewedMinorRelease="0" reviewedMajorRevision="0" reviewedMinorRevision="20">
+        <details>
+          <text xml:lang="en" index="0">These datasets model the electricity exchanges between the Brazilean grid regions. They are not based on certificates of origin, but on total electricity flows between the grids. Transmission grid capacities were used for extrapolation of total values given, see production volume comment. If more accurate measured data become accesible, the modelling should be changed.  </text>
+        </details>
+        <otherDetails xml:lang="en"></otherDetails>
+      </review>
+      <review reviewerId="c4597934-ecac-422c-b431-382e85fdcb83" reviewerName="[System]" reviewerEmail="support@ecoinvent.org" reviewDate="2018-05-02" reviewedMajorRelease="3" reviewedMinorRelease="0" reviewedMajorRevision="0" reviewedMinorRevision="20">
+        <details>
+          <text xml:lang="en" index="0">Validation failed with errors:
+
+- No GLO dataset found! Related datasets: 
+</text>
+        </details>
+        <otherDetails xml:lang="en">Validation warnings:
+
+- Mass and/or economic deficit in activity dataset exceeds either 0.1% of input or output sum:
+
+Property 'price':
+ - Input='0', Output='0,0977'
+ - Input &lt; output by 0,0977 EUR2005 (100% of output)
+
+
+- Specified amount (1) did not match amount calculated by uncertainty (0,71) at exchange 'electricity, high voltage'
+- The input exchange 'electricity, high voltage' has an activity link and therefore requires a valid product exchange for that input to be available. If the valid product exchange is not available the dataset will be put on hold at the end of its review and will remain on hold until such a valid product exchange has been accepted into the ecoinvent database.
+
+</otherDetails>
+      </review>
+    </modellingAndValidation>
+    <administrativeInformation>
+      <dataEntryBy personId="ab2a5a32-7e0d-431a-9f6c-9011ff140de7" isActiveAuthor="false" personName="Florentine Brunner" personEmail="Brunner@ecoinvent.org" />
+      <dataGeneratorAndPublication personId="ab2a5a32-7e0d-431a-9f6c-9011ff140de7" personName="Florentine Brunner" personEmail="Brunner@ecoinvent.org" dataPublishedIn="1" publishedSourceId="7447e4ce-4a9d-4421-a718-eba846b6644c" publishedSourceYear="2017" publishedSourceFirstAuthor="Suppen, N" isCopyrightProtected="true" accessRestrictedTo="1" />
+      <fileAttributes majorRelease="3" minorRelease="0" majorRevision="1" minorRevision="0" defaultLanguage="en" creationTimestamp="2018-04-27T09:16:25" lastEditTimestamp="2018-04-30T10:20:14" fileGenerator="EcoEditor 3.11.1000.17123" fileTimestamp="2018-04-30T10:20:14" contextId="de659012-50c4-4e96-b54a-fc781bf987ab">
+        <contextName xml:lang="en">ecoinvent</contextName>
+      </fileAttributes>
+    </administrativeInformation>
+  </childActivityDataset>
+</ecoSpold>

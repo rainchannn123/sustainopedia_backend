@@ -1,0 +1,725 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ecoSpold xmlns="http://www.EcoInvent.org/EcoSpold02">
+  <childActivityDataset>
+    <activityDescription>
+      <activity id="1be654e8-06a3-4e38-a041-d1996a328df6" activityNameId="d6e2ebdd-f59f-4bde-ad7b-2999efcfd718" parentActivityId="9cd82483-65af-459d-b9a0-385e467b4460" inheritanceDepth="-1" type="1" specialActivityType="0" energyValues="1">
+        <activityName xml:lang="en">natural gas, burned in gas turbine, for compressor station</activityName>
+        <includedActivitiesStart xml:lang="en">This activity starts at the reception of the natural gas in the turbine</includedActivitiesStart>
+        <includedActivitiesEnd xml:lang="en">The activity ends with the production of electricity.
+The activity includes fuel input, infrastructure, and emissions to air.</includedActivitiesEnd>
+        <generalComment>
+          <text xml:lang="en" index="0">This dataset describes the production of electricity from natural gas for a compressor station in Quebec (Canada) in 2010. A part of the natural gas transported by pipeline is used in gas turbines located in compressor stations (along the pipeline route) to produce electricity that compress the gas and enable its transport.
+The electricity generated in by this gas turbine is only used by the corresponding natural market activity (through a direct link), so it does not contribute to the electricity market. The dataset is an adaptation of the dataset describing the average burning of gas for a compressor station in Germany in 1990-2000 period.
+
+ Main emissions have been adapted using local data provided by the Canadian Association of Petroleum Producers.</text>
+        </generalComment>
+      </activity>
+      <classification classificationId="5bd3c258-eb6a-497e-9643-32b30aa010bf">
+        <classificationSystem xml:lang="en">EcoSpold01Categories</classificationSystem>
+        <classificationValue xml:lang="en">natural gas/power plants</classificationValue>
+      </classification>
+      <classification classificationId="4c3b7870-d05d-41cf-9a2f-d901c183b0d8">
+        <classificationSystem xml:lang="en">ISIC rev.4 ecoinvent</classificationSystem>
+        <classificationValue xml:lang="en">3510:Electric power generation, transmission and distribution</classificationValue>
+      </classification>
+      <geography geographyId="868a66d1-7428-4ba2-9125-253b07afc119">
+        <shortname xml:lang="en">CA-QC</shortname>
+        <comment>
+          <text xml:lang="en" index="1">Infrastructure, amount of gas and some emissions derived from german dataset.Main emissions derived from Albertan data. The uncertainty has been adjusted accordingly.</text>
+        </comment>
+      </geography>
+      <technology technologyLevel="3">
+        <comment>
+          <text xml:lang="en" index="1">For infrastructure, a 10MWe gas turbine was assumed. The Technology and emissions data corresponding to 2000 technologies. Uncertainty has been adjusted accordingly.</text>
+        </comment>
+      </technology>
+      <timePeriod startDate="2010-01-01" endDate="2021-12-31" isDataValidForEntirePeriod="false">
+        <comment>
+          <text xml:lang="en" index="1">Technology and emissions data corresponding to 2000 technologies. Uncertainty has been adjusted accordingly.</text>
+        </comment>
+      </timePeriod>
+      <macroEconomicScenario macroEconomicScenarioId="d9f57f0a-a01f-42eb-a57b-8f18d6635801">
+        <name xml:lang="en">Business-as-Usual</name>
+      </macroEconomicScenario>
+    </activityDescription>
+    <flowData>
+      <intermediateExchange id="9232032e-02d5-4bbf-aa75-9f459b18fbf2" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="1" intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d" productionVolumeAmount="2055537.6" productionVolumeMathematicalRelation="5585700000*200* 2e-5*0.092" productionVolumeSourceId="09ac2b35-9c03-46ca-b251-6409640a0e9e">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment>EcoSpold01Location=NO</comment>
+        <property propertyId="b00066a1-40f3-466c-9bf9-4be11256842e" amount="1" unitId="980b811e-3905-4797-82a5-173f5568bc7e">
+          <name xml:lang="en">Corresponding fuel use</name>
+          <unitName xml:lang="en">MJ</unitName>
+        </property>
+        <property propertyId="38f94dd1-d5aa-41b8-b182-c0c42985d9dc" amount="0.1" unitId="7b75baf0-cbee-45e6-bf66-af119da06553">
+          <name xml:lang="en">price</name>
+          <unitName xml:lang="en">EUR2005</unitName>
+          <comment xml:lang="en">Calculated to be between the price of electricity, high voltage and electricity, low voltage.</comment>
+        </property>
+        <productionVolumeComment xml:lang="en">Total natural gas imported: 5585700000 m3
+Km of pipeline: 200 (estimated value)
+Natural gas used as fuel for compressors: 2e-5m3/m3 per Km transported
+Kwh/m3= 0,092</productionVolumeComment>
+        <productionVolumeUncertainty>
+          <lognormal meanValue="2055537.6" mu="14.54" variance="0.0006" varianceWithPedigreeUncertainty="0.0026" />
+          <pedigreeMatrix reliability="3" completeness="1" temporalCorrelation="1" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </productionVolumeUncertainty>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <outputGroup>0</outputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="7c3f6b4f-dad2-43b0-ade2-2339f9e8b9a2" unitId="5b972631-34e3-4db7-a615-f6931770a0cb" amount="1.25E-09" intermediateExchangeId="6c241831-a858-4ad1-a683-3971dd131fd3" activityLinkId="5f55d40f-42e8-4da1-9406-7c27b880e072">
+        <name xml:lang="en">gas turbine, 10MW electrical</name>
+        <unitName xml:lang="en">unit</unitName>
+        <comment>EcoSpold01Location=RER</comment>
+        <comment xml:lang="en">Estimated value. As german dataset (uncertainty of lifetime)</comment>
+        <uncertainty>
+          <lognormal meanValue="1.25E-09" mu="-20.5" variance="0.12" varianceWithPedigreeUncertainty="0.18" />
+          <pedigreeMatrix reliability="3" completeness="5" temporalCorrelation="5" geographicalCorrelation="5" furtherTechnologyCorrelation="3" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <property propertyId="b00066a1-40f3-466c-9bf9-4be11256842e" variableName="FuelUseTurbine" amount="3.01403985507246" isDefiningValue="false" mathematicalRelation="(amountGas* NHVNaturalGas)/(3.6*0.092)" isCalculatedAmount="true" unitId="980b811e-3905-4797-82a5-173f5568bc7e">
+          <name xml:lang="en">Corresponding fuel use</name>
+          <unitName xml:lang="en">MJ</unitName>
+          <uncertainty>
+            <lognormal meanValue="3.01403985507246" mu="1.103" variance="0.0006" varianceWithPedigreeUncertainty="0.025225" />
+            <pedigreeMatrix reliability="4" completeness="5" temporalCorrelation="4" geographicalCorrelation="2" furtherTechnologyCorrelation="2" />
+            <comment xml:lang="en"></comment>
+          </uncertainty>
+          <comment xml:lang="en">Calculated from natural gas input. Lower heating value of the fuel input related to the heat/electricity output</comment>
+        </property>
+        <classification classificationId="cf1d1b13-9638-407a-8b26-d3c91dfff1e7">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">43143: Gas turbines other than turbo-jets and turbo-propellers</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="e0f742ec-bc05-456e-9c6a-cc2795975a1c" unitId="de5b3c87-0e35-4fb0-9765-4f3ba34c99e5" variableName="amountGas" casNumber="014493-06-2" amount="0.298913043478261" intermediateExchangeId="a9007f10-7e39-4d50-8f4a-d6d03ce3d673" activityLinkId="74573bcd-c832-49ce-9978-41f9fb545a90">
+        <name xml:lang="en">natural gas, high pressure</name>
+        <unitName xml:lang="en">m3</unitName>
+        <comment xml:lang="en">Estimated value. As german dataset</comment>
+        <comment>EcoSpold01Location=NO</comment>
+        <uncertainty>
+          <lognormal meanValue="0.298913043478261" mu="-1.208" variance="0.0006" varianceWithPedigreeUncertainty="0.0606" />
+          <pedigreeMatrix reliability="3" completeness="5" temporalCorrelation="5" geographicalCorrelation="5" furtherTechnologyCorrelation="3" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <property propertyId="b00066a1-40f3-466c-9bf9-4be11256842e" variableName="amountGas_fuel_use" amount="0" isDefiningValue="false" unitId="980b811e-3905-4797-82a5-173f5568bc7e">
+          <name xml:lang="en">Corresponding fuel use</name>
+          <unitName xml:lang="en">MJ</unitName>
+          <comment xml:lang="en">Lower heating value of the fuel input related to the heat/electricity output</comment>
+        </property>
+        <property propertyId="48c987bb-3144-4872-b5c7-b1389c40be25" variableName="NHVNaturalGas" amount="36.3" isDefiningValue="false" mathematicalRelation="" unitId="980b811e-3905-4797-82a5-173f5568bc7e" sourceId="47afb1d3-de41-4acf-8ca9-e951d0388c36" sourceYear="2013" sourceFirstAuthor="Weidema B P">
+          <name xml:lang="en">heating value, net</name>
+          <unitName xml:lang="en">MJ</unitName>
+          <comment xml:lang="en">NHVNaturalGas</comment>
+        </property>
+        <classification classificationId="f185f0f7-6274-4778-9fde-8c85aa92c9c4">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">12020: Natural gas, liquefied or in the gaseous state</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <elementaryExchange id="fd03c12c-b181-4145-9763-2300b5cb03ac" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" casNumber="010024-97-2" amount="1.25866304347826E-05" isCalculatedAmount="true" mathematicalRelation="1.16e-6* amountGas* NHVNaturalGas" sourceId="4ede442a-436b-45f8-b8d5-6aeafd59f99f" sourceYear="2004" sourceFirstAuthor="Canadian Association of Petroleum Produc" elementaryExchangeId="6dc1b46f-ee89-4495-95c4-b8a637bcd6cb" formula="N2O">
+        <name xml:lang="en">Dinitrogen monoxide</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">Measured value. Amount per MJ burned. Data for 2010
+Source: Canadian Association of Petroleum producers</comment>
+        <uncertainty>
+          <lognormal meanValue="1.25866304347826E-05" mu="-11.28" variance="0.3" varianceWithPedigreeUncertainty="0.3581" />
+          <pedigreeMatrix reliability="3" completeness="5" temporalCorrelation="5" geographicalCorrelation="3" furtherTechnologyCorrelation="3" />
+          <comment xml:lang="en">DQP adapted considering the original source of data</comment>
+        </uncertainty>
+        <synonym xml:lang="en">Stickstoffdioxid</synonym>
+        <synonym xml:lang="en">nitrous oxide</synonym>
+        <synonym />
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <compartment subcompartmentId="e8d7772c-55ca-4dd7-b605-fee5ae764578">
+          <compartment xml:lang="en">air</compartment>
+          <subcompartment xml:lang="en">urban air close to ground</subcompartment>
+        </compartment>
+        <outputGroup>4</outputGroup>
+      </elementaryExchange>
+      <elementaryExchange id="8240bdc2-1769-4ebb-a415-fe76d4a3bbe8" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" casNumber="007446-09-5" amount="5.97826086956522E-06" elementaryExchangeId="8c52f40c-69b7-4538-8923-b371523c71f5" formula="O2S">
+        <name xml:lang="en">Sulfur dioxide</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">Estimated value. As german dataset (composition of natural gas)</comment>
+        <uncertainty>
+          <lognormal meanValue="5.97826086956522E-06" mu="-12.03" variance="0.04" varianceWithPedigreeUncertainty="0.1" />
+          <pedigreeMatrix reliability="3" completeness="5" temporalCorrelation="5" geographicalCorrelation="5" furtherTechnologyCorrelation="3" />
+          <comment xml:lang="en">Variance from default table. DQP adapted considering the original source of data</comment>
+        </uncertainty>
+        <synonym />
+        <synonym xml:lang="en">Sulfur oxides</synonym>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <compartment subcompartmentId="e8d7772c-55ca-4dd7-b605-fee5ae764578">
+          <compartment xml:lang="en">air</compartment>
+          <subcompartment xml:lang="en">urban air close to ground</subcompartment>
+        </compartment>
+        <outputGroup>4</outputGroup>
+      </elementaryExchange>
+      <elementaryExchange id="c0532385-ffc2-45e6-9a9c-c9f3ff17c0e8" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" amount="0.00181204076086957" isCalculatedAmount="true" mathematicalRelation=".000167* amountGas* NHVNaturalGas" sourceId="4ede442a-436b-45f8-b8d5-6aeafd59f99f" sourceYear="2004" sourceFirstAuthor="Canadian Association of Petroleum Produc" elementaryExchangeId="175baa64-d985-4c5e-84ef-67cc3a1cf952">
+        <name xml:lang="en">NMVOC, non-methane volatile organic compounds, unspecified origin</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">Measured value. Amount per MJ burned. Data for 2010
+Source: Canadian Association of Petroleum producers</comment>
+        <uncertainty>
+          <lognormal meanValue="0.00181204076086957" mu="-6.313" variance="0.65" varianceWithPedigreeUncertainty="0.7026" />
+          <pedigreeMatrix reliability="3" completeness="3" temporalCorrelation="5" geographicalCorrelation="5" furtherTechnologyCorrelation="3" />
+          <comment xml:lang="en">DQP adapted considering the original source of data</comment>
+        </uncertainty>
+        <synonym />
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0.427024457774336" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">The following list of representative NMVOC were considered following EEA definitions: benzene, xylene, propane, butane, and ethane
+The ratio C fossil/C biogenic has been estimated to 50:50 using data concerning global material uses and mass flows (J.K. Steinberger et al., Ecological Economics, 2010, 69:1148–1158). Repartition of different fossil fuels was estimated using production volumes in ecoinvent v3.)</comment>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">The ratio C fossil/C biogenic has been estimated to 50:50 using data concerning global material uses and mass flows (J.K. Steinberger et al., Ecological Economics, 2010, 69:1148–1158). Repartition of different fossil fuels was estimated using production volumes in ecoinvent v3.)
+water mass/dry mass</comment>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0.427024457774336" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">The ratio C fossil/C biogenic has been estimated to 50:50 using data concerning global material uses and mass flows (J.K. Steinberger et al., Ecological Economics, 2010, 69:1148–1158). Repartition of different fossil fuels was estimated using production volumes in ecoinvent v3.)</comment>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.854048915548672" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.854048915548672" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <compartment subcompartmentId="e8d7772c-55ca-4dd7-b605-fee5ae764578">
+          <compartment xml:lang="en">air</compartment>
+          <subcompartment xml:lang="en">urban air close to ground</subcompartment>
+        </compartment>
+        <outputGroup>4</outputGroup>
+      </elementaryExchange>
+      <elementaryExchange id="5541a12c-4977-4465-8a17-2845ad5413bf" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" casNumber="011104-93-1" amount="0.00185544293478261" isCalculatedAmount="true" mathematicalRelation=".000171* amountGas* NHVNaturalGas" sourceId="4ede442a-436b-45f8-b8d5-6aeafd59f99f" sourceYear="2004" sourceFirstAuthor="Canadian Association of Petroleum Produc" elementaryExchangeId="d068f3e2-b033-417b-a359-ca4f25da9731" formula="H3NO">
+        <name xml:lang="en">Nitrogen oxides</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">Measured value. Amount per MJ burned. Data for 2010
+Source: Canadian Association of Petroleum producers</comment>
+        <uncertainty>
+          <lognormal meanValue="0.00185544293478261" mu="-6.29" variance="0.3" varianceWithPedigreeUncertainty="0.3581" />
+          <pedigreeMatrix reliability="3" completeness="5" temporalCorrelation="5" geographicalCorrelation="3" furtherTechnologyCorrelation="3" />
+          <comment xml:lang="en">DQP adapted considering the original source of data</comment>
+        </uncertainty>
+        <synonym xml:lang="en">hydroxylamine</synonym>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <compartment subcompartmentId="e8d7772c-55ca-4dd7-b605-fee5ae764578">
+          <compartment xml:lang="en">air</compartment>
+          <subcompartment xml:lang="en">urban air close to ground</subcompartment>
+        </compartment>
+        <outputGroup>4</outputGroup>
+      </elementaryExchange>
+      <elementaryExchange id="38a37d22-36e9-4aa5-9b43-2e197745c4ba" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" casNumber="001746-01-6" amount="0" isCalculatedAmount="false" mathematicalRelation="" elementaryExchangeId="237a5f15-8119-472a-8988-88b7ecb42405" formula="C12H4Cl4O2">
+        <name xml:lang="en">Dioxins, measured as 2,3,7,8-tetrachlorodibenzo-p-dioxin</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">Estimated value. As german dataset (rough estimate, high uncertainty)</comment>
+        <uncertainty>
+          <undefined minValue="0" maxValue="0" standardDeviation95="0" />
+          <pedigreeMatrix reliability="1" completeness="1" temporalCorrelation="1" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en">DQP adapted considering the original source of data</comment>
+        </uncertainty>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water mass/dry mass</comment>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0.447651942384302" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.447651942384302" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.447651942384302" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <compartment subcompartmentId="e8d7772c-55ca-4dd7-b605-fee5ae764578">
+          <compartment xml:lang="en">air</compartment>
+          <subcompartment xml:lang="en">urban air close to ground</subcompartment>
+        </compartment>
+        <outputGroup>4</outputGroup>
+      </elementaryExchange>
+      <elementaryExchange id="fa802569-07df-48b4-8584-fc511b80fc1b" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" casNumber="007439-97-6" amount="1.6304347826087E-09" elementaryExchangeId="a850e6de-a007-432f-be7f-ce6e2cf1f2ae" formula="Hg">
+        <name xml:lang="en">Mercury</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">Estimated value. As german dataset (basic uncertainty for heavy metal; trace element in natural gas)</comment>
+        <uncertainty>
+          <lognormal meanValue="1.6304347826087E-09" mu="-20.23" variance="0.65" varianceWithPedigreeUncertainty="0.71" />
+          <pedigreeMatrix reliability="3" completeness="5" temporalCorrelation="5" geographicalCorrelation="5" furtherTechnologyCorrelation="3" />
+          <comment xml:lang="en">DQP adapted considering the original source of data</comment>
+        </uncertainty>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <compartment subcompartmentId="e8d7772c-55ca-4dd7-b605-fee5ae764578">
+          <compartment xml:lang="en">air</compartment>
+          <subcompartment xml:lang="en">urban air close to ground</subcompartment>
+        </compartment>
+        <outputGroup>4</outputGroup>
+      </elementaryExchange>
+      <elementaryExchange id="506f9ce5-679c-4c7e-98aa-e0af665c233d" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" casNumber="000630-08-0" amount="0.00160588043478261" isCalculatedAmount="true" mathematicalRelation="0.000148* amountGas* NHVNaturalGas" sourceId="4ede442a-436b-45f8-b8d5-6aeafd59f99f" sourceYear="2004" sourceFirstAuthor="Canadian Association of Petroleum Produc" elementaryExchangeId="6edcc2df-88a3-48e1-83d8-ffc38d31c35b" formula="CO">
+        <name xml:lang="en">Carbon monoxide, fossil</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">Measured value. Amount per MJ burned. Data for 2010
+Source: Canadian Association of Petroleum producers</comment>
+        <uncertainty>
+          <lognormal meanValue="0.00160588043478261" mu="-6.434" variance="0.3" varianceWithPedigreeUncertainty="0.3581" />
+          <pedigreeMatrix reliability="3" completeness="5" temporalCorrelation="5" geographicalCorrelation="3" furtherTechnologyCorrelation="3" />
+          <comment xml:lang="en">DQP adapted considering the original source of data</comment>
+        </uncertainty>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water mass/dry mass</comment>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0.428805015280039" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.428805015280039" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.428805015280039" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <compartment subcompartmentId="e8d7772c-55ca-4dd7-b605-fee5ae764578">
+          <compartment xml:lang="en">air</compartment>
+          <subcompartment xml:lang="en">urban air close to ground</subcompartment>
+        </compartment>
+        <outputGroup>4</outputGroup>
+      </elementaryExchange>
+      <elementaryExchange id="d43074a5-1c2c-4c51-81d9-c532a8cc6dfa" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" casNumber="000124-38-9" amount="0.13020652173913" isCalculatedAmount="true" mathematicalRelation=".012* amountGas* NHVNaturalGas" sourceId="4ede442a-436b-45f8-b8d5-6aeafd59f99f" sourceYear="2004" sourceFirstAuthor="Canadian Association of Petroleum Produc" elementaryExchangeId="f9749677-9c9f-4678-ab55-c607dfdc2cb9" formula="CO2">
+        <name xml:lang="en">Carbon dioxide, fossil</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">Measured value. Amount per MJ burned. Data for 2010
+Source: Canadian Association of Petroleum producers</comment>
+        <uncertainty>
+          <lognormal meanValue="0.13020652173913" mu="-2.039" variance="0.0006" varianceWithPedigreeUncertainty="0.0587" />
+          <pedigreeMatrix reliability="3" completeness="5" temporalCorrelation="5" geographicalCorrelation="3" furtherTechnologyCorrelation="3" />
+          <comment xml:lang="en">Variance from default table. DQP adapted considering the original source of data</comment>
+        </uncertainty>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0.272916486782489" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water mass/dry mass</comment>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.272916486782489" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.272916486782489" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <compartment subcompartmentId="e8d7772c-55ca-4dd7-b605-fee5ae764578">
+          <compartment xml:lang="en">air</compartment>
+          <subcompartment xml:lang="en">urban air close to ground</subcompartment>
+        </compartment>
+        <outputGroup>4</outputGroup>
+      </elementaryExchange>
+      <elementaryExchange id="174fb240-2436-4f37-af2e-36378364f497" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" casNumber="000074-82-8" amount="0.000271263586956522" isCalculatedAmount="true" mathematicalRelation="2.5e-5* amountGas* NHVNaturalGas" sourceId="4ede442a-436b-45f8-b8d5-6aeafd59f99f" sourceYear="2004" sourceFirstAuthor="Canadian Association of Petroleum Produc" elementaryExchangeId="5f7aad3d-566c-4d0d-ad59-e765f971aa0f" formula="CH4">
+        <name xml:lang="en">Methane, fossil</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">Measured value. Amount per MJ burned. Data for 2010
+Source: Canadian Association of Petroleum producers</comment>
+        <uncertainty>
+          <lognormal meanValue="0.000271263586956522" mu="-8.212" variance="0.65" varianceWithPedigreeUncertainty="0.7081" />
+          <pedigreeMatrix reliability="3" completeness="5" temporalCorrelation="5" geographicalCorrelation="3" furtherTechnologyCorrelation="3" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0.748686634968048" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water mass/dry mass</comment>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.748686634968048" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.748686634968048" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <compartment subcompartmentId="e8d7772c-55ca-4dd7-b605-fee5ae764578">
+          <compartment xml:lang="en">air</compartment>
+          <subcompartment xml:lang="en">urban air close to ground</subcompartment>
+        </compartment>
+        <outputGroup>4</outputGroup>
+      </elementaryExchange>
+    </flowData>
+    <modellingAndValidation>
+      <representativeness systemModelId="290c1f85-4cc4-4fa1-b0c8-2cb7f4276dce">
+        <systemModelName xml:lang="en">Allocation, cut-off by classification</systemModelName>
+        <samplingProcedure xml:lang="en">Literature</samplingProcedure>
+        <extrapolations xml:lang="en">This dataset has been extrapolated from year 2010 to the year of the calculation (2021). The uncertainty has been adjusted accordingly.</extrapolations>
+      </representativeness>
+      <review reviewerId="87296ea5-2149-44c3-8e36-b1256c92666a" reviewerName="Gregor Wernet" reviewerEmail="wernet@ecoinvent.org" reviewDate="2014-02-28" reviewedMajorRelease="3" reviewedMinorRelease="0" reviewedMajorRevision="0" reviewedMinorRevision="23">
+        <details>
+          <text xml:lang="en" index="0"></text>
+        </details>
+        <otherDetails xml:lang="en"></otherDetails>
+      </review>
+      <review reviewerId="35d091e9-38c2-4037-9efe-a73673c57123" reviewerName="Emilia Moreno Ruiz" reviewerEmail="moreno@ecoinvent.org" reviewDate="2015-09-17" reviewedMajorRelease="3" reviewedMinorRelease="0" reviewedMajorRevision="1" reviewedMinorRevision="5">
+        <details>
+          <text xml:lang="en" index="0">broken formula fixed</text>
+        </details>
+        <otherDetails xml:lang="en"></otherDetails>
+      </review>
+      <review reviewerId="f86c02d3-2c12-4c25-ad03-33af05bcfe63" reviewerName="Tereza Levova" reviewerEmail="levova@ecoinvent.org" reviewDate="2014-02-28" reviewedMajorRelease="3" reviewedMinorRelease="0" reviewedMajorRevision="0" reviewedMinorRevision="23">
+        <details>
+          <text xml:lang="en" index="0"></text>
+        </details>
+        <otherDetails xml:lang="en"></otherDetails>
+      </review>
+      <review reviewerId="c4597934-ecac-422c-b431-382e85fdcb83" reviewerName="[System]" reviewerEmail="support@ecoinvent.org" reviewDate="2015-09-17" reviewedMajorRelease="3" reviewedMinorRelease="0" reviewedMajorRevision="1" reviewedMinorRevision="5">
+        <details />
+        <otherDetails xml:lang="en">Validation warnings:
+
+- Consider if it would be better to create this dataset as a child dataset relative to a parent dataset. See the ecoinvent Data Quality Guideline Chapter 4.2 for further advice.
+- Mass and/or economic deficit in activity dataset exceeds either 0.1% of input or output sum:
+
+Property 'carbon content, non-fossil':
+ - Input='0', Output='7,11882865505296E-05'
+ - Input &lt; output by 7,11882865505296E-05 kg (100% of output)
+
+Property 'wet mass':
+ - Input='0', Output='0,01249081387'
+ - Input &lt; output by 0,01249081387 kg (100% of output)
+
+Property 'carbon content, fossil':
+ - Input='0', Output='0,00342249137431439'
+ - Input &lt; output by 0,00342249137431439 kg (100% of output)
+
+Property 'dry mass':
+ - Input='0', Output='0,01249081387'
+ - Input &lt; output by 0,01249081387 kg (100% of output)
+
+Property 'price':
+ - Input='0', Output='0,0092'
+ - Input &lt; output by 0,0092 EUR2005 (100% of output)
+
+
+- Property 'carbon content, non-fossil=0' of master data exchange was removed from exchange 'natural gas, high pressure'.
+Property 'wet mass=0,84' of master data exchange was removed from exchange 'natural gas, high pressure'.
+Property 'carbon content, fossil=0,602380952380952' of master data exchange was removed from exchange 'natural gas, high pressure'.
+Property 'heating value, gross=' of master data exchange was removed from exchange 'natural gas, high pressure'.
+Property 'dry mass=0,84' of master data exchange was removed from exchange 'natural gas, high pressure'.
+Property 'water in wet mass=0' of master data exchange was removed from exchange 'natural gas, high pressure'.
+Property 'water content=0' of master data exchange was removed from exchange 'natural gas, high pressure'.
+
+- Uncertainty shall always be provided for all primary data inputs (exchange amounts, properties and parameters), except for the amount and properties of reference products.
+ -- Property(ies): water content=0, water in wet mass=0, carbon content, non-fossil=0, wet mass=1, carbon content, fossil=0, dry mass=1, water in wet mass=0, wet mass=1, carbon content, non-fossil=0, carbon content, fossil=0,272916486782489, dry mass=1, water content=0, wet mass=1, dry mass=1, water in wet mass=0, water content=0, carbon content, non-fossil=0, carbon content, fossil=0,447651942384302, water in wet mass=0, water content=0, wet mass=1, carbon content, non-fossil=0,427024457774336, carbon content, fossil=0,427024457774336, dry mass=1, wet mass=1, water content=0, dry mass=1, carbon content, fossil=0,748686634968048, water in wet mass=0, carbon content, non-fossil=0, carbon content, non-fossil=0, dry mass=1, wet mass=1, water content=0, carbon content, fossil=0, water in wet mass=0, carbon content, fossil=0, carbon content, non-fossil=0, wet mass=1, water in wet mass=0, water content=0, dry mass=1, dry mass=1, wet mass=1, water in wet mass=0, carbon content, fossil=0, water content=0, carbon content, non-fossil=0, water in wet mass=0, dry mass=1, carbon content, non-fossil=0, carbon content, fossil=0,428805015280039, wet mass=1, water content=0
+
+- Pedigree information shall always be provided for all uncertainties of primary data inputs (exchange amounts, properties and parameters), except for the amount and properties of reference products.
+ -- Property(ies): water content=0, water in wet mass=0, carbon content, non-fossil=0, wet mass=1, carbon content, fossil=0, dry mass=1, water in wet mass=0, wet mass=1, carbon content, non-fossil=0, carbon content, fossil=0,272916486782489, dry mass=1, water content=0, wet mass=1, dry mass=1, water in wet mass=0, water content=0, carbon content, non-fossil=0, carbon content, fossil=0,447651942384302, water in wet mass=0, water content=0, wet mass=1, carbon content, non-fossil=0,427024457774336, carbon content, fossil=0,427024457774336, dry mass=1, wet mass=1, water content=0, dry mass=1, carbon content, fossil=0,748686634968048, water in wet mass=0, carbon content, non-fossil=0, carbon content, non-fossil=0, dry mass=1, wet mass=1, water content=0, carbon content, fossil=0, water in wet mass=0, carbon content, fossil=0, carbon content, non-fossil=0, wet mass=1, water in wet mass=0, water content=0, dry mass=1, dry mass=1, wet mass=1, water in wet mass=0, carbon content, fossil=0, water content=0, carbon content, non-fossil=0, water in wet mass=0, dry mass=1, carbon content, non-fossil=0, carbon content, fossil=0,428805015280039, wet mass=1, water content=0
+
+</otherDetails>
+      </review>
+      <review reviewerId="c4597934-ecac-422c-b431-382e85fdcb83" reviewerName="[System]" reviewerEmail="support@ecoinvent.org" reviewDate="2014-04-16" reviewedMajorRelease="3" reviewedMinorRelease="0" reviewedMajorRevision="0" reviewedMinorRevision="23">
+        <details />
+        <otherDetails xml:lang="en">Validation warnings:
+
+- Consider if it would be better to create this dataset as a child dataset relative to a parent dataset. See the ecoinvent Data Quality Guideline Chapter 4.2 for further advice.
+- Mass and/or economic deficit in activity dataset exceeds either 0.1% of input or output sum:
+
+Property 'carbon content, fossil':
+ - Input='0', Output='0,00342249137431439'
+ - Input &lt; output by 0,00342249137431439 kg (100% of output)
+
+Property 'carbon content, non-fossil':
+ - Input='0', Output='7,11882865505296E-05'
+ - Input &lt; output by 7,11882865505296E-05 kg (100% of output)
+
+Property 'wet mass':
+ - Input='0', Output='0,01249081387'
+ - Input &lt; output by 0,01249081387 kg (100% of output)
+
+Property 'dry mass':
+ - Input='0', Output='0,01249081387'
+ - Input &lt; output by 0,01249081387 kg (100% of output)
+
+
+- Property 'dry mass=0,84' of master data exchange was removed from exchange 'natural gas, high pressure'.
+Property 'wet mass=0,84' of master data exchange was removed from exchange 'natural gas, high pressure'.
+Property 'water content=0' of master data exchange was removed from exchange 'natural gas, high pressure'.
+Property 'carbon content, fossil=0,602380952380952' of master data exchange was removed from exchange 'natural gas, high pressure'.
+Property 'water in wet mass=0' of master data exchange was removed from exchange 'natural gas, high pressure'.
+Property 'carbon content, non-fossil=0' of master data exchange was removed from exchange 'natural gas, high pressure'.
+Property 'heating value, gross=' of master data exchange was removed from exchange 'natural gas, high pressure'.
+
+- Uncertainty shall always be provided for all primary data inputs (exchange amounts, properties and parameters), except for the amount and properties of reference products.
+ -- Property(ies): carbon content, fossil=0,428805015280039, carbon content, non-fossil=0, wet mass=1, water in wet mass=0, dry mass=1, water content=0, carbon content, non-fossil=0, water content=0, dry mass=1, carbon content, fossil=0, wet mass=1, water in wet mass=0, dry mass=1, water content=0, water in wet mass=0, wet mass=1, carbon content, fossil=0, carbon content, non-fossil=0, water content=0, carbon content, non-fossil=0, carbon content, fossil=0, wet mass=1, water in wet mass=0, dry mass=1, wet mass=1, carbon content, non-fossil=0, dry mass=1, water in wet mass=0, carbon content, fossil=0,748686634968048, water content=0, carbon content, fossil=0,427024457774336, dry mass=1, carbon content, non-fossil=0,427024457774336, water in wet mass=0, water content=0, wet mass=1, carbon content, fossil=0,447651942384302, carbon content, non-fossil=0, dry mass=1, water in wet mass=0, wet mass=1, water content=0, water content=0, water in wet mass=0, dry mass=1, carbon content, non-fossil=0, carbon content, fossil=0,272916486782489, wet mass=1, carbon content, fossil=0, wet mass=1, dry mass=1, water in wet mass=0, carbon content, non-fossil=0, water content=0
+
+- Pedigree information shall always be provided for all uncertainties of primary data inputs (exchange amounts, properties and parameters), except for the amount and properties of reference products.
+ -- Property(ies): carbon content, fossil=0,428805015280039, carbon content, non-fossil=0, wet mass=1, water in wet mass=0, dry mass=1, water content=0, carbon content, non-fossil=0, water content=0, dry mass=1, carbon content, fossil=0, wet mass=1, water in wet mass=0, dry mass=1, water content=0, water in wet mass=0, wet mass=1, carbon content, fossil=0, carbon content, non-fossil=0, water content=0, carbon content, non-fossil=0, carbon content, fossil=0, wet mass=1, water in wet mass=0, dry mass=1, wet mass=1, carbon content, non-fossil=0, dry mass=1, water in wet mass=0, carbon content, fossil=0,748686634968048, water content=0, carbon content, fossil=0,427024457774336, dry mass=1, carbon content, non-fossil=0,427024457774336, water in wet mass=0, water content=0, wet mass=1, carbon content, fossil=0,447651942384302, carbon content, non-fossil=0, dry mass=1, water in wet mass=0, wet mass=1, water content=0, water content=0, water in wet mass=0, dry mass=1, carbon content, non-fossil=0, carbon content, fossil=0,272916486782489, wet mass=1, carbon content, fossil=0, wet mass=1, dry mass=1, water in wet mass=0, carbon content, non-fossil=0, water content=0
+
+</otherDetails>
+      </review>
+      <review reviewerId="f2bb9b6d-0f7b-47dc-ac26-8bda20f91ff3" reviewerName="Christian Bauer" reviewerEmail="christian.bauer@psi.ch" reviewDate="2014-02-28" reviewedMajorRelease="3" reviewedMinorRelease="0" reviewedMajorRevision="0" reviewedMinorRevision="23">
+        <details>
+          <text xml:lang="en" index="0">These datasets were thoroughfully reviewed and comply with the Data Quality Guidelines. </text>
+        </details>
+        <otherDetails xml:lang="en"></otherDetails>
+      </review>
+    </modellingAndValidation>
+    <administrativeInformation>
+      <dataEntryBy personId="1bd1c9a0-1fba-4bb3-ac28-b30bbc2b2388" isActiveAuthor="false" personName="Pablo Tirado " personEmail="pablo.tirado-seco@polymtl.ca" />
+      <dataGeneratorAndPublication personId="1bd1c9a0-1fba-4bb3-ac28-b30bbc2b2388" personName="Pablo Tirado " personEmail="pablo.tirado-seco@polymtl.ca" dataPublishedIn="1" publishedSourceId="c1e37bd2-786e-4445-b36c-f90ecb7876ba" publishedSourceYear="2007" publishedSourceFirstAuthor="Faist Emmenegger, M." isCopyrightProtected="true" accessRestrictedTo="1" />
+      <fileAttributes majorRelease="3" minorRelease="0" majorRevision="3" minorRevision="0" internalSchemaVersion="2.0.10" defaultLanguage="en" creationTimestamp="2014-02-28T08:53:57" lastEditTimestamp="2015-09-17T16:55:04" fileGenerator="EcoEditor 3.6.120.14104" fileTimestamp="2015-09-17T16:55:04" contextId="de659012-50c4-4e96-b54a-fc781bf987ab">
+        <contextName xml:lang="en">ecoinvent</contextName>
+      </fileAttributes>
+    </administrativeInformation>
+  </childActivityDataset>
+</ecoSpold>

@@ -1,0 +1,541 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ecoSpold xmlns="http://www.EcoInvent.org/EcoSpold02">
+  <childActivityDataset>
+    <activityDescription>
+      <activity id="fe20c6d1-2e2e-43b8-9ca1-3badd8d31565" activityNameId="eef6e174-acf3-4212-9daa-e9bcb1124c24" activityNameContextId="de659012-50c4-4e96-b54a-fc781bf987ab" parentActivityId="7944303d-58eb-4ed6-8659-c9256a831c69" inheritanceDepth="-1" type="1" specialActivityType="0">
+        <activityName xml:lang="en">electricity production, photovoltaic, 3kWp slanted-roof installation, single-Si, panel, mounted</activityName>
+        <synonym xml:lang="en">single crystalline</synonym>
+        <synonym xml:lang="en">PV-module</synonym>
+        <synonym xml:lang="en">monocrystalline</synonym>
+        <synonym xml:lang="en">Solar module</synonym>
+        <synonym xml:lang="en">silicon</synonym>
+        <includedActivitiesStart xml:lang="en">From the PV module installed and ready to be used.</includedActivitiesStart>
+        <includedActivitiesEnd xml:lang="en">This activity ends with low voltage electricity produced with the 3 kWp module, assuming an average yield. 
+
+This dataset includes tap water use for cleaning the module and it’s treatment.</includedActivitiesEnd>
+        <generalComment>
+          <variable xml:lang="en" name="location">in Finland</variable>
+          <variable xml:lang="en" name="type">single-Si panel</variable>
+          <text xml:lang="en" index="3">[This dataset is meant to replace the following datasets:]</text>
+          <text xml:lang="en" index="1">This dataset represents the production of grid-connected low voltage electricity with a 3 kWp building integrated photovoltaic (PV) module {{location}} {{year}}. The 3 kWp module has been chosen as basic module for building integrated PV electricity production. Larger modules can easily be built with these 3 kWp modules without producing a significant error in environmental impact calculations. The module is a {{type}} installed {{building_location}}.</text>
+          <variable xml:lang="en" name="building_location">on a slanted roof</variable>
+          <text xml:lang="en" index="2">An inverter is used to convert the low voltage DC power into AC power.</text>
+          <variable xml:lang="en" name="year">in 2012</variable>
+        </generalComment>
+        <tag>photovoltaic power</tag>
+      </activity>
+      <classification classificationId="4c3b7870-d05d-41cf-9a2f-d901c183b0d8">
+        <classificationSystem xml:lang="en">ISIC rev.4 ecoinvent</classificationSystem>
+        <classificationValue xml:lang="en">3510:Electric power generation, transmission and distribution</classificationValue>
+      </classification>
+      <classification classificationId="7cd31277-4ed1-4a72-b24b-0c0b6f16542e">
+        <classificationSystem xml:lang="en">EcoSpold01Categories</classificationSystem>
+        <classificationValue xml:lang="en">photovoltaic/power plants</classificationValue>
+      </classification>
+      <geography geographyId="0d512a50-7d7e-11de-9ae2-0019e336be3a">
+        <shortname xml:lang="en">FI</shortname>
+      </geography>
+      <technology technologyLevel="3">
+        <comment>
+          <text xml:lang="en" index="1">Electricity production with a grid-connected 3 kWp single-Si photovoltaic panel mounted on a building slanted roof. See field "extrapolation" for comment on the output voltage.</text>
+        </comment>
+      </technology>
+      <timePeriod startDate="2005-01-01" endDate="2021-12-31" isDataValidForEntirePeriod="true">
+        <comment>
+          <text xml:lang="en" index="1">The annual production volume valid for 2012</text>
+        </comment>
+      </timePeriod>
+      <macroEconomicScenario macroEconomicScenarioId="d9f57f0a-a01f-42eb-a57b-8f18d6635801">
+        <name xml:lang="en">Business-as-Usual</name>
+      </macroEconomicScenario>
+    </activityDescription>
+    <flowData>
+      <intermediateExchange id="22063b0a-fb54-5b91-bfa4-3127e8dbdf68" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="1" intermediateExchangeId="d69294d7-8d64-4915-a896-9996a014c410" productionVolumeAmount="2137500" productionVolumeVariableName="apv" productionVolumeMathematicalRelation="gross_electricity* (1-losses_gross_net)* pv_3sri_sSi_pmr">
+        <name xml:lang="en">electricity, low voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <property propertyId="38f94dd1-d5aa-41b8-b182-c0c42985d9dc" amount="0.107" isDefiningValue="false" unitId="7b75baf0-cbee-45e6-bf66-af119da06553">
+          <name xml:lang="en">price</name>
+          <unitName xml:lang="en">EUR2005</unitName>
+          <comment xml:lang="en">Temporary price data. Calculated as 90% of purchasers price based on: IEA Key world energy statistics 2004 (www.iea.org/textbase/nppdf/free/2004/keyworld2004.pdf)</comment>
+        </property>
+        <productionVolumeComment xml:lang="en">Calculated value</productionVolumeComment>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <outputGroup>0</outputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="4bde7161-5881-522a-a28a-1478ed168c20" unitId="de5b3c87-0e35-4fb0-9765-4f3ba34c99e5" variableName="sewage" amount="-6.48567393425828E-06" isCalculatedAmount="true" mathematicalRelation="(tapwater/1000)*-1" intermediateExchangeId="f33b4dc5-f3af-4ca8-aeff-3deeb7159ec1" activityLinkId="86b9270e-4a1b-4c13-b1af-0141d684adee" productionVolumeAmount="13.8631280344771" productionVolumeMathematicalRelation="apv*sewage">
+        <name xml:lang="en">wastewater, from residence</name>
+        <unitName xml:lang="en">m3</unitName>
+        <comment xml:lang="en">Calculated value</comment>
+        <uncertainty>
+          <lognormal meanValue="-6.48567393425828E-06" mu="-11.95" variance="0" varianceWithPedigreeUncertainty="0.0047" />
+          <pedigreeMatrix reliability="2" completeness="2" temporalCorrelation="3" geographicalCorrelation="5" furtherTechnologyCorrelation="1" />
+        </uncertainty>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0.199421496268" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">0.0673 kg TOC/m3 (Tab A.17, ecoinvent v2.2 report 13_I). TOC was considered as Total Carbon.</comment>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="2962.1723071" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water mass/dry mass</comment>
+        </property>
+        <property propertyId="38f94dd1-d5aa-41b8-b182-c0c42985d9dc" variableName="sewage_price_EUR2005" amount="0" isDefiningValue="false" unitId="7b75baf0-cbee-45e6-bf66-af119da06553">
+          <name xml:lang="en">price</name>
+          <unitName xml:lang="en">EUR2005</unitName>
+          <comment xml:lang="en">Waste products are assigned a price of zero as they are assumed to require further treatment.</comment>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="0.337476156079" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">Tap water dry mass was used as an estimation of the wastewater dry mass. This approach was chosen when the addition of compunds in wastewater was smaller than the mineral content estimated using the chemical properties of tap water in ecoinvent v2.2 report 8, Tab 93.1.</comment>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1000" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">Density of water was assumed that of tap water 1kg/L, that is 1000kg/m3.</comment>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="999.662523844" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">wet mass-dry mass</comment>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.199421496268" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0673000000000473" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <productionVolumeComment xml:lang="en">Calculated value</productionVolumeComment>
+        <classification classificationId="ee3238ec-ca7a-4ddc-af1b-e7c35957b9b6">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">Waste</classificationValue>
+        </classification>
+        <classification classificationId="34f49fca-a18e-48df-a635-ee7e24ef6dbb">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">39920: Sewage sludge</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="ad50910e-98ae-5cce-9799-b5ca3a4a0a7f" unitId="5b972631-34e3-4db7-a615-f6931770a0cb" variableName="installation" amount="1.51534437716315E-05" isCalculatedAmount="true" mathematicalRelation="1/(lifetime*(capacity*1000)*yield_corr)" intermediateExchangeId="845b9f66-4a29-45f9-85d0-8b7fc8df73e4" activityLinkId="fb517665-f019-43c0-843d-fff6b022716d">
+        <name xml:lang="en">photovoltaic slanted-roof installation, 3kWp, single-Si, panel, mounted, on roof</name>
+        <unitName xml:lang="en">unit</unitName>
+        <comment xml:lang="en">Calculated value. Lifetime*capacity*annual yield = y * kWp/unit * kWh/(kWp*y) = kWh/unit and then the reciproke.</comment>
+        <uncertainty>
+          <lognormal meanValue="1.51534437716315E-05" mu="-11.1" variance="0.01" varianceWithPedigreeUncertainty="0.0161" />
+          <pedigreeMatrix reliability="3" completeness="2" temporalCorrelation="3" geographicalCorrelation="5" furtherTechnologyCorrelation="1" />
+        </uncertainty>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="114e41e7-c77a-4ae7-b886-37f977bfbcef">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">87360: Installation services of electrical machinery and apparatus n.e.c.</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="c5f11489-98e4-54f5-9e9a-39afdbe2e758" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" variableName="tapwater" casNumber="7732-18-5" amount="0.00648567393425828" isCalculatedAmount="true" mathematicalRelation="installation*panel_area_scSi*water_pv_panels_cleaning" intermediateExchangeId="c5adb1fb-872e-4446-a3bb-c4b61aa4bd45" activityLinkId="c8a0c424-3185-41d0-8cc2-ad6f9b1e9e2c">
+        <name xml:lang="en">tap water</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">Calculated value. Amount of installation needed to produce 1 kWh * panel area per installation * water need to clean 1 m2 of panel. [unit/kWh * m2/unit * l/m2 = l/kWh]. A density of 1 kg/dm3 is assumed.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.00648567393425828" mu="-5.038" variance="0" varianceWithPedigreeUncertainty="0.0047" />
+          <pedigreeMatrix reliability="2" completeness="2" temporalCorrelation="3" geographicalCorrelation="5" furtherTechnologyCorrelation="1" />
+        </uncertainty>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0.00178990835662" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">Bicarbonate content is 2.93 mol/m3. CO2 content is 0.1 mol/m3 (ecoinvent v2.2 report 8, Tab 93.1).</comment>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="2962.1723071" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water mass/dry mass</comment>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0.999662523844" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">wet mass-dry mass</comment>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="0.000337476156079" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">Mineral content was estimated using the chemical properties of tap water in ecoinvent v2.2 report 8, Tab 93.1.</comment>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.00178990835662" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="6.04051391925798E-07" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <classification classificationId="ced3d107-ae48-4f1e-801e-3b956776120c">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">18000: Natural water</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <elementaryExchange id="d59628b5-a353-58b4-9aef-10b724bb907a" unitId="980b811e-3905-4797-82a5-173f5568bc7e" amount="3.8503" elementaryExchangeId="a7ff17d4-d3fe-4a70-9f2e-392b34630772">
+        <name xml:lang="en">Energy, solar, converted</name>
+        <unitName xml:lang="en">MJ</unitName>
+        <comment xml:lang="en">Energy loss in the system is included.</comment>
+        <uncertainty>
+          <lognormal meanValue="3.8503" mu="1.348" variance="0.00118441472768" varianceWithPedigreeUncertainty="0.00388441472768" />
+          <pedigreeMatrix reliability="2" completeness="2" temporalCorrelation="3" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+        </uncertainty>
+        <compartment subcompartmentId="45bb416c-a63b-429f-8754-b3f76a069c43">
+          <compartment xml:lang="en">natural resource</compartment>
+          <subcompartment xml:lang="en">in air</subcompartment>
+        </compartment>
+        <inputGroup>4</inputGroup>
+      </elementaryExchange>
+      <elementaryExchange id="b1f3a5ec-61e6-5cd2-843e-1f6d2e534a30" unitId="de5b3c87-0e35-4fb0-9765-4f3ba34c99e5" variableName="water_to_air_unspecified" casNumber="007732-18-5" amount="9.72851090138742E-07" isCalculatedAmount="true" mathematicalRelation="(tapwater/1000)*fraction_TW_to_air" elementaryExchangeId="075e433b-4be4-448e-9510-9a5029c1ce94" formula="H2O">
+        <name xml:lang="en">Water</name>
+        <unitName xml:lang="en">m3</unitName>
+        <comment xml:lang="en">Calculated value based on literature values and expert opinion. See comments in the parametres" comment field.</comment>
+        <uncertainty>
+          <lognormal meanValue="9.72851090138742E-07" mu="-13.84" variance="0.04" varianceWithPedigreeUncertainty="0.130025" />
+          <pedigreeMatrix reliability="4" completeness="4" temporalCorrelation="5" geographicalCorrelation="2" furtherTechnologyCorrelation="4" />
+        </uncertainty>
+        <synonym xml:lang="en">oxidane</synonym>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="d2efbebc-9ec8-4ce3-aea4-f4353094f458" variableName="fraction_origin_fresh_water" amount="1" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">fraction, origin: fresh water</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">This property represent the fraction of the amount of the exchange which origin is fresh water.</comment>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="1000" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1000" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="1f45c101-983d-43ff-a576-9601b15e0c65" variableName="fraction_origin_unspecified" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">fraction, origin: unspecified</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">This property represent the fraction of the amount of the exchange which origin is unspecified.</comment>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="0" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="ed9ccf89-0acb-4097-8f74-867ed82f5fd0" variableName="fraction_origin_salt_water_1" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">fraction, origin: salt water</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">This property represent the fraction of the amount of the exchange which origin is salt water.</comment>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <compartment subcompartmentId="7011f0aa-f5f9-4901-8c10-884ad8296812">
+          <compartment xml:lang="en">air</compartment>
+          <subcompartment xml:lang="en">unspecified</subcompartment>
+        </compartment>
+        <outputGroup>4</outputGroup>
+      </elementaryExchange>
+      <parameter parameterId="63da158b-d2bb-4044-b424-a93ae3a1932b" variableName="yield" amount="797">
+        <name xml:lang="en">Yield (Output), photovoltaics</name>
+        <unitName xml:lang="en">kWh/kWp</unitName>
+        <uncertainty>
+          <lognormal meanValue="797" mu="6.681" variance="0.001" varianceWithPedigreeUncertainty="0.0193" />
+          <pedigreeMatrix reliability="4" completeness="4" temporalCorrelation="2" geographicalCorrelation="3" furtherTechnologyCorrelation="3" />
+        </uncertainty>
+        <comment xml:lang="en">Literature value/calculated value. Specific solar yield in kWh per kilowatt peak installed (radiation intensity and sunshine duration standardised to a default 1kW peak of capacity). 
+The yield is taken from an IEA PVPS report valid for 2012, which presents data for one or several cities in a country for roof-top and façade installations. The two values for one city were averaged based on the weight of the shares of these two installation types as presented in Jungbluth et al. 2012 (12.5% façade installations, 87.5% roof-top installations, data valid for Europe). Data for several cities were just averaged without weighting.
+This dataset: Data from Helsinki
+
+IEA PVPS. 2014. Compared assessment of selected environmental indicators of photovoltaic electricity in OECD cities. International Energy Agency - Photovoltaic Power Systems Programme.
+Jungbluth N., Stucki M., Flury K., Frischknecht R., Büsser S. 2012. Life Cycle Inventories of Photovoltaics. Report prepared for the Swiss Federal Office of Energy. ESU-services Ltd., Uster, Switzerland. 
+nan</comment>
+      </parameter>
+      <parameter parameterId="c50b2f1d-685e-4f39-9d4e-52fe87e7f721" variableName="capacity" amount="0.003">
+        <name xml:lang="en">capacity</name>
+        <unitName xml:lang="en">MW</unitName>
+        <uncertainty>
+          <lognormal meanValue="0.003" mu="-5.809" variance="0.0006" varianceWithPedigreeUncertainty="0.001925" />
+          <pedigreeMatrix reliability="2" completeness="2" temporalCorrelation="1" geographicalCorrelation="2" furtherTechnologyCorrelation="2" />
+        </uncertainty>
+        <comment xml:lang="en">Capacity of the photovoltaic cell in MWp per installation unit [MWp/unit]
+nan</comment>
+      </parameter>
+      <parameter parameterId="7e1f2b1b-824c-4303-9889-d09d8f3e73d9" variableName="panel_area_scSi" amount="21.4">
+        <name xml:lang="en">Panel area for one 3 kWp unit, sc-Si</name>
+        <unitName xml:lang="en">m2/unit</unitName>
+        <uncertainty>
+          <lognormal meanValue="21.4" mu="3.063" variance="0.003" varianceWithPedigreeUncertainty="0.0199" />
+          <pedigreeMatrix reliability="4" completeness="3" temporalCorrelation="2" geographicalCorrelation="3" furtherTechnologyCorrelation="3" />
+        </uncertainty>
+        <comment xml:lang="en">Literature value. Jungbluth N., Stucki M., Flury K., Frischknecht R. and Buesser S. (2012) Life Cycle Inventories of Photovoltaic Power Production. ESU-services Ltd., Uster, CH, retrieved from: www.esu-services.ch/data/public-lci-reports/
+Tab. 12.3, p.127
+nan</comment>
+      </parameter>
+      <parameter parameterId="52a463f2-e021-4067-8312-2f0b10564e25" variableName="water_pv_panels_cleaning" amount="20">
+        <name xml:lang="en">water use for cleaning photovoltaic panels</name>
+        <unitName xml:lang="en">l/m2</unitName>
+        <uncertainty>
+          <lognormal meanValue="20" mu="2.996" variance="0.0006" varianceWithPedigreeUncertainty="0.1227" />
+          <pedigreeMatrix reliability="5" completeness="4" temporalCorrelation="5" geographicalCorrelation="3" furtherTechnologyCorrelation="4" />
+        </uncertainty>
+        <comment xml:lang="en">Estimation
+nan</comment>
+      </parameter>
+      <parameter parameterId="902d8a9c-c2b3-4b9e-855c-94bbe44f79db" variableName="lifetime" amount="30">
+        <name xml:lang="en">lifetime</name>
+        <unitName xml:lang="en">year</unitName>
+        <uncertainty>
+          <lognormal meanValue="30" mu="3.401" variance="0.008" varianceWithPedigreeUncertainty="0.026625" />
+          <pedigreeMatrix reliability="4" completeness="3" temporalCorrelation="3" geographicalCorrelation="2" furtherTechnologyCorrelation="3" />
+        </uncertainty>
+        <comment xml:lang="en">Oral communication. Gnos, S. 2002. Personal Communication, 10.2002. NET AG, Switzerland
+nan</comment>
+      </parameter>
+      <parameter parameterId="daadf2d4-7bbb-4f69-8ab5-58df4c1685eb" variableName="fraction_PW_to_air" amount="0.15">
+        <name xml:lang="en">fraction, process water, to air</name>
+        <unitName xml:lang="en">dimensionless</unitName>
+        <uncertainty>
+          <lognormal meanValue="0.15" mu="-1.897" variance="0.04" varianceWithPedigreeUncertainty="0.092025" />
+          <pedigreeMatrix reliability="4" completeness="4" temporalCorrelation="3" geographicalCorrelation="2" furtherTechnologyCorrelation="4" />
+        </uncertainty>
+        <comment xml:lang="en">Literature value. In case when no industry/process specific data are available, default evaporation fraction value is used. This value is 15% and is based on literature (Statistics Canada, 2007 &amp; Shaffer, K.H., 2008, Consumptive water use in the Great Lakes Basin, USGS &amp; Shiklomanov, 2003, World Water Resources at the Beginning of the 21st Century) and has been approved by an expert.
+nan</comment>
+      </parameter>
+      <parameter parameterId="8ce7c260-eef4-467b-833a-7754240d2626" variableName="gross_electricity" amount="5000000">
+        <name xml:lang="en">gross electricity production</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <uncertainty>
+          <lognormal meanValue="5000000" mu="15.42" variance="0.0006" varianceWithPedigreeUncertainty="0.0018" />
+          <pedigreeMatrix reliability="2" completeness="1" temporalCorrelation="1" geographicalCorrelation="1" furtherTechnologyCorrelation="2" />
+        </uncertainty>
+        <comment xml:lang="en">Literature value/statistics. Total gross grid-connected photovoltaic electricity production in 2012 in this geography. 
+For all OECD countries, data were taken from the OECD iLibrary 2014. 
+For all non-OECD countries and the world, data were taken from IEA online statistics.
+
+OECD. 2014. IEA Electricity Information Statistics: OECD - Electricity and heat generation. OECD iLibrary. Online database. DOI : 10.1787/elect-data-en 
+IEA. 2014. Online statistics, Electricity and Heat for 2012. Retreived from http://www.iea.org/statistics/statisticssearch/report/?country=WORLD&amp;product=electricityandheat&amp;year=2012
+nan</comment>
+      </parameter>
+      <parameter parameterId="66a5b129-e1fb-49ef-ae44-7870f1e80901" variableName="yield_corr" mathematicalRelation="yield*corr" isCalculatedAmount="true" amount="733.24">
+        <name xml:lang="en">Yield (Output), photovoltaics, corrected</name>
+        <unitName xml:lang="en">kWh/kWp</unitName>
+        <uncertainty>
+          <lognormal meanValue="733.24" mu="6.597" variance="0" varianceWithPedigreeUncertainty="0" />
+          <pedigreeMatrix reliability="1" completeness="1" temporalCorrelation="1" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+        </uncertainty>
+        <comment xml:lang="en">Estimated value. The annual yield is corrected with a correction factor of 0.92 according to Jungbluth et al. 2012.
+Annual output (yield), roof-top [kWh* kWp-1*y-1]
+The annual yield is corrected with a correction factor of 0.92 according to [ Jungbluth N., Stucki M., and Frischknecht R. (2009) Photovoltaics. In Dones, R. (Ed.) et al., Sachbilanzen von Energiesystemen: Grundlagen für den ökologischen Vergleich von Energiesystemen und den Einbezug von Energiesystemen in Oekobilanzen für die Schweiz. ecoinvent report No. 6-XII, Swiss Centre for Life Cycle Inventories, Dübendorf, CH, 2009.]
+</comment>
+      </parameter>
+      <parameter parameterId="fb56edfc-6599-4dac-b6f8-3bf2f194cb48" variableName="corr" amount="0.92">
+        <name xml:lang="en">correction factor</name>
+        <unitName xml:lang="en">dimensionless</unitName>
+        <uncertainty>
+          <lognormal meanValue="0.92" mu="-0.08338" variance="0.0006" varianceWithPedigreeUncertainty="0.0175" />
+          <pedigreeMatrix reliability="4" completeness="3" temporalCorrelation="2" geographicalCorrelation="3" furtherTechnologyCorrelation="3" />
+        </uncertainty>
+        <comment xml:lang="en">Estimation. Literature data on the yield for optimum installation and not real performance in the country have been corrected with a factor of 92% according to experiences in Switzerland for average production. This is based on the ratio of actual yield and published IEA data (820/892 = 0.92 - see Jungbluth et al. 2012 for detailed discussion)
+for use when something has to be corrected with an overall factor</comment>
+      </parameter>
+      <parameter parameterId="3f4d89fc-56e8-44e3-8de9-f961e847a524" variableName="pv_3sri_sSi_pmr" amount="0.45">
+        <name xml:lang="en">Share 3kWp slanted-roof installation, single-Si, panel, mounted, on roof</name>
+        <unitName xml:lang="en">dimensionless</unitName>
+        <uncertainty>
+          <lognormal meanValue="0.45" mu="-0.7985" variance="0.004" varianceWithPedigreeUncertainty="0.214" />
+          <pedigreeMatrix reliability="5" completeness="5" temporalCorrelation="5" geographicalCorrelation="5" furtherTechnologyCorrelation="5" />
+        </uncertainty>
+        <comment xml:lang="en">Literature values, calculated value.
+Calculated from the shares of different types of cells in 2008 (European Photovoltaic Technology Platform 2012) and the shares of different types of mounting systems (Jungbluth et al. 2012). The latter shares are valid for Europe (RER) and do not take into account open ground PV plants. Due to lack of data for other regions or even countries on the world, the shares have been taken as calculation basis for all PV datasets.Further, the electricity markets in ecoinvent v3.2 are modelled with only three types of PV panels: multi-Si and single-Si panels installed at slanted roofs and open ground installations. The shares of the two slanted-roof installations are calculated based on the two sources mentioned before and amount to 44.5% (single-Si) and 55.5% (multi-Si), respectively (if no open ground present). Further, data from the IEA-PVPS 2013 were used to find out if there are any open ground installations present in a country. In some cases no or only aggregated information were given in the 2013 report, so that the report from 2014 was used in these cases with data for the year 2013. Where no information were given at all, no open ground installations are considered due to lack of data. 
+
+Sources:
+ - European Photovoltaic Technology Platform. 2012. Photovoltaic Fact Sheets. The status of the PV industry (2008). LB-32-10-251-EN-D. retrieved from &lt;http://www.eupvplatform.org/publications/misperceptions-fact-sheets.html#c2242&gt; (accessed 31.01.2012)
+ - Jungbluth N., Stucki M., Flury K., Frischknecht R. and Buesser S. (2012) Life Cycle Inventories of Photovoltaic Power Production. ESU-services Ltd., Uster, CH, retrieved from: www.esu-services.ch/data/public-lci-reports
+ - IEA-PVPS. 2013. Trends 2013 in photovoltaic applications. Survey report of selected IEA countries between 1992 and 2012. International Energy Agency, Photovoltaic Power Systems Programme. Report IEA-PVPS T1-23:2013
+ - IEA-PVPS. 2014. Trends 2014 in photovoltaic applications. Survey report of selected IEA countries between 1992 and 2014. International Energy Agency, Photovoltaic Power Systems Programme. Report IEA-PVPS T1-23:2013
+ - annual production volumes in ecoinvent v3.2, photovoltaic datasets for electricity production.</comment>
+      </parameter>
+      <parameter parameterId="22325219-5239-4f09-a250-5b20c7fe50d2" variableName="losses_gross_net" amount="0.05">
+        <name xml:lang="en">losses from gross electricity production</name>
+        <unitName xml:lang="en">dimensionless</unitName>
+        <uncertainty>
+          <lognormal meanValue="0.05" mu="-2.996" variance="0.006" varianceWithPedigreeUncertainty="0.0167" />
+          <pedigreeMatrix reliability="3" completeness="3" temporalCorrelation="1" geographicalCorrelation="3" furtherTechnologyCorrelation="3" />
+        </uncertainty>
+        <comment xml:lang="en">Estimation. The factor for the loss of electricity from gross to net electricity production is an assumption based on experiences and expertise (5% losses for photovoltaics).
+nan</comment>
+      </parameter>
+      <parameter parameterId="148c8010-cc60-48cd-9b40-fc7278e377f7" variableName="fraction_TW_to_air" mathematicalRelation="fraction_PW_to_air" isCalculatedAmount="true" amount="0.15">
+        <name xml:lang="en">fraction, tap water, to air</name>
+        <unitName xml:lang="en">dimensionless</unitName>
+        <uncertainty>
+          <lognormal meanValue="0.15" mu="-1.897" variance="0.04" varianceWithPedigreeUncertainty="0.092025" />
+          <pedigreeMatrix reliability="4" completeness="4" temporalCorrelation="3" geographicalCorrelation="2" furtherTechnologyCorrelation="4" />
+        </uncertainty>
+        <comment xml:lang="en">Calculated value. See comment in the other parametres present in this dataset. Tap water is considered to be always used as process water, thus process water fractions to air are applied to all tap water input flows to calculate the amount of water consumed in the processes.
+nan</comment>
+      </parameter>
+    </flowData>
+    <modellingAndValidation>
+      <representativeness systemModelId="290c1f85-4cc4-4fa1-b0c8-2cb7f4276dce">
+        <systemModelName xml:lang="en">Allocation, cut-off by classification</systemModelName>
+        <samplingProcedure xml:lang="en">Literature, statistics</samplingProcedure>
+        <extrapolations xml:lang="en">This dataset has been extrapolated from year 2015 to the year of the calculation (2021). The uncertainty has been adjusted accordingly.</extrapolations>
+      </representativeness>
+      <review reviewerId="c4597934-ecac-422c-b431-382e85fdcb83" reviewerName="[System]" reviewerEmail="support@ecoinvent.org" reviewDate="2015-05-22" reviewedMajorRelease="3" reviewedMinorRelease="0" reviewedMajorRevision="0" reviewedMinorRevision="5">
+        <otherDetails>Validation warnings:
+
+- Mass and/or economic deficit in activity dataset exceeds either 0.1% of input or output sum:
+
+Property "carbon content, non-fossil":
+ - Input="0", Output="4,36485855775889E-07"
+ - Input &lt; output by 4,36485855775889E-07 kg (100% of output)
+
+Property "water in wet mass":
+ - Input="0,00648348517394988", Output="0,00745633626408862"
+ - Input &lt; output by 0,000972851090138742 kg (13,05% of output)
+
+Property "carbon content, fossil":
+ - Input="3,91768036756558E-09", Output="0"
+ - Input &gt; output by 3,91768036756558E-09 kg
+
+Property "wet mass":
+ - Input="0,00648567393425828", Output="0,00745852502439702"
+ - Input &lt; output by 0,000972851090138742 kg (13,04% of output)
+
+Property "price":
+ - Input="0", Output="0,107"
+ - Input &lt; output by 0,107 EUR2005 (100% of output)
+
+
+- Amount of property "carbon content, non-fossil=0,199421496268" of exchange "wastewater, from residence" deviates from the default amount in the master file.
+Amount of property "water in wet mass=999,662523844" of exchange "wastewater, from residence" deviates from the default amount in the master file.
+Amount of property "water content=2962,1723071" of exchange "wastewater, from residence" deviates from the default amount in the master file.
+Amount of property "dry mass=0,337476156079" of exchange "wastewater, from residence" deviates from the default amount in the master file.
+Amount of property "carbon content, fossil=0,00178990835662" of exchange "tap water" deviates from the default amount in the master file.
+Amount of property "water content=2962,1723071" of exchange "tap water" deviates from the default amount in the master file.
+Amount of property "dry mass=0,000337476156079" of exchange "tap water" deviates from the default amount in the master file.
+Amount of property "water in wet mass=0,999662523844" of exchange "tap water" deviates from the default amount in the master file.
+
+- Specified amount (9,72851090138742E-07) did not match amount calculated by uncertainty (9,3869530126E-07) at exchange "Water"
+- The total water in wet mass of all input exchanges (0,00648348517394988) and output exchanges (0,00745633626408862) is unbalanced.
+- Uncertainty shall always be provided for all primary data inputs (exchange amounts, properties and parameters), except for the amount and properties of reference products.
+ -- Property(ies): carbon content, non-fossil=0,199421496268, water content=2962,1723071, water in wet mass=999,662523844, dry mass=0,337476156079, carbon content, fossil=0, wet mass=1000, carbon content, non-fossil=0, fraction, origin: unspecified=0, water in wet mass=1000, fraction, origin: salt water=0, dry mass=0, carbon content, fossil=0, wet mass=1000, fraction, origin: fresh water=1
+
+- Pedigree information shall always be provided for all uncertainties of primary data inputs (exchange amounts, properties and parameters), except for the amount and properties of reference products.
+ -- Property(ies): carbon content, non-fossil=0,199421496268, water content=2962,1723071, water in wet mass=999,662523844, dry mass=0,337476156079, carbon content, fossil=0, wet mass=1000, carbon content, non-fossil=0, fraction, origin: unspecified=0, water in wet mass=1000, fraction, origin: salt water=0, dry mass=0, carbon content, fossil=0, wet mass=1000, fraction, origin: fresh water=1
+
+</otherDetails>
+      </review>
+      <review reviewerId="847a56f5-d9e5-4a65-ab51-b056e0039130" reviewerName="Avraam Symeonidis" reviewerEmail="Symeonidis@ecoinvent.org" reviewDate="2021-01-16" reviewedMajorRelease="3" reviewedMinorRelease="0" reviewedMajorRevision="1" reviewedMinorRevision="2">
+        <details>
+          <text xml:lang="en" index="0"></text>
+        </details>
+        <otherDetails xml:lang="en"></otherDetails>
+      </review>
+      <review reviewerId="c4597934-ecac-422c-b431-382e85fdcb83" reviewerName="[System]" reviewerEmail="support@ecoinvent.org" reviewDate="2021-01-16" reviewedMajorRelease="3" reviewedMinorRelease="0" reviewedMajorRevision="1" reviewedMinorRevision="2">
+        <details />
+        <otherDetails xml:lang="en">Validation warnings:
+
+- Mass and/or economic deficit in activity dataset exceeds either 0.1% of input or output sum:
+
+Property 'wet mass':
+ - Input='0.00648567393425828', Output='0.00745852502439702'
+ - Input &lt; output by 0.000972851090138742 kg (13.04% of output)
+
+Property 'carbon content, non-fossil':
+ - Input='0', Output='4.36485855775889E-07'
+ - Input &lt; output by 4.36485855775889E-07 kg (100% of output)
+
+Property 'water in wet mass':
+ - Input='0.00648348517394988', Output='0.00745633626408862'
+ - Input &lt; output by 0.000972851090138742 kg (13.05% of output)
+
+Property 'carbon content, fossil':
+ - Input='3.91768036756558E-09', Output='0'
+ - Input &gt; output by 3.91768036756558E-09 kg
+
+Property 'price':
+ - Input='0', Output='0.107'
+ - Input &lt; output by 0.107 EUR2005 (100% of output)
+
+
+- Amount of property 'water content=2962.1723071' of exchange 'wastewater, from residence' deviates from the default amount in the master file.
+Amount of property 'dry mass=0.337476156079' of exchange 'wastewater, from residence' deviates from the default amount in the master file.
+Amount of property 'carbon content, non-fossil=0.199421496268' of exchange 'wastewater, from residence' deviates from the default amount in the master file.
+Amount of property 'water in wet mass=999.662523844' of exchange 'wastewater, from residence' deviates from the default amount in the master file.
+Amount of property 'dry mass=0.000337476156079' of exchange 'tap water' deviates from the default amount in the master file.
+Amount of property 'water in wet mass=0.999662523844' of exchange 'tap water' deviates from the default amount in the master file.
+Amount of property 'carbon content, fossil=0.00178990835662' of exchange 'tap water' deviates from the default amount in the master file.
+Amount of property 'water content=2962.1723071' of exchange 'tap water' deviates from the default amount in the master file.
+
+- The total water in wet mass of all input exchanges (0.00648348517394988) and output exchanges (0.00745633626408862) is unbalanced.
+
+- Uncertainty shall always be provided for all primary data inputs (exchange amounts, properties and parameters), except for the amount and properties of reference products.
+ -- Property(ies): price=0, carbon content, non-fossil=0.199421496268, dry mass=0.337476156079, carbon content, fossil=0, wet mass=1000, water content=2962.1723071, water in wet mass=999.662523844, wet mass=1000, carbon content, non-fossil=0, water in wet mass=1000, fraction, origin: fresh water=1, dry mass=0, fraction, origin: salt water=0, carbon content, fossil=0, fraction, origin: unspecified=0
+
+- Pedigree information shall always be provided for all uncertainties of primary data inputs (exchange amounts, properties and parameters), except for the amount and properties of reference products.
+ -- Property(ies): price=0, carbon content, non-fossil=0.199421496268, dry mass=0.337476156079, carbon content, fossil=0, wet mass=1000, water content=2962.1723071, water in wet mass=999.662523844, wet mass=1000, carbon content, non-fossil=0, water in wet mass=1000, fraction, origin: fresh water=1, dry mass=0, fraction, origin: salt water=0, carbon content, fossil=0, fraction, origin: unspecified=0
+
+</otherDetails>
+      </review>
+      <review reviewerId="9a963412-20a7-428b-8740-3582e217c4b6" reviewerName="Carl Vadenbo" reviewerEmail="vadenbo@ifu.baug.ethz.ch" reviewDate="2015-05-22" reviewedMajorRelease="3" reviewedMinorRelease="0" reviewedMajorRevision="0" reviewedMinorRevision="5">
+        <details>
+          <text xml:lang="en" index="1">The update of the whole electricity sector for the ecoinvent v3.2 database consist of hundreds of datasets. All these datasets have passed through a streamlined review processes where the underlying modelling of production volumes, technology shares and efficiencies was reviewed in detail prior to the datasets being submitted to the database.</text>
+        </details>
+      </review>
+    </modellingAndValidation>
+    <administrativeInformation>
+      <dataEntryBy personId="610bd1b2-fec3-4e8e-84a6-76fef8b6b7b8" isActiveAuthor="true" personName="Karin Treyer" personEmail="karin.treyer@psi.ch" />
+      <dataGeneratorAndPublication personId="610bd1b2-fec3-4e8e-84a6-76fef8b6b7b8" personName="Karin Treyer" personEmail="karin.treyer@psi.ch" dataPublishedIn="2" publishedSourceId="03a520d1-768a-4ad6-9b78-4723daf79665" publishedSourceYear="2012" publishedSourceFirstAuthor="Jungbluth N." isCopyrightProtected="true" pageNumbers="operation" accessRestrictedTo="1" />
+      <fileAttributes majorRelease="3" minorRelease="0" majorRevision="3" minorRevision="0" internalSchemaVersion="2.0.12" defaultLanguage="en" creationTimestamp="2015-05-20T09:52:25" lastEditTimestamp="2015-11-05T15:21:32" fileGenerator="EcoEditor 3.6.120.14104" fileTimestamp="2015-11-05T15:21:32" contextId="de659012-50c4-4e96-b54a-fc781bf987ab">
+        <contextName xml:lang="en">ecoinvent</contextName>
+      </fileAttributes>
+    </administrativeInformation>
+  </childActivityDataset>
+</ecoSpold>

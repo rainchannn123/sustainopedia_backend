@@ -1,0 +1,637 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ecoSpold xmlns="http://www.EcoInvent.org/EcoSpold02">
+  <childActivityDataset>
+    <activityDescription>
+      <activity id="f3c46044-0496-4741-9e52-67efa8a47615" activityNameId="24b16b69-ebad-464e-9d7b-c2b008bd81bc" parentActivityId="73422ed9-b9e5-48c6-b614-4347a4a9d6a1" inheritanceDepth="-1" type="1" specialActivityType="1">
+        <activityName xml:lang="en">market for concrete, 30MPa</activityName>
+        <includedActivitiesStart xml:lang="en">This activity starts at the gate of the activities that produce 'concrete, 30MPa',  within the geography of Global.</includedActivitiesStart>
+        <includedActivitiesEnd xml:lang="en">This activity ends with the supply of 'concrete, 30MPa',  to the consumers of this product. Transport is included. Product losses during transportation are assumed negligible and are therefore not included.</includedActivitiesEnd>
+        <generalComment>
+          <text xml:lang="en" index="1">This is a market activity. Each market represents the consumption mix of a product in a given geography, connecting suppliers with consumers of the same product in the same geographical area. Markets group the producers and also the imports of the product (if relevant) within the same geographical area. They also account for transport to the consumer and for the losses during that process, when relevant.</text>
+          <text xml:lang="en" index="4">The product "concrete, 30MPa" represents 30 MPa ready-mix concrete. The raw materials for 1 m³ include: Portland fly ash cement 376 kg, Water 127 kg, Gravel 850 kg, Sand 1090 kg, Admixtures (air-entrainers and superplastisizers) 2.72 kg.</text>
+          <text xml:lang="en" index="2">This is the market for  'concrete, 30MPa', in the Global geography.</text>
+          <text xml:lang="en" index="3">In this market, expert judgement was used to develop product specific transport distance estimations.</text>
+        </generalComment>
+      </activity>
+      <classification classificationId="27f6acbc-2350-450e-9762-1ce00e12ecba">
+        <classificationSystem xml:lang="en">ISIC rev.4 ecoinvent</classificationSystem>
+        <classificationValue xml:lang="en">2395:Manufacture of articles of concrete, cement and plaster</classificationValue>
+      </classification>
+      <classification classificationId="a82c98c0-1e7e-495d-bad9-8b6d0d12e5c5">
+        <classificationSystem xml:lang="en">EcoSpold01Categories</classificationSystem>
+        <classificationValue xml:lang="en">construction materials/concrete</classificationValue>
+      </classification>
+      <geography geographyId="7846b897-7c04-4f9f-b607-2b83fcd9a74c">
+        <shortname xml:lang="en">RoW</shortname>
+        <comment />
+      </geography>
+      <technology technologyLevel="0" />
+      <timePeriod startDate="2017-01-01" endDate="2021-12-31" isDataValidForEntirePeriod="true" />
+      <macroEconomicScenario macroEconomicScenarioId="d9f57f0a-a01f-42eb-a57b-8f18d6635801">
+        <name xml:lang="en">Business-as-Usual</name>
+      </macroEconomicScenario>
+    </activityDescription>
+    <flowData>
+      <intermediateExchange id="9ebf6340-4399-4c7a-8d23-9a07776f0474" unitId="2f4daad7-5331-4f14-930c-d8bca924557d" amount="0" intermediateExchangeId="090f56b8-6a83-48c1-ae26-234d04771e53" productionVolumeAmount="0">
+        <name xml:lang="en">transport, freight, light commercial vehicle</name>
+        <unitName xml:lang="en">metric ton*km</unitName>
+        <comment xml:lang="en">Transport distance based on US BTS Commodity Flow Surveys 1993, 1997, 2002, 2007, US Dep. Of Transportation, Bureau of Transportation Statistics. Of the total road transport, 6% is assumed to be by delivery van for goods with a large share of retail sale, and 3% for goods that are mainly sold via wholesale.</comment>
+        <classification classificationId="3ca82b2c-1079-495b-8eb4-76d8b4095055">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">65119: Other road transport services of freight</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="48c22f71-ece0-478d-8eb0-23e201f8c26e" unitId="de5b3c87-0e35-4fb0-9765-4f3ba34c99e5" amount="1" intermediateExchangeId="ef5d9b7f-0d4a-49b9-a2eb-eef36ded1c38" productionVolumeAmount="81370780.656">
+        <name xml:lang="en">concrete, 30MPa</name>
+        <unitName xml:lang="en">m3</unitName>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" variableName="WM" amount="115.236036701481" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">water content on a wet matter basis</comment>
+        </property>
+        <property propertyId="38f94dd1-d5aa-41b8-b182-c0c42985d9dc" variableName="Price" amount="185" isDefiningValue="false" unitId="7b75baf0-cbee-45e6-bf66-af119da06553">
+          <name xml:lang="en">price</name>
+          <unitName xml:lang="en">EUR2005</unitName>
+          <comment xml:lang="en">Calculated value based on data from United Nations Commodity Trade Statistics Database (comtrade.un.org). UN comtrade category: 681019 Tiles &amp; flagstones of cement, concrete, artificial ston. Year 2005. Using exchange rate of 1EURO = 1.209 USD. Average of price of import into 5 main markets (EU, US, JP, IN and CN).</comment>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" variableName="Carb_con" amount="0" isDefiningValue="false" mathematicalRelation="0" isCalculatedAmount="true" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">fossil carbon content on a dry matter basis</comment>
+        </property>
+        <property propertyId="db390f56-9eb4-4add-88c6-e5118e9cc074" variableName="FA_C" amount="60" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">fly ash content</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" variableName="RP_DM" amount="2293.40122121286" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="4188c979-9024-41a0-9d68-94b267a06469" variableName="Gravel_C" amount="1094.7865943294" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">gravel content</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="f6e8dc68-9e1a-498e-a384-f731aa70ba37" variableName="Cem_C" amount="327.011854067928" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">cement content</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="f74d688f-15db-411c-af4e-5110e136ec21" variableName="Sand_C" amount="838.055072597442" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">sand content</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" variableName="RP_WM" amount="2408.63725791434" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" variableName="WC" amount="0.0502193858829256" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water content on a dry matter basis</comment>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <outputGroup>0</outputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="69c47077-b960-4692-9b1e-bed34317cb45" unitId="2f4daad7-5331-4f14-930c-d8bca924557d" variableName="Concrete30MPa" amount="0" isCalculatedAmount="false" intermediateExchangeId="cfbce515-3f54-4411-ad9d-3d26b7faa15a" productionVolumeAmount="0">
+        <name xml:lang="en">transport, freight, lorry, unspecified</name>
+        <unitName xml:lang="en">metric ton*km</unitName>
+        <comment xml:lang="en">Transport distance based on US BTS Commodity Flow Surveys 1993, 1997, 2002, 2007, US Dep. Of Transportation, Bureau of Transportation Statistics. Of the total road transport, 6% is assumed to be by delivery van for goods with a large share of retail sale, and 3% for goods that are mainly sold via wholesale.</comment>
+        <uncertainty>
+          <undefined minValue="0" maxValue="0" standardDeviation95="0" />
+          <pedigreeMatrix reliability="1" completeness="1" temporalCorrelation="1" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+        </uncertainty>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="951f8f36-8fb0-47a1-b6f8-acb10713cca2">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">6511: Road transport services of freight</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="d3537f62-1577-4fdb-b458-8f00001fffe4" unitId="2f4daad7-5331-4f14-930c-d8bca924557d" amount="0" intermediateExchangeId="0ace02fa-eca5-482d-a829-c18e46a52db4" productionVolumeAmount="0">
+        <name xml:lang="en">transport, freight train</name>
+        <unitName xml:lang="en">metric ton*km</unitName>
+        <comment xml:lang="en">Transport distance based on US BTS Commodity Flow Surveys 1993, 1997, 2002, 2007, US Dep. Of Transportation, Bureau of Transportation Statistics.</comment>
+        <classification classificationId="d3a7e1bd-527a-4941-905b-e2bea12a7944">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">6512: Railway transport services of freight</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="db8f8619-af3c-43b7-ae2e-238066020af8" unitId="de5b3c87-0e35-4fb0-9765-4f3ba34c99e5" amount="0.39487859058202" intermediateExchangeId="ef5d9b7f-0d4a-49b9-a2eb-eef36ded1c38" activityLinkId="35eadf1a-067e-4882-a528-3f891c971b56" productionVolumeAmount="32131579.18">
+        <name xml:lang="en">concrete, 30MPa</name>
+        <unitName xml:lang="en">m3</unitName>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="2316" isDefiningValue="false" mathematicalRelation="" isCalculatedAmount="true" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0.0548359240069085" isDefiningValue="false" mathematicalRelation="" isCalculatedAmount="true" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water content on a dry matter basis</comment>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="127" isDefiningValue="false" mathematicalRelation="" isCalculatedAmount="true" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">water content on a wet matter basis</comment>
+        </property>
+        <property propertyId="f74d688f-15db-411c-af4e-5110e136ec21" amount="1090" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">sand content</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">Estimated from primary data collection. </comment>
+        </property>
+        <property propertyId="4188c979-9024-41a0-9d68-94b267a06469" amount="850" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">gravel content</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">Estimated from primary data collection. </comment>
+        </property>
+        <property propertyId="f6e8dc68-9e1a-498e-a384-f731aa70ba37" amount="376" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">cement content</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">Estimated from primary data collection. </comment>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="1E-51" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">Estimated  value to zero, based on components properties.</comment>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="2443" isDefiningValue="false" mathematicalRelation="" isCalculatedAmount="true" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="38f94dd1-d5aa-41b8-b182-c0c42985d9dc" amount="185" isDefiningValue="false" unitId="7b75baf0-cbee-45e6-bf66-af119da06553">
+          <name xml:lang="en">price</name>
+          <unitName xml:lang="en">EUR2005</unitName>
+          <comment xml:lang="en">Calculated value based on data from United Nations Commodity Trade Statistics Database (comtrade.un.org). UN comtrade category: 681019 Tiles &amp; flagstones of cement, concrete, artificial ston. Year 2005. Using exchange rate of 1EURO = 1.209 USD. Average of price of import into 5 main markets (EU, US, JP, IN and CN).</comment>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="1E-51" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="2.316E-48" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="db08a34f-617c-42f6-9618-55a86cebf8cb" unitId="de5b3c87-0e35-4fb0-9765-4f3ba34c99e5" amount="0.181045752679696" intermediateExchangeId="ef5d9b7f-0d4a-49b9-a2eb-eef36ded1c38" activityLinkId="96b3507e-cfbf-40dc-8c3c-275bdec2b021" productionVolumeAmount="14731834.23">
+        <name xml:lang="en">concrete, 30MPa</name>
+        <unitName xml:lang="en">m3</unitName>
+        <property propertyId="4188c979-9024-41a0-9d68-94b267a06469" amount="1311" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">gravel content</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="38f94dd1-d5aa-41b8-b182-c0c42985d9dc" amount="185" isDefiningValue="false" unitId="7b75baf0-cbee-45e6-bf66-af119da06553">
+          <name xml:lang="en">price</name>
+          <unitName xml:lang="en">EUR2005</unitName>
+          <comment xml:lang="en">Calculated value based on data from United Nations Commodity Trade Statistics Database (comtrade.un.org). UN comtrade category: 681019 Tiles &amp; flagstones of cement, concrete, artificial ston. Year 2005. Using exchange rate of 1EURO = 1.209 USD. Average of price of import into 5 main markets (EU, US, JP, IN and CN).</comment>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0.044949" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="101" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">Water contained in fresh concrete, that evaporates during curing. Does not include combined water (cement hydration). As a consequence, this dataset is not water balanced according to ecoinvent guidelines.</comment>
+        </property>
+        <property propertyId="f74d688f-15db-411c-af4e-5110e136ec21" amount="639" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">sand content</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="2247" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" sourceId="fa4a85c7-89d4-440b-9433-e2093c4ff232" sourceYear="2013" sourceFirstAuthor="A. M. Neville">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">Calculated value, considering combined water. Water consumed for total cement hydration = 23% of cement mass according to Neville &amp; Brooks (2013). Thus: dry mass = wet mass - mix water + 0,23*cement.</comment>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="2348" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">Calculated value, Weighted average from 4 concrete mix designs.</comment>
+        </property>
+        <property propertyId="f6e8dc68-9e1a-498e-a384-f731aa70ba37" amount="330" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">cement content</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="52246518-b4f8-43b3-b20f-1568ca626211" unitId="de5b3c87-0e35-4fb0-9765-4f3ba34c99e5" amount="0.132965380973056" intermediateExchangeId="ef5d9b7f-0d4a-49b9-a2eb-eef36ded1c38" activityLinkId="2a993455-97f5-4164-b6b6-8050f27ef07b" productionVolumeAmount="10819496.85">
+        <name xml:lang="en">concrete, 30MPa</name>
+        <unitName xml:lang="en">m3</unitName>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="2406" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">Calculated value, Weighted average from 20 concrete mix designs.</comment>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0.048366" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="38f94dd1-d5aa-41b8-b182-c0c42985d9dc" amount="185" isDefiningValue="false" unitId="7b75baf0-cbee-45e6-bf66-af119da06553">
+          <name xml:lang="en">price</name>
+          <unitName xml:lang="en">EUR2005</unitName>
+          <comment xml:lang="en">Calculated value based on data from United Nations Commodity Trade Statistics Database (comtrade.un.org). UN comtrade category: 681019 Tiles &amp; flagstones of cement, concrete, artificial ston. Year 2005. Using exchange rate of 1EURO = 1.209 USD. Average of price of import into 5 main markets (EU, US, JP, IN and CN).</comment>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="2295" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" sourceId="fa4a85c7-89d4-440b-9433-e2093c4ff232" sourceYear="2013" sourceFirstAuthor="A. M. Neville">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">Calculated value, considering combined water. Water consumed for total cement hydration = 23% of cement mass according to Neville &amp; Brooks (2013). Thus: dry mass = wet mass - mix water + 0,23*cement.</comment>
+        </property>
+        <property propertyId="f6e8dc68-9e1a-498e-a384-f731aa70ba37" amount="283" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">cement content</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="4188c979-9024-41a0-9d68-94b267a06469" amount="1477" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">gravel content</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="f74d688f-15db-411c-af4e-5110e136ec21" amount="468" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">sand content</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="111" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">Water contained in fresh concrete, that evaporates during curing. Does not include combined water (cement hydration). As a consequence, this dataset is not water balanced according to ecoinvent guidelines.</comment>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="505fd591-4a9b-4f8f-b206-5a4cac919d06" unitId="de5b3c87-0e35-4fb0-9765-4f3ba34c99e5" amount="0.0644239141831738" intermediateExchangeId="ef5d9b7f-0d4a-49b9-a2eb-eef36ded1c38" activityLinkId="5f2ad575-2be1-4cac-ba32-bf2d4810d246" productionVolumeAmount="5242224.19">
+        <name xml:lang="en">concrete, 30MPa</name>
+        <unitName xml:lang="en">m3</unitName>
+        <property propertyId="4188c979-9024-41a0-9d68-94b267a06469" amount="1389" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">gravel content</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="2237" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" sourceId="fa4a85c7-89d4-440b-9433-e2093c4ff232" sourceYear="2013" sourceFirstAuthor="A. M. Neville">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">Calculated value, considering combined water. Water consumed for total cement hydration = 23% of cement mass according to Neville &amp; Brooks (2013). Thus: dry mass = wet mass - mix water + 0,23*cement.
+</comment>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="117" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">Water contained in fresh concrete, that evaporates during curing. Does not include combined water (cement hydration). As a consequence, this dataset is not water balanced according to ecoinvent guidelines.
+</comment>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0.052302" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="38f94dd1-d5aa-41b8-b182-c0c42985d9dc" amount="185" isDefiningValue="false" unitId="7b75baf0-cbee-45e6-bf66-af119da06553">
+          <name xml:lang="en">price</name>
+          <unitName xml:lang="en">EUR2005</unitName>
+          <comment xml:lang="en">Calculated value based on data from United Nations Commodity Trade Statistics Database (comtrade.un.org). UN comtrade category: 681019 Tiles &amp; flagstones of cement, concrete, artificial ston. Year 2005. Using exchange rate of 1EURO = 1.209 USD. Average of price of import into 5 main markets (EU, US, JP, IN and CN).</comment>
+        </property>
+        <property propertyId="f74d688f-15db-411c-af4e-5110e136ec21" amount="483" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">sand content</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="2354" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">Calculated value, Weighted average from 19 concrete mix designs.
+</comment>
+        </property>
+        <property propertyId="f6e8dc68-9e1a-498e-a384-f731aa70ba37" amount="295" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">cement content</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="45c1811f-ba46-444d-a34e-0a9653c6f79f" unitId="de5b3c87-0e35-4fb0-9765-4f3ba34c99e5" amount="0.0734235699575958" intermediateExchangeId="ef5d9b7f-0d4a-49b9-a2eb-eef36ded1c38" activityLinkId="1e58f31c-2e68-40d3-9b06-df380d07dbf4" productionVolumeAmount="5974533.206">
+        <name xml:lang="en">concrete, 30MPa</name>
+        <unitName xml:lang="en">m3</unitName>
+        <property propertyId="38f94dd1-d5aa-41b8-b182-c0c42985d9dc" amount="185" unitId="7b75baf0-cbee-45e6-bf66-af119da06553">
+          <name xml:lang="en">price</name>
+          <unitName xml:lang="en">EUR2005</unitName>
+          <comment xml:lang="en">Calculated value based on data from United Nations Commodity Trade Statistics Database (comtrade.un.org). UN comtrade category: 681019 Tiles &amp; flagstones of cement, concrete, artificial ston. Year 2005. Using exchange rate of 1EURO = 1.209 USD. Average of price of import into 5 main markets (EU, US, JP, IN and CN).</comment>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="2286.408" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" sourceId="3bb9583a-5b10-424b-bc66-a4367774ef7a" sourceYear="2013" sourceFirstAuthor="Neville, A. M.">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">Calculated value, considering combined water. Water consumed for total cement hydration = 23% of cement mass according to Neville &amp; Brooks (2013). Thus: dry mass = wet mass - mix water + 0,23*cement.
+</comment>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0.0491923313774269" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">Calculated based on wet and dy mass</comment>
+        </property>
+        <property propertyId="4188c979-9024-41a0-9d68-94b267a06469" amount="1039.762" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">gravel content</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="112.47374" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">Water contained in fresh concrete, that evaporates during curing. Does not include combined water (cement hydration). As a consequence, this dataset is not water balanced according to ecoinvent guidelines.</comment>
+        </property>
+        <property propertyId="f6e8dc68-9e1a-498e-a384-f731aa70ba37" amount="257.603" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">cement content</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="f74d688f-15db-411c-af4e-5110e136ec21" amount="881.299" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">sand content</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="2398.88174" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">Calculated value, Weighted average from 7 concrete manufacturers.</comment>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="b71508c3-17c6-49d3-a67f-97a79da452f3" unitId="de5b3c87-0e35-4fb0-9765-4f3ba34c99e5" amount="0.153262791624458" intermediateExchangeId="ef5d9b7f-0d4a-49b9-a2eb-eef36ded1c38" activityLinkId="0882074f-1306-405f-8509-6b895f232382" productionVolumeAmount="12471113">
+        <name xml:lang="en">concrete, 30MPa</name>
+        <unitName xml:lang="en">m3</unitName>
+        <property propertyId="38f94dd1-d5aa-41b8-b182-c0c42985d9dc" amount="185" unitId="7b75baf0-cbee-45e6-bf66-af119da06553">
+          <name xml:lang="en">price</name>
+          <unitName xml:lang="en">EUR2005</unitName>
+          <comment xml:lang="en">Calculated value based on data from United Nations Commodity Trade Statistics Database (comtrade.un.org). UN comtrade category: 681019 Tiles &amp; flagstones of cement, concrete, artificial ston. Year 2005. Using exchange rate of 1EURO = 1.209 USD. Average of price of import into 5 main markets (EU, US, JP, IN and CN).</comment>
+        </property>
+        <property propertyId="f6e8dc68-9e1a-498e-a384-f731aa70ba37" amount="282.156" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">cement content</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0.0457752865273831" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">Calculated based on wet and dy mass</comment>
+        </property>
+        <property propertyId="4188c979-9024-41a0-9d68-94b267a06469" amount="1041.16" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">gravel content</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="106" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">Water contained in fresh concrete, that evaporates during curing. Does not include combined water (cement hydration). As a consequence, this dataset is not water balanced according to ecoinvent guidelines.</comment>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="2421.66" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">Calculated value, Weighted average from 7 concrete manufacturers.</comment>
+        </property>
+        <property propertyId="f74d688f-15db-411c-af4e-5110e136ec21" amount="873.64" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">sand content</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="2315.66" isDefiningValue="false" isCalculatedAmount="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" sourceId="3bb9583a-5b10-424b-bc66-a4367774ef7a" sourceYear="2013" sourceFirstAuthor="Neville, A. M.">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">Calculated value, considering combined water. Water consumed for total cement hydration = 23% of cement mass according to Neville &amp; Brooks (2013). Thus: dry mass = wet mass - mix water + 0,23*cement.
+</comment>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="fa80dd17-1fda-4ee3-8c49-167a895c4046" unitId="2f4daad7-5331-4f14-930c-d8bca924557d" amount="0.203236911919716" intermediateExchangeId="090f56b8-6a83-48c1-ae26-234d04771e53" activityLinkId="40947653-18ba-4cee-bba4-5db85039f468">
+        <name xml:lang="en">transport, freight, light commercial vehicle</name>
+        <unitName xml:lang="en">metric ton*km</unitName>
+        <comment xml:lang="en">Transport distance based on US BTS Commodity Flow Surveys 1993, 1997, 2002, 2007, US Dep. Of Transportation, Bureau of Transportation Statistics. Of the total road transport, 6% is assumed to be by delivery van for goods with a large share of retail sale, and 3% for goods that are mainly sold via wholesale.</comment>
+        <classification classificationId="3ca82b2c-1079-495b-8eb4-76d8b4095055">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">65119: Other road transport services of freight</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="efa3f063-3637-4408-9540-0d7178e3c2f0" unitId="2f4daad7-5331-4f14-930c-d8bca924557d" amount="0.429203535973052" intermediateExchangeId="090f56b8-6a83-48c1-ae26-234d04771e53" activityLinkId="e2a326ec-95b8-4c1f-98c9-1a706ae58f87">
+        <name xml:lang="en">transport, freight, light commercial vehicle</name>
+        <unitName xml:lang="en">metric ton*km</unitName>
+        <comment xml:lang="en">Transport distance based on US BTS Commodity Flow Surveys 1993, 1997, 2002, 2007, US Dep. Of Transportation, Bureau of Transportation Statistics. Of the total road transport, 6% is assumed to be by delivery van for goods with a large share of retail sale, and 3% for goods that are mainly sold via wholesale.</comment>
+        <classification classificationId="3ca82b2c-1079-495b-8eb4-76d8b4095055">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">65119: Other road transport services of freight</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="e94361df-882a-41cd-a226-3f992189a238" unitId="2f4daad7-5331-4f14-930c-d8bca924557d" amount="3.48775955210723" intermediateExchangeId="090f56b8-6a83-48c1-ae26-234d04771e53" activityLinkId="1d2fa189-e825-489c-ad7f-c28f891a3920">
+        <name xml:lang="en">transport, freight, light commercial vehicle</name>
+        <unitName xml:lang="en">metric ton*km</unitName>
+        <comment xml:lang="en">Transport distance based on US BTS Commodity Flow Surveys 1993, 1997, 2002, 2007, US Dep. Of Transportation, Bureau of Transportation Statistics. Of the total road transport, 6% is assumed to be by delivery van for goods with a large share of retail sale, and 3% for goods that are mainly sold via wholesale.</comment>
+        <classification classificationId="3ca82b2c-1079-495b-8eb4-76d8b4095055">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">65119: Other road transport services of freight</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="8fa744d1-91d0-41dc-90c8-af1f74bc0827" unitId="2f4daad7-5331-4f14-930c-d8bca924557d" amount="3.62758480044527" isCalculatedAmount="false" intermediateExchangeId="cfbce515-3f54-4411-ad9d-3d26b7faa15a" activityLinkId="9f73155b-929b-4745-a5c7-54307f7828c7">
+        <name xml:lang="en">transport, freight, lorry, unspecified</name>
+        <unitName xml:lang="en">metric ton*km</unitName>
+        <comment xml:lang="en">Transport distance based on US BTS Commodity Flow Surveys 1993, 1997, 2002, 2007, US Dep. Of Transportation, Bureau of Transportation Statistics. Of the total road transport, 6% is assumed to be by delivery van for goods with a large share of retail sale, and 3% for goods that are mainly sold via wholesale.</comment>
+        <uncertainty>
+          <lognormal meanValue="3.62758480044527" mu="1.289" variance="0.12" varianceWithPedigreeUncertainty="0.17" />
+          <pedigreeMatrix reliability="1" completeness="1" temporalCorrelation="4" geographicalCorrelation="5" furtherTechnologyCorrelation="4" />
+        </uncertainty>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="951f8f36-8fb0-47a1-b6f8-acb10713cca2">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">6511: Road transport services of freight</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="0099b052-e099-452b-9cd7-559357bf5a1a" unitId="2f4daad7-5331-4f14-930c-d8bca924557d" amount="27.5028151995547" isCalculatedAmount="false" intermediateExchangeId="cfbce515-3f54-4411-ad9d-3d26b7faa15a" activityLinkId="c8fb7463-6853-43e4-9980-a9e405a28006">
+        <name xml:lang="en">transport, freight, lorry, unspecified</name>
+        <unitName xml:lang="en">metric ton*km</unitName>
+        <comment xml:lang="en">Transport distance based on US BTS Commodity Flow Surveys 1993, 1997, 2002, 2007, US Dep. Of Transportation, Bureau of Transportation Statistics. Of the total road transport, 6% is assumed to be by delivery van for goods with a large share of retail sale, and 3% for goods that are mainly sold via wholesale.</comment>
+        <uncertainty>
+          <lognormal meanValue="27.5028151995547" mu="3.314" variance="0.12" varianceWithPedigreeUncertainty="0.17" />
+          <pedigreeMatrix reliability="1" completeness="1" temporalCorrelation="4" geographicalCorrelation="5" furtherTechnologyCorrelation="4" />
+        </uncertainty>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="951f8f36-8fb0-47a1-b6f8-acb10713cca2">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">6511: Road transport services of freight</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="5a6838d9-2c22-430a-b039-df83b7aae4e0" unitId="2f4daad7-5331-4f14-930c-d8bca924557d" amount="0.269479929857388" intermediateExchangeId="0ace02fa-eca5-482d-a829-c18e46a52db4" activityLinkId="9d2674a2-e4e3-42af-b851-c33a40789427">
+        <name xml:lang="en">transport, freight train</name>
+        <unitName xml:lang="en">metric ton*km</unitName>
+        <comment xml:lang="en">Transport distance based on US BTS Commodity Flow Surveys 1993, 1997, 2002, 2007, US Dep. Of Transportation, Bureau of Transportation Statistics.</comment>
+        <classification classificationId="d3a7e1bd-527a-4941-905b-e2bea12a7944">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">6512: Railway transport services of freight</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="1b37eb63-154d-4db0-8721-aeb976c77fa5" unitId="2f4daad7-5331-4f14-930c-d8bca924557d" amount="34.8712701651825" intermediateExchangeId="0ace02fa-eca5-482d-a829-c18e46a52db4" activityLinkId="d51e220b-8409-4bad-b3b6-f99c6b2ffcc4">
+        <name xml:lang="en">transport, freight train</name>
+        <unitName xml:lang="en">metric ton*km</unitName>
+        <comment xml:lang="en">Transport distance based on US BTS Commodity Flow Surveys 1993, 1997, 2002, 2007, US Dep. Of Transportation, Bureau of Transportation Statistics.</comment>
+        <classification classificationId="d3a7e1bd-527a-4941-905b-e2bea12a7944">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">6512: Railway transport services of freight</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="0c645479-050a-49ca-8faa-aa5df1eba030" unitId="2f4daad7-5331-4f14-930c-d8bca924557d" amount="9.66126584794342" intermediateExchangeId="0ace02fa-eca5-482d-a829-c18e46a52db4" activityLinkId="bb21d806-04e1-400b-89a9-d5c7a078ddb4">
+        <name xml:lang="en">transport, freight train</name>
+        <unitName xml:lang="en">metric ton*km</unitName>
+        <comment xml:lang="en">Transport distance based on US BTS Commodity Flow Surveys 1993, 1997, 2002, 2007, US Dep. Of Transportation, Bureau of Transportation Statistics.</comment>
+        <classification classificationId="d3a7e1bd-527a-4941-905b-e2bea12a7944">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">6512: Railway transport services of freight</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="b75e4104-64d6-4608-9697-696f0236c987" unitId="2f4daad7-5331-4f14-930c-d8bca924557d" amount="38.0912818828927" intermediateExchangeId="0ace02fa-eca5-482d-a829-c18e46a52db4" activityLinkId="4f2c4048-dcfa-4961-b876-71ebb51b7858">
+        <name xml:lang="en">transport, freight train</name>
+        <unitName xml:lang="en">metric ton*km</unitName>
+        <comment xml:lang="en">Transport distance based on US BTS Commodity Flow Surveys 1993, 1997, 2002, 2007, US Dep. Of Transportation, Bureau of Transportation Statistics.</comment>
+        <classification classificationId="d3a7e1bd-527a-4941-905b-e2bea12a7944">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">6512: Railway transport services of freight</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="cd2885e2-940a-48a8-a064-6930d1563d8d" unitId="2f4daad7-5331-4f14-930c-d8bca924557d" amount="2.44643434664855" intermediateExchangeId="0ace02fa-eca5-482d-a829-c18e46a52db4" activityLinkId="0cdcc953-3776-4b00-84ba-f3f5b0aa1211">
+        <name xml:lang="en">transport, freight train</name>
+        <unitName xml:lang="en">metric ton*km</unitName>
+        <comment xml:lang="en">Transport distance based on US BTS Commodity Flow Surveys 1993, 1997, 2002, 2007, US Dep. Of Transportation, Bureau of Transportation Statistics.</comment>
+        <classification classificationId="d3a7e1bd-527a-4941-905b-e2bea12a7944">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">6512: Railway transport services of freight</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="62fdde0b-175d-49ae-a3b3-780877ac5eb4" unitId="2f4daad7-5331-4f14-930c-d8bca924557d" amount="48.1089678274755" intermediateExchangeId="0ace02fa-eca5-482d-a829-c18e46a52db4" activityLinkId="768e776f-d09b-4350-938a-1c203c752e4d">
+        <name xml:lang="en">transport, freight train</name>
+        <unitName xml:lang="en">metric ton*km</unitName>
+        <comment xml:lang="en">Transport distance based on US BTS Commodity Flow Surveys 1993, 1997, 2002, 2007, US Dep. Of Transportation, Bureau of Transportation Statistics.</comment>
+        <classification classificationId="d3a7e1bd-527a-4941-905b-e2bea12a7944">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">6512: Railway transport services of freight</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+    </flowData>
+    <modellingAndValidation>
+      <representativeness percent="1" systemModelId="290c1f85-4cc4-4fa1-b0c8-2cb7f4276dce">
+        <systemModelName xml:lang="en">Allocation, cut-off by classification</systemModelName>
+      </representativeness>
+      <review reviewerId="c4597934-ecac-422c-b431-382e85fdcb83" reviewerName="[System]" reviewerEmail="support@ecoinvent.org" reviewDate="2017-11-10" reviewedMajorRelease="3" reviewedMinorRelease="0" reviewedMajorRevision="0" reviewedMinorRevision="5">
+        <details />
+        <otherDetails xml:lang="en">Validation warnings:
+
+- The total water in wet mass of all input exchanges (0) and output exchanges (127) is unbalanced.
+
+- The dataset contains user added exchange master data entries. The following user added exchanges do not contain product information data. Please consider adding the appropriate data before submitting the dataset for review.
+ - concrete, 30MPa
+
+- Uncertainty shall always be provided for all primary data inputs (exchange amounts, properties and parameters), except for the amount and properties of reference products.
+ -- Exchange(s): transport, freight, light commercial vehicle, transport, freight train
+
+- Pedigree information shall always be provided for all uncertainties of primary data inputs (exchange amounts, properties and parameters), except for the amount and properties of reference products.
+ -- Exchange(s): transport, freight, light commercial vehicle, transport, freight train
+
+</otherDetails>
+      </review>
+      <review reviewerId="f86c02d3-2c12-4c25-ad03-33af05bcfe63" reviewerName="Tereza Levova" reviewerEmail="levova@ecoinvent.org" reviewDate="2017-11-10" reviewedMajorRelease="3" reviewedMinorRelease="0" reviewedMajorRevision="0" reviewedMinorRevision="5">
+        <details>
+          <text xml:lang="en" index="0"></text>
+        </details>
+        <otherDetails xml:lang="en"></otherDetails>
+      </review>
+    </modellingAndValidation>
+    <administrativeInformation>
+      <dataEntryBy personId="c4597934-ecac-422c-b431-382e85fdcb83" isActiveAuthor="false" personName="[System]" personEmail="support@ecoinvent.org" />
+      <dataGeneratorAndPublication personId="c4597934-ecac-422c-b431-382e85fdcb83" personName="[System]" personEmail="support@ecoinvent.org" dataPublishedIn="0" isCopyrightProtected="false" accessRestrictedTo="1" />
+      <fileAttributes majorRelease="3" minorRelease="0" majorRevision="2" minorRevision="0" internalSchemaVersion="2.0.11" defaultLanguage="en" creationTimestamp="2017-11-10T11:46:27" lastEditTimestamp="2017-11-10T15:08:55" fileGenerator="EcoEditor 3.8.600.15190" fileTimestamp="2017-11-10T15:08:55" contextId="de659012-50c4-4e96-b54a-fc781bf987ab">
+        <contextName xml:lang="en">ecoinvent</contextName>
+      </fileAttributes>
+    </administrativeInformation>
+  </childActivityDataset>
+</ecoSpold>

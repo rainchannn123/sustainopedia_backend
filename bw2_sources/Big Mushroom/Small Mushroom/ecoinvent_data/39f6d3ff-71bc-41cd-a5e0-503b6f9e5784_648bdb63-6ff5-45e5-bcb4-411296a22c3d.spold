@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ecoSpold xmlns="http://www.EcoInvent.org/EcoSpold02">
+  <childActivityDataset>
+    <activityDescription>
+      <activity id="39f6d3ff-71bc-41cd-a5e0-503b6f9e5784" activityNameId="ef65c104-5061-4003-83cc-7af2de550bef" parentActivityId="fa397f5a-3c77-4f83-bd66-09370cf665f6" inheritanceDepth="-1" type="1" specialActivityType="0">
+        <activityName xml:lang="en">transport, passenger car</activityName>
+        <includedActivitiesEnd xml:lang="en">This activity provides an average transport in passenger car.</includedActivitiesEnd>
+        <generalComment>
+          <text xml:lang="en" index="1">This activity provides an average transport in a passenger car. It does so by linking specific "transport, passenger car", both with internal combustion engine and electric, into a generic product.</text>
+        </generalComment>
+      </activity>
+      <classification classificationId="be39820a-80ae-4419-9621-ec9499c13d21">
+        <classificationSystem xml:lang="en">ISIC rev.4 ecoinvent</classificationSystem>
+        <classificationValue xml:lang="en">4922:Other passenger land transport</classificationValue>
+      </classification>
+      <geography geographyId="7846b897-7c04-4f9f-b607-2b83fcd9a74c">
+        <shortname xml:lang="en">RoW</shortname>
+      </geography>
+      <technology technologyLevel="3">
+        <comment>
+          <text xml:lang="en" index="1">Average transport in a passenger car. The average takes into account internal combustion engines and electric cars. For the first type, the average accounts for different car classes(EURO 3, EURO 4 and EURO 5). These at its turn, are an average of the different car sizes (small, medium and large) and  fuel types (petrol, diesel and natural gas). For the electric car, it takes into account a medium size electric car.</text>
+        </comment>
+      </technology>
+      <timePeriod startDate="2012-01-01" endDate="2021-12-31" isDataValidForEntirePeriod="true" />
+      <macroEconomicScenario macroEconomicScenarioId="d9f57f0a-a01f-42eb-a57b-8f18d6635801">
+        <name xml:lang="en">Business-as-Usual</name>
+      </macroEconomicScenario>
+    </activityDescription>
+    <flowData>
+      <intermediateExchange id="9609beaf-1034-4547-beec-3d59c5db86c7" unitId="ae252091-811b-461b-8e89-8f3075639eb1" amount="1" isCalculatedAmount="false" intermediateExchangeId="648bdb63-6ff5-45e5-bcb4-411296a22c3d" productionVolumeAmount="10834187500000" productionVolumeMathematicalRelation="PV_sum">
+        <name xml:lang="en">transport, passenger car</name>
+        <unitName xml:lang="en">km</unitName>
+        <property propertyId="38f94dd1-d5aa-41b8-b182-c0c42985d9dc" amount="0.158752119267148" unitId="7b75baf0-cbee-45e6-bf66-af119da06553">
+          <name xml:lang="en">price</name>
+          <unitName xml:lang="en">EUR2005</unitName>
+          <comment xml:lang="en">Calculated based on inputs: The price of the product has been calculated as a sum of the values of the material and energy inputs for this product. This value is therefore a rough estimation. It may underestimate the real price since there are additional expenses when producing any product. These expences can include for example labour costs, treatment of waste materials and profit for the producer. Please consider carefully whether this level of data quality is acceptable for your application.</comment>
+        </property>
+        <productionVolumeComment xml:lang="en">The production volume is equal to the sum of the individual production volumes of the inputs transport, passenger car, internal combustion engine and transport, passenger car, electric. This value is obtained from the ecoinvent datasets that produce these products as reference product.</productionVolumeComment>
+        <productionVolumeUncertainty>
+          <lognormal meanValue="10834187500000" mu="30.22" variance="0.0006" varianceWithPedigreeUncertainty="0.0086" />
+          <pedigreeMatrix reliability="4" completeness="1" temporalCorrelation="1" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </productionVolumeUncertainty>
+        <classification classificationId="0d3a65bf-dfa1-4137-980b-c94e817a9470">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">64119: Other land transportation services of passengers, n.e.c.</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <outputGroup>0</outputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="8e4bc459-f542-4961-936a-07ec2f2b96de" unitId="ae252091-811b-461b-8e89-8f3075639eb1" amount="0.000169411764705882" isCalculatedAmount="true" mathematicalRelation="2.25E+09/ PV_sum&#xD;&#xA;" intermediateExchangeId="6fcb39b4-3030-47b1-872e-a84c23dca79b" activityLinkId="59310c19-677f-49ce-8b8d-8ee7cfddf288">
+        <name xml:lang="en">transport, passenger car, electric</name>
+        <unitName xml:lang="en">km</unitName>
+        <comment xml:lang="en">calculated value. Based on the production volume of this exchange divided by the total sum of the  production volumes from all the inputs. The production volumes are obtained from the ecoinvent datasets where these inputs are produced as reference product.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.000169411764705882" mu="-8.683" variance="0.0006" varianceWithPedigreeUncertainty="0.0166" />
+          <pedigreeMatrix reliability="4" completeness="1" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <classification classificationId="0d3a65bf-dfa1-4137-980b-c94e817a9470">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">64119: Other land transportation services of passengers, n.e.c.</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="5e6da2c8-8c16-4771-85c2-41dda993e8d5" unitId="ae252091-811b-461b-8e89-8f3075639eb1" amount="0.999981176470588" isCalculatedAmount="true" mathematicalRelation="1.3281E+13/ PV_sum&#xD;&#xA;" intermediateExchangeId="c7f4de9b-f58b-4189-976e-51586da634df" activityLinkId="178333ed-b6f3-4a02-a8b3-fa011247786a">
+        <name xml:lang="en">transport, passenger car with internal combustion engine</name>
+        <unitName xml:lang="en">km</unitName>
+        <comment xml:lang="en">calculated value. Based on the production volume of this exchange divided by the total sum of the  production volumes from all the inputs. The production volumes are obtained from the ecoinvent datasets where these inputs are produced as reference product.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.999981176470588" mu="-1.882E-05" variance="0.0006" varianceWithPedigreeUncertainty="0.0166" />
+          <pedigreeMatrix reliability="4" completeness="1" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="0d3a65bf-dfa1-4137-980b-c94e817a9470">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">64119: Other land transportation services of passengers, n.e.c.</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <parameter parameterId="956a060c-5431-4a98-b5e6-1cf1b04e8b7a" variableName="PV_sum" mathematicalRelation="1.3279E+13 + 2.25E+09&#xD;&#xA;" isCalculatedAmount="true" amount="13281250000000">
+        <name xml:lang="en">production volumes sum</name>
+        <unitName xml:lang="en">km</unitName>
+        <uncertainty>
+          <lognormal meanValue="13281250000000" mu="30.22" variance="0.0006" varianceWithPedigreeUncertainty="0.0026" />
+          <pedigreeMatrix reliability="3" completeness="1" temporalCorrelation="1" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <comment xml:lang="en">sum of the production volumes of the input exchanges in the present inventory. Values obtained from the ecoinvent datasets that produce these inputs as reference products.</comment>
+      </parameter>
+    </flowData>
+    <modellingAndValidation>
+      <representativeness systemModelId="290c1f85-4cc4-4fa1-b0c8-2cb7f4276dce">
+        <systemModelName xml:lang="en">Allocation, cut-off by classification</systemModelName>
+      </representativeness>
+      <review reviewerId="c4597934-ecac-422c-b431-382e85fdcb83" reviewerName="[System]" reviewerEmail="support@ecoinvent.org" reviewDate="2012-08-16" reviewedMajorRelease="3" reviewedMinorRelease="0" reviewedMajorRevision="0" reviewedMinorRevision="4">
+        <details />
+        <otherDetails xml:lang="en">Validation warnings:
+
+- The input exchange 'transport, passenger car, internal combustion engine' does not have an activity link and therefore requires a market for that input to be available. If the market is not available the dataset will be put on hold at the end of its review and will remain on hold until such a market has been accepted into the ecoinvent database.
+
+</otherDetails>
+      </review>
+      <review reviewerId="87296ea5-2149-44c3-8e36-b1256c92666a" reviewerName="Gregor Wernet" reviewerEmail="wernet@ecoinvent.org" reviewDate="2012-08-16" reviewedMajorRelease="3" reviewedMinorRelease="0" reviewedMajorRevision="0" reviewedMinorRevision="4">
+        <details>
+          <text xml:lang="en" index="0"></text>
+        </details>
+        <otherDetails xml:lang="en"></otherDetails>
+      </review>
+    </modellingAndValidation>
+    <administrativeInformation>
+      <dataEntryBy personId="1b11366d-47b7-40d4-b85d-7d7063b22209" isActiveAuthor="true" personName="Sofia Parada Tur" personEmail="parada@ecoinvent.org" />
+      <dataGeneratorAndPublication personId="1b11366d-47b7-40d4-b85d-7d7063b22209" personName="Sofia Parada Tur" personEmail="parada@ecoinvent.org" isCopyrightProtected="true" accessRestrictedTo="1" />
+      <fileAttributes majorRelease="3" minorRelease="0" majorRevision="1" minorRevision="0" internalSchemaVersion="2.0.8" defaultLanguage="en" creationTimestamp="2012-08-16T09:32:55" lastEditTimestamp="2012-08-16T09:53:27" fileGenerator="EcoEditor 3.0.61.8724" fileTimestamp="2012-08-16T09:53:27" contextId="de659012-50c4-4e96-b54a-fc781bf987ab">
+        <contextName xml:lang="en">ecoinvent</contextName>
+      </fileAttributes>
+    </administrativeInformation>
+  </childActivityDataset>
+</ecoSpold>

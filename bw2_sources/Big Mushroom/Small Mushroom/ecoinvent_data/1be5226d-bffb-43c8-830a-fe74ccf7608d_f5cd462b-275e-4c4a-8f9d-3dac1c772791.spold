@@ -1,0 +1,1525 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ecoSpold xmlns="http://www.EcoInvent.org/EcoSpold02">
+  <childActivityDataset>
+    <activityDescription>
+      <activity id="1be5226d-bffb-43c8-830a-fe74ccf7608d" activityNameId="bab9fa8f-169c-4c10-8d56-b94581ca0a3c" parentActivityId="6725327a-1699-48a4-97b6-5210f9ba0c14" inheritanceDepth="-1" type="1" specialActivityType="0">
+        <activityName xml:lang="en">catch crop growing, ryegrass-Egyptian&amp;Persian clover-mixture, August-October, not fertilised, one cut</activityName>
+        <includedActivitiesStart xml:lang="en">This activity starts after the harvest of the previous crop. The input of seeds is included. </includedActivitiesStart>
+        <includedActivitiesEnd xml:lang="en">The dataset includes all machine operations and corresponding machine infrastructure and sheds. Machine operations are: soil cultivation, sowing, manuring - if manure is applied -, mowing, haying, swathing, baling, bale loading and transport of silage bales to the farm. Further, direct field emissions are included. This activity ends after the transport of the bales to the farm at the farm gate.
+</includedActivitiesEnd>
+        <generalComment>
+          <text xml:lang="en" index="1">This dataset represents the cultivation of ryegrass-Egyptian&amp;Persian clover-mixture silage on an area of 1 ha. The dry matter yield is 1660.05 kg/ha. The moisture content of the silage at storage is 65%.
+</text>
+        </generalComment>
+      </activity>
+      <classification classificationId="bbe2eb06-fac9-48bb-9610-f402b9d3f2d0">
+        <classificationSystem xml:lang="en">ISIC rev.4 ecoinvent</classificationSystem>
+        <classificationValue xml:lang="en">0161:Support activities for crop production</classificationValue>
+      </classification>
+      <geography geographyId="131278d6-7d7e-11de-9ae2-0019e336be3a">
+        <shortname xml:lang="en">CH</shortname>
+      </geography>
+      <technology technologyLevel="3">
+        <comment>
+          <text xml:lang="en" index="1">Swiss integrated production</text>
+        </comment>
+      </technology>
+      <timePeriod startDate="2011-01-01" endDate="2021-12-31" isDataValidForEntirePeriod="true" />
+      <macroEconomicScenario macroEconomicScenarioId="d9f57f0a-a01f-42eb-a57b-8f18d6635801">
+        <name xml:lang="en">Business-as-Usual</name>
+      </macroEconomicScenario>
+    </activityDescription>
+    <flowData>
+      <intermediateExchange id="455046e4-c438-416f-93fe-cf0bef416a44" unitId="86bbe475-8a8f-44d8-914c-e398787e7121" amount="0.000602373351002952" mathematicalRelation="" sourceId="4f44ed4f-30c7-4fff-be4d-d8b601488f0f" sourceYear="2004" sourceFirstAuthor="Boessinger M." intermediateExchangeId="479ce50b-7465-4ee0-ada2-81418055c725" activityLinkId="6677636c-c15b-4da1-81e4-bacfa829f3b1">
+        <name xml:lang="en">mowing, by rotary mower</name>
+        <unitName xml:lang="en">ha</unitName>
+        <comment xml:lang="en">Assumption based on the number of cuts and current practice in Switzerland (cf. Boessinger et. al 2004)
+This exchange has an activity link directly to the producing activity because the product is primarily consumed in the same geographical area where it is produced. </comment>
+        <uncertainty>
+          <lognormal meanValue="0.000602373351002952" mu="-7.415" variance="0.0006" varianceWithPedigreeUncertainty="0.0092" />
+          <pedigreeMatrix reliability="2" completeness="1" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+        </uncertainty>
+        <classification classificationId="39afb89e-b8b3-4a64-ae59-adc9ad3bdb4e">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">86119: Other support services to crop production</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="ac6131d2-53db-4b5c-ab69-7726778e335b" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" variableName="REF_PRODUCT" amount="1" mathematicalRelation="" sourceId="cfeb8e8f-4860-47fb-acdd-91fe2aa96c99" sourceYear="1991" sourceFirstAuthor="Lehmann J." intermediateExchangeId="f5cd462b-275e-4c4a-8f9d-3dac1c772791" productionVolumeAmount="450000" productionVolumeMathematicalRelation="900*500">
+        <name xml:lang="en">ryegrass-Egyptian&amp;Persian clover-mixture silage</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">Dry matter yield per hectare; calculated based on Lehmann (1991): dry matter yield  at 25 kg N/ha; 15% subtracted due to lack of fertilisation; 10% of silage loss are subtracted (Agridea 2007). --- Sources: AGRIDEA (2007) Landwirtschaftliches Handbuch Pflanzen und Tiere. Wirz Kalender, 2007. Ed. AGRIDEA, Lindau (Switzerland).</comment>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="2.857142857" isDefiningValue="true" mathematicalRelation="" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">Assumption of 35% DM in fresh silage.</comment>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" variableName="REF_PRODUCT_DM" amount="1" isDefiningValue="true" mathematicalRelation="" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" variableName="REF_PRODUCT_C_content_non_fossil" amount="0.42211" isDefiningValue="true" mathematicalRelation="" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">Composition data obtained from 'L Leguminosenreicher Mischbestand, Stadium 3, Silage' in Swiss Feed Database ('Schweizerische Futtermitteldatenbank. V1.0'; http://www.feed-alp.admin.ch/start.php?action=adv_search&amp;cmd=list_feed). First, composition data were refered to 1 kg dry mass. Then, C-contents were calculated considering a C-content/dry mass of 44% in carbohydrates (including fibres), 53% in proteins and 75% in fats. All data from ecoinvent report, n 15a, pg 40, except C-content in protein, that comes from Determination of protein concentration by total organic carbon analysis, Rouwenhorst et al., 1991, J Biochem and Biophys Methods, 22:119-128.</comment>
+        </property>
+        <property propertyId="38f94dd1-d5aa-41b8-b182-c0c42985d9dc" variableName="REF_PRODUCT_price_EUR2005" amount="0.016" unitId="7b75baf0-cbee-45e6-bf66-af119da06553">
+          <name xml:lang="en">price</name>
+          <unitName xml:lang="en">EUR2005</unitName>
+          <comment xml:lang="en">Assumed the same price of alfalfa-grass silage to ryegrass silage, based on data for 2016 in Manitoba (Canada) [https://www.gov.mb.ca/agriculture/business-and-economics/financial-management/pubs/cop_forage_cerealsilage.pdf].</comment>
+        </property>
+        <property propertyId="6bc8ac5e-cc4c-45fb-93dc-53c0e45091df" amount="18.34" isDefiningValue="true" mathematicalRelation="" unitId="980b811e-3905-4797-82a5-173f5568bc7e">
+          <name xml:lang="en">energy content</name>
+          <unitName xml:lang="en">MJ</unitName>
+          <comment xml:lang="en">Gross calorific value of 'L Leguminosenreicher Mischbestand, Stadium 3, Silage' in Swiss Feed Database ('Schweizerische Futtermitteldatenbank. V1.0'; http://www.feed-alp.admin.ch/start.php?action=adv_search&amp;cmd=list_feed).</comment>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.42211" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.42211" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <productionVolumeComment xml:lang="en">Area of ryegrass-Egyptian&amp;Persian clover-mixture (SM106) in Switzerland estimated as 2,000ha (own estimate Agroscope). 25% of it for this inventory (since 4 different inventories for ryegrass-Egyptian&amp;Persian clover-mixture silage in Switzerland).</productionVolumeComment>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="fedb5ced-540a-430f-b4d3-5ce1be20d00c">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">01919: Forage products, n.e.c.</classificationValue>
+        </classification>
+        <outputGroup>0</outputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="4bbe1f12-fd91-45d0-b23a-0a9de3794adb" unitId="86bbe475-8a8f-44d8-914c-e398787e7121" amount="0.000602373351002952" mathematicalRelation="" sourceId="4f44ed4f-30c7-4fff-be4d-d8b601488f0f" sourceYear="2004" sourceFirstAuthor="Boessinger M." intermediateExchangeId="60cfe502-80f5-4a1e-9a97-48503466a802" activityLinkId="42c40687-807a-4cb6-969d-c566a4a17315">
+        <name xml:lang="en">tillage, cultivating, chiselling</name>
+        <unitName xml:lang="en">ha</unitName>
+        <comment xml:lang="en">Assumption based on the number of cuts and current practice in Switzerland (cf. Boessinger et. al 2004)
+This exchange has an activity link directly to the producing activity because the product is primarily consumed in the same geographical area where it is produced. </comment>
+        <uncertainty>
+          <lognormal meanValue="0.000602373351002952" mu="-7.415" variance="0.0006" varianceWithPedigreeUncertainty="0.0092" />
+          <pedigreeMatrix reliability="2" completeness="1" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+        </uncertainty>
+        <classification classificationId="39afb89e-b8b3-4a64-ae59-adc9ad3bdb4e">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">86119: Other support services to crop production</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="5faa3bd5-1f14-4fc0-9b97-24ab55de4a7d" unitId="86bbe475-8a8f-44d8-914c-e398787e7121" amount="0.0012047467020059" mathematicalRelation="" sourceId="4f44ed4f-30c7-4fff-be4d-d8b601488f0f" sourceYear="2004" sourceFirstAuthor="Boessinger M." intermediateExchangeId="68850e7f-0daf-4744-a87d-146555861f30" activityLinkId="6de44dd7-ec61-4aef-b3f0-e42be9f8dae3">
+        <name xml:lang="en">haying, by rotary tedder</name>
+        <unitName xml:lang="en">ha</unitName>
+        <comment xml:lang="en">Assumption based on the number of cuts and current practice in Switzerland (cf. Boessinger et. al 2004)
+This exchange has an activity link directly to the producing activity because the product is primarily consumed in the same geographical area where it is produced. </comment>
+        <uncertainty>
+          <lognormal meanValue="0.0012047467020059" mu="-6.721" variance="0.0006" varianceWithPedigreeUncertainty="0.0092" />
+          <pedigreeMatrix reliability="2" completeness="1" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+        </uncertainty>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="39afb89e-b8b3-4a64-ae59-adc9ad3bdb4e">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">86119: Other support services to crop production</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="251d9eb9-15ab-4d3b-9c58-de35405effd9" unitId="5b972631-34e3-4db7-a615-f6931770a0cb" amount="0.0040815011143907" mathematicalRelation="" sourceId="15229d9c-1cd2-4bdb-86a6-9c3514d62ac5" sourceYear="2007" sourceFirstAuthor="Nemecek, T." intermediateExchangeId="bab2d2e5-e35f-4264-82ff-7d8e6dc222c1" activityLinkId="4fd8b0f5-bed1-466f-8e8e-a0a279094007">
+        <name xml:lang="en">bale loading</name>
+        <unitName xml:lang="en">unit</unitName>
+        <comment xml:lang="en">Calculated from fresh matter yield (35% dry matter content) and bale weigth of 700 kg (fresh matter; Nemecek 2007).
+This exchange has an activity link directly to the producing activity because the product is primarily consumed in the same geographical area where it is produced. </comment>
+        <uncertainty>
+          <lognormal meanValue="0.0040815011143907" mu="-5.501" variance="0.0006" varianceWithPedigreeUncertainty="0.0092" />
+          <pedigreeMatrix reliability="2" completeness="1" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+        </uncertainty>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="cbf9b263-1377-4f5a-b2d4-7c07b3ebfed3">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">86111: Post-harvest crop services</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="c8a62b9d-0199-4e59-9602-97e25665cbf5" unitId="86bbe475-8a8f-44d8-914c-e398787e7121" amount="0.000602373351002952" mathematicalRelation="" sourceId="4f44ed4f-30c7-4fff-be4d-d8b601488f0f" sourceYear="2004" sourceFirstAuthor="Boessinger M." intermediateExchangeId="ba4b94f3-797f-4724-af8c-21ec8fed9c2e" activityLinkId="33fb149a-5221-4048-922b-6777e2fcdd24">
+        <name xml:lang="en">swath, by rotary windrower</name>
+        <unitName xml:lang="en">ha</unitName>
+        <comment xml:lang="en">Assumption based on the number of cuts and current practice in Switzerland (cf. Boessinger et. al 2004)
+This exchange has an activity link directly to the producing activity because the product is primarily consumed in the same geographical area where it is produced. </comment>
+        <uncertainty>
+          <lognormal meanValue="0.000602373351002952" mu="-7.415" variance="0.0006" varianceWithPedigreeUncertainty="0.0092" />
+          <pedigreeMatrix reliability="2" completeness="1" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+        </uncertainty>
+        <classification classificationId="39afb89e-b8b3-4a64-ae59-adc9ad3bdb4e">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">86119: Other support services to crop production</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="b3e5e6da-b9ba-4882-9630-338a6bb42304" unitId="86bbe475-8a8f-44d8-914c-e398787e7121" amount="0.000602373351002952" mathematicalRelation="" sourceId="4f44ed4f-30c7-4fff-be4d-d8b601488f0f" sourceYear="2004" sourceFirstAuthor="Boessinger M." intermediateExchangeId="51d3e5e1-ebff-4b8c-b764-42bfe74434ea" activityLinkId="43b93ce4-ec67-4e6b-ae64-4f03250f047d">
+        <name xml:lang="en">tillage, rolling</name>
+        <unitName xml:lang="en">ha</unitName>
+        <comment xml:lang="en">Assumption based on the number of cuts and current practice in Switzerland (cf. Boessinger et. al 2004)
+This exchange has an activity link directly to the producing activity because the product is primarily consumed in the same geographical area where it is produced. </comment>
+        <uncertainty>
+          <lognormal meanValue="0.000602373351002952" mu="-7.415" variance="0.0006" varianceWithPedigreeUncertainty="0.0092" />
+          <pedigreeMatrix reliability="2" completeness="1" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+        </uncertainty>
+        <classification classificationId="39afb89e-b8b3-4a64-ae59-adc9ad3bdb4e">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">86119: Other support services to crop production</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="821a8127-63d4-4a6f-91ec-7c4711b4ec0a" unitId="86bbe475-8a8f-44d8-914c-e398787e7121" amount="0.000602373351002952" mathematicalRelation="" sourceId="4f44ed4f-30c7-4fff-be4d-d8b601488f0f" sourceYear="2004" sourceFirstAuthor="Boessinger M." intermediateExchangeId="406c9ce9-fa6f-47b7-8659-386f0a54f2a8" activityLinkId="808360a0-7fba-4ac2-aa73-42f1b3b0d9ac">
+        <name xml:lang="en">tillage, harrowing, by rotary harrow</name>
+        <unitName xml:lang="en">ha</unitName>
+        <comment xml:lang="en">Assumption based on the number of cuts and current practice in Switzerland (cf. Boessinger et. al 2004)
+This exchange has an activity link directly to the producing activity because the product is primarily consumed in the same geographical area where it is produced. </comment>
+        <uncertainty>
+          <lognormal meanValue="0.000602373351002952" mu="-7.415" variance="0.0006" varianceWithPedigreeUncertainty="0.0092" />
+          <pedigreeMatrix reliability="2" completeness="1" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+        </uncertainty>
+        <classification classificationId="39afb89e-b8b3-4a64-ae59-adc9ad3bdb4e">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">86119: Other support services to crop production</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="9a6c0808-0ead-42de-a260-40704b5f6983" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" variableName="SEED_1" amount="0.00975844828624782" mathematicalRelation="" sourceId="cfeb8e8f-4860-47fb-acdd-91fe2aa96c99" sourceYear="1991" sourceFirstAuthor="Lehmann J." intermediateExchangeId="cd360246-4139-4f4a-a844-c9d9d5c22ce5" activityLinkId="15cb6e41-b22d-4105-b60b-65dc0017ea03">
+        <name xml:lang="en">clover seed, Swiss integrated production, for sowing</name>
+        <unitName xml:lang="en">kg</unitName>
+        <uncertainty>
+          <lognormal meanValue="0.00975844828624782" mu="-4.63" variance="0.0006" varianceWithPedigreeUncertainty="0.0092" />
+          <pedigreeMatrix reliability="2" completeness="1" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+        </uncertainty>
+        <property propertyId="6bc8ac5e-cc4c-45fb-93dc-53c0e45091df" variableName="SEED_1_energy_content" amount="16.0776" isDefiningValue="false" mathematicalRelation="" unitId="980b811e-3905-4797-82a5-173f5568bc7e">
+          <name xml:lang="en">energy content</name>
+          <unitName xml:lang="en">MJ</unitName>
+          <comment xml:lang="en">See chapter 'Product Properties' in '01_crop production - yields &amp; inputs CH &amp; Europe_v1.0.pdf', section 'AGRICULTURAL PRODUCTION IN SWITZERLAND' - pdf-document on the dedicated talk page of ecoinvent (www.ecoinvent.org/documentation)
+</comment>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0.1" mathematicalRelation="" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">dataset</comment>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" variableName="SEED_1_C_content_non_fossil" amount="0.469420714527" isDefiningValue="false" mathematicalRelation="" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">biogene carbon content on a dry matter basis
+peas seeds values are used</comment>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0" mathematicalRelation="" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0.111111111111" mathematicalRelation="" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water mass/dry mass</comment>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1" mathematicalRelation="" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" variableName="SEED_1_DM" amount="0.9" isDefiningValue="false" mathematicalRelation="" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">Wet mass- Water mass</comment>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.469420714527" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.4224786430743" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="fedb5ced-540a-430f-b4d3-5ce1be20d00c">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">01919: Forage products, n.e.c.</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="36155c1f-c54c-4b4a-8d42-d97d04fd95e8" unitId="2f4daad7-5331-4f14-930c-d8bca924557d" amount="0.0009999397626649" mathematicalRelation="" intermediateExchangeId="ba4b7781-39f2-465b-8d98-0bc1c4c82e61" activityLinkId="739e30d5-8470-4245-9d29-06b713db75fe">
+        <name xml:lang="en">transport, tractor and trailer, agricultural</name>
+        <unitName xml:lang="en">metric ton*km</unitName>
+        <comment xml:lang="en">Transport of silage bales to farm; distance 1 km.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.0009999397626649" mu="-6.908" variance="0.1204" varianceWithPedigreeUncertainty="0.1364" />
+          <pedigreeMatrix reliability="4" completeness="1" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+        </uncertainty>
+        <classification classificationId="39afb89e-b8b3-4a64-ae59-adc9ad3bdb4e">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">86119: Other support services to crop production</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="ce2e1430-b5a7-4212-a9e1-d13a603c96c9" unitId="86bbe475-8a8f-44d8-914c-e398787e7121" amount="0.000602373351002952" mathematicalRelation="" sourceId="4f44ed4f-30c7-4fff-be4d-d8b601488f0f" sourceYear="2004" sourceFirstAuthor="Boessinger M." intermediateExchangeId="6c365ae3-f8cb-4aff-8709-afea7fbf0a40" activityLinkId="1af52757-b5c0-4b48-8419-3e67b0dc1bcf">
+        <name xml:lang="en">sowing</name>
+        <unitName xml:lang="en">ha</unitName>
+        <comment xml:lang="en">Assumption based on the number of cuts and current practice in Switzerland (cf. Boessinger et. al 2004)
+This exchange has an activity link directly to the producing activity because the product is primarily consumed in the same geographical area where it is produced. </comment>
+        <uncertainty>
+          <lognormal meanValue="0.000602373351002952" mu="-7.415" variance="0.0006" varianceWithPedigreeUncertainty="0.0092" />
+          <pedigreeMatrix reliability="2" completeness="1" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+        </uncertainty>
+        <classification classificationId="39afb89e-b8b3-4a64-ae59-adc9ad3bdb4e">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">86119: Other support services to crop production</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="616be6e3-e66f-4341-b433-fcac08b111e8" unitId="5b972631-34e3-4db7-a615-f6931770a0cb" amount="0.0040815011143907" mathematicalRelation="" sourceId="15229d9c-1cd2-4bdb-86a6-9c3514d62ac5" sourceYear="2007" sourceFirstAuthor="Nemecek, T." intermediateExchangeId="bb425565-81b9-410b-bbb4-a0316567f297" activityLinkId="6251f5ed-a1fa-4de7-b139-53b8b403dec1">
+        <name xml:lang="en">baling</name>
+        <unitName xml:lang="en">unit</unitName>
+        <comment xml:lang="en">Calculated from fresh matter yield (35% dry matter content) and bale weigth of 700 kg (fresh matter; Nemecek 2007).
+This exchange has an activity link directly to the producing activity because the product is primarily consumed in the same geographical area where it is produced. </comment>
+        <uncertainty>
+          <lognormal meanValue="0.0040815011143907" mu="-5.501" variance="0.0006" varianceWithPedigreeUncertainty="0.0092" />
+          <pedigreeMatrix reliability="2" completeness="1" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+        </uncertainty>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="cbf9b263-1377-4f5a-b2d4-7c07b3ebfed3">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">86111: Post-harvest crop services</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="bfef4b76-57da-4dc3-adac-1bd62aa9de5d" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" variableName="SEED_2" amount="0.0119269923498584" mathematicalRelation="" sourceId="cfeb8e8f-4860-47fb-acdd-91fe2aa96c99" sourceYear="1991" sourceFirstAuthor="Lehmann J." intermediateExchangeId="995688a0-00f6-41ca-88c6-677b66b7627d" activityLinkId="8717d7c9-16a7-4450-816a-c9665f091561">
+        <name xml:lang="en">grass seed, Swiss integrated production, for sowing</name>
+        <unitName xml:lang="en">kg</unitName>
+        <uncertainty>
+          <lognormal meanValue="0.0119269923498584" mu="-4.429" variance="0.0006" varianceWithPedigreeUncertainty="0.0092" />
+          <pedigreeMatrix reliability="2" completeness="1" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+        </uncertainty>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" variableName="SEED_2_DM" amount="0.9" isDefiningValue="false" mathematicalRelation="" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="6bc8ac5e-cc4c-45fb-93dc-53c0e45091df" variableName="SEED_2_energy_content" amount="16.299" isDefiningValue="false" mathematicalRelation="" unitId="980b811e-3905-4797-82a5-173f5568bc7e">
+          <name xml:lang="en">energy content</name>
+          <unitName xml:lang="en">MJ</unitName>
+          <comment xml:lang="en">See chapter 'Product Properties' in '01_crop production - yields &amp; inputs CH &amp; Europe_v1.0.pdf', section 'AGRICULTURAL PRODUCTION IN SWITZERLAND' - pdf-document on the dedicated talk page of ecoinvent (www.ecoinvent.org/documentation).
+</comment>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0" mathematicalRelation="" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" variableName="SEED_2_C_content_non_fossil" amount="0.464600933622" isDefiningValue="false" mathematicalRelation="" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">biogene carbon content on a dry matter basis
+wheat grains values are used</comment>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0.111111111111" mathematicalRelation="" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water mass/dry mass</comment>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0.1" mathematicalRelation="" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">dataset</comment>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1" mathematicalRelation="" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.464600933622" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.4181408402598" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <classification classificationId="5cdd1f34-4c5f-40b0-9881-62c61f08bd4c">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">01940: Beet seeds (excluding sugar beet seeds) and seeds of forage plants</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <elementaryExchange id="ee11eb55-7946-412b-b258-2639df45b596" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" casNumber="007439-92-1" amount="2.21992651045118E-08" mathematicalRelation="" elementaryExchangeId="4010918f-7fd0-4925-8fbb-8fd7a44a806c" formula="Pb">
+        <name xml:lang="en">Lead</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">Modelled, see chapter 'Emissions of heavy metals to agricultural soil, surface water and ground water' in '01_crop production_direct field emissions and natural resources_v1.0.pdf' - pdf-document on the dedicated talk page of ecoinvent (www.ecoinvent.org/documentation)</comment>
+        <uncertainty>
+          <lognormal meanValue="2.21992651045118E-08" mu="-17.62" variance="0.0411" varianceWithPedigreeUncertainty="0.0498" />
+          <pedigreeMatrix reliability="2" completeness="2" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+        </uncertainty>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1" mathematicalRelation="" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0" mathematicalRelation="" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water mass/dry mass</comment>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0" mathematicalRelation="" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0" mathematicalRelation="" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0" mathematicalRelation="" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1" mathematicalRelation="" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <compartment subcompartmentId="e1bc9a16-5b6a-494f-98ef-49f461b1a11e">
+          <compartment xml:lang="en">soil</compartment>
+          <subcompartment xml:lang="en">agricultural</subcompartment>
+        </compartment>
+        <outputGroup>4</outputGroup>
+      </elementaryExchange>
+      <elementaryExchange id="5dacfad2-3113-4a52-bc3b-8f84f41e39bd" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" casNumber="007440-47-3" amount="-1.22582976929101E-07" mathematicalRelation="" elementaryExchangeId="e7881581-21b3-4f5c-bd63-6b0684b5e712" formula="Cr">
+        <name xml:lang="en">Chromium</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">Modelled, see chapter 'Emissions of heavy metals to agricultural soil, surface water and ground water' in '01_crop production_direct field emissions and natural resources_v1.0.pdf' - pdf-document on the dedicated talk page of ecoinvent (www.ecoinvent.org/documentation)</comment>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0" mathematicalRelation="" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0" mathematicalRelation="" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water mass/dry mass</comment>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1" mathematicalRelation="" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0" mathematicalRelation="" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0" mathematicalRelation="" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1" mathematicalRelation="" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <compartment subcompartmentId="e1bc9a16-5b6a-494f-98ef-49f461b1a11e">
+          <compartment xml:lang="en">soil</compartment>
+          <subcompartment xml:lang="en">agricultural</subcompartment>
+        </compartment>
+        <outputGroup>4</outputGroup>
+      </elementaryExchange>
+      <elementaryExchange id="0ec505e6-f521-4632-a602-266e356485e4" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" variableName="N2O" casNumber="010024-97-2" amount="0.000274510143967231" mathematicalRelation="" elementaryExchangeId="afd6d670-bbb0-4625-9730-04088a5b035e" formula="N2O">
+        <name xml:lang="en">Dinitrogen monoxide</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">Modelled, see chapter 'Emissions of N2O to the air' in '01_crop production_direct field emissions and natural resources_v1.0.pdf' - pdf-document on the dedicated talk page of ecoinvent (www.ecoinvent.org/documentation)</comment>
+        <uncertainty>
+          <lognormal meanValue="0.000274510143967231" mu="-8.201" variance="0.0411" varianceWithPedigreeUncertainty="0.0498" />
+          <pedigreeMatrix reliability="2" completeness="2" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+        </uncertainty>
+        <synonym />
+        <synonym xml:lang="en">nitrous oxide</synonym>
+        <synonym xml:lang="en">Stickstoffdioxid</synonym>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0" mathematicalRelation="" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1" mathematicalRelation="" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0" mathematicalRelation="" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water mass/dry mass</comment>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0" mathematicalRelation="" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1" mathematicalRelation="" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0" mathematicalRelation="" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <compartment subcompartmentId="be7e06e9-0bf5-462e-99dc-fe4aee383c48">
+          <compartment xml:lang="en">air</compartment>
+          <subcompartment xml:lang="en">non-urban air or from high stacks</subcompartment>
+        </compartment>
+        <outputGroup>4</outputGroup>
+      </elementaryExchange>
+      <elementaryExchange id="02508a5e-0434-4932-9bf0-1a8909381a88" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" casNumber="007440-66-6" amount="-7.08391060779471E-08" mathematicalRelation="" elementaryExchangeId="84aa799e-9d98-4d34-85e0-516d28ab1be9" formula="Zn">
+        <name xml:lang="en">Zinc</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">Modelled, see chapter 'Emissions of heavy metals to agricultural soil, surface water and ground water' in '01_crop production_direct field emissions and natural resources_v1.0.pdf' - pdf-document on the dedicated talk page of ecoinvent (www.ecoinvent.org/documentation)</comment>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1" mathematicalRelation="" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0" mathematicalRelation="" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0" mathematicalRelation="" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0" mathematicalRelation="" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water mass/dry mass</comment>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1" mathematicalRelation="" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0" mathematicalRelation="" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <compartment subcompartmentId="e1bc9a16-5b6a-494f-98ef-49f461b1a11e">
+          <compartment xml:lang="en">soil</compartment>
+          <subcompartment xml:lang="en">agricultural</subcompartment>
+        </compartment>
+        <outputGroup>4</outputGroup>
+      </elementaryExchange>
+      <elementaryExchange id="d52cb2d4-02be-4690-835d-fc242146fa70" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" casNumber="007439-97-6" amount="-1.19269923498584E-08" mathematicalRelation="" elementaryExchangeId="ed2d49f8-110d-4db4-9488-f61c349e6117" formula="Hg">
+        <name xml:lang="en">Mercury</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">Modelled, see chapter 'Emissions of heavy metals to agricultural soil, surface water and ground water' in '01_crop production_direct field emissions and natural resources_v1.0.pdf' - pdf-document on the dedicated talk page of ecoinvent (www.ecoinvent.org/documentation)</comment>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0" mathematicalRelation="" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0" mathematicalRelation="" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0" mathematicalRelation="" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water mass/dry mass</comment>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0" mathematicalRelation="" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1" mathematicalRelation="" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1" mathematicalRelation="" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <compartment subcompartmentId="e1bc9a16-5b6a-494f-98ef-49f461b1a11e">
+          <compartment xml:lang="en">soil</compartment>
+          <subcompartment xml:lang="en">agricultural</subcompartment>
+        </compartment>
+        <outputGroup>4</outputGroup>
+      </elementaryExchange>
+      <elementaryExchange id="9b575fc0-3ec1-4f1c-9eb9-32e505f89c0f" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" casNumber="014701-22-5" amount="8.24709354858141E-10" mathematicalRelation="" elementaryExchangeId="9798359e-a3ee-4362-a038-23a188582c6e" formula="Ni+2">
+        <name xml:lang="en">Nickel, ion</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">Modelled, see chapter 'Emissions of heavy metals to agricultural soil, surface water and ground water' in '01_crop production_direct field emissions and natural resources_v1.0.pdf' - pdf-document on the dedicated talk page of ecoinvent (www.ecoinvent.org/documentation)</comment>
+        <uncertainty>
+          <lognormal meanValue="8.24709354858141E-10" mu="-20.92" variance="0.0864" varianceWithPedigreeUncertainty="0.0951" />
+          <pedigreeMatrix reliability="2" completeness="2" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+        </uncertainty>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1" mathematicalRelation="" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0" mathematicalRelation="" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water mass/dry mass</comment>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1" mathematicalRelation="" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0" mathematicalRelation="" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0" mathematicalRelation="" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0" mathematicalRelation="" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <compartment subcompartmentId="963f8022-3e2e-4be9-ad4d-b3b7a2282099">
+          <compartment xml:lang="en">water</compartment>
+          <subcompartment xml:lang="en">surface water</subcompartment>
+        </compartment>
+        <outputGroup>4</outputGroup>
+      </elementaryExchange>
+      <elementaryExchange id="5e05a947-7bf2-4066-b804-e39cd58e1640" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" casNumber="007440-02-0" amount="1.78941027648937E-08" mathematicalRelation="" elementaryExchangeId="b4580545-243d-48d2-a3a0-2633a4f46fb1" formula="Ni">
+        <name xml:lang="en">Nickel</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">Modelled, see chapter 'Emissions of heavy metals to agricultural soil, surface water and ground water' in '01_crop production_direct field emissions and natural resources_v1.0.pdf' - pdf-document on the dedicated talk page of ecoinvent (www.ecoinvent.org/documentation)</comment>
+        <uncertainty>
+          <lognormal meanValue="1.78941027648937E-08" mu="-17.84" variance="0.0411" varianceWithPedigreeUncertainty="0.0498" />
+          <pedigreeMatrix reliability="2" completeness="2" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+        </uncertainty>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1" mathematicalRelation="" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0" mathematicalRelation="" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water mass/dry mass</comment>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1" mathematicalRelation="" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0" mathematicalRelation="" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0" mathematicalRelation="" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0" mathematicalRelation="" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <compartment subcompartmentId="e1bc9a16-5b6a-494f-98ef-49f461b1a11e">
+          <compartment xml:lang="en">soil</compartment>
+          <subcompartment xml:lang="en">agricultural</subcompartment>
+        </compartment>
+        <outputGroup>4</outputGroup>
+      </elementaryExchange>
+      <elementaryExchange id="870dc159-2cd9-47e1-9c8f-a8cec5d93133" unitId="980b811e-3905-4797-82a5-173f5568bc7e" amount="18.34" mathematicalRelation="" elementaryExchangeId="01c12fca-ad8b-4902-8b48-2d5afe3d3a0f">
+        <name xml:lang="en">Energy, gross calorific value, in biomass</name>
+        <unitName xml:lang="en">MJ</unitName>
+        <comment xml:lang="en">Gross calorific value of 'L Leguminosenreicher Mischbestand, Stadium 3, Silage' in Swiss Feed Database ('Schweizerische Futtermitteldatenbank. V1.0'; http://www.feed-alp.admin.ch/start.php?action=adv_search&amp;cmd=list_feed).</comment>
+        <uncertainty>
+          <lognormal meanValue="18.34" mu="2.909" variance="0.0006" varianceWithPedigreeUncertainty="0.0499" />
+          <pedigreeMatrix reliability="2" completeness="3" temporalCorrelation="4" geographicalCorrelation="3" furtherTechnologyCorrelation="4" />
+        </uncertainty>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0" mathematicalRelation="" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water content on a dry matter basis</comment>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0" mathematicalRelation="" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">biogene carbon content on a dry matter basis</comment>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1" mathematicalRelation="" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">gross calorific value, measured in dry mass</comment>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1" mathematicalRelation="" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0" mathematicalRelation="" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">water content on a wet matter basis</comment>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0" mathematicalRelation="" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">fossil carbon content on a dry matter basis</comment>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <compartment subcompartmentId="2d0acbd3-2083-4011-9a29-20c626b23dc3">
+          <compartment xml:lang="en">natural resource</compartment>
+          <subcompartment xml:lang="en">biotic</subcompartment>
+        </compartment>
+        <inputGroup>4</inputGroup>
+      </elementaryExchange>
+      <elementaryExchange id="6fb62bfd-4566-4aeb-8e2a-09e5f8a885cc" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" casNumber="014265-44-2" amount="2.69058309740377E-05" mathematicalRelation="" elementaryExchangeId="329fc7d8-4011-4327-84e4-34ff76f0e42d" formula="O4P-3">
+        <name xml:lang="en">Phosphate</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">Modelled, see chapter 'Emissions of phosphorous to the water' in '01_crop production_direct field emissions and natural resources_v1.0.pdf' - pdf-document on the dedicated talk page of ecoinvent (www.ecoinvent.org/documentation)</comment>
+        <uncertainty>
+          <lognormal meanValue="2.69058309740377E-05" mu="-10.52" variance="0.0411" varianceWithPedigreeUncertainty="0.0498" />
+          <pedigreeMatrix reliability="2" completeness="2" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+        </uncertainty>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1" mathematicalRelation="" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0" mathematicalRelation="" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1" mathematicalRelation="" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0" mathematicalRelation="" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water mass/dry mass</comment>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0" mathematicalRelation="" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0" mathematicalRelation="" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <compartment subcompartmentId="a119c440-7e83-4655-a874-97fe1468315a">
+          <compartment xml:lang="en">water</compartment>
+          <subcompartment xml:lang="en">ground-</subcompartment>
+        </compartment>
+        <outputGroup>4</outputGroup>
+      </elementaryExchange>
+      <elementaryExchange id="02faa71f-5ff0-4815-8784-1ad435011428" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" casNumber="011104-93-1" amount="5.76471302331185E-05" isCalculatedAmount="true" mathematicalRelation="0.21*N2O" elementaryExchangeId="77357947-ccc5-438e-9996-95e65e1e1bce" formula="H3NO">
+        <name xml:lang="en">Nitrogen oxides</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">Modelled, see chapter 'Emissions of NOx to the air' in '01_crop production_direct field emissions and natural resources_v1.0.pdf' - pdf-document on the dedicated talk page of ecoinvent (www.ecoinvent.org/documentation)</comment>
+        <uncertainty>
+          <lognormal meanValue="5.76471302331185E-05" mu="-9.761" variance="0.0411" varianceWithPedigreeUncertainty="0.0498" />
+          <pedigreeMatrix reliability="2" completeness="2" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+        </uncertainty>
+        <synonym xml:lang="en">hydroxylamine</synonym>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0" mathematicalRelation="" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water mass/dry mass</comment>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1" mathematicalRelation="" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0" mathematicalRelation="" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0" mathematicalRelation="" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1" mathematicalRelation="" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0" mathematicalRelation="" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <compartment subcompartmentId="be7e06e9-0bf5-462e-99dc-fe4aee383c48">
+          <compartment xml:lang="en">air</compartment>
+          <subcompartment xml:lang="en">non-urban air or from high stacks</subcompartment>
+        </compartment>
+        <outputGroup>4</outputGroup>
+      </elementaryExchange>
+      <elementaryExchange id="9d8d05e1-d8ee-4dea-8f17-7707618ea2ee" unitId="1017f68a-f818-4f9d-a34d-a31e7386f628" amount="6.02373351002952" mathematicalRelation="" elementaryExchangeId="c3f83a91-4888-41a4-add9-fd01678a1e5f" formula="CORINE 21">
+        <name xml:lang="en">Transformation, to annual crop</name>
+        <unitName xml:lang="en">m2</unitName>
+        <comment xml:lang="en">Modelled, see chapter 'Land use' in '01_crop production_direct field emissions and natural resources_v1.0.pdf' - pdf-document on the dedicated talk page of ecoinvent (www.ecoinvent.org/documentation)</comment>
+        <uncertainty>
+          <lognormal meanValue="6.02373351002952" mu="1.796" variance="0.0083" varianceWithPedigreeUncertainty="0.0169" />
+          <pedigreeMatrix reliability="2" completeness="1" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+        </uncertainty>
+        <compartment subcompartmentId="7d704b6f-d455-4f41-9c28-50b4f372f315">
+          <compartment xml:lang="en">natural resource</compartment>
+          <subcompartment xml:lang="en">land</subcompartment>
+        </compartment>
+        <inputGroup>4</inputGroup>
+      </elementaryExchange>
+      <elementaryExchange id="88f6c162-ff4c-480d-a375-99866373567b" unitId="eb955b7c-7bed-401f-9c76-5db716ca3640" amount="1.25426179145835" mathematicalRelation="" elementaryExchangeId="c5aafa60-495c-461c-a1d4-b262a34c45b9">
+        <name xml:lang="en">Occupation, annual crop</name>
+        <unitName xml:lang="en">m2*year</unitName>
+        <comment xml:lang="en">Modelled, see chapter 'Land use' in '01_crop production_direct field emissions and natural resources_v1.0.pdf' - pdf-document on the dedicated talk page of ecoinvent (www.ecoinvent.org/documentation)</comment>
+        <uncertainty>
+          <lognormal meanValue="1.25426179145835" mu="0.2265" variance="0.0023" varianceWithPedigreeUncertainty="0.0109" />
+          <pedigreeMatrix reliability="2" completeness="1" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+        </uncertainty>
+        <synonym />
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="0" mathematicalRelation="" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0" mathematicalRelation="" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="0" mathematicalRelation="" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0" mathematicalRelation="" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0" mathematicalRelation="" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <compartment subcompartmentId="7d704b6f-d455-4f41-9c28-50b4f372f315">
+          <compartment xml:lang="en">natural resource</compartment>
+          <subcompartment xml:lang="en">land</subcompartment>
+        </compartment>
+        <inputGroup>4</inputGroup>
+      </elementaryExchange>
+      <elementaryExchange id="1438be97-333f-4cff-bfce-990bda4c3082" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" casNumber="016065-83-1" amount="1.34485874344919E-07" mathematicalRelation="" elementaryExchangeId="e34d3da4-a3d5-41be-84b5-458afe32c990" formula="Cr+3">
+        <name xml:lang="en">Chromium, ion</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">Modelled, see chapter 'Emissions of heavy metals to agricultural soil, surface water and ground water' in '01_crop production_direct field emissions and natural resources_v1.0.pdf' - pdf-document on the dedicated talk page of ecoinvent (www.ecoinvent.org/documentation)</comment>
+        <uncertainty>
+          <lognormal meanValue="1.34485874344919E-07" mu="-15.82" variance="0.0864" varianceWithPedigreeUncertainty="0.0951" />
+          <pedigreeMatrix reliability="2" completeness="2" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+        </uncertainty>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0" mathematicalRelation="" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1" mathematicalRelation="" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0" mathematicalRelation="" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0" mathematicalRelation="" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water mass/dry mass</comment>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0" mathematicalRelation="" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1" mathematicalRelation="" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <compartment subcompartmentId="963f8022-3e2e-4be9-ad4d-b3b7a2282099">
+          <compartment xml:lang="en">water</compartment>
+          <subcompartment xml:lang="en">surface water</subcompartment>
+        </compartment>
+        <outputGroup>4</outputGroup>
+      </elementaryExchange>
+      <elementaryExchange id="7f28153d-f338-4f53-adfd-8aba5564e7c5" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" casNumber="007439-92-1" amount="6.57490512619722E-10" mathematicalRelation="" elementaryExchangeId="b3ebdcc3-c588-4997-95d2-9785b26b34e1" formula="Pb">
+        <name xml:lang="en">Lead</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">Modelled, see chapter 'Emissions of heavy metals to agricultural soil, surface water and ground water' in '01_crop production_direct field emissions and natural resources_v1.0.pdf' - pdf-document on the dedicated talk page of ecoinvent (www.ecoinvent.org/documentation)</comment>
+        <uncertainty>
+          <lognormal meanValue="6.57490512619722E-10" mu="-21.14" variance="0.0864" varianceWithPedigreeUncertainty="0.0951" />
+          <pedigreeMatrix reliability="2" completeness="2" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+        </uncertainty>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0" mathematicalRelation="" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0" mathematicalRelation="" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1" mathematicalRelation="" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1" mathematicalRelation="" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0" mathematicalRelation="" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water mass/dry mass</comment>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0" mathematicalRelation="" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <compartment subcompartmentId="963f8022-3e2e-4be9-ad4d-b3b7a2282099">
+          <compartment xml:lang="en">water</compartment>
+          <subcompartment xml:lang="en">surface water</subcompartment>
+        </compartment>
+        <outputGroup>4</outputGroup>
+      </elementaryExchange>
+      <elementaryExchange id="a43b1a4b-f8bd-41a3-9c2b-22d05cdbba8f" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" casNumber="000124-38-9" amount="1.51433370515744" isCalculatedAmount="true" mathematicalRelation="44/12 * (REF_PRODUCT_C_content_non_fossil *  REF_PRODUCT *  REF_PRODUCT_DM - (SEED_1_C_content_non_fossil * SEED_1 *  SEED_1_DM +  SEED_2_C_content_non_fossil * SEED_2 *  SEED_2_DM))  " elementaryExchangeId="cc6a1abb-b123-4ca6-8f16-38209df609be" formula="CO2">
+        <name xml:lang="en">Carbon dioxide, in air</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">Modelled,see chapter 'CO2 binding' in '01_crop production_direct field emissions and natural resources_v1.0.pdf' - pdf-document on the dedicated talk page of ecoinvent (www.ecoinvent.org/documentation)</comment>
+        <uncertainty>
+          <lognormal meanValue="1.51433370515744" mu="0.415" variance="0.0411" varianceWithPedigreeUncertainty="0.0498" />
+          <pedigreeMatrix reliability="2" completeness="2" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+        </uncertainty>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0" mathematicalRelation="" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1" mathematicalRelation="" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1" mathematicalRelation="" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0" mathematicalRelation="" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water mass/dry mass</comment>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0.272916486782" mathematicalRelation="" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0" mathematicalRelation="" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.272916486782" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.272916486782" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <compartment subcompartmentId="45bb416c-a63b-429f-8754-b3f76a069c43">
+          <compartment xml:lang="en">natural resource</compartment>
+          <subcompartment xml:lang="en">in air</subcompartment>
+        </compartment>
+        <inputGroup>4</inputGroup>
+      </elementaryExchange>
+      <elementaryExchange id="315b36f1-b9d3-4eaa-a877-a4871e58e60a" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" casNumber="017493-86-6" amount="2.45581591470393E-07" mathematicalRelation="" elementaryExchangeId="6d9550e2-e670-44c1-bad8-c0c4975ffca7" formula="Cu+">
+        <name xml:lang="en">Copper, ion</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">Modelled, see chapter 'Emissions of heavy metals to agricultural soil, surface water and ground water' in '01_crop production_direct field emissions and natural resources_v1.0.pdf' - pdf-document on the dedicated talk page of ecoinvent (www.ecoinvent.org/documentation)</comment>
+        <uncertainty>
+          <lognormal meanValue="2.45581591470393E-07" mu="-15.22" variance="0.0864" varianceWithPedigreeUncertainty="0.0951" />
+          <pedigreeMatrix reliability="2" completeness="2" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+        </uncertainty>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1" mathematicalRelation="" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0" mathematicalRelation="" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water mass/dry mass</comment>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1" mathematicalRelation="" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0" mathematicalRelation="" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0" mathematicalRelation="" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0" mathematicalRelation="" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <compartment subcompartmentId="963f8022-3e2e-4be9-ad4d-b3b7a2282099">
+          <compartment xml:lang="en">water</compartment>
+          <subcompartment xml:lang="en">surface water</subcompartment>
+        </compartment>
+        <outputGroup>4</outputGroup>
+      </elementaryExchange>
+      <elementaryExchange id="571be2d0-a2bd-4d8c-9e03-bf500f90d43c" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" casNumber="023713-49-7" amount="3.08613938919342E-07" mathematicalRelation="" elementaryExchangeId="541b633c-17a3-4047-bce6-0c0e4fdb7c10" formula="Zn+2">
+        <name xml:lang="en">Zinc, ion</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">Modelled, see chapter 'Emissions of heavy metals to agricultural soil, surface water and ground water' in '01_crop production_direct field emissions and natural resources_v1.0.pdf' - pdf-document on the dedicated talk page of ecoinvent (www.ecoinvent.org/documentation)</comment>
+        <uncertainty>
+          <lognormal meanValue="3.08613938919342E-07" mu="-14.99" variance="0.0864" varianceWithPedigreeUncertainty="0.0951" />
+          <pedigreeMatrix reliability="2" completeness="2" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+        </uncertainty>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1" mathematicalRelation="" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0" mathematicalRelation="" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water mass/dry mass</comment>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0" mathematicalRelation="" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1" mathematicalRelation="" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0" mathematicalRelation="" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0" mathematicalRelation="" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <compartment subcompartmentId="963f8022-3e2e-4be9-ad4d-b3b7a2282099">
+          <compartment xml:lang="en">water</compartment>
+          <subcompartment xml:lang="en">surface water</subcompartment>
+        </compartment>
+        <outputGroup>4</outputGroup>
+      </elementaryExchange>
+      <elementaryExchange id="dfb4df2c-c76b-47f3-994c-382101ac8709" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" casNumber="022537-48-0" amount="1.9804228660924E-10" mathematicalRelation="" elementaryExchangeId="af83b42f-a4e6-4457-be74-46a87798f82a" formula="Cd+2">
+        <name xml:lang="en">Cadmium, ion</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">Modelled, see chapter 'Emissions of heavy metals to agricultural soil, surface water and ground water' in '01_crop production_direct field emissions and natural resources_v1.0.pdf' - pdf-document on the dedicated talk page of ecoinvent (www.ecoinvent.org/documentation)</comment>
+        <uncertainty>
+          <lognormal meanValue="1.9804228660924E-10" mu="-22.34" variance="0.0864" varianceWithPedigreeUncertainty="0.0951" />
+          <pedigreeMatrix reliability="2" completeness="2" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+        </uncertainty>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0" mathematicalRelation="" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0" mathematicalRelation="" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0" mathematicalRelation="" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water mass/dry mass</comment>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0" mathematicalRelation="" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1" mathematicalRelation="" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1" mathematicalRelation="" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <compartment subcompartmentId="963f8022-3e2e-4be9-ad4d-b3b7a2282099">
+          <compartment xml:lang="en">water</compartment>
+          <subcompartment xml:lang="en">surface water</subcompartment>
+        </compartment>
+        <outputGroup>4</outputGroup>
+      </elementaryExchange>
+      <elementaryExchange id="73c1deb8-5425-4ba9-86ea-88310daf29c2" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" casNumber="007440-43-9" amount="1.73808806698392E-09" mathematicalRelation="" elementaryExchangeId="e429b852-e421-4fcb-8a9b-b0241863bfb2" formula="Cd">
+        <name xml:lang="en">Cadmium</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">Modelled, see chapter 'Emissions of heavy metals to agricultural soil, surface water and ground water' in '01_crop production_direct field emissions and natural resources_v1.0.pdf' - pdf-document on the dedicated talk page of ecoinvent (www.ecoinvent.org/documentation)</comment>
+        <uncertainty>
+          <lognormal meanValue="1.73808806698392E-09" mu="-20.17" variance="0.0411" varianceWithPedigreeUncertainty="0.0498" />
+          <pedigreeMatrix reliability="2" completeness="2" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+        </uncertainty>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1" mathematicalRelation="" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0" mathematicalRelation="" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0" mathematicalRelation="" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0" mathematicalRelation="" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water mass/dry mass</comment>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1" mathematicalRelation="" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0" mathematicalRelation="" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <compartment subcompartmentId="e1bc9a16-5b6a-494f-98ef-49f461b1a11e">
+          <compartment xml:lang="en">soil</compartment>
+          <subcompartment xml:lang="en">agricultural</subcompartment>
+        </compartment>
+        <outputGroup>4</outputGroup>
+      </elementaryExchange>
+      <elementaryExchange id="4aa76c36-8a3e-49a2-b319-d3138aa051c5" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" casNumber="007440-50-8" amount="-1.03487741702307E-06" mathematicalRelation="" elementaryExchangeId="7e66a41c-d311-4949-bdd8-eef09cdcfa47" formula="Cu">
+        <name xml:lang="en">Copper</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">Modelled, see chapter 'Emissions of heavy metals to agricultural soil, surface water and ground water' in '01_crop production_direct field emissions and natural resources_v1.0.pdf' - pdf-document on the dedicated talk page of ecoinvent (www.ecoinvent.org/documentation)</comment>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0" mathematicalRelation="" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water mass/dry mass</comment>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0" mathematicalRelation="" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0" mathematicalRelation="" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1" mathematicalRelation="" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0" mathematicalRelation="" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1" mathematicalRelation="" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <compartment subcompartmentId="e1bc9a16-5b6a-494f-98ef-49f461b1a11e">
+          <compartment xml:lang="en">soil</compartment>
+          <subcompartment xml:lang="en">agricultural</subcompartment>
+        </compartment>
+        <outputGroup>4</outputGroup>
+      </elementaryExchange>
+      <elementaryExchange id="d3393f48-00ac-43ef-886d-b444296e7bf9" unitId="1017f68a-f818-4f9d-a34d-a31e7386f628" amount="6.02373351002952" mathematicalRelation="" elementaryExchangeId="f05cca02-ec18-4acc-9939-59658ff9a554" formula="CORINE 21">
+        <name xml:lang="en">Transformation, from annual crop</name>
+        <unitName xml:lang="en">m2</unitName>
+        <comment xml:lang="en">Modelled, see chapter 'Land use' in '01_crop production_direct field emissions and natural resources_v1.0.pdf' - pdf-document on the dedicated talk page of ecoinvent (www.ecoinvent.org/documentation)</comment>
+        <uncertainty>
+          <lognormal meanValue="6.02373351002952" mu="1.796" variance="0.0083" varianceWithPedigreeUncertainty="0.0169" />
+          <pedigreeMatrix reliability="2" completeness="1" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+        </uncertainty>
+        <compartment subcompartmentId="7d704b6f-d455-4f41-9c28-50b4f372f315">
+          <compartment xml:lang="en">natural resource</compartment>
+          <subcompartment xml:lang="en">land</subcompartment>
+        </compartment>
+        <inputGroup>4</inputGroup>
+      </elementaryExchange>
+      <elementaryExchange id="636a1720-3879-43a8-bdf0-ddae5329553e" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" casNumber="014265-44-2" amount="6.7264580446961E-05" mathematicalRelation="" elementaryExchangeId="1727b41d-377e-43cd-bc01-9eaba946eccb" formula="O4P-3">
+        <name xml:lang="en">Phosphate</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">Modelled, see chapter 'Emissions of phosphorous to the water' in '01_crop production_direct field emissions and natural resources_v1.0.pdf' - pdf-document on the dedicated talk page of ecoinvent (www.ecoinvent.org/documentation)</comment>
+        <uncertainty>
+          <lognormal meanValue="6.7264580446961E-05" mu="-9.607" variance="0.0411" varianceWithPedigreeUncertainty="0.0498" />
+          <pedigreeMatrix reliability="2" completeness="2" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+        </uncertainty>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0" mathematicalRelation="" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0" mathematicalRelation="" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1" mathematicalRelation="" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0" mathematicalRelation="" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0" mathematicalRelation="" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water mass/dry mass</comment>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1" mathematicalRelation="" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <compartment subcompartmentId="963f8022-3e2e-4be9-ad4d-b3b7a2282099">
+          <compartment xml:lang="en">water</compartment>
+          <subcompartment xml:lang="en">surface water</subcompartment>
+        </compartment>
+        <outputGroup>4</outputGroup>
+      </elementaryExchange>
+    </flowData>
+    <modellingAndValidation>
+      <representativeness systemModelId="290c1f85-4cc4-4fa1-b0c8-2cb7f4276dce">
+        <systemModelName xml:lang="en">Allocation, cut-off by classification</systemModelName>
+        <samplingProcedure xml:lang="en">Data collected from literature and expert knowledge; some own estimates.</samplingProcedure>
+        <extrapolations xml:lang="en">This dataset has been extrapolated from year 2011 to the year of the calculation (2021). The uncertainty has been adjusted accordingly.</extrapolations>
+      </representativeness>
+      <review reviewerId="c4597934-ecac-422c-b431-382e85fdcb83" reviewerName="[System]" reviewerEmail="support@ecoinvent.org" reviewDate="2016-04-05" reviewedMajorRelease="3" reviewedMinorRelease="0" reviewedMajorRevision="3" reviewedMinorRevision="5">
+        <details />
+        <otherDetails xml:lang="en">Validation warnings:
+
+- Consider if it would be better to create this dataset as a child dataset relative to a parent dataset. See the ecoinvent Data Quality Guideline Chapter 4.2 for further advice.
+- Mass and/or economic deficit in activity dataset exceeds either 0.1% of input or output sum:
+
+Property 'dry mass':
+ - Input='32992,5814428319', Output='1660,80896210467'
+ - Input &gt; output by 31331,7724807272 kg (1886,54% of output)
+
+Property 'water in wet mass':
+ - Input='3,6', Output='0'
+ - Input &gt; output by 3,6 kg
+
+Property 'wet mass':
+ - Input='32996,1814428319', Output='4743,85181901037'
+ - Input &gt; output by 28252,3296238215 kg (595,56% of output)
+
+
+- Property 'water in wet mass=1,85714285714286' of master data exchange was removed from exchange 'ryegrass-Egyptian&amp;Persian clover-mixture silage'.
+Amount of property 'carbon content, non-fossil=0,42211' of exchange 'ryegrass-Egyptian&amp;Persian clover-mixture silage' deviates from the default amount in the master file.
+Amount of property 'wet mass=2,857142857' of exchange 'ryegrass-Egyptian&amp;Persian clover-mixture silage' deviates from the default amount in the master file.
+Property 'carbon content, fossil=0' of master data exchange was removed from exchange 'ryegrass-Egyptian&amp;Persian clover-mixture silage'.
+Property 'water content=1,85714285714286' of master data exchange was removed from exchange 'ryegrass-Egyptian&amp;Persian clover-mixture silage'.
+Amount of property 'water content=0,111111111111' of exchange 'grass seed, Swiss integrated production, for sowing' deviates from the default amount in the master file.
+Amount of property 'carbon content, non-fossil=0,464600933622' of exchange 'grass seed, Swiss integrated production, for sowing' deviates from the default amount in the master file.
+Amount of property 'water content=0,111111111111' of exchange 'clover seed, Swiss integrated production, for sowing' deviates from the default amount in the master file.
+Amount of property 'carbon content, non-fossil=0,469420714527' of exchange 'clover seed, Swiss integrated production, for sowing' deviates from the default amount in the master file.
+Amount of property 'carbon content, non-fossil=0,272916486782' of exchange 'Carbon dioxide, in air' deviates from the default amount in the master file.
+
+- The total water in wet mass of all input exchanges (3,6) and output exchanges (0) is unbalanced.
+
+- Uncertainty shall always be provided for all primary data inputs (exchange amounts, properties and parameters), except for the amount and properties of reference products.
+ -- Exchange(s): Zinc, Mercury, Chromium, Copper
+ -- Property(ies): dry mass=1, water content=0, water in wet mass=0, wet mass=1, carbon content, non-fossil=0, carbon content, fossil=0, dry mass=1, water content=0, carbon content, fossil=0, carbon content, non-fossil=0, water in wet mass=0, wet mass=1, water in wet mass=0, carbon content, fossil=0, wet mass=1, water content=0, carbon content, non-fossil=0, dry mass=1, water in wet mass=0, carbon content, fossil=0, carbon content, non-fossil=0, wet mass=1, water content=0, dry mass=1, water in wet mass=0, dry mass=1, carbon content, fossil=0, wet mass=1, water content=0, carbon content, non-fossil=0, carbon content, non-fossil=0, dry mass=1, water content=0, water in wet mass=0, wet mass=1, carbon content, fossil=0, water content=0, carbon content, non-fossil=0, water in wet mass=0, dry mass=1, carbon content, fossil=0, wet mass=1, carbon content, fossil=0, water content=0, water in wet mass=0, dry mass=1, wet mass=1, carbon content, non-fossil=0, water in wet mass=0, carbon content, fossil=0, wet mass=1, carbon content, non-fossil=0, water content=0, dry mass=1, water in wet mass=0, carbon content, non-fossil=0, wet mass=1, water content=0, carbon content, fossil=0, dry mass=1, dry mass=1, water in wet mass=0, water content=0, carbon content, non-fossil=0, wet mass=1, carbon content, fossil=0, carbon content, non-fossil=0, wet mass=1, dry mass=1, water in wet mass=0, water content=0, carbon content, fossil=0, carbon content, non-fossil=0, water in wet mass=0, carbon content, fossil=0, wet mass=1, dry mass=1, water content=0, carbon content, fossil=0, wet mass=1, carbon content, non-fossil=0, water in wet mass=0, water content=0, dry mass=1, carbon content, non-fossil=0, wet mass=1, carbon content, fossil=0, water in wet mass=0, dry mass=1, water content=0, wet mass=1, carbon content, fossil=0, carbon content, non-fossil=0, water in wet mass=0, dry mass=1, water content=0, dry mass=1, water in wet mass=0, water content=0, carbon content, non-fossil=0, wet mass=1, carbon content, fossil=0, dry mass=0, wet mass=0, carbon content, fossil=0, carbon content, non-fossil=0, water in wet mass=0, carbon content, fossil=0, water in wet mass=0, wet mass=1, water content=0, carbon content, non-fossil=0, dry mass=1, wet mass=1, water in wet mass=0, dry mass=1, carbon content, non-fossil=0,272916486782, water content=0, carbon content, fossil=0
+
+- Pedigree information shall always be provided for all uncertainties of primary data inputs (exchange amounts, properties and parameters), except for the amount and properties of reference products.
+ -- Exchange(s): Zinc, Mercury, Chromium, Copper
+ -- Property(ies): dry mass=1, water content=0, water in wet mass=0, wet mass=1, carbon content, non-fossil=0, carbon content, fossil=0, dry mass=1, water content=0, carbon content, fossil=0, carbon content, non-fossil=0, water in wet mass=0, wet mass=1, water in wet mass=0, carbon content, fossil=0, wet mass=1, water content=0, carbon content, non-fossil=0, dry mass=1, water in wet mass=0, carbon content, fossil=0, carbon content, non-fossil=0, wet mass=1, water content=0, dry mass=1, water in wet mass=0, dry mass=1, carbon content, fossil=0, wet mass=1, water content=0, carbon content, non-fossil=0, carbon content, non-fossil=0, dry mass=1, water content=0, water in wet mass=0, wet mass=1, carbon content, fossil=0, water content=0, carbon content, non-fossil=0, water in wet mass=0, dry mass=1, carbon content, fossil=0, wet mass=1, carbon content, fossil=0, water content=0, water in wet mass=0, dry mass=1, wet mass=1, carbon content, non-fossil=0, water in wet mass=0, carbon content, fossil=0, wet mass=1, carbon content, non-fossil=0, water content=0, dry mass=1, water in wet mass=0, carbon content, non-fossil=0, wet mass=1, water content=0, carbon content, fossil=0, dry mass=1, dry mass=1, water in wet mass=0, water content=0, carbon content, non-fossil=0, wet mass=1, carbon content, fossil=0, carbon content, non-fossil=0, wet mass=1, dry mass=1, water in wet mass=0, water content=0, carbon content, fossil=0, carbon content, non-fossil=0, water in wet mass=0, carbon content, fossil=0, wet mass=1, dry mass=1, water content=0, carbon content, fossil=0, wet mass=1, carbon content, non-fossil=0, water in wet mass=0, water content=0, dry mass=1, carbon content, non-fossil=0, wet mass=1, carbon content, fossil=0, water in wet mass=0, dry mass=1, water content=0, wet mass=1, carbon content, fossil=0, carbon content, non-fossil=0, water in wet mass=0, dry mass=1, water content=0, dry mass=1, water in wet mass=0, water content=0, carbon content, non-fossil=0, wet mass=1, carbon content, fossil=0, dry mass=0, wet mass=0, carbon content, fossil=0, carbon content, non-fossil=0, water in wet mass=0, carbon content, fossil=0, water in wet mass=0, wet mass=1, water content=0, carbon content, non-fossil=0, dry mass=1, wet mass=1, water in wet mass=0, dry mass=1, carbon content, non-fossil=0,272916486782, water content=0, carbon content, fossil=0
+
+</otherDetails>
+      </review>
+      <review reviewerId="63eace01-5789-4faa-b4a7-30ee7bab41b3" reviewerName="Assumpció ANTON" reviewerEmail="aantonvallejo@hotmail.com" reviewDate="2012-01-26" reviewedMajorRelease="3" reviewedMinorRelease="3" reviewedMajorRevision="0" reviewedMinorRevision="60">
+        <details />
+      </review>
+      <review reviewerId="87296ea5-2149-44c3-8e36-b1256c92666a" reviewerName="Gregor Wernet" reviewerEmail="wernet@ecoinvent.org" reviewDate="2014-06-11" reviewedMajorRelease="3" reviewedMinorRelease="3" reviewedMajorRevision="2" reviewedMinorRevision="5">
+        <details />
+      </review>
+      <review reviewerId="cb2a55cb-5170-46a5-819d-75173b1914e9" reviewerName="Thomas Nemecek" reviewerEmail="thomas.nemecek@agroscope.admin.ch" reviewDate="2011-12-16" reviewedMajorRelease="3" reviewedMinorRelease="3" reviewedMajorRevision="1" reviewedMinorRevision="0">
+        <details>
+          <text xml:lang="en" index="1">Passed internally.</text>
+        </details>
+      </review>
+      <review reviewerId="c4597934-ecac-422c-b431-382e85fdcb83" reviewerName="[System]" reviewerEmail="support@ecoinvent.org" reviewDate="2012-04-23" reviewedMajorRelease="3" reviewedMinorRelease="3" reviewedMajorRevision="0" reviewedMinorRevision="60">
+        <details />
+        <otherDetails>Validation warnings:
+
+- Consider if it would be better to create this dataset as a child dataset relative to a parent dataset. See the ecoinvent Data Quality Guideline Chapter 4.2 for further advice.
+- Mass and/or economic deficit in activity dataset:
+
+Property 'carbon content, non-fossil':
+ - Input='14,3138923692474', Output='700,744811'
+ - Input &lt; output by 686,430918630752 kg (97,96% of output)
+
+Property 'dry mass':
+ - Input='31,914', Output='1660,1'
+ - Input &lt; output by 1628,186 kg (98,08% of output)
+
+Property 'wet mass':
+ - Input='0', Output='4743,1428569057'
+ - Input &lt; output by 4743,1428569057 kg (100% of output)
+
+
+</otherDetails>
+      </review>
+      <review reviewerId="35d091e9-38c2-4037-9efe-a73673c57123" reviewerName="Emilia Moreno Ruiz" reviewerEmail="moreno@ecoinvent.org" reviewDate="2016-04-05" reviewedMajorRelease="3" reviewedMinorRelease="0" reviewedMajorRevision="3" reviewedMinorRevision="5">
+        <details>
+          <text xml:lang="en" index="0"></text>
+        </details>
+        <otherDetails xml:lang="en"></otherDetails>
+      </review>
+      <review reviewerId="c4597934-ecac-422c-b431-382e85fdcb83" reviewerName="[System]" reviewerEmail="support@ecoinvent.org" reviewDate="2014-06-11" reviewedMajorRelease="3" reviewedMinorRelease="3" reviewedMajorRevision="2" reviewedMinorRevision="5">
+        <details />
+        <otherDetails>Validation warnings:
+
+- Consider if it would be better to create this dataset as a child dataset relative to a parent dataset. See the ecoinvent Data Quality Guideline Chapter 4.2 for further advice.
+- Mass and/or economic deficit in activity dataset exceeds either 0.1% of input or output sum:
+
+Property 'wet mass':
+ - Input='2549,94744283186', Output='4743,85181901037'
+ - Input &lt; output by 2193,90437617851 kg (46,25% of output)
+
+Property 'water in wet mass':
+ - Input='3,6', Output='0'
+ - Input &gt; output by 3,6 kg
+
+Property 'dry mass':
+ - Input='2546,34744283186', Output='1660,80896210467'
+ - Input &gt; output by 885,53848072719 kg (53,32% of output)
+
+
+- Amount of property 'carbon content, non-fossil=0,42211' of exchange 'ryegrass-Egyptian&amp;Persian clover-mixture silage' deviates from the default amount in the master file.
+Amount of property 'wet mass=2,857142857' of exchange 'ryegrass-Egyptian&amp;Persian clover-mixture silage' deviates from the default amount in the master file.
+Property 'carbon content, fossil=0' of master data exchange was removed from exchange 'ryegrass-Egyptian&amp;Persian clover-mixture silage'.
+Property 'water in wet mass=1,85714285714286' of master data exchange was removed from exchange 'ryegrass-Egyptian&amp;Persian clover-mixture silage'.
+Property 'water content=1,85714285714286' of master data exchange was removed from exchange 'ryegrass-Egyptian&amp;Persian clover-mixture silage'.
+
+- The total water in wet mass of all input exchanges (3,6) and output exchanges (0) is unbalanced.
+- Uncertainty shall always be provided for all primary data inputs (exchange amounts, properties and parameters), except for the amount and properties of reference products.
+ -- Exchange(s): Zinc, Chromium, Mercury, Copper
+ -- Property(ies): carbon content, fossil=0, wet mass=1, carbon content, non-fossil=0, water in wet mass=0, dry mass=1, water content=0, water content=0, dry mass=1, wet mass=1, water in wet mass=0, carbon content, fossil=0, carbon content, non-fossil=0, water content=0, carbon content, fossil=0, water in wet mass=0, dry mass=1, wet mass=1, carbon content, non-fossil=0, dry mass=1, water in wet mass=0, water content=0, carbon content, non-fossil=0, wet mass=1, carbon content, fossil=0, water content=0, dry mass=1, carbon content, non-fossil=0, wet mass=1, water in wet mass=0, carbon content, fossil=0, water in wet mass=0, water content=0, dry mass=1, carbon content, fossil=0, carbon content, non-fossil=0, wet mass=1, water content=0, dry mass=1, wet mass=1, water in wet mass=0, carbon content, fossil=0, carbon content, non-fossil=0, carbon content, non-fossil=0, water content=0, dry mass=1, carbon content, fossil=0, wet mass=1, water in wet mass=0, water in wet mass=0, carbon content, non-fossil=0, wet mass=1, dry mass=1, carbon content, fossil=0, water content=0, carbon content, fossil=0, water content=0, water in wet mass=0, wet mass=1, carbon content, non-fossil=0, dry mass=1, water content=0, water in wet mass=0, dry mass=1, carbon content, fossil=0, carbon content, non-fossil=0, wet mass=1, carbon content, non-fossil=0, wet mass=1, carbon content, fossil=0, dry mass=1, water in wet mass=0, water content=0, dry mass=1, wet mass=1, carbon content, non-fossil=0, water in wet mass=0, water content=0, carbon content, fossil=0, water in wet mass=0, carbon content, non-fossil=0, dry mass=0, carbon content, fossil=0, wet mass=0, wet mass=1, carbon content, fossil=0, water in wet mass=0, dry mass=1, carbon content, non-fossil=0, water content=0, carbon content, fossil=0, water content=0, wet mass=1, dry mass=1, carbon content, non-fossil=0, water in wet mass=0, water content=0, carbon content, fossil=0, dry mass=1, carbon content, non-fossil=0, wet mass=1, water in wet mass=0, water content=0, dry mass=1, wet mass=1, carbon content, non-fossil=0, carbon content, fossil=0, water in wet mass=0, water content=0, dry mass=1, carbon content, non-fossil=0,272916486782489, wet mass=1, carbon content, fossil=0, water in wet mass=0
+
+- Pedigree information shall always be provided for all uncertainties of primary data inputs (exchange amounts, properties and parameters), except for the amount and properties of reference products.
+ -- Exchange(s): Zinc, Chromium, Mercury, Copper
+ -- Property(ies): carbon content, fossil=0, wet mass=1, carbon content, non-fossil=0, water in wet mass=0, dry mass=1, water content=0, water content=0, dry mass=1, wet mass=1, water in wet mass=0, carbon content, fossil=0, carbon content, non-fossil=0, water content=0, carbon content, fossil=0, water in wet mass=0, dry mass=1, wet mass=1, carbon content, non-fossil=0, dry mass=1, water in wet mass=0, water content=0, carbon content, non-fossil=0, wet mass=1, carbon content, fossil=0, water content=0, dry mass=1, carbon content, non-fossil=0, wet mass=1, water in wet mass=0, carbon content, fossil=0, water in wet mass=0, water content=0, dry mass=1, carbon content, fossil=0, carbon content, non-fossil=0, wet mass=1, water content=0, dry mass=1, wet mass=1, water in wet mass=0, carbon content, fossil=0, carbon content, non-fossil=0, carbon content, non-fossil=0, water content=0, dry mass=1, carbon content, fossil=0, wet mass=1, water in wet mass=0, water in wet mass=0, carbon content, non-fossil=0, wet mass=1, dry mass=1, carbon content, fossil=0, water content=0, carbon content, fossil=0, water content=0, water in wet mass=0, wet mass=1, carbon content, non-fossil=0, dry mass=1, water content=0, water in wet mass=0, dry mass=1, carbon content, fossil=0, carbon content, non-fossil=0, wet mass=1, carbon content, non-fossil=0, wet mass=1, carbon content, fossil=0, dry mass=1, water in wet mass=0, water content=0, dry mass=1, wet mass=1, carbon content, non-fossil=0, water in wet mass=0, water content=0, carbon content, fossil=0, water in wet mass=0, carbon content, non-fossil=0, dry mass=0, carbon content, fossil=0, wet mass=0, wet mass=1, carbon content, fossil=0, water in wet mass=0, dry mass=1, carbon content, non-fossil=0, water content=0, carbon content, fossil=0, water content=0, wet mass=1, dry mass=1, carbon content, non-fossil=0, water in wet mass=0, water content=0, carbon content, fossil=0, dry mass=1, carbon content, non-fossil=0, wet mass=1, water in wet mass=0, water content=0, dry mass=1, wet mass=1, carbon content, non-fossil=0, carbon content, fossil=0, water in wet mass=0, water content=0, dry mass=1, carbon content, non-fossil=0,272916486782489, wet mass=1, carbon content, fossil=0, water in wet mass=0
+
+</otherDetails>
+      </review>
+    </modellingAndValidation>
+    <administrativeInformation>
+      <dataEntryBy personId="cb2a55cb-5170-46a5-819d-75173b1914e9" isActiveAuthor="false" personName="Thomas Nemecek" personEmail="thomas.nemecek@agroscope.admin.ch" />
+      <dataGeneratorAndPublication personId="cb2a55cb-5170-46a5-819d-75173b1914e9" personName="Thomas Nemecek" personEmail="thomas.nemecek@agroscope.admin.ch" dataPublishedIn="0" isCopyrightProtected="true" accessRestrictedTo="1" />
+      <fileAttributes majorRelease="3" minorRelease="0" majorRevision="4" minorRevision="0" internalSchemaVersion="2.0.11" defaultLanguage="en" creationTimestamp="2011-12-16T14:49:54" lastEditTimestamp="2016-04-04T14:13:03" fileGenerator="EcoEditor 3.7.200.14330" fileTimestamp="2016-04-04T14:13:03" contextId="de659012-50c4-4e96-b54a-fc781bf987ab">
+        <contextName xml:lang="en">ecoinvent</contextName>
+      </fileAttributes>
+    </administrativeInformation>
+  </childActivityDataset>
+</ecoSpold>

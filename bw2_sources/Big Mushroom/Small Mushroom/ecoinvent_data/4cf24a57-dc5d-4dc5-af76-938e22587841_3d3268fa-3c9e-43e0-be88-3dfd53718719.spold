@@ -1,0 +1,1193 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ecoSpold xmlns="http://www.EcoInvent.org/EcoSpold02">
+  <childActivityDataset>
+    <activityDescription>
+      <activity id="4cf24a57-dc5d-4dc5-af76-938e22587841" activityNameId="1c4f45f8-59ae-408f-b291-4840f40f74c4" parentActivityId="f2d6078c-021b-4696-bddc-edce05e21f97" inheritanceDepth="-1" type="1" specialActivityType="0" energyValues="0">
+        <activityName xml:lang="en">treatment of waste cooking oil, purified, esterification</activityName>
+        <includedActivitiesStart xml:lang="en">From reception of purified cooking oil and chemicals at factory gate. </includedActivitiesStart>
+        <includedActivitiesEnd xml:lang="en">This activity ends at esterification plant with the produced methyl ester and glycerine. 
+The dataset includes the esterification process of purified oil into methyl ester and glycerine, the intermediate storage of the oil and products and treatment of specific wastewater effluents. </includedActivitiesEnd>
+        <generalComment>
+          <text xml:lang="en" index="1">This dataset represents the treatment of purified vegetable cooking oil by esterification with methanol to produce methyl ester and glycerine. The transesterification is base-catalysed with sodium methoxide and sodium hydroxide. 
+This dataset could be too used for the esterification of waste animal fat into methyl ester and glycerine. The studied plant treats both types of waste. 
+Data have been collected for the annual production of the esterification plant and adapted to production of one liter of vegetable oil methyl esther. To fit with the current ecoinvent datasets, collected data have been divided between a purification step and an esterification step.This dataset considers only the esterification step. </text>
+        </generalComment>
+        <tag>single enterprise data</tag>
+      </activity>
+      <classification classificationId="db303709-3eac-4c8b-9ed9-7e4888240c50">
+        <classificationSystem xml:lang="en">ISIC rev.4 ecoinvent</classificationSystem>
+        <classificationValue xml:lang="en">3830:Materials recovery</classificationValue>
+      </classification>
+      <classification classificationId="e35c112f-4c8d-4bf6-87c9-f6cd6d7daa27">
+        <classificationSystem xml:lang="en">EcoSpold01Categories</classificationSystem>
+        <classificationValue xml:lang="en">biomass/fuels</classificationValue>
+      </classification>
+      <geography geographyId="868a66d1-7428-4ba2-9125-253b07afc119">
+        <shortname xml:lang="en">CA-QC</shortname>
+        <comment>
+          <text xml:lang="en" index="1">Data from one biodiesel producer in the Quebec region.</text>
+        </comment>
+      </geography>
+      <technology technologyLevel="3">
+        <comment>
+          <text xml:lang="en" index="1">Typical waste oil esterification plant designed for methyl ester production (for the vehicle fuels market), Quebec context. Based on industrial data from one biodiesel producer in the Quebec region with a low production volume (2 000 000 litres of biodiesel per year).  The transesterification is base-catalysed with sodium methoxide and sodium hydroxide. </text>
+        </comment>
+      </technology>
+      <timePeriod startDate="2012-01-01" endDate="2021-12-31" isDataValidForEntirePeriod="true">
+        <comment>
+          <text xml:lang="en" index="1">Data from 2012, current technology in Quebec.</text>
+        </comment>
+      </timePeriod>
+      <macroEconomicScenario macroEconomicScenarioId="d9f57f0a-a01f-42eb-a57b-8f18d6635801">
+        <name xml:lang="en">Business-as-Usual</name>
+      </macroEconomicScenario>
+    </activityDescription>
+    <flowData>
+      <intermediateExchange id="7f5eb335-c12d-4a86-a574-6cae65a264f5" unitId="de5b3c87-0e35-4fb0-9765-4f3ba34c99e5" variableName="wastewater" amount="-0.00024833746725094" intermediateExchangeId="f33b4dc5-f3af-4ca8-aeff-3deeb7159ec1" activityLinkId="86b9270e-4a1b-4c13-b1af-0141d684adee" productionVolumeAmount="1267.77027027027" productionVolumeMathematicalRelation="PV_biodiesel * wasteWater / biodiesel">
+        <name xml:lang="en">wastewater, from residence</name>
+        <unitName xml:lang="en">m3</unitName>
+        <comment>EcoSpold01Location=CH</comment>
+        <comment xml:lang="en">Proxy. Composition unknow. Measured value.</comment>
+        <uncertainty>
+          <lognormal meanValue="-0.00024833746725094" mu="-8.301" variance="0.0006" varianceWithPedigreeUncertainty="0.0112" />
+          <pedigreeMatrix reliability="2" completeness="4" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en">Measured data from industry under study. </comment>
+        </uncertainty>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1000" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">Density of water was assumed that of tap water 1kg/L, that is 1000kg/m3.</comment>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="2962.17230710238" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water mass/dry mass
+water mass/dry mass</comment>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="0.33747615607878" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">Tap water dry mass was used as an estimation of the wastewater dry mass. This approach was chosen when the addition of compunds in wastewater was smaller than the mineral content estimated using the chemical properties of tap water in ecoinvent v2.2 report 8, Tab 93.1.</comment>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0.19942149626799" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">In Tab 17.4, ecoinvent v2.2 report n 17
+0.0673 kg TOC/m3 (Tab A.17, ecoinvent v2.2 report 13_I). TOC was considered as Total Carbon.</comment>
+        </property>
+        <property propertyId="38f94dd1-d5aa-41b8-b182-c0c42985d9dc" variableName="wastewater_price_EUR2005" amount="0" unitId="7b75baf0-cbee-45e6-bf66-af119da06553">
+          <name xml:lang="en">price</name>
+          <unitName xml:lang="en">EUR2005</unitName>
+          <comment xml:lang="en">Waste products are assigned a price of zero as they are assumed to require further treatment.</comment>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="999.662523843921" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">wet mass-dry mass</comment>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">In Tab 17.4, ecoinvent v2.2 report n 17</comment>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.19942149626799" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0673" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <productionVolumeComment xml:lang="en">Calculated from the biodiesel production volume using the relative outputs.</productionVolumeComment>
+        <classification classificationId="ee3238ec-ca7a-4ddc-af1b-e7c35957b9b6">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">Waste</classificationValue>
+        </classification>
+        <classification classificationId="34f49fca-a18e-48df-a635-ee7e24ef6dbb">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">39920: Sewage sludge</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="45dfcb1f-0e3f-4f06-b513-72f20132a9a1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" variableName="water_deionised" casNumber="007732-18-5" amount="0.000436533702817364" isCalculatedAmount="true" mathematicalRelation="(sodium_hydroxide_use_l*sodium_hydroxide_density*(1-sodium_hydroxide_concentration))+(sulfuric_acid_use_l*sulfuric_acid_density*(1-sulfuric_acid_concentration))*water_deionised_density" intermediateExchangeId="360e2eb0-f81c-4e4b-ba6b-c7a690f31275" activityLinkId="b6e7d379-3986-4800-9469-d31843ac5070">
+        <name xml:lang="en">water, deionised</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">Calculated value. Water for chemicals dillution.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.000436533702817364" mu="-7.737" variance="0" varianceWithPedigreeUncertainty="0.008" />
+          <pedigreeMatrix reliability="1" completeness="1" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en">Calculated variable. Uncertainty will be determined from propagation of uncertainty factors of underlying variables. Uncertainty of actual relation between variables not accounted for at this time, although this could be included in a future update.</comment>
+        </uncertainty>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="0" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="e40445b1-8aba-4282-851d-9c2d28b1a5c1" variableName="water_deionised_density" amount="1" isDefiningValue="false" unitId="b06bab82-f0e8-426d-849a-ebdb5b553519">
+          <name xml:lang="en">density</name>
+          <unitName xml:lang="en">kg/l</unitName>
+          <uncertainty>
+            <lognormal meanValue="1" mu="0" variance="0" varianceWithPedigreeUncertainty="0.016" />
+            <pedigreeMatrix reliability="4" completeness="1" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+            <comment xml:lang="en"></comment>
+          </uncertainty>
+          <comment xml:lang="en">Density of water. </comment>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <classification classificationId="ced3d107-ae48-4f1e-801e-3b956776120c">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">18000: Natural water</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="75afef10-a773-4834-bc35-70f0366c61dc" unitId="5b972631-34e3-4db7-a615-f6931770a0cb" amount="7.26095608138446E-10" isCalculatedAmount="false" mathematicalRelation="" intermediateExchangeId="30061140-566d-45e5-834f-1c6a344dd315" activityLinkId="dee7674d-3d05-4333-9a41-15493b500753">
+        <name xml:lang="en">vegetable oil esterification facility</name>
+        <unitName xml:lang="en">unit</unitName>
+        <comment xml:lang="en">Calculated value, according to feed capacity (2 000 000 tonnes of methyl ester) and lifetime of the plant (50 years).</comment>
+        <comment>EcoSpold01Location=CH</comment>
+        <uncertainty>
+          <lognormal meanValue="7.26095608138446E-10" mu="-21.04" variance="0.3" varianceWithPedigreeUncertainty="0.3846" />
+          <pedigreeMatrix reliability="3" completeness="3" temporalCorrelation="5" geographicalCorrelation="5" furtherTechnologyCorrelation="4" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <classification classificationId="f986e611-0d52-4a9c-a8c2-1329b9fee31f">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">53269: Other constructions for manufacturing</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="3b367fea-2698-415e-80ac-6c755c5c888a" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" variableName="" amount="0" isCalculatedAmount="true" mathematicalRelation="" intermediateExchangeId="4bc66efe-f91b-48e5-9a26-07e383d47e80" productionVolumeAmount="0" productionVolumeVariableName="PV_biodiesel">
+        <name xml:lang="en">fatty acid methyl ester</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">See Properties.</comment>
+        <uncertainty>
+          <undefined minValue="0" maxValue="0" standardDeviation95="0" />
+          <pedigreeMatrix reliability="1" completeness="1" temporalCorrelation="1" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en">Calculated variable. Uncertainty will be determined from propagation of uncertainty factors of underlying variables. Uncertainty of actual relation between variables not accounted for at this time, although this could be included in a future update.</comment>
+        </uncertainty>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0.732" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">In Tab 17.4, ecoinvent v2.2 report n 17</comment>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0.041" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">In Tab 17.4, ecoinvent v2.2 report n 17</comment>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="48c987bb-3144-4872-b5c7-b1389c40be25" amount="37.2" mathematicalRelation="" unitId="980b811e-3905-4797-82a5-173f5568bc7e">
+          <name xml:lang="en">heating value, net</name>
+          <unitName xml:lang="en">MJ</unitName>
+          <comment xml:lang="en">Based on literature, report 17, page 439. Jungbluth, N., Chudacoff, M., Dauriat, A., Dinkel, F., Doka, G., Faist Emmenegger, M., Gnansounou, E., Kljun, N., Schleiss, K., Spielmann, M., Stettler, C., Sutter, J. 2007: Life Cycle Inventories of Bioenergy. ecoinvent report No. 17, Swiss Centre for Life Cycle Inventories, Dübendorf, CH.</comment>
+        </property>
+        <property propertyId="38f94dd1-d5aa-41b8-b182-c0c42985d9dc" variableName="biodiesel_price_EUR2005" amount="0.817" unitId="7b75baf0-cbee-45e6-bf66-af119da06553">
+          <name xml:lang="en">price</name>
+          <unitName xml:lang="en">EUR2005</unitName>
+          <comment xml:lang="en">Temporary price data. Calculated as 90% of purchasers price based on: 2004 import and export prices (total trades (USD) divided by total weight (kg) in EU27, USA, China, Japan and India) from UN Commodity Trade Statistics Database (http://data.un.org/Explorer.aspxDatabase [Accessed 2 July 2010]). Commodity: 'Veg fats, oils or fractions hydrogenated, esterified'.</comment>
+        </property>
+        <property propertyId="dbbc1095-ca27-4acb-98ea-57a8b54f1d91" variableName="biodiesel_production_l" amount="1" isDefiningValue="false" unitId="86b0e4a2-57e5-48b8-a43d-22c7f8490dca">
+          <name xml:lang="en">production in l</name>
+          <unitName xml:lang="en">l</unitName>
+          <uncertainty>
+            <lognormal meanValue="1" mu="0" variance="0.0006" varianceWithPedigreeUncertainty="0.0112" />
+            <pedigreeMatrix reliability="2" completeness="4" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+            <comment xml:lang="en">Measured data from industry under study. </comment>
+          </uncertainty>
+          <comment xml:lang="en">Measured value of vegetable oil methyl esther production at plant. Data was collected per litre of vegetable methyl ester produced.</comment>
+        </property>
+        <property propertyId="e40445b1-8aba-4282-851d-9c2d28b1a5c1" variableName="biodiesel_density" amount="0.888" isDefiningValue="false" unitId="b06bab82-f0e8-426d-849a-ebdb5b553519">
+          <name xml:lang="en">density</name>
+          <unitName xml:lang="en">kg/l</unitName>
+          <uncertainty>
+            <lognormal meanValue="0.888" mu="-0.1188" variance="0" varianceWithPedigreeUncertainty="0.016" />
+            <pedigreeMatrix reliability="4" completeness="1" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+            <comment xml:lang="en">Data from litterature. </comment>
+          </uncertainty>
+          <comment xml:lang="en">Density of vegetable oil methyl esther. In ecoinvent 2.2 report, n 17, p439 (Table 17.4).
+</comment>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.773" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.773" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <productionVolumeComment xml:lang="en">Based on data provider's production volume and his estimated share of the Québec region biodiesel market.</productionVolumeComment>
+        <productionVolumeUncertainty>
+          <lognormal meanValue="0" mu="15.29" variance="0" varianceWithPedigreeUncertainty="0.004" />
+          <pedigreeMatrix reliability="3" completeness="4" temporalCorrelation="1" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </productionVolumeUncertainty>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="c21f476a-8c62-4e83-9969-211c913fade8">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">35491: Biodiesel</classificationValue>
+        </classification>
+        <outputGroup>2</outputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="2d124f37-e185-430f-9f17-9adf6140ba0b" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" variableName="glycerine" casNumber="000056-81-5" amount="1" isCalculatedAmount="true" mathematicalRelation="glycerine_production_l * glycerine_density" intermediateExchangeId="3d3268fa-3c9e-43e0-be88-3dfd53718719" productionVolumeAmount="617719.594594595" productionVolumeMathematicalRelation="PV_biodiesel * glycerine / biodiesel">
+        <name xml:lang="en">glycerine</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment>EcoSpold01Location=CH</comment>
+        <comment xml:lang="en">See Properties.</comment>
+        <uncertainty>
+          <undefined minValue="0" maxValue="0" standardDeviation95="0" />
+          <pedigreeMatrix reliability="1" completeness="1" temporalCorrelation="1" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en">Calculated variable. Uncertainty will be determined from propagation of uncertainty factors of underlying variables. Uncertainty of actual relation between variables not accounted for at this time, although this could be included in a future update.</comment>
+        </uncertainty>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="48c987bb-3144-4872-b5c7-b1389c40be25" amount="22.38" mathematicalRelation="" unitId="980b811e-3905-4797-82a5-173f5568bc7e">
+          <name xml:lang="en">heating value, net</name>
+          <unitName xml:lang="en">MJ</unitName>
+          <comment xml:lang="en">LHV is calculated based on the elemental composition of the substance. Based on the CAS number of the substance (000056-81-5), the chemical formula of the substance is found to be: C3H8O3, (PubChem 2020).
+Reference: Kim, S., Chen, J., Cheng, T., Gindulyte, A., He, J., He, S., Li, Q., Shoemaker, B. A., Thiessen, P. A., Yu, B., Zaslavsky, L., Zhang, J., &amp; Bolton, E. E. (2019). PubChem 2019 update: improved access to chemical data. Nucleic acids research, 47(D1), D1102–D1109. https://doi.org/10.1093/nar/gky1033</comment>
+        </property>
+        <property propertyId="38f94dd1-d5aa-41b8-b182-c0c42985d9dc" variableName="glycerine_price_EUR2005" amount="0.792" unitId="7b75baf0-cbee-45e6-bf66-af119da06553">
+          <name xml:lang="en">price</name>
+          <unitName xml:lang="en">EUR2005</unitName>
+          <comment xml:lang="en">Temporary price data. Calculated as 90% of purchasers price based on: 2004 import and export prices (total trades (USD) divided by total weight (kg) in EU27, USA, China, Japan and India) from UN data  - Glycerol (glycerine), nes including synthetic glycerol (http://data.un.org/Data.aspx?q=glycerine&amp;d=ComTrade&amp;f=_l1Code%3a16%3bcmdCode%3a152090; accessed 1 July 10)</comment>
+        </property>
+        <property propertyId="dbbc1095-ca27-4acb-98ea-57a8b54f1d91" variableName="glycerine_production_l" amount="0.1" isDefiningValue="false" unitId="86b0e4a2-57e5-48b8-a43d-22c7f8490dca">
+          <name xml:lang="en">production in l</name>
+          <unitName xml:lang="en">l</unitName>
+          <uncertainty>
+            <lognormal meanValue="0.1" mu="-2.303" variance="0.0006" varianceWithPedigreeUncertainty="0.0112" />
+            <pedigreeMatrix reliability="2" completeness="4" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+            <comment xml:lang="en">Measured data from industry under study. </comment>
+          </uncertainty>
+          <comment xml:lang="en">Measured value of glycerine production at plant. 
+</comment>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">In ecoinvent v2.2 report n 17, p439
+C3H8O3. </comment>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0.391304347826087" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">In ecoinvent v2.2 report n 17, p439
+C3H8O3. </comment>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water mass/dry mass</comment>
+        </property>
+        <property propertyId="e40445b1-8aba-4282-851d-9c2d28b1a5c1" variableName="glycerine_density" amount="1.261" isDefiningValue="false" unitId="b06bab82-f0e8-426d-849a-ebdb5b553519">
+          <name xml:lang="en">density</name>
+          <unitName xml:lang="en">kg/l</unitName>
+          <uncertainty>
+            <lognormal meanValue="1.261" mu="0.2319" variance="0.0006" varianceWithPedigreeUncertainty="0.0166" />
+            <pedigreeMatrix reliability="4" completeness="1" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+            <comment xml:lang="en">Data from litterature. </comment>
+          </uncertainty>
+          <comment xml:lang="en">Density of glycerine. Data from litterature. </comment>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.391304347826087" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.391304347826087" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="2dec5fcb-b303-4bfa-8e30-0e043c523163" variableName="glycerine_true_value" amount="0.0998712" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">true value</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">allocation property applied in "true value" allocation // value calculated from revenue</comment>
+        </property>
+        <productionVolumeComment xml:lang="en">Calculated from the biodiesel production volume using the relative outputs.</productionVolumeComment>
+        <classification classificationId="e070e2fc-d743-4d80-b9f6-33c4aeaa6ccf">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">34570: Glycerol</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <outputGroup>0</outputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="ad219651-5595-425f-a470-2e00092c47fe" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" variableName="solidWaste" amount="-0.000959572902824343" intermediateExchangeId="27da8130-82ba-485c-a800-b89efdcb0491" activityLinkId="e73dab4b-db8f-4796-b531-88a9e197ec65" productionVolumeAmount="4898.64864864865" productionVolumeMathematicalRelation="PV_biodiesel * solidWaste / biodiesel ">
+        <name xml:lang="en">municipal solid waste</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">Measured value. Reported as "general facility wastes".</comment>
+        <uncertainty>
+          <lognormal meanValue="-0.000959572902824343" mu="-6.949" variance="0.0006" varianceWithPedigreeUncertainty="0.0112" />
+          <pedigreeMatrix reliability="2" completeness="4" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <property propertyId="38f94dd1-d5aa-41b8-b182-c0c42985d9dc" variableName="solidWaste_price_EUR2005" amount="0" unitId="7b75baf0-cbee-45e6-bf66-af119da06553">
+          <name xml:lang="en">price</name>
+          <unitName xml:lang="en">EUR2005</unitName>
+          <comment xml:lang="en">Waste products are assigned a price of zero as they are assumed to require further treatment.</comment>
+        </property>
+        <property propertyId="48c987bb-3144-4872-b5c7-b1389c40be25" amount="11.74" mathematicalRelation="" unitId="980b811e-3905-4797-82a5-173f5568bc7e">
+          <name xml:lang="en">heating value, net</name>
+          <unitName xml:lang="en">MJ</unitName>
+          <comment xml:lang="en">Value taken from the general comment of the treatment dataset.</comment>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0.261654993514916" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">MSW composition in tab 4.1, ecoinvent v2.2 report 13_I. C content referred to 1 kg DM</comment>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="0.771" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">wet mass-water mass</comment>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0.229" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0.171548638132296" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">MSW composition in tab 4.1, ecoinvent v2.2 report 13_I. C content referred to 1 kg DM</comment>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0.297016861219196" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water mass/dry mass</comment>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.433203631647212" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.334" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <productionVolumeComment xml:lang="en">Calculated from the biodiesel production volume using the relative outputs.</productionVolumeComment>
+        <classification classificationId="595a05b0-c7e6-4681-b3ee-b0f59c85c9f2">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">39910: Municipal waste</classificationValue>
+        </classification>
+        <classification classificationId="ee3238ec-ca7a-4ddc-af1b-e7c35957b9b6">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">Waste</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="ebccef2e-c3aa-48c9-b949-69465124b64d" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" casNumber="7732-18-5" amount="0.24833746725094" isCalculatedAmount="true" mathematicalRelation="(wastewater*-1)*1000" intermediateExchangeId="c5adb1fb-872e-4446-a3bb-c4b61aa4bd45" activityLinkId="893e6692-20c0-4587-9e6d-969697f96b56">
+        <name xml:lang="en">tap water</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">Calculated value, based on wastewater maesured value</comment>
+        <comment>EcoSpold01Location=CH</comment>
+        <uncertainty>
+          <lognormal meanValue="0.24833746725094" mu="-1.393" variance="0.0006" varianceWithPedigreeUncertainty="0.0112" />
+          <pedigreeMatrix reliability="2" completeness="4" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en">Measured data from industry under study. </comment>
+        </uncertainty>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="0.00033747615607878" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">Mineral content was estimated using the chemical properties of tap water in ecoinvent v2.2 report 8, Tab 93.1.</comment>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0.999662523843921" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">wet mass-dry mass</comment>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0.00178990835661632" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">In Tab 17.4, ecoinvent v2.2 report n 17
+Bicarbonate content is 2.93 mol/m3. CO2 content is 0.1 mol/m3 (ecoinvent v2.2 report 8, Tab 93.1).</comment>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">In Tab 17.4, ecoinvent v2.2 report n 17</comment>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="2962.17230710238" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water mass/dry mass
+water mass/dry mass</comment>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.00178990835661632" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="6.04051391924162E-07" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <classification classificationId="ced3d107-ae48-4f1e-801e-3b956776120c">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">18000: Natural water</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="781246e9-a9b0-40f1-b008-4aee4256092d" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" variableName="sodium_hydroxide" casNumber="1310-73-2" amount="0.000365909137169493" isCalculatedAmount="true" mathematicalRelation="sodium_hydroxide_use_l*sodium_hydroxide_density*sodium_hydroxide_concentration" intermediateExchangeId="61396bcb-bf35-411a-a6a6-8543ccef83e8" activityLinkId="ad2f7e9a-4886-4d71-966d-d529bcc7587f">
+        <name xml:lang="en">sodium hydroxide, without water, in 50% solution state</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">See Properties.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.000365909137169493" mu="-7.913" variance="0" varianceWithPedigreeUncertainty="0.008" />
+          <pedigreeMatrix reliability="1" completeness="1" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en">Calculated variable. Uncertainty will be determined from propagation of uncertainty factors of underlying variables. Uncertainty of actual relation between variables not accounted for at this time, although this could be included in a future update.</comment>
+        </uncertainty>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water mass/dry mass</comment>
+        </property>
+        <property propertyId="48c987bb-3144-4872-b5c7-b1389c40be25" amount="3.03" mathematicalRelation="" unitId="980b811e-3905-4797-82a5-173f5568bc7e">
+          <name xml:lang="en">heating value, net</name>
+          <unitName xml:lang="en">MJ</unitName>
+          <comment xml:lang="en">LHV is calculated based on the elemental composition of the substance. Based on the CAS number of the substance (001310-73-2), the chemical formula of the substance is found to be: NaOH, (PubChem 2020).
+Reference: Kim, S., Chen, J., Cheng, T., Gindulyte, A., He, J., He, S., Li, Q., Shoemaker, B. A., Thiessen, P. A., Yu, B., Zaslavsky, L., Zhang, J., &amp; Bolton, E. E. (2019). PubChem 2019 update: improved access to chemical data. Nucleic acids research, 47(D1), D1102–D1109. https://doi.org/10.1093/nar/gky1033</comment>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="e40445b1-8aba-4282-851d-9c2d28b1a5c1" variableName="sodium_hydroxide_density" amount="1.5253" isDefiningValue="false" unitId="b06bab82-f0e8-426d-849a-ebdb5b553519">
+          <name xml:lang="en">density</name>
+          <unitName xml:lang="en">kg/l</unitName>
+          <uncertainty>
+            <lognormal meanValue="1.5253" mu="0.4222" variance="0" varianceWithPedigreeUncertainty="0.016" />
+            <pedigreeMatrix reliability="4" completeness="1" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+            <comment xml:lang="en">Data from litterature.</comment>
+          </uncertainty>
+          <comment xml:lang="en">Density for a 50% sodium hydroxide solution at 20C. Data from litterature  :http://www.handymath.com/cgi-bin/naohtble3.cgi?submit=Entry</comment>
+        </property>
+        <property propertyId="3cfb9179-6e58-4cf6-b0fb-3a853eaea89e" variableName="sodium_hydroxide_concentration" amount="0.5" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">concentration</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <uncertainty>
+            <lognormal meanValue="0.5" mu="-0.6931" variance="0" varianceWithPedigreeUncertainty="0.008" />
+            <pedigreeMatrix reliability="1" completeness="1" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+            <comment xml:lang="en">Data from industry under study. </comment>
+          </uncertainty>
+          <comment xml:lang="en">Concentration of product, data from producer. </comment>
+        </property>
+        <property propertyId="54947c59-30b5-466f-8eae-595f58f54cbd" variableName="sodium_hydroxide_use_l" amount="0.0005" isDefiningValue="false" unitId="86b0e4a2-57e5-48b8-a43d-22c7f8490dca">
+          <name xml:lang="en">consumption in litre</name>
+          <unitName xml:lang="en">l</unitName>
+          <uncertainty>
+            <lognormal meanValue="0.0005" mu="-7.601" variance="0.0006" varianceWithPedigreeUncertainty="0.0126" />
+            <pedigreeMatrix reliability="3" completeness="4" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+            <comment xml:lang="en">Measured data from industry under study. </comment>
+          </uncertainty>
+          <comment xml:lang="en">Measured value of sodium hydroxide consumption at plant. </comment>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">NaOH</comment>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">NaOH</comment>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <classification classificationId="d3d4d040-0471-45ee-aef2-3c034a9de7b7">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">34231: Chemical elements n.e.c.; inorganic acids except phosphoric, nitric and sulphonitric; inorganic oxygen compoun[…]</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="6b6e3279-e567-4c98-9f46-2bf0d298b69b" unitId="980b811e-3905-4797-82a5-173f5568bc7e" amount="0.214004009584479" isCalculatedAmount="true" mathematicalRelation="0.4*m3Fuel_input*Net_Heat_Value*36.3/fuel_use " intermediateExchangeId="1125e767-7b5d-442e-81d6-9b0d3e1919ac" activityLinkId="b5558035-188c-4c91-936a-287761017e5a">
+        <name xml:lang="en">heat, district or industrial, natural gas</name>
+        <unitName xml:lang="en">MJ</unitName>
+        <comment>EcoSpold01Location=RER</comment>
+        <comment xml:lang="en">Calculated based on reported fuel input (measured value), the Net Heating Value of the fuel and efficiency (1/fuel_use). 40% of energy consumption on site is associated to the esterification step (estimation from industrial).</comment>
+        <uncertainty>
+          <lognormal meanValue="0.214004009584479" mu="-1.542" variance="0" varianceWithPedigreeUncertainty="0.008" />
+          <pedigreeMatrix reliability="1" completeness="1" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en">Calculated variable. Uncertainty will be determined from propagation of uncertainty factors of underlying variables. Uncertainty of actual relation between variables not accounted for at this time, although this could be included in a future update.</comment>
+        </uncertainty>
+        <property propertyId="135d3658-e653-4468-81bf-705e68d7c400" variableName="m3Fuel_input" amount="0.016" isDefiningValue="false" unitId="de5b3c87-0e35-4fb0-9765-4f3ba34c99e5">
+          <name xml:lang="en">m3Fuel_input</name>
+          <unitName xml:lang="en">m3</unitName>
+          <uncertainty>
+            <lognormal meanValue="0.016" mu="-4.135" variance="0.0006" varianceWithPedigreeUncertainty="0.0112" />
+            <pedigreeMatrix reliability="2" completeness="4" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+            <comment xml:lang="en">Measured data from industry under study. </comment>
+          </uncertainty>
+          <comment xml:lang="en">Measured value. Fuel consumption at plant.</comment>
+        </property>
+        <property propertyId="48c987bb-3144-4872-b5c7-b1389c40be25" variableName="Net_Heat_Value" amount="1" isDefiningValue="false" mathematicalRelation="" unitId="980b811e-3905-4797-82a5-173f5568bc7e">
+          <name xml:lang="en">heating value, net</name>
+          <unitName xml:lang="en">MJ</unitName>
+          <uncertainty>
+            <lognormal meanValue="1" mu="0" variance="0.0006" varianceWithPedigreeUncertainty="0.0606" />
+            <pedigreeMatrix reliability="3" completeness="5" temporalCorrelation="5" geographicalCorrelation="5" furtherTechnologyCorrelation="3" />
+            <comment xml:lang="en"></comment>
+          </uncertainty>
+          <comment xml:lang="en">Net (lower) heating (calorific) value. Value Taken from Table 5.1 of report "Overview and methodology, Data quality guideline for the ecoinvent database version 3" (ecoinvent report No. 1 (v3), 2011)</comment>
+        </property>
+        <property propertyId="b00066a1-40f3-466c-9bf9-4be11256842e" variableName="fuel_use" amount="1.0417" isDefiningValue="false" unitId="980b811e-3905-4797-82a5-173f5568bc7e">
+          <name xml:lang="en">Corresponding fuel use</name>
+          <unitName xml:lang="en">MJ</unitName>
+          <uncertainty>
+            <lognormal meanValue="1.0417" mu="0.04085" variance="0.0006" varianceWithPedigreeUncertainty="0.0606" />
+            <pedigreeMatrix reliability="3" completeness="5" temporalCorrelation="5" geographicalCorrelation="5" furtherTechnologyCorrelation="3" />
+            <comment xml:lang="en"></comment>
+          </uncertainty>
+          <comment xml:lang="en">Lower heating value of the fuel input related to the heat/electricity output. Assume a 96% energy efficiency based on Section 5.3.6 of report "Life cycle Inventories of Energy Systems, Results for Current Systems in Switzerland and other UCTE Countries" (ecoinvent report No. 5, 2007)</comment>
+        </property>
+        <classification classificationId="da9e0ee4-0a34-499e-9f51-82a5235d243c">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17300: Steam and hot water</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="20007c6c-e7db-4219-b501-40136caa9635" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" variableName="sodium_methoxide" casNumber="124-41-4" amount="0.0422212077242711" isCalculatedAmount="true" mathematicalRelation="sodium_methoxide_use_l*sodium_methoxide_density" intermediateExchangeId="0d1d6886-5798-4fc9-a6f4-f2dd358c4d34" activityLinkId="b490b21e-e233-4a20-8803-c96cebd3b182">
+        <name xml:lang="en">sodium methoxide</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">See Properties.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.0422212077242711" mu="-3.165" variance="0" varianceWithPedigreeUncertainty="0.008" />
+          <pedigreeMatrix reliability="1" completeness="1" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en">Calculated variable. Uncertainty will be determined from propagation of uncertainty factors of underlying variables. Uncertainty of actual relation between variables not accounted for at this time, although this could be included in a future update.</comment>
+        </uncertainty>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="48c987bb-3144-4872-b5c7-b1389c40be25" amount="13.47" mathematicalRelation="" unitId="980b811e-3905-4797-82a5-173f5568bc7e">
+          <name xml:lang="en">heating value, net</name>
+          <unitName xml:lang="en">MJ</unitName>
+          <comment xml:lang="en">LHV is calculated based on the elemental composition of the substance. Based on the CAS number of the substance (000124-41-4), the chemical formula of the substance is found to be: CH3NaO, (PubChem 2020).
+Reference: Kim, S., Chen, J., Cheng, T., Gindulyte, A., He, J., He, S., Li, Q., Shoemaker, B. A., Thiessen, P. A., Yu, B., Zaslavsky, L., Zhang, J., &amp; Bolton, E. E. (2019). PubChem 2019 update: improved access to chemical data. Nucleic acids research, 47(D1), D1102–D1109. https://doi.org/10.1093/nar/gky1033</comment>
+        </property>
+        <property propertyId="e40445b1-8aba-4282-851d-9c2d28b1a5c1" variableName="sodium_methoxide_density" amount="1.1" isDefiningValue="false" unitId="b06bab82-f0e8-426d-849a-ebdb5b553519">
+          <name xml:lang="en">density</name>
+          <unitName xml:lang="en">kg/l</unitName>
+          <uncertainty>
+            <lognormal meanValue="1.1" mu="0.09531" variance="0" varianceWithPedigreeUncertainty="0.016" />
+            <pedigreeMatrix reliability="4" completeness="1" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+            <comment xml:lang="en">Data from litterature.</comment>
+          </uncertainty>
+          <comment xml:lang="en">Density of sodium methoxide at 20C. Data from litterature : 
+http://www.alkalimetals.com/msds/SODIUM%20METHOXIDE_MSDS.pdf</comment>
+        </property>
+        <property propertyId="54947c59-30b5-466f-8eae-595f58f54cbd" variableName="sodium_methoxide_use_l" amount="0.04" isDefiningValue="false" unitId="86b0e4a2-57e5-48b8-a43d-22c7f8490dca">
+          <name xml:lang="en">consumption in litre</name>
+          <unitName xml:lang="en">l</unitName>
+          <uncertainty>
+            <lognormal meanValue="0.04" mu="-3.219" variance="0.0006" varianceWithPedigreeUncertainty="0.0112" />
+            <pedigreeMatrix reliability="2" completeness="4" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+            <comment xml:lang="en">Measured data from industry under study. </comment>
+          </uncertainty>
+          <comment xml:lang="en">Measured value of sodium methoxide consumption at plant. </comment>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0.222222222222222" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.222222222222222" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.222222222222222" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <classification classificationId="bce08813-09df-42b9-9f2b-0926ce543889">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">34: Basic chemicals</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="965f2027-ed33-43db-bee2-72edd73e200b" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" variableName="methanol" casNumber="000067-56-1" amount="0.227994521711064" isCalculatedAmount="true" mathematicalRelation="methanol_use_l*methanol_density" intermediateExchangeId="4a0b47d3-c643-4b67-841b-b5689787f7a1" activityLinkId="523d46ab-c305-474f-bb0f-ba89e694c44b">
+        <name xml:lang="en">methanol</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">See Properties.</comment>
+        <comment>EcoSpold01Location=CH</comment>
+        <uncertainty>
+          <lognormal meanValue="0.227994521711064" mu="-1.478" variance="0" varianceWithPedigreeUncertainty="0.008" />
+          <pedigreeMatrix reliability="1" completeness="1" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en">Calculated variable. Uncertainty will be determined from propagation of uncertainty factors of underlying variables. Uncertainty of actual relation between variables not accounted for at this time, although this could be included in a future update.</comment>
+        </uncertainty>
+        <property propertyId="54947c59-30b5-466f-8eae-595f58f54cbd" variableName="methanol_use_l" amount="0.3" isDefiningValue="false" unitId="86b0e4a2-57e5-48b8-a43d-22c7f8490dca">
+          <name xml:lang="en">consumption in litre</name>
+          <unitName xml:lang="en">l</unitName>
+          <uncertainty>
+            <lognormal meanValue="0.3" mu="-1.204" variance="0.0006" varianceWithPedigreeUncertainty="0.0112" />
+            <pedigreeMatrix reliability="2" completeness="4" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+            <comment xml:lang="en">Measured data from industry under study. </comment>
+          </uncertainty>
+          <comment xml:lang="en">Measured value of methanol consumption at plant. </comment>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0.375" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">In Tab 17.4, ecoinvent v2.2 report n 17
+CH3OH</comment>
+        </property>
+        <property propertyId="e40445b1-8aba-4282-851d-9c2d28b1a5c1" variableName="methanol_density" amount="0.792" isDefiningValue="false" unitId="b06bab82-f0e8-426d-849a-ebdb5b553519">
+          <name xml:lang="en">density</name>
+          <unitName xml:lang="en">kg/l</unitName>
+          <uncertainty>
+            <lognormal meanValue="0.792" mu="-0.2332" variance="0" varianceWithPedigreeUncertainty="0.016" />
+            <pedigreeMatrix reliability="4" completeness="1" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+            <comment xml:lang="en">Data from litterature. </comment>
+          </uncertainty>
+          <comment xml:lang="en">Density of methanol at 20C. Data from litterature : 
+http://www.engineeringtoolbox.com/methanol-properties-d_1209.html</comment>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">In Tab 17.4, ecoinvent v2.2 report n 17
+CH3OH</comment>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water mass/dry mass</comment>
+        </property>
+        <property propertyId="48c987bb-3144-4872-b5c7-b1389c40be25" amount="26.49" mathematicalRelation="" unitId="980b811e-3905-4797-82a5-173f5568bc7e">
+          <name xml:lang="en">heating value, net</name>
+          <unitName xml:lang="en">MJ</unitName>
+          <comment xml:lang="en">LHV is calculated based on the elemental composition of the substance. Based on the CAS number of the substance (000067-56-1), the chemical formula of the substance is found to be: CH4O, (PubChem 2020).
+Reference: Kim, S., Chen, J., Cheng, T., Gindulyte, A., He, J., He, S., Li, Q., Shoemaker, B. A., Thiessen, P. A., Yu, B., Zaslavsky, L., Zhang, J., &amp; Bolton, E. E. (2019). PubChem 2019 update: improved access to chemical data. Nucleic acids research, 47(D1), D1102–D1109. https://doi.org/10.1093/nar/gky1033</comment>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.375" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.375" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <classification classificationId="7f682a80-5bb0-4db9-9f0c-f1aa087032c6">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">34139: Other alcohols, phenols, phenol-alcohols, and their halogenated, sulphonated, nitrated or nitrosated derivativ[…]</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="1924adca-2d19-43e8-8c55-49c9aed739de" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.0287871870847303" isCalculatedAmount="true" mathematicalRelation="0.4*0.075" intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d" activityLinkId="01dadda2-8c4c-4eea-8917-9057b1253cb9">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment>EcoSpold01Location=CH</comment>
+        <comment xml:lang="en">Measured value. 40% of energy consumption on site is associated to the esterification step (estimation from industrial).</comment>
+        <uncertainty>
+          <lognormal meanValue="0.0287871870847303" mu="-3.548" variance="0.0006" varianceWithPedigreeUncertainty="0.0113" />
+          <pedigreeMatrix reliability="2" completeness="4" temporalCorrelation="4" geographicalCorrelation="3" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en">Measured data from industry under study. </comment>
+        </uncertainty>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="a2de4deb-5939-44eb-aee1-5b8585a0892d" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" casNumber="007664-93-9" amount="0.00346060371674571" isCalculatedAmount="true" mathematicalRelation="sulfuric_acid_use_l*sulfuric_acid_density*sulfuric_acid_concentration" intermediateExchangeId="9d63da75-8289-4b96-a900-67ec3bd40a16" activityLinkId="e1d3d70c-5b1f-4e18-b123-9d786773596c">
+        <name xml:lang="en">sulfuric acid</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">See Properties.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.00346060371674571" mu="-5.666" variance="0" varianceWithPedigreeUncertainty="0.008" />
+          <pedigreeMatrix reliability="1" completeness="1" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en">Calculated variable. Uncertainty will be determined from propagation of uncertainty factors of underlying variables. Uncertainty of actual relation between variables not accounted for at this time, although this could be included in a future update.</comment>
+        </uncertainty>
+        <property propertyId="3cfb9179-6e58-4cf6-b0fb-3a853eaea89e" variableName="sulfuric_acid_concentration" amount="0.98" isDefiningValue="false" isCalculatedAmount="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">concentration</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <uncertainty>
+            <lognormal meanValue="0.98" mu="-0.0202" variance="0" varianceWithPedigreeUncertainty="0.008" />
+            <pedigreeMatrix reliability="1" completeness="1" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+            <comment xml:lang="en">Data from industry under study. </comment>
+          </uncertainty>
+          <comment xml:lang="en">Concentration of product, data from producer. </comment>
+        </property>
+        <property propertyId="54947c59-30b5-466f-8eae-595f58f54cbd" variableName="sulfuric_acid_use_l" amount="0.002" isDefiningValue="false" unitId="86b0e4a2-57e5-48b8-a43d-22c7f8490dca">
+          <name xml:lang="en">consumption in litre</name>
+          <unitName xml:lang="en">l</unitName>
+          <uncertainty>
+            <lognormal meanValue="0.002" mu="-6.215" variance="0.0006" varianceWithPedigreeUncertainty="0.0112" />
+            <pedigreeMatrix reliability="2" completeness="4" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+            <comment xml:lang="en">Measured data from industry under study. </comment>
+          </uncertainty>
+          <comment xml:lang="en">Measured value of sulfuric acid consumption at plant. </comment>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water mass/dry mass</comment>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">H2SO4</comment>
+        </property>
+        <property propertyId="e40445b1-8aba-4282-851d-9c2d28b1a5c1" variableName="sulfuric_acid_density" amount="1.84" isDefiningValue="false" unitId="b06bab82-f0e8-426d-849a-ebdb5b553519">
+          <name xml:lang="en">density</name>
+          <unitName xml:lang="en">kg/l</unitName>
+          <uncertainty>
+            <lognormal meanValue="1.84" mu="0.6098" variance="0" varianceWithPedigreeUncertainty="0.016" />
+            <pedigreeMatrix reliability="4" completeness="1" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+            <comment xml:lang="en">Data from litterature.</comment>
+          </uncertainty>
+          <comment xml:lang="en">Density of sulfuric acid at 25C. Data from litterature: http://www.chemicalbook.com/ProductChemicalPropertiesCB9675634_EN.htm</comment>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">H2SO4</comment>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <classification classificationId="d3d4d040-0471-45ee-aef2-3c034a9de7b7">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">34231: Chemical elements n.e.c.; inorganic acids except phosphoric, nitric and sulphonitric; inorganic oxygen compoun[…]</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="7d41801e-2a86-4e25-9f3d-d4d1bbd26f6d" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" variableName="" amount="0" mathematicalRelation="" intermediateExchangeId="e303fb73-b0e1-41ae-bddc-5e0e444eb3fb" productionVolumeAmount="0" productionVolumeMathematicalRelation="PV_biodiesel *(-1)* purified_oil / biodiesel">
+        <name xml:lang="en">used vegetable cooking oil, purified</name>
+        <unitName xml:lang="en">kg</unitName>
+        <property propertyId="38f94dd1-d5aa-41b8-b182-c0c42985d9dc" variableName="purified_oil_price_EUR2005" amount="0.362" unitId="7b75baf0-cbee-45e6-bf66-af119da06553">
+          <name xml:lang="en">price</name>
+          <unitName xml:lang="en">EUR2005</unitName>
+          <comment xml:lang="en">Temporary price data. Calculated as 90% of purchasers price based on: Assumed equal to palm oil</comment>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0.003" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0.747" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="48c987bb-3144-4872-b5c7-b1389c40be25" amount="38.4" mathematicalRelation="" unitId="980b811e-3905-4797-82a5-173f5568bc7e">
+          <name xml:lang="en">heating value, net</name>
+          <unitName xml:lang="en">MJ</unitName>
+          <comment xml:lang="en">Values is approximated from HHV from "vegetable oil, crude". Source: Radovanovic,M.; Zivanovic,T.; Stojiljkovic,D.; Jovanovic,V.; Jerinic,N.; Knezevic,S. et.al. Utilization of sunflower husk as a fuel for industrial boilers - 20 years experience. Proc. 5th Eur. Conf. on Industrial Furnaces&amp;Boilers 2000,vol.2,p.221-233.
+Available at: https://phyllis.nl/Biomass/View/2152</comment>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.75" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.75" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <productionVolumeComment xml:lang="en">Calculated from the biodiesel production volume using the relative outputs.</productionVolumeComment>
+        <classification classificationId="6e0803e5-067b-456e-a414-d05881903f1f">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">39120: Bran and other residues from the working of cereals or legumes; vegetable materials and vegetable waste, veget[…]</classificationValue>
+        </classification>
+        <classification classificationId="a20a9e2f-b3f0-40fd-8358-f8adf7f419c4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">Recyclable</classificationValue>
+        </classification>
+        <outputGroup>0</outputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="8fee9c76-fa48-4c4f-b717-0201304ec48a" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" amount="0.790496157346694" intermediateExchangeId="e303fb73-b0e1-41ae-bddc-5e0e444eb3fb" activityLinkId="f5008450-613c-4277-8303-6e9a20eb91d0" productionVolumeAmount="4035506.75675676">
+        <name xml:lang="en">used vegetable cooking oil, purified</name>
+        <unitName xml:lang="en">kg</unitName>
+        <property propertyId="38f94dd1-d5aa-41b8-b182-c0c42985d9dc" variableName="purified_oil_price_EUR2005" amount="0.362" unitId="7b75baf0-cbee-45e6-bf66-af119da06553">
+          <name xml:lang="en">price</name>
+          <unitName xml:lang="en">EUR2005</unitName>
+          <comment xml:lang="en">Temporary price data. Calculated as 90% of purchasers price based on: Assumed equal to palm oil</comment>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0.003" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0.747" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="48c987bb-3144-4872-b5c7-b1389c40be25" amount="38.4" mathematicalRelation="" unitId="980b811e-3905-4797-82a5-173f5568bc7e">
+          <name xml:lang="en">heating value, net</name>
+          <unitName xml:lang="en">MJ</unitName>
+          <comment xml:lang="en">Values is approximated from HHV from "vegetable oil, crude". Source: Radovanovic,M.; Zivanovic,T.; Stojiljkovic,D.; Jovanovic,V.; Jerinic,N.; Knezevic,S. et.al. Utilization of sunflower husk as a fuel for industrial boilers - 20 years experience. Proc. 5th Eur. Conf. on Industrial Furnaces&amp;Boilers 2000,vol.2,p.221-233.
+Available at: https://phyllis.nl/Biomass/View/2152</comment>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.75" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.75" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <classification classificationId="6e0803e5-067b-456e-a414-d05881903f1f">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">39120: Bran and other residues from the working of cereals or legumes; vegetable materials and vegetable waste, veget[…]</classificationValue>
+        </classification>
+        <classification classificationId="a20a9e2f-b3f0-40fd-8358-f8adf7f419c4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">Recyclable</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="050ba9fe-6cd2-419b-b85c-8df64f92e6c8" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" variableName="biodiesel" amount="0" isCalculatedAmount="true" mathematicalRelation="" intermediateExchangeId="4bc66efe-f91b-48e5-9a26-07e383d47e80" productionVolumeAmount="4350000" productionVolumeVariableName="PV_biodiesel">
+        <name xml:lang="en">fatty acid methyl ester</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">See Properties.</comment>
+        <uncertainty>
+          <undefined minValue="0" maxValue="0" standardDeviation95="0" />
+          <pedigreeMatrix reliability="1" completeness="1" temporalCorrelation="1" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en">Calculated variable. Uncertainty will be determined from propagation of uncertainty factors of underlying variables. Uncertainty of actual relation between variables not accounted for at this time, although this could be included in a future update.</comment>
+        </uncertainty>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0.732" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">In Tab 17.4, ecoinvent v2.2 report n 17</comment>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0.041" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">In Tab 17.4, ecoinvent v2.2 report n 17</comment>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="48c987bb-3144-4872-b5c7-b1389c40be25" amount="37.2" mathematicalRelation="" unitId="980b811e-3905-4797-82a5-173f5568bc7e">
+          <name xml:lang="en">heating value, net</name>
+          <unitName xml:lang="en">MJ</unitName>
+          <comment xml:lang="en">Based on literature, report 17, page 439. Jungbluth, N., Chudacoff, M., Dauriat, A., Dinkel, F., Doka, G., Faist Emmenegger, M., Gnansounou, E., Kljun, N., Schleiss, K., Spielmann, M., Stettler, C., Sutter, J. 2007: Life Cycle Inventories of Bioenergy. ecoinvent report No. 17, Swiss Centre for Life Cycle Inventories, Dübendorf, CH.</comment>
+        </property>
+        <property propertyId="38f94dd1-d5aa-41b8-b182-c0c42985d9dc" variableName="biodiesel_price_EUR2005" amount="0.817" unitId="7b75baf0-cbee-45e6-bf66-af119da06553">
+          <name xml:lang="en">price</name>
+          <unitName xml:lang="en">EUR2005</unitName>
+          <comment xml:lang="en">Temporary price data. Calculated as 90% of purchasers price based on: 2004 import and export prices (total trades (USD) divided by total weight (kg) in EU27, USA, China, Japan and India) from UN Commodity Trade Statistics Database (http://data.un.org/Explorer.aspxDatabase [Accessed 2 July 2010]). Commodity: 'Veg fats, oils or fractions hydrogenated, esterified'.</comment>
+        </property>
+        <property propertyId="dbbc1095-ca27-4acb-98ea-57a8b54f1d91" variableName="biodiesel_production_l" amount="1" isDefiningValue="false" unitId="86b0e4a2-57e5-48b8-a43d-22c7f8490dca">
+          <name xml:lang="en">production in l</name>
+          <unitName xml:lang="en">l</unitName>
+          <uncertainty>
+            <lognormal meanValue="1" mu="0" variance="0.0006" varianceWithPedigreeUncertainty="0.0112" />
+            <pedigreeMatrix reliability="2" completeness="4" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+            <comment xml:lang="en">Measured data from industry under study. </comment>
+          </uncertainty>
+          <comment xml:lang="en">Measured value of vegetable oil methyl esther production at plant. Data was collected per litre of vegetable methyl ester produced.</comment>
+        </property>
+        <property propertyId="e40445b1-8aba-4282-851d-9c2d28b1a5c1" variableName="biodiesel_density" amount="0.888" isDefiningValue="false" unitId="b06bab82-f0e8-426d-849a-ebdb5b553519">
+          <name xml:lang="en">density</name>
+          <unitName xml:lang="en">kg/l</unitName>
+          <uncertainty>
+            <lognormal meanValue="0.888" mu="-0.1188" variance="0" varianceWithPedigreeUncertainty="0.016" />
+            <pedigreeMatrix reliability="4" completeness="1" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+            <comment xml:lang="en">Data from litterature. </comment>
+          </uncertainty>
+          <comment xml:lang="en">Density of vegetable oil methyl esther. In ecoinvent 2.2 report, n 17, p439 (Table 17.4).
+</comment>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.773" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.773" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="2dec5fcb-b303-4bfa-8e30-0e043c523163" variableName="biodiesel_true_value" amount="0.725496" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">true value</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">allocation property applied in "true value" allocation // value calculated from revenue</comment>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <classification classificationId="c21f476a-8c62-4e83-9969-211c913fade8">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">35491: Biodiesel</classificationValue>
+        </classification>
+        <outputGroup>0</outputGroup>
+      </intermediateExchange>
+    </flowData>
+    <modellingAndValidation>
+      <representativeness percent="40" systemModelId="290c1f85-4cc4-4fa1-b0c8-2cb7f4276dce">
+        <systemModelName xml:lang="en">Allocation, cut-off by classification</systemModelName>
+        <samplingProcedure xml:lang="en">Industrial data from one biodiesel producer in the Quebec region.</samplingProcedure>
+        <extrapolations xml:lang="en">Data from one biodiesel producer used to represent the total Quebec region production.
+Energy consumption of the plant has been divided between purification and esterification seps based on industrial expertise. </extrapolations>
+      </representativeness>
+      <review reviewerId="f86c02d3-2c12-4c25-ad03-33af05bcfe63" reviewerName="Tereza Levova" reviewerEmail="levova@ecoinvent.org" reviewDate="2014-02-12" reviewedMajorRelease="3" reviewedMinorRelease="0" reviewedMajorRevision="0" reviewedMinorRevision="26">
+        <details>
+          <text xml:lang="en" index="0"></text>
+        </details>
+        <otherDetails xml:lang="en"></otherDetails>
+      </review>
+      <review reviewerId="c4597934-ecac-422c-b431-382e85fdcb83" reviewerName="[System]" reviewerEmail="support@ecoinvent.org" reviewDate="2014-04-16" reviewedMajorRelease="3" reviewedMinorRelease="0" reviewedMajorRevision="0" reviewedMinorRevision="29">
+        <details />
+        <otherDetails xml:lang="en">Validation warnings:
+
+- Consider if it would be better to create this dataset as a child dataset relative to a parent dataset. See the ecoinvent Data Quality Guideline Chapter 4.2 for further advice.
+- Mass and/or economic deficit in activity dataset exceeds either 0.1% of input or output sum:
+
+Property 'wet mass':
+ - Input='1,36864265', Output='1,2739'
+ - Input &gt; output by 0,0947426499999999 kg (7,44% of output)
+
+Property 'carbon content, fossil':
+ - Input='0,101349334106278', Output='0,036540264'
+ - Input &gt; output by 0,064809070106278 kg (177,36% of output)
+
+Property 'carbon content, non-fossil':
+ - Input='0,6153786', Output='0,69957863150087'
+ - Input &lt; output by 0,0842000315008696 kg (12,04% of output)
+
+Property 'dry mass':
+ - Input='1,10947506382919', Output='1,01495833882919'
+ - Input &gt; output by 0,0945167250000001 kg (9,31% of output)
+
+
+- Amount of property 'heating value, net=0' of exchange 'municipal solid waste' deviates from the default amount in the master file.
+
+- Uncertainty shall always be provided for all primary data inputs (exchange amounts, properties and parameters), except for the amount and properties of reference products.
+ -- Property(ies): water in wet mass=0, dry mass=1, wet mass=1, carbon content, non-fossil=0,391304347826087, carbon content, fossil=0, water content=0, carbon content, non-fossil=0,19942149626799, dry mass=0,33747615607878, water content=2962,17230710238, wet mass=1000, water in wet mass=999,662523843921, carbon content, fossil=0, water content=0,297016861219196, wet mass=1, water in wet mass=0,229, carbon content, fossil=0,171548638132296, carbon content, non-fossil=0,261654993514916, dry mass=0,771, heating value, net=0, water in wet mass=0, carbon content, fossil=0,041, carbon content, non-fossil=0,732, water content=0, wet mass=1, dry mass=1
+
+- Pedigree information shall always be provided for all uncertainties of primary data inputs (exchange amounts, properties and parameters), except for the amount and properties of reference products.
+ -- Property(ies): water in wet mass=0, dry mass=1, wet mass=1, carbon content, non-fossil=0,391304347826087, carbon content, fossil=0, water content=0, carbon content, non-fossil=0,19942149626799, dry mass=0,33747615607878, water content=2962,17230710238, wet mass=1000, water in wet mass=999,662523843921, carbon content, fossil=0, water content=0,297016861219196, wet mass=1, water in wet mass=0,229, carbon content, fossil=0,171548638132296, carbon content, non-fossil=0,261654993514916, dry mass=0,771, heating value, net=0, water in wet mass=0, carbon content, fossil=0,041, carbon content, non-fossil=0,732, water content=0, wet mass=1, dry mass=1
+
+- The following negative reference products could not be identified as materials for treatment. No activities exist that produce these materials for treatment.
+ - used vegetable cooking oil, purified
+
+</otherDetails>
+      </review>
+    </modellingAndValidation>
+    <administrativeInformation>
+      <dataEntryBy personId="37cc4296-1529-4587-9d00-4107455be7d7" isActiveAuthor="true" personName="François Saunier" personEmail="francois.saunier@polymtl.ca" />
+      <dataGeneratorAndPublication personId="37cc4296-1529-4587-9d00-4107455be7d7" personName="François Saunier" personEmail="francois.saunier@polymtl.ca" dataPublishedIn="0" publishedSourceIdOverwrittenByChild="true" isCopyrightProtected="true" accessRestrictedTo="1" />
+      <fileAttributes majorRelease="3" minorRelease="0" majorRevision="5" minorRevision="0" internalSchemaVersion="2.0.10" defaultLanguage="en" creationTimestamp="2013-12-03T15:34:34" lastEditTimestamp="2014-04-15T10:23:55" fileGenerator="EcoEditor 3.3.65.10694" fileTimestamp="2014-04-15T10:23:55" contextId="de659012-50c4-4e96-b54a-fc781bf987ab">
+        <contextName xml:lang="en">ecoinvent</contextName>
+      </fileAttributes>
+    </administrativeInformation>
+  </childActivityDataset>
+</ecoSpold>

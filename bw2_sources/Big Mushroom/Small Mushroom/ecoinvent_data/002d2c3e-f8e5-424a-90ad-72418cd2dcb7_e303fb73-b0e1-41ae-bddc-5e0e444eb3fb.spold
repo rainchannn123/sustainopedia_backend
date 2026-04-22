@@ -1,0 +1,991 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ecoSpold xmlns="http://www.EcoInvent.org/EcoSpold02">
+  <childActivityDataset>
+    <activityDescription>
+      <activity id="002d2c3e-f8e5-424a-90ad-72418cd2dcb7" activityNameId="25e49c08-c484-492d-b949-18ef105df927" parentActivityId="86b9a0db-cea4-439c-aed2-d8bcee40619f" inheritanceDepth="-1" type="1" specialActivityType="0" energyValues="0">
+        <activityName xml:lang="en">treatment of used vegetable cooking oil, purification</activityName>
+        <synonym xml:lang="en">pure vegetable oil</synonym>
+        <synonym xml:lang="en">straight vegetable oil</synonym>
+        <synonym xml:lang="en">vegetable oil</synonym>
+        <synonym xml:lang="en">SVO</synonym>
+        <includedActivitiesStart xml:lang="en">From reception of waste cooking oil at factory gate. </includedActivitiesStart>
+        <includedActivitiesEnd xml:lang="en">This activity ends at esterification plant with the purified used vegetable cooking oil. 
+The dataset includes the treatment of impurities and water removal from the used vegetable cooking oil, the intermediate storage of the oil and treatment of specific wastewater effluents. </includedActivitiesEnd>
+        <generalComment>
+          <text xml:lang="en" index="1">This dataset represents the purification of waste vegetable cooking oil before its esterification. 
+This dataset could be too used for the treatment of waste animal fat. The studied plant treats both types of waste. 
+
+Data have been collected for the annual production of the esterification plant and adapted to production of one liter of vegetable oil methyl esther. To fit with the current ecoinvent datasets, collected data have been divided between a purification step and an esterification step. This dataset considers only the purification step. </text>
+        </generalComment>
+        <tag>single enterprise data</tag>
+      </activity>
+      <classification classificationId="db303709-3eac-4c8b-9ed9-7e4888240c50">
+        <classificationSystem xml:lang="en">ISIC rev.4 ecoinvent</classificationSystem>
+        <classificationValue xml:lang="en">3830:Materials recovery</classificationValue>
+      </classification>
+      <classification classificationId="e35c112f-4c8d-4bf6-87c9-f6cd6d7daa27">
+        <classificationSystem xml:lang="en">EcoSpold01Categories</classificationSystem>
+        <classificationValue xml:lang="en">biomass/fuels</classificationValue>
+      </classification>
+      <geography geographyId="868a66d1-7428-4ba2-9125-253b07afc119">
+        <shortname xml:lang="en">CA-QC</shortname>
+        <comment>
+          <text xml:lang="en" index="1">Data from one biodiesel producer in the Quebec region.</text>
+        </comment>
+      </geography>
+      <technology technologyLevel="3">
+        <comment>
+          <text xml:lang="en" index="1">Typical waste oil esterification plant designed for methyl ester production (for the vehicle fuels market), Quebec context. Based on industrial data from one biodiesel producer in the Quebec region with a low production volume (2 000 000 litres of biodiesel per year).  The transesterification is base-catalysed with sodium methoxide and sodium hydroxide. </text>
+        </comment>
+      </technology>
+      <timePeriod startDate="2012-01-01" endDate="2021-12-31" isDataValidForEntirePeriod="true">
+        <comment>
+          <text xml:lang="en" index="1">Data from 2012, current technology in Quebec.</text>
+        </comment>
+      </timePeriod>
+      <macroEconomicScenario macroEconomicScenarioId="d9f57f0a-a01f-42eb-a57b-8f18d6635801">
+        <name xml:lang="en">Business-as-Usual</name>
+      </macroEconomicScenario>
+    </activityDescription>
+    <flowData>
+      <intermediateExchange id="ca00e5d2-894c-412a-a058-b7699faa68e0" unitId="980b811e-3905-4797-82a5-173f5568bc7e" amount="0.406079322476586" isCalculatedAmount="true" mathematicalRelation="0.6*m3Fuel_input*Net_Heat_Value*36.3/fuel_use " intermediateExchangeId="1125e767-7b5d-442e-81d6-9b0d3e1919ac" activityLinkId="b5558035-188c-4c91-936a-287761017e5a">
+        <name xml:lang="en">heat, district or industrial, natural gas</name>
+        <unitName xml:lang="en">MJ</unitName>
+        <comment>EcoSpold01Location=RER</comment>
+        <comment xml:lang="en">Calculated based on reported fuel input (measured value), the Net Heating Value of the fuel and efficiency (1/fuel_use). 60% of energy consumption on site is associated to the purification step (estimation from industrial).</comment>
+        <uncertainty>
+          <lognormal meanValue="0.406079322476586" mu="-0.9012" variance="0" varianceWithPedigreeUncertainty="0.008" />
+          <pedigreeMatrix reliability="1" completeness="1" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en">Calculated variable. Uncertainty will be determined from propagation of uncertainty factors of underlying variables. Uncertainty of actual relation between variables not accounted for at this time, although this could be included in a future update.</comment>
+        </uncertainty>
+        <property propertyId="135d3658-e653-4468-81bf-705e68d7c400" variableName="m3Fuel_input" amount="0.016" isDefiningValue="false" unitId="de5b3c87-0e35-4fb0-9765-4f3ba34c99e5">
+          <name xml:lang="en">m3Fuel_input</name>
+          <unitName xml:lang="en">m3</unitName>
+          <uncertainty>
+            <lognormal meanValue="0.016" mu="-4.135" variance="0.0006" varianceWithPedigreeUncertainty="0.0112" />
+            <pedigreeMatrix reliability="2" completeness="4" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+            <comment xml:lang="en">Measured data from industry under study. </comment>
+          </uncertainty>
+          <comment xml:lang="en">Measured value. Fuel consumption at plant.</comment>
+        </property>
+        <property propertyId="48c987bb-3144-4872-b5c7-b1389c40be25" variableName="Net_Heat_Value" amount="1" isDefiningValue="false" mathematicalRelation="" unitId="980b811e-3905-4797-82a5-173f5568bc7e">
+          <name xml:lang="en">heating value, net</name>
+          <unitName xml:lang="en">MJ</unitName>
+          <uncertainty>
+            <lognormal meanValue="1" mu="0" variance="0.0006" varianceWithPedigreeUncertainty="0.0606" />
+            <pedigreeMatrix reliability="3" completeness="5" temporalCorrelation="5" geographicalCorrelation="5" furtherTechnologyCorrelation="3" />
+            <comment xml:lang="en"></comment>
+          </uncertainty>
+          <comment xml:lang="en">Net (lower) heating (calorific) value. Value Taken from Table 5.1 of report "Overview and methodology, Data quality guideline for the ecoinvent database version 3" (ecoinvent report No. 1 (v3), 2011)</comment>
+        </property>
+        <property propertyId="b00066a1-40f3-466c-9bf9-4be11256842e" variableName="fuel_use" amount="1.0417" isDefiningValue="false" unitId="980b811e-3905-4797-82a5-173f5568bc7e">
+          <name xml:lang="en">Corresponding fuel use</name>
+          <unitName xml:lang="en">MJ</unitName>
+          <uncertainty>
+            <lognormal meanValue="1.0417" mu="0.04085" variance="0.0006" varianceWithPedigreeUncertainty="0.0606" />
+            <pedigreeMatrix reliability="3" completeness="5" temporalCorrelation="5" geographicalCorrelation="5" furtherTechnologyCorrelation="3" />
+            <comment xml:lang="en"></comment>
+          </uncertainty>
+          <comment xml:lang="en">Lower heating value of the fuel input related to the heat/electricity output. Assume a 96% energy efficiency based on Section 5.3.6 of report "Life cycle Inventories of Energy Systems, Results for Current Systems in Switzerland and other UCTE Countries" (ecoinvent report No. 5, 2007)</comment>
+        </property>
+        <classification classificationId="da9e0ee4-0a34-499e-9f51-82a5235d243c">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17300: Steam and hot water</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="bb01bc36-d82f-4164-85ae-7bf2aba3fe47" unitId="de5b3c87-0e35-4fb0-9765-4f3ba34c99e5" variableName="wastewater" amount="-0.000314152090398114" isCalculatedAmount="false" mathematicalRelation="" intermediateExchangeId="f33b4dc5-f3af-4ca8-aeff-3deeb7159ec1" activityLinkId="86b9270e-4a1b-4c13-b1af-0141d684adee" productionVolumeAmount="1267.76076080159" productionVolumeMathematicalRelation="PV_purifiedOil * wasteWater / purifiedOil">
+        <name xml:lang="en">wastewater, from residence</name>
+        <unitName xml:lang="en">m3</unitName>
+        <comment xml:lang="en">Proxy. Composition unknow. Measured value.</comment>
+        <comment>EcoSpold01Location=CH</comment>
+        <uncertainty>
+          <lognormal meanValue="-0.000314152090398114" mu="-8.066" variance="0.0006" varianceWithPedigreeUncertainty="0.0112" />
+          <pedigreeMatrix reliability="2" completeness="4" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en">Measured data from industry under study. </comment>
+        </uncertainty>
+        <property propertyId="38f94dd1-d5aa-41b8-b182-c0c42985d9dc" variableName="wastewater_price_EUR2005" amount="0" unitId="7b75baf0-cbee-45e6-bf66-af119da06553">
+          <name xml:lang="en">price</name>
+          <unitName xml:lang="en">EUR2005</unitName>
+          <comment xml:lang="en">Waste products are assigned a price of zero as they are assumed to require further treatment.</comment>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="2962.17230710238" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water mass/dry mass
+water mass/dry mass</comment>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0.19942149626799" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">In Tab 17.4, ecoinvent v2.2 report n 17
+0.0673 kg TOC/m3 (Tab A.17, ecoinvent v2.2 report 13_I). TOC was considered as Total Carbon.</comment>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="999.662523843921" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">wet mass-dry mass</comment>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="0.33747615607878" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">Tap water dry mass was used as an estimation of the wastewater dry mass. This approach was chosen when the addition of compunds in wastewater was smaller than the mineral content estimated using the chemical properties of tap water in ecoinvent v2.2 report 8, Tab 93.1.</comment>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1000" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">Density of water was assumed that of tap water 1kg/L, that is 1000kg/m3.</comment>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">In Tab 17.4, ecoinvent v2.2 report n 17</comment>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.19942149626799" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.0673" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <productionVolumeComment xml:lang="en">Calculated from the purified oil production volume using the relative outputs.</productionVolumeComment>
+        <classification classificationId="ee3238ec-ca7a-4ddc-af1b-e7c35957b9b6">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">Waste</classificationValue>
+        </classification>
+        <classification classificationId="34f49fca-a18e-48df-a635-ee7e24ef6dbb">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">39920: Sewage sludge</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="9416f14a-b0aa-450b-b72d-f07a6f9c7d08" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" casNumber="25038-59-9" amount="0.00194220766861276" intermediateExchangeId="d585421f-a3a1-45bc-bd94-188f65865b9c" activityLinkId="7565bc85-f6f6-4568-b5cc-2966c2b7d9e7">
+        <name xml:lang="en">polyethylene terephthalate, granulate, amorphous</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">Proxy. Represents PET filters. Measured value.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.00194220766861276" mu="-6.244" variance="0.0006" varianceWithPedigreeUncertainty="0.0112" />
+          <pedigreeMatrix reliability="2" completeness="4" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en">Measured data from industry under study. </comment>
+        </uncertainty>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0.625" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="48c987bb-3144-4872-b5c7-b1389c40be25" amount="22.95" mathematicalRelation="" unitId="980b811e-3905-4797-82a5-173f5568bc7e">
+          <name xml:lang="en">heating value, net</name>
+          <unitName xml:lang="en">MJ</unitName>
+          <comment xml:lang="en">Assumed equal to "waste polyethylene terephthalate".</comment>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.625" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.625" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <classification classificationId="59218a6b-437d-4703-bd26-060329f62965">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">34710: Polymers of ethylene, in primary forms</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="737a1035-d232-4a21-886b-9129c44baf2f" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" variableName="" amount="0" isCalculatedAmount="true" mathematicalRelation="" intermediateExchangeId="e303fb73-b0e1-41ae-bddc-5e0e444eb3fb" activityLinkId="4cf24a57-dc5d-4dc5-af76-938e22587841" productionVolumeAmount="0" productionVolumeVariableName="PV_purifiedOil">
+        <name xml:lang="en">used vegetable cooking oil, purified</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">Calculated value. All the water in the used cooking oil input is supposed to be extracte durng purification. 
+Mass of purified used cooking oil produced = (mass of used cooking oil input without water) - used oil loss</comment>
+        <uncertainty>
+          <undefined minValue="0" maxValue="0" standardDeviation95="0" />
+          <pedigreeMatrix reliability="1" completeness="1" temporalCorrelation="1" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <property propertyId="48c987bb-3144-4872-b5c7-b1389c40be25" amount="38.4" mathematicalRelation="" unitId="980b811e-3905-4797-82a5-173f5568bc7e">
+          <name xml:lang="en">heating value, net</name>
+          <unitName xml:lang="en">MJ</unitName>
+          <comment xml:lang="en">Values is approximated from HHV from "vegetable oil, crude". Source: Radovanovic,M.; Zivanovic,T.; Stojiljkovic,D.; Jovanovic,V.; Jerinic,N.; Knezevic,S. et.al. Utilization of sunflower husk as a fuel for industrial boilers - 20 years experience. Proc. 5th Eur. Conf. on Industrial Furnaces&amp;Boilers 2000,vol.2,p.221-233.
+Available at: https://phyllis.nl/Biomass/View/2152</comment>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" variableName="purifiedOil_drymass" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0.747" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="38f94dd1-d5aa-41b8-b182-c0c42985d9dc" variableName="purifiedOil_price_EUR2005" amount="0.362" unitId="7b75baf0-cbee-45e6-bf66-af119da06553">
+          <name xml:lang="en">price</name>
+          <unitName xml:lang="en">EUR2005</unitName>
+          <comment xml:lang="en">Temporary price data. Calculated as 90% of purchasers price based on: Assumed equal to palm oil</comment>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0.003" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.75" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.75" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <productionVolumeComment xml:lang="en">Based on the purified used vegetable cooking oil consumption of the esterification dataset for Quebec region ("treatment of waste cooking oil, purified, esterification, Quebec").</productionVolumeComment>
+        <classification classificationId="6e0803e5-067b-456e-a414-d05881903f1f">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">39120: Bran and other residues from the working of cereals or legumes; vegetable materials and vegetable waste, veget[…]</classificationValue>
+        </classification>
+        <classification classificationId="a20a9e2f-b3f0-40fd-8358-f8adf7f419c4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">Recyclable</classificationValue>
+        </classification>
+        <outputGroup>2</outputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="dbb346f6-149d-4d6c-a85a-a8967f766331" unitId="5b972631-34e3-4db7-a615-f6931770a0cb" amount="9.18526131600946E-10" isCalculatedAmount="false" mathematicalRelation="" intermediateExchangeId="30061140-566d-45e5-834f-1c6a344dd315" activityLinkId="dee7674d-3d05-4333-9a41-15493b500753">
+        <name xml:lang="en">vegetable oil esterification facility</name>
+        <unitName xml:lang="en">unit</unitName>
+        <comment>EcoSpold01Location=CH</comment>
+        <comment xml:lang="en">Calculated value, according to feed capacity of esterification plant (2 000 000 tonnes of methyl ester) and lifetime of the plant (50 years).</comment>
+        <uncertainty>
+          <lognormal meanValue="9.18526131600946E-10" mu="-20.81" variance="0.3" varianceWithPedigreeUncertainty="0.3846" />
+          <pedigreeMatrix reliability="3" completeness="3" temporalCorrelation="5" geographicalCorrelation="5" furtherTechnologyCorrelation="4" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <classification classificationId="f986e611-0d52-4a9c-a8c2-1329b9fee31f">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">53269: Other constructions for manufacturing</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="289f6403-df12-49ed-b65c-8a2a36e8f52c" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" variableName="wastePET" casNumber="25038-59-9" amount="-0.00194220766861276" intermediateExchangeId="dcb70fd5-e305-4920-b68b-40697cc6a206" activityLinkId="6e219670-cc72-4a11-94a7-510f9897009d" productionVolumeAmount="7837.77904668679" productionVolumeMathematicalRelation="PV_purifiedOil * wastePET /  purifiedOil">
+        <name xml:lang="en">waste polyethylene terephthalate</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">Measured value. Represents used filters.</comment>
+        <uncertainty>
+          <lognormal meanValue="-0.00194220766861276" mu="-6.244" variance="0.0006" varianceWithPedigreeUncertainty="0.0112" />
+          <pedigreeMatrix reliability="2" completeness="4" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en">Measured data from industry under study. </comment>
+        </uncertainty>
+        <property propertyId="38f94dd1-d5aa-41b8-b182-c0c42985d9dc" variableName="wastePET_price_EUR2005" amount="0" unitId="7b75baf0-cbee-45e6-bf66-af119da06553">
+          <name xml:lang="en">price</name>
+          <unitName xml:lang="en">EUR2005</unitName>
+          <comment xml:lang="en">Waste products are assigned a price of zero as they are assumed to require further treatment.</comment>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0.625" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="48c987bb-3144-4872-b5c7-b1389c40be25" amount="22.95" mathematicalRelation="" unitId="980b811e-3905-4797-82a5-173f5568bc7e">
+          <name xml:lang="en">heating value, net</name>
+          <unitName xml:lang="en">MJ</unitName>
+          <comment xml:lang="en">Value taken from the general comment of the treatment dataset.</comment>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.625" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.625" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <productionVolumeComment xml:lang="en">Calculated from the purified oil production volume using the relative outputs.</productionVolumeComment>
+        <classification classificationId="555d4947-3964-4529-ab70-20468dfee0bd">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">39270: Waste, parings and scrap of plastics</classificationValue>
+        </classification>
+        <classification classificationId="ee3238ec-ca7a-4ddc-af1b-e7c35957b9b6">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">Waste</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="79c30760-5970-4d70-bdce-d82d561f04a2" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" variableName="" amount="0" isCalculatedAmount="true" mathematicalRelation="" intermediateExchangeId="0b404a7a-c140-4b1b-a555-a7082a6012ef" productionVolumeAmount="0" productionVolumeMathematicalRelation="PV_purifiedOil * -usedOil / purifiedOil">
+        <name xml:lang="en">used vegetable cooking oil</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">See Properties.</comment>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0.6" mathematicalRelation="0.75*usedOil_DM" isCalculatedAmount="true" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">C content in fat is estimated to be 75% in dry mass (ecoinvent v2.2 report, n 15a, p 40)</comment>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="0.8" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <uncertainty>
+            <lognormal meanValue="0.8" mu="-0.2231" variance="0" varianceWithPedigreeUncertainty="0.21" />
+            <pedigreeMatrix reliability="5" completeness="5" temporalCorrelation="5" geographicalCorrelation="5" furtherTechnologyCorrelation="5" />
+            <comment xml:lang="en"></comment>
+          </uncertainty>
+          <comment xml:lang="en">Measured value from industry. </comment>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0.25" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water mass/dry mass</comment>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0.2" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">Measured value from industry. </comment>
+        </property>
+        <property propertyId="38f94dd1-d5aa-41b8-b182-c0c42985d9dc" variableName="usedOil_price_EUR2005" amount="0" unitId="7b75baf0-cbee-45e6-bf66-af119da06553">
+          <name xml:lang="en">price</name>
+          <unitName xml:lang="en">EUR2005</unitName>
+          <comment xml:lang="en">Assumed without economic value</comment>
+        </property>
+        <property propertyId="48c987bb-3144-4872-b5c7-b1389c40be25" amount="38.4" mathematicalRelation="" unitId="980b811e-3905-4797-82a5-173f5568bc7e">
+          <name xml:lang="en">heating value, net</name>
+          <unitName xml:lang="en">MJ</unitName>
+          <comment xml:lang="en">Values is approximated from HHV from "vegetable oil, crude". Source: Radovanovic,M.; Zivanovic,T.; Stojiljkovic,D.; Jovanovic,V.; Jerinic,N.; Knezevic,S. et.al. Utilization of sunflower husk as a fuel for industrial boilers - 20 years experience. Proc. 5th Eur. Conf. on Industrial Furnaces&amp;Boilers 2000,vol.2,p.221-233.
+Available at: https://phyllis.nl/Biomass/View/2152</comment>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.6" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.48" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <productionVolumeComment xml:lang="en">Calculated from the purified oil production volume using the relative outputs.</productionVolumeComment>
+        <classification classificationId="a20a9e2f-b3f0-40fd-8358-f8adf7f419c4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">Recyclable</classificationValue>
+        </classification>
+        <classification classificationId="6e0803e5-067b-456e-a414-d05881903f1f">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">39120: Bran and other residues from the working of cereals or legumes; vegetable materials and vegetable waste, veget[…]</classificationValue>
+        </classification>
+        <outputGroup>0</outputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="ca57486c-9c7c-4d75-a941-b3e32fbddb0f" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" casNumber="7732-18-5" amount="0.0728327875729785" intermediateExchangeId="c5adb1fb-872e-4446-a3bb-c4b61aa4bd45" activityLinkId="893e6692-20c0-4587-9e6d-969697f96b56">
+        <name xml:lang="en">tap water</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">Measured value.</comment>
+        <comment>EcoSpold01Location=CH</comment>
+        <uncertainty>
+          <lognormal meanValue="0.0728327875729785" mu="-2.62" variance="0.0006" varianceWithPedigreeUncertainty="0.0112" />
+          <pedigreeMatrix reliability="2" completeness="4" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en">Measured data from industry under study. </comment>
+        </uncertainty>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0.00178990835661632" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">In Tab 17.4, ecoinvent v2.2 report n 17
+Bicarbonate content is 2.93 mol/m3. CO2 content is 0.1 mol/m3 (ecoinvent v2.2 report 8, Tab 93.1).</comment>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0.999662523843921" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">wet mass-dry mass</comment>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="0.00033747615607878" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">Mineral content was estimated using the chemical properties of tap water in ecoinvent v2.2 report 8, Tab 93.1.</comment>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">In Tab 17.4, ecoinvent v2.2 report n 17</comment>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="2962.17230710238" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water mass/dry mass
+water mass/dry mass</comment>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.00178990835661632" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="6.04051391924162E-07" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <classification classificationId="ced3d107-ae48-4f1e-801e-3b956776120c">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">18000: Natural water</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="8b17bc0d-a387-4d1d-9135-2174390b88f9" unitId="77ae64fa-7e74-4252-9c3b-889c1cd20bfc" amount="0.0546245906797338" isCalculatedAmount="true" mathematicalRelation="0.6*0.075" intermediateExchangeId="759b89bd-3aa6-42ad-b767-5bb9ef5d331d" activityLinkId="01dadda2-8c4c-4eea-8917-9057b1253cb9">
+        <name xml:lang="en">electricity, medium voltage</name>
+        <unitName xml:lang="en">kWh</unitName>
+        <comment xml:lang="en">Measured value. 60% of energy consumption on site is associated to the purification step (estimation from industrial).</comment>
+        <comment>EcoSpold01Location=CH</comment>
+        <uncertainty>
+          <lognormal meanValue="0.0546245906797338" mu="-2.907" variance="0.0006" varianceWithPedigreeUncertainty="0.0113" />
+          <pedigreeMatrix reliability="2" completeness="4" temporalCorrelation="4" geographicalCorrelation="3" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en">Measured data from industry under study. </comment>
+        </uncertainty>
+        <classification classificationId="8c58a77e-289e-4069-bd0f-413c4f45e21b">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">17100: Electrical energy</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="68303545-2796-4d92-92d6-cba57fd2585d" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" amount="1.25078173858662" isCalculatedAmount="true" intermediateExchangeId="0b404a7a-c140-4b1b-a555-a7082a6012ef" activityLinkId="8290eb44-021d-4dfe-88e1-90ca111f96e7" productionVolumeAmount="5047529.70606629">
+        <name xml:lang="en">used vegetable cooking oil</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">See Properties.</comment>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0.6" mathematicalRelation="0.75*usedOil_DM" isCalculatedAmount="true" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">C content in fat is estimated to be 75% in dry mass (ecoinvent v2.2 report, n 15a, p 40)</comment>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="0.8" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <uncertainty>
+            <lognormal meanValue="0.8" mu="-0.2231" variance="0" varianceWithPedigreeUncertainty="0.21" />
+            <pedigreeMatrix reliability="5" completeness="5" temporalCorrelation="5" geographicalCorrelation="5" furtherTechnologyCorrelation="5" />
+            <comment xml:lang="en"></comment>
+          </uncertainty>
+          <comment xml:lang="en">Measured value from industry. </comment>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0.25" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water mass/dry mass</comment>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0.2" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">Measured value from industry. </comment>
+        </property>
+        <property propertyId="38f94dd1-d5aa-41b8-b182-c0c42985d9dc" variableName="usedOil_price_EUR2005" amount="0" unitId="7b75baf0-cbee-45e6-bf66-af119da06553">
+          <name xml:lang="en">price</name>
+          <unitName xml:lang="en">EUR2005</unitName>
+          <comment xml:lang="en">Assumed without economic value</comment>
+        </property>
+        <property propertyId="48c987bb-3144-4872-b5c7-b1389c40be25" amount="38.4" mathematicalRelation="" unitId="980b811e-3905-4797-82a5-173f5568bc7e">
+          <name xml:lang="en">heating value, net</name>
+          <unitName xml:lang="en">MJ</unitName>
+          <comment xml:lang="en">Values is approximated from HHV from "vegetable oil, crude". Source: Radovanovic,M.; Zivanovic,T.; Stojiljkovic,D.; Jovanovic,V.; Jerinic,N.; Knezevic,S. et.al. Utilization of sunflower husk as a fuel for industrial boilers - 20 years experience. Proc. 5th Eur. Conf. on Industrial Furnaces&amp;Boilers 2000,vol.2,p.221-233.
+Available at: https://phyllis.nl/Biomass/View/2152</comment>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.6" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.48" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <classification classificationId="a20a9e2f-b3f0-40fd-8358-f8adf7f419c4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">Recyclable</classificationValue>
+        </classification>
+        <classification classificationId="6e0803e5-067b-456e-a414-d05881903f1f">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">39120: Bran and other residues from the working of cereals or legumes; vegetable materials and vegetable waste, veget[…]</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="4f4b44ec-7220-4472-89a9-604346ae706f" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" variableName="purifiedOil" amount="1" isCalculatedAmount="true" mathematicalRelation="(-1*usedOil*usedOil_DM/purifiedOil_drymass)-oil_loss" intermediateExchangeId="e303fb73-b0e1-41ae-bddc-5e0e444eb3fb" productionVolumeAmount="4035500" productionVolumeVariableName="PV_purifiedOil">
+        <name xml:lang="en">used vegetable cooking oil, purified</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">Calculated value. All the water in the used cooking oil input is supposed to be extracte durng purification. 
+Mass of purified used cooking oil produced = (mass of used cooking oil input without water) - used oil loss</comment>
+        <uncertainty>
+          <undefined minValue="0" maxValue="0" standardDeviation95="0" />
+          <pedigreeMatrix reliability="1" completeness="1" temporalCorrelation="1" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <property propertyId="48c987bb-3144-4872-b5c7-b1389c40be25" amount="38.4" mathematicalRelation="" unitId="980b811e-3905-4797-82a5-173f5568bc7e">
+          <name xml:lang="en">heating value, net</name>
+          <unitName xml:lang="en">MJ</unitName>
+          <comment xml:lang="en">Values is approximated from HHV from "vegetable oil, crude". Source: Radovanovic,M.; Zivanovic,T.; Stojiljkovic,D.; Jovanovic,V.; Jerinic,N.; Knezevic,S. et.al. Utilization of sunflower husk as a fuel for industrial boilers - 20 years experience. Proc. 5th Eur. Conf. on Industrial Furnaces&amp;Boilers 2000,vol.2,p.221-233.
+Available at: https://phyllis.nl/Biomass/View/2152</comment>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" variableName="purifiedOil_drymass" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0.747" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="38f94dd1-d5aa-41b8-b182-c0c42985d9dc" variableName="purifiedOil_price_EUR2005" amount="0.362" unitId="7b75baf0-cbee-45e6-bf66-af119da06553">
+          <name xml:lang="en">price</name>
+          <unitName xml:lang="en">EUR2005</unitName>
+          <comment xml:lang="en">Temporary price data. Calculated as 90% of purchasers price based on: Assumed equal to palm oil</comment>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0.003" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.75" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.75" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <classification classificationId="6e0803e5-067b-456e-a414-d05881903f1f">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">39120: Bran and other residues from the working of cereals or legumes; vegetable materials and vegetable waste, veget[…]</classificationValue>
+        </classification>
+        <classification classificationId="a20a9e2f-b3f0-40fd-8358-f8adf7f419c4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">Recyclable</classificationValue>
+        </classification>
+        <outputGroup>0</outputGroup>
+      </intermediateExchange>
+      <elementaryExchange id="74bd53e9-867f-40b7-bd71-5a0fc8283ada" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" amount="0.000541102698114893" elementaryExchangeId="960c0f37-f34c-4fc1-b77c-22d8b35fd8d5">
+        <name xml:lang="en">DOC, Dissolved Organic Carbon</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">Calculated value. According to emissions of used oil to soil.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.000541102698114893" mu="-7.522" variance="0.04" varianceWithPedigreeUncertainty="0.25" />
+          <pedigreeMatrix reliability="5" completeness="5" temporalCorrelation="5" geographicalCorrelation="5" furtherTechnologyCorrelation="5" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <compartment subcompartmentId="963f8022-3e2e-4be9-ad4d-b3b7a2282099">
+          <compartment xml:lang="en">water</compartment>
+          <subcompartment xml:lang="en">surface water</subcompartment>
+        </compartment>
+        <outputGroup>4</outputGroup>
+      </elementaryExchange>
+      <elementaryExchange id="2ff52f90-3374-470c-962d-4801d69efd97" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" variableName="oil_loss" amount="0.000625390869293308" isCalculatedAmount="true" mathematicalRelation="oil_emission_to_soil*usedOil*-1" elementaryExchangeId="be4835bf-5252-48c1-be48-14f59d533bbd">
+        <name xml:lang="en">Oils, non-fossil</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">See Properties.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.000625390869293308" mu="-7.377" variance="0" varianceWithPedigreeUncertainty="0.008" />
+          <pedigreeMatrix reliability="1" completeness="1" temporalCorrelation="4" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en">Calculated variable. Uncertainty will be determined from propagation of uncertainty factors of underlying variables. Uncertainty of actual relation between variables not accounted for at this time, although this could be included in a future update.</comment>
+        </uncertainty>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0.75" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="706d9439-c660-47d8-a3ea-088800b65910" variableName="oil_emission_to_soil" amount="0.0005" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">used oil fraction emitted to soil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <uncertainty>
+            <lognormal meanValue="0.0005" mu="-7.601" variance="0.0006" varianceWithPedigreeUncertainty="0.0506" />
+            <pedigreeMatrix reliability="4" completeness="1" temporalCorrelation="5" geographicalCorrelation="5" furtherTechnologyCorrelation="1" />
+            <comment xml:lang="en">Estimation from ecoinvent guidelines.</comment>
+          </uncertainty>
+          <comment xml:lang="en">Loss of used oil to soil is considered to be 0,05% according to ecoinvent guidelines (ecoinvent v2.2 report no. 17, p475).</comment>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0.75" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0.75" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <compartment subcompartmentId="912f1ae3-734e-4cc6-bbf7-0f36843cd7de">
+          <compartment xml:lang="en">soil</compartment>
+          <subcompartment xml:lang="en">industrial</subcompartment>
+        </compartment>
+        <outputGroup>4</outputGroup>
+      </elementaryExchange>
+      <elementaryExchange id="d77080a5-b042-443a-89dc-056e14e2c03b" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" amount="0.000541102698114893" elementaryExchangeId="f65558fb-61a1-4e48-b4f2-60d62f14b085">
+        <name xml:lang="en">TOC, Total Organic Carbon</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">Calculated value. According to emissions of used oil to soil.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.000541102698114893" mu="-7.522" variance="0.04" varianceWithPedigreeUncertainty="0.25" />
+          <pedigreeMatrix reliability="5" completeness="5" temporalCorrelation="5" geographicalCorrelation="5" furtherTechnologyCorrelation="5" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <compartment subcompartmentId="963f8022-3e2e-4be9-ad4d-b3b7a2282099">
+          <compartment xml:lang="en">water</compartment>
+          <subcompartment xml:lang="en">surface water</subcompartment>
+        </compartment>
+        <outputGroup>4</outputGroup>
+      </elementaryExchange>
+      <elementaryExchange id="38915e97-bcbe-43d9-a694-e7b054c4ab21" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" amount="0.00437772394625523" elementaryExchangeId="fc0b5c85-3b49-42c2-a3fd-db7e57b696e3">
+        <name xml:lang="en">COD, Chemical Oxygen Demand</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">Calculated value. According to emissions of used oil to soil.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.00437772394625523" mu="-5.431" variance="0.04" varianceWithPedigreeUncertainty="0.25" />
+          <pedigreeMatrix reliability="5" completeness="5" temporalCorrelation="5" geographicalCorrelation="5" furtherTechnologyCorrelation="5" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <compartment subcompartmentId="963f8022-3e2e-4be9-ad4d-b3b7a2282099">
+          <compartment xml:lang="en">water</compartment>
+          <subcompartment xml:lang="en">surface water</subcompartment>
+        </compartment>
+        <outputGroup>4</outputGroup>
+      </elementaryExchange>
+      <elementaryExchange id="8dc11497-3709-4d29-9834-885ac12c5334" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" amount="0.00437772394625523" elementaryExchangeId="70d467b6-115e-43c5-add2-441de9411348">
+        <name xml:lang="en">BOD5, Biological Oxygen Demand</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">Calculated value. According to emissions of used oil to soil.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.00437772394625523" mu="-5.431" variance="0.04" varianceWithPedigreeUncertainty="0.25" />
+          <pedigreeMatrix reliability="5" completeness="5" temporalCorrelation="5" geographicalCorrelation="5" furtherTechnologyCorrelation="5" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <compartment subcompartmentId="963f8022-3e2e-4be9-ad4d-b3b7a2282099">
+          <compartment xml:lang="en">water</compartment>
+          <subcompartment xml:lang="en">surface water</subcompartment>
+        </compartment>
+        <outputGroup>4</outputGroup>
+      </elementaryExchange>
+      <parameter parameterId="01df0f0c-30f3-4446-ba4e-3956f227f4e9" variableName="usedOil_DM" amount="0.8">
+        <name xml:lang="en">dry mass, used oil</name>
+        <unitName xml:lang="en">dimensionless</unitName>
+        <uncertainty>
+          <lognormal meanValue="0.8" mu="-0.2231" variance="0" varianceWithPedigreeUncertainty="0.01" />
+          <pedigreeMatrix reliability="4" completeness="4" temporalCorrelation="1" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <comment xml:lang="en">Measured value from industry. </comment>
+      </parameter>
+      <parameter parameterId="2b3d7baf-3a04-4c87-b1b9-d7f5473167b3" variableName="usedOil_consumption_l" amount="1.12">
+        <name xml:lang="en">consumption, used oil</name>
+        <unitName xml:lang="en">l</unitName>
+        <uncertainty>
+          <lognormal meanValue="1.12" mu="0.1133" variance="0.0006" varianceWithPedigreeUncertainty="0.0032" />
+          <pedigreeMatrix reliability="2" completeness="4" temporalCorrelation="1" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <comment xml:lang="en">Measured value of used vegatable cooking oil consumption at plant. </comment>
+      </parameter>
+      <parameter parameterId="788e7fab-8fb8-4d9f-884a-775ee890a4f7" variableName="usedOil_density" amount="0.92">
+        <name xml:lang="en">usedOil_density</name>
+        <unitName xml:lang="en">kg/l</unitName>
+        <uncertainty>
+          <lognormal meanValue="0.92" mu="-0.08338" variance="0" varianceWithPedigreeUncertainty="0.042" />
+          <pedigreeMatrix reliability="5" completeness="4" temporalCorrelation="1" geographicalCorrelation="1" furtherTechnologyCorrelation="1" />
+          <comment xml:lang="en"></comment>
+        </uncertainty>
+        <comment xml:lang="en">Density of used vegetable cooking oil. Measured value from industry. </comment>
+      </parameter>
+    </flowData>
+    <modellingAndValidation>
+      <representativeness percent="40" systemModelId="290c1f85-4cc4-4fa1-b0c8-2cb7f4276dce">
+        <systemModelName xml:lang="en">Allocation, cut-off by classification</systemModelName>
+        <samplingProcedure xml:lang="en">Industrial data from one biodiesel producer in the Quebec region. </samplingProcedure>
+        <extrapolations xml:lang="en">This dataset has been extrapolated from year 2012 to the year of the calculation (2021). The uncertainty has been adjusted accordingly.</extrapolations>
+      </representativeness>
+      <review reviewerId="35d091e9-38c2-4037-9efe-a73673c57123" reviewerName="Emilia Moreno Ruiz" reviewerEmail="moreno@ecoinvent.org" reviewDate="2015-09-17" reviewedMajorRelease="3" reviewedMinorRelease="0" reviewedMajorRevision="2" reviewedMinorRevision="3">
+        <details>
+          <text xml:lang="en" index="0">broken formula fixed</text>
+        </details>
+        <otherDetails xml:lang="en"></otherDetails>
+      </review>
+      <review reviewerId="f86c02d3-2c12-4c25-ad03-33af05bcfe63" reviewerName="Tereza Levova" reviewerEmail="levova@ecoinvent.org" reviewDate="2014-02-12" reviewedMajorRelease="3" reviewedMinorRelease="0" reviewedMajorRevision="0" reviewedMinorRevision="24">
+        <details>
+          <text xml:lang="en" index="0"></text>
+        </details>
+        <otherDetails xml:lang="en"></otherDetails>
+      </review>
+      <review reviewerId="c4597934-ecac-422c-b431-382e85fdcb83" reviewerName="[System]" reviewerEmail="support@ecoinvent.org" reviewDate="2015-09-17" reviewedMajorRelease="3" reviewedMinorRelease="0" reviewedMajorRevision="2" reviewedMinorRevision="3">
+        <details />
+        <otherDetails xml:lang="en">Validation warnings:
+
+- Consider if it would be better to create this dataset as a child dataset relative to a parent dataset. See the ecoinvent Data Quality Guideline Chapter 4.2 for further advice.
+- Mass and/or economic deficit in activity dataset exceeds either 0.1% of input or output sum:
+
+Property 'carbon content, fossil':
+ - Input='0,00100003624308352', Output='0,0034714144'
+ - Input &lt; output by 0,00247137815691648 kg (71,19% of output)
+
+Property 'water in wet mass':
+ - Input='0,266059751430635', Output='0,258712661170807'
+ - Input &gt; output by 0,00734709025982849 kg (2,84% of output)
+
+Property 'carbon content, non-fossil':
+ - Input='0,494592', Output='0,61578600284'
+ - Input &lt; output by 0,12119400284 kg (19,68% of output)
+
+Property 'wet mass':
+ - Input='1,092', Output='1,08472'
+ - Input &gt; output by 0,00727999999999995 kg (0,67% of output)
+
+Property 'price':
+ - Input='0', Output='0,2982173376'
+ - Input &lt; output by 0,2982173376 EUR2005 (100% of output)
+
+
+- Amount of property 'carbon content, non-fossil=0,6' of exchange 'used vegetable cooking oil' deviates from the default amount in the master file.
+Amount of property 'dry mass=0,8' of exchange 'used vegetable cooking oil' deviates from the default amount in the master file.
+Amount of property 'water in wet mass=0,2' of exchange 'used vegetable cooking oil' deviates from the default amount in the master file.
+Amount of property 'water content=0,25' of exchange 'used vegetable cooking oil' deviates from the default amount in the master file.
+Amount of property 'water content=2962,17230710238' of exchange 'tap water' deviates from the default amount in the master file.
+Amount of property 'carbon content, fossil=0,625' of exchange 'waste polyethylene terephtalate' deviates from the default amount in the master file.
+Amount of property 'dry mass=1' of exchange 'waste polyethylene terephtalate' deviates from the default amount in the master file.
+Amount of property 'water in wet mass=0' of exchange 'waste polyethylene terephtalate' deviates from the default amount in the master file.
+Amount of property 'water content=0' of exchange 'waste polyethylene terephtalate' deviates from the default amount in the master file.
+
+- The total water in wet mass of all input exchanges (0,266059751430635) and output exchanges (0,258712661170807) is unbalanced.
+- Uncertainty shall always be provided for all primary data inputs (exchange amounts, properties and parameters), except for the amount and properties of reference products.
+ -- Property(ies): carbon content, fossil=0,003, dry mass=1, water in wet mass=0, water content=0, wet mass=1, carbon content, non-fossil=0,747, price=0,362, wet mass=1000, carbon content, fossil=0, water in wet mass=999,662523843921, carbon content, non-fossil=0,19942149626799, water content=2962,17230710238, dry mass=0,33747615607878, water in wet mass=0, dry mass=1, water content=0, carbon content, fossil=0,625, wet mass=1, carbon content, non-fossil=0, dry mass=1, carbon content, fossil=0, water in wet mass=0, water content=0, carbon content, non-fossil=0,75, wet mass=1
+
+- Pedigree information shall always be provided for all uncertainties of primary data inputs (exchange amounts, properties and parameters), except for the amount and properties of reference products.
+ -- Property(ies): carbon content, fossil=0,003, dry mass=1, water in wet mass=0, water content=0, wet mass=1, carbon content, non-fossil=0,747, price=0,362, wet mass=1000, carbon content, fossil=0, water in wet mass=999,662523843921, carbon content, non-fossil=0,19942149626799, water content=2962,17230710238, dry mass=0,33747615607878, water in wet mass=0, dry mass=1, water content=0, carbon content, fossil=0,625, wet mass=1, carbon content, non-fossil=0, dry mass=1, carbon content, fossil=0, water in wet mass=0, water content=0, carbon content, non-fossil=0,75, wet mass=1
+
+- The following negative reference products could not be identified as materials for treatment. No activities exist that produce these materials for treatment.
+ - used vegetable cooking oil
+
+- Production volume of local datasets for a specific activity, time period, and macro-economic scenario must not exceed production volume of the corresponding global.
+
+ -  Exchange 'waste polyethylene terephtalate', global (2003-2006) production volume 7837,73291925466, sum of all non-global production volumes 7837,77904668679. Local datasets used in calculation: CH (2003-2006), FR (2003-2006), CA-QC (2012-2012)
+
+</otherDetails>
+      </review>
+      <review reviewerId="87296ea5-2149-44c3-8e36-b1256c92666a" reviewerName="Gregor Wernet" reviewerEmail="wernet@ecoinvent.org" reviewDate="2014-06-03" reviewedMajorRelease="3" reviewedMinorRelease="0" reviewedMajorRevision="1" reviewedMinorRevision="2">
+        <details>
+          <text xml:lang="en" index="0"></text>
+        </details>
+        <otherDetails xml:lang="en"></otherDetails>
+      </review>
+      <review reviewerId="c4597934-ecac-422c-b431-382e85fdcb83" reviewerName="[System]" reviewerEmail="support@ecoinvent.org" reviewDate="2014-06-03" reviewedMajorRelease="3" reviewedMinorRelease="0" reviewedMajorRevision="1" reviewedMinorRevision="2">
+        <details />
+        <otherDetails xml:lang="en">Validation warnings:
+
+- Consider if it would be better to create this dataset as a child dataset relative to a parent dataset. See the ecoinvent Data Quality Guideline Chapter 4.2 for further advice.
+- Mass and/or economic deficit in activity dataset exceeds either 0.1% of input or output sum:
+
+Property 'wet mass':
+ - Input='1,092', Output='1,08472'
+ - Input &gt; output by 0,00727999999999995 kg (0,67% of output)
+
+Property 'carbon content, non-fossil':
+ - Input='0,494592', Output='0,61578600284'
+ - Input &lt; output by 0,12119400284 kg (19,68% of output)
+
+Property 'carbon content, fossil':
+ - Input='0,00100003624308352', Output='0,0034714144'
+ - Input &lt; output by 0,00247137815691648 kg (71,19% of output)
+
+Property 'water in wet mass':
+ - Input='0,266059751430635', Output='0,258712661170807'
+ - Input &gt; output by 0,00734709025982849 kg (2,84% of output)
+
+Property 'price':
+ - Input='0', Output='0,2982173376'
+ - Input &lt; output by 0,2982173376 EUR2005 (100% of output)
+
+
+- Amount of property 'carbon content, non-fossil=0,6' of exchange 'used vegetable cooking oil' deviates from the default amount in the master file.
+Amount of property 'water in wet mass=0,2' of exchange 'used vegetable cooking oil' deviates from the default amount in the master file.
+Amount of property 'dry mass=0,8' of exchange 'used vegetable cooking oil' deviates from the default amount in the master file.
+Amount of property 'water content=0,25' of exchange 'used vegetable cooking oil' deviates from the default amount in the master file.
+Amount of property 'water in wet mass=0' of exchange 'waste polyethylene terephtalate' deviates from the default amount in the master file.
+Amount of property 'dry mass=1' of exchange 'waste polyethylene terephtalate' deviates from the default amount in the master file.
+Amount of property 'carbon content, fossil=0,625' of exchange 'waste polyethylene terephtalate' deviates from the default amount in the master file.
+Amount of property 'water content=0' of exchange 'waste polyethylene terephtalate' deviates from the default amount in the master file.
+
+- The total water in wet mass of all input exchanges (0,266059751430635) and output exchanges (0,258712661170807) is unbalanced.
+- Uncertainty shall always be provided for all primary data inputs (exchange amounts, properties and parameters), except for the amount and properties of reference products.
+ -- Property(ies): price=0,362, wet mass=1, carbon content, non-fossil=0,747, dry mass=1, water in wet mass=0, water content=0, carbon content, fossil=0,003, carbon content, non-fossil=0, dry mass=1, carbon content, fossil=0,625, wet mass=1, water content=0, water in wet mass=0, wet mass=1000, carbon content, fossil=0, water content=2962,17230710238, dry mass=0,33747615607878, water in wet mass=999,662523843921, carbon content, non-fossil=0,19942149626799, dry mass=1, wet mass=1, carbon content, non-fossil=0,75, water content=0, carbon content, fossil=0, water in wet mass=0
+
+- Pedigree information shall always be provided for all uncertainties of primary data inputs (exchange amounts, properties and parameters), except for the amount and properties of reference products.
+ -- Property(ies): price=0,362, wet mass=1, carbon content, non-fossil=0,747, dry mass=1, water in wet mass=0, water content=0, carbon content, fossil=0,003, carbon content, non-fossil=0, dry mass=1, carbon content, fossil=0,625, wet mass=1, water content=0, water in wet mass=0, wet mass=1000, carbon content, fossil=0, water content=2962,17230710238, dry mass=0,33747615607878, water in wet mass=999,662523843921, carbon content, non-fossil=0,19942149626799, dry mass=1, wet mass=1, carbon content, non-fossil=0,75, water content=0, carbon content, fossil=0, water in wet mass=0
+
+- The following negative reference products could not be identified as materials for treatment. No activities exist that produce these materials for treatment.
+ - used vegetable cooking oil
+
+</otherDetails>
+      </review>
+      <review reviewerId="c4597934-ecac-422c-b431-382e85fdcb83" reviewerName="[System]" reviewerEmail="support@ecoinvent.org" reviewDate="2014-04-16" reviewedMajorRelease="3" reviewedMinorRelease="0" reviewedMajorRevision="0" reviewedMinorRevision="27">
+        <details />
+        <otherDetails xml:lang="en">Validation warnings:
+
+- Consider if it would be better to create this dataset as a child dataset relative to a parent dataset. See the ecoinvent Data Quality Guideline Chapter 4.2 for further advice.
+- Mass and/or economic deficit in activity dataset exceeds either 0.1% of input or output sum:
+
+Property 'carbon content, non-fossil':
+ - Input='0,494592', Output='0,61578600284'
+ - Input &lt; output by 0,12119400284 kg (19,68% of output)
+
+Property 'carbon content, fossil':
+ - Input='0,00100003624308352', Output='0,0034714144'
+ - Input &lt; output by 0,00247137815691648 kg (71,19% of output)
+
+Property 'water in wet mass':
+ - Input='0,266059751430635', Output='0,258712661170807'
+ - Input &gt; output by 0,00734709025982849 kg (2,84% of output)
+
+Property 'wet mass':
+ - Input='1,092', Output='1,08472'
+ - Input &gt; output by 0,00728000000000018 kg (0,67% of output)
+
+
+- Amount of property 'dry mass=1' of exchange 'waste polyethylene terephtalate' deviates from the default amount in the master file.
+Amount of property 'carbon content, fossil=0,625' of exchange 'waste polyethylene terephtalate' deviates from the default amount in the master file.
+Amount of property 'water content=0' of exchange 'waste polyethylene terephtalate' deviates from the default amount in the master file.
+Amount of property 'water in wet mass=0' of exchange 'waste polyethylene terephtalate' deviates from the default amount in the master file.
+Amount of property 'dry mass=0,8' of exchange 'used vegetable cooking oil' deviates from the default amount in the master file.
+Amount of property 'water content=0,25' of exchange 'used vegetable cooking oil' deviates from the default amount in the master file.
+Amount of property 'carbon content, non-fossil=0,6' of exchange 'used vegetable cooking oil' deviates from the default amount in the master file.
+Amount of property 'water in wet mass=0,2' of exchange 'used vegetable cooking oil' deviates from the default amount in the master file.
+
+- The total water in wet mass of all input exchanges (0,266059751430635) and output exchanges (0,258712661170807) is unbalanced.
+- Uncertainty shall always be provided for all primary data inputs (exchange amounts, properties and parameters), except for the amount and properties of reference products.
+ -- Property(ies): carbon content, non-fossil=0,19942149626799, dry mass=0,33747615607878, water content=2962,17230710238, wet mass=1000, water in wet mass=999,662523843921, carbon content, fossil=0, dry mass=1, water in wet mass=0, wet mass=1, carbon content, non-fossil=0, water content=0, carbon content, fossil=0,625, carbon content, non-fossil=0,747, carbon content, fossil=0,003, water in wet mass=0, water content=0, wet mass=1, dry mass=1, carbon content, non-fossil=0,75, carbon content, fossil=0, water in wet mass=0, water content=0, wet mass=1, dry mass=1
+
+- Pedigree information shall always be provided for all uncertainties of primary data inputs (exchange amounts, properties and parameters), except for the amount and properties of reference products.
+ -- Property(ies): carbon content, non-fossil=0,19942149626799, dry mass=0,33747615607878, water content=2962,17230710238, wet mass=1000, water in wet mass=999,662523843921, carbon content, fossil=0, dry mass=1, water in wet mass=0, wet mass=1, carbon content, non-fossil=0, water content=0, carbon content, fossil=0,625, carbon content, non-fossil=0,747, carbon content, fossil=0,003, water in wet mass=0, water content=0, wet mass=1, dry mass=1, carbon content, non-fossil=0,75, carbon content, fossil=0, water in wet mass=0, water content=0, wet mass=1, dry mass=1
+
+- The following negative reference products could not be identified as materials for treatment. No activities exist that produce these materials for treatment.
+ - used vegetable cooking oil
+
+</otherDetails>
+      </review>
+    </modellingAndValidation>
+    <administrativeInformation>
+      <dataEntryBy personId="37cc4296-1529-4587-9d00-4107455be7d7" isActiveAuthor="true" personName="François Saunier" personEmail="francois.saunier@polymtl.ca" />
+      <dataGeneratorAndPublication personId="37cc4296-1529-4587-9d00-4107455be7d7" personName="François Saunier" personEmail="francois.saunier@polymtl.ca" dataPublishedIn="0" isCopyrightProtected="true" accessRestrictedTo="1" />
+      <fileAttributes majorRelease="3" minorRelease="0" majorRevision="7" minorRevision="0" internalSchemaVersion="2.0.10" defaultLanguage="en" creationTimestamp="2014-02-06T11:52:11" lastEditTimestamp="2015-09-17T13:15:51" fileGenerator="EcoEditor 3.6.120.14104" fileTimestamp="2015-09-17T13:15:51" contextId="de659012-50c4-4e96-b54a-fc781bf987ab">
+        <contextName xml:lang="en">ecoinvent</contextName>
+      </fileAttributes>
+    </administrativeInformation>
+  </childActivityDataset>
+</ecoSpold>

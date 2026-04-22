@@ -1,0 +1,276 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ecoSpold xmlns="http://www.EcoInvent.org/EcoSpold02">
+  <childActivityDataset>
+    <activityDescription>
+      <activity id="2d142ea5-5e03-4ede-8426-c0164b68cc9a" activityNameId="57f5ff28-692c-49f5-bc34-439830487447" parentActivityId="dcee7c09-edf7-4b1d-bcc8-c0632a6dc1f7" inheritanceDepth="-1" type="1" specialActivityType="1">
+        <activityName xml:lang="en">market for granulated blast furnace slag</activityName>
+        <includedActivitiesStart xml:lang="en">This activity starts at the gate of the activities that produce 'granulated blast furnace slag',  within the geography of Brazil.</includedActivitiesStart>
+        <includedActivitiesEnd xml:lang="en">This activity ends with the supply of 'granulated blast furnace slag',  to the consumers of this product. Transport is included. Product losses during transportation are assumed negligible and are therefore not included.</includedActivitiesEnd>
+        <generalComment>
+          <text xml:lang="en" index="2">This is the market for 'granulated blast furnace slag', in the geography of Brazil. This is a constrained market for consequential system model, for attributional system models, this is a regular market. In the case of consequential system model, details about the marginal consumer can be found in the comment of the conditional exchange (by-product).</text>
+          <text xml:lang="en" index="1">This is a market activity. Each market represents the consumption mix of a product in a given geography, connecting suppliers with consumers of the same product in the same geographical area. Markets group the producers and also the imports of the product (if relevant) within the same geographical area. They also account for transport to the consumer and for the losses during that process, when relevant.</text>
+          <text xml:lang="en" index="4">The product "granulated blast furnace slag" represents  the intermediate treatment of raw blast furnace slag, producing an output of granulated blast furnace slag (GBFS). GBFS resembles a natural sand grain, with a more angular form. It has a glass content of over 95% and presents excellent hydraulic properties. The GBFS usually goes through a subsequent grinding process, generating a supplementary cementitious material called ground granulated blast furnace slag (GGBFS). The most import part of the raw material for producing blast furnace slag cement is dry granulated blast furnace slag.</text>
+          <text xml:lang="en" index="3">This is a constrained market for GBFS, which is further grinded and added to cement as a clinker replacement. The justification for a market constraint is included in the comment field of the conditional exchange.
+Transport distance was measured from all the 32 steelmaking factories associated to the Brazilian Steel Institute to the 56 cement making factories associated to the Brazilian Portland cement Association that actually manufacture slag cement. The underlying assumption was that cement making factories bought granulated blast furnace slag from the closest steelmaking factory (this was confirmed by sector experts). The average distance is 159.22 km, but high uncertainty is associated with it.
+Lorry's size was defined as 16-32t based on the average amount of granulated blast furnace slag generated in the country and transported daily. Considering the number of investigated steelmaking factories, around 640 ton of GBFS leave each factory, every day, which would require a lorry able to transport elevated loads.
+EURO 3 emission standard (equivalent to PROCONVE 5) is assumed to represent 45% of Brazilian road cargo fleet, according to the inventory of road transport vehicles in 2013.
+Ministry of Environment. 1st National Inventory of atmospheric emissions of road transport vehicles. 2013 http://www.anp.gov.br/wwwanp/images/Emissoes-Atmosfericas-1Inventariodeemissoes.pdf
+</text>
+        </generalComment>
+      </activity>
+      <classification classificationId="27f6acbc-2350-450e-9762-1ce00e12ecba">
+        <classificationSystem xml:lang="en">ISIC rev.4 ecoinvent</classificationSystem>
+        <classificationValue xml:lang="en">2395:Manufacture of articles of concrete, cement and plaster</classificationValue>
+      </classification>
+      <geography geographyId="0a2c8c66-7d7e-11de-9ae2-0019e336be3a">
+        <shortname xml:lang="en">BR</shortname>
+      </geography>
+      <technology technologyLevel="0" />
+      <timePeriod startDate="2015-01-01" endDate="2021-12-31" isDataValidForEntirePeriod="true" />
+      <macroEconomicScenario macroEconomicScenarioId="d9f57f0a-a01f-42eb-a57b-8f18d6635801">
+        <name xml:lang="en">Business-as-Usual</name>
+      </macroEconomicScenario>
+    </activityDescription>
+    <flowData>
+      <intermediateExchange id="7a4017d7-44f5-4e1b-8238-1d2bcaa61e8f" unitId="2f4daad7-5331-4f14-930c-d8bca924557d" amount="0.15922" isCalculatedAmount="true" mathematicalRelation="159,22/1000" intermediateExchangeId="f9895e44-5657-47fc-8eec-a4985e2bce2e" activityLinkId="ee935e63-dc3f-4a68-94c2-3b5ff7805e83">
+        <name xml:lang="en">transport, freight, lorry 16-32 metric ton, EURO3</name>
+        <unitName xml:lang="en">metric ton*km</unitName>
+        <comment xml:lang="en">Average distance from 31 steelmaking factories to 56 cement making factories - assumption:cement making factories buy GBFS from the closest steelmaking plant.</comment>
+        <uncertainty>
+          <lognormal meanValue="0.15922" mu="-1.837" variance="2.29" varianceWithPedigreeUncertainty="2.331425" />
+          <pedigreeMatrix reliability="5" completeness="3" temporalCorrelation="2" geographicalCorrelation="2" furtherTechnologyCorrelation="2" />
+          <comment xml:lang="en">Variance calculated based on sample.</comment>
+        </uncertainty>
+        <classification classificationId="951f8f36-8fb0-47a1-b6f8-acb10713cca2">
+          <classificationSystem xml:lang="en">CPC</classificationSystem>
+          <classificationValue xml:lang="en">6511: Road transport services of freight</classificationValue>
+        </classification>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="f8a9d181-3a5d-4ad8-ae9e-f2a213783a19" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" amount="1" intermediateExchangeId="908ee5e9-b25e-4f56-8a41-d9856a5bd39e" productionVolumeAmount="7240000000">
+        <name xml:lang="en">granulated blast furnace slag</name>
+        <unitName xml:lang="en">kg</unitName>
+        <property propertyId="38f94dd1-d5aa-41b8-b182-c0c42985d9dc" amount="0.0615" unitId="7b75baf0-cbee-45e6-bf66-af119da06553">
+          <name xml:lang="en">price</name>
+          <unitName xml:lang="en">EUR2005</unitName>
+          <comment xml:lang="en">2005 import and export prices (total trades (USD) divided by total weight (kg) in China, India, USA, Japan, Russia and Europe, major producers and consumers (http://www.cementchina.net/freport/showfre.asp?id=749) from UN Commodity Trade Statistics Database  (http://data.un.org/Explorer.aspxDatabase [Accessed 2 July 2010]). Commodity: Cement (portland, aluminious, slag or hydraulic)</comment>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">This is a calculated weighted average.</comment>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">This is a calculated weighted average.</comment>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">This is a calculated weighted average.</comment>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">This is a calculated weighted average.</comment>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">This is a calculated weighted average.</comment>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">This is a calculated weighted average.</comment>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <outputGroup>0</outputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="1cecc6ea-cece-4f9c-9d75-80f3c9476182" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" variableName="GBFS" amount="0" intermediateExchangeId="908ee5e9-b25e-4f56-8a41-d9856a5bd39e" activityLinkId="6af1e6f5-e5af-40f5-bd4c-f6665d5a565f" productionVolumeAmount="0">
+        <name xml:lang="en">granulated blast furnace slag</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">This is a conditional exchange. The ground granulated blast furnace slag (GGBFS) market is not fully elastic, which means that in a case when demand is higher than supply one of the uses of GBFS will be affected by this shortage. 
+
+The GBFS is used in the cement production as a substitute for portland cement. In case of shortage of GGBFS on the market it is the cement production which will be affected and will start using another product. This is modelled through the generic market for Supplementary cementitious materials. 
+
+Supplementary cementitious materials (SCMs) are materials used to substitute clinker in cement production. SCMs do not usually have an elastic demand as they are mostly produced as by-products. Examples of SCMs are: fly ash, by-product of coal-dired electricity, and blast furnace slag, by-product of iron and steel production. According to Scrivener et al. (2018) clay is the material that could supply an increased demand for SCMs.
+
+In Brazil, according to the Brazilian cement Technology Roadmap 2019, unconstrained substitutes for clinker are clay and limestone filler. Calcined clay is the product currently available in ecoinvent and therefore the unconstrained supplier acting in the consequential system model.
+
+ROADMAP tecnológico do cimento: potencial de redução das emissões de carbono da indústria do cimento brasileira até 2050 / coordenado por Gonzalo V isedo e Marcelo Pecchio. Rio de Janeiro: SNIC, 2019 64 p.
+
+Scrivener et al. 2018. Calcined clay limestone cements (LC3). Cement and Concrete Research, 114, 49-56. https://doi.org/10.1016/j.cemconres.2017.08.017
+</comment>
+        <property propertyId="38f94dd1-d5aa-41b8-b182-c0c42985d9dc" variableName="GBFS_price_EUR2005" amount="0.0615" unitId="7b75baf0-cbee-45e6-bf66-af119da06553">
+          <name xml:lang="en">price</name>
+          <unitName xml:lang="en">EUR2005</unitName>
+          <comment xml:lang="en">2005 import and export prices (total trades (USD) divided by total weight (kg) in China, India, USA, Japan, Russia and Europe, major producers and consumers (http://www.cementchina.net/freport/showfre.asp?id=749) from UN Commodity Trade Statistics Database  (http://data.un.org/Explorer.aspxDatabase [Accessed 2 July 2010]). Commodity: Cement (portland, aluminious, slag or hydraulic)</comment>
+        </property>
+        <property propertyId="2903bca6-1b3d-4ac5-87a4-b6701cfbbe42" amount="1" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">consequential</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">set to 1 for conditional exchanges to be used in consequential system model only</comment>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <outputGroup>2</outputGroup>
+      </intermediateExchange>
+      <intermediateExchange id="95595224-38d8-41f6-b48c-bb8396e08502" unitId="487df68b-4994-4027-8fdc-a4dc298257b7" amount="1" intermediateExchangeId="908ee5e9-b25e-4f56-8a41-d9856a5bd39e" activityLinkId="cb6589e5-bd6a-4c9c-bfce-246ddf5238f3" productionVolumeAmount="7240000000">
+        <name xml:lang="en">granulated blast furnace slag</name>
+        <unitName xml:lang="en">kg</unitName>
+        <property propertyId="38f94dd1-d5aa-41b8-b182-c0c42985d9dc" amount="0.0615" unitId="7b75baf0-cbee-45e6-bf66-af119da06553">
+          <name xml:lang="en">price</name>
+          <unitName xml:lang="en">EUR2005</unitName>
+          <comment xml:lang="en">2005 import and export prices (total trades (USD) divided by total weight (kg) in China, India, USA, Japan, Russia and Europe, major producers and consumers (http://www.cementchina.net/freport/showfre.asp?id=749) from UN Commodity Trade Statistics Database  (http://data.un.org/Explorer.aspxDatabase [Accessed 2 July 2010]). Commodity: Cement (portland, aluminious, slag or hydraulic)</comment>
+        </property>
+        <property propertyId="6d9e1462-80e3-4f10-b3f4-71febd6f1168" amount="0" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">water in wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">water content on a wet matter basis</comment>
+        </property>
+        <property propertyId="6393c14b-db78-445d-a47b-c0cb866a1b25" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, non-fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">biogene carbon content on a dry matter basis</comment>
+        </property>
+        <property propertyId="c74c3729-e577-4081-b572-a283d2561a75" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content, fossil</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">fossil carbon content on a dry matter basis</comment>
+        </property>
+        <property propertyId="a9358458-9724-4f03-b622-106eda248916" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">water content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">water content on a dry matter basis</comment>
+        </property>
+        <property propertyId="67f102e2-9cb6-4d20-aa16-bf74d8a03326" amount="1" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">wet mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="3a0af1d6-04c3-41c6-a3da-92c4f61e0eaa" amount="1" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">dry mass</name>
+          <unitName xml:lang="en">kg</unitName>
+        </property>
+        <property propertyId="a301a838-7975-4d89-9e74-8eb77ad03cd1" amount="0" isDefiningValue="false" unitId="577e242a-461f-44a7-922c-d8e1c3d2bf45">
+          <name xml:lang="en">carbon content</name>
+          <unitName xml:lang="en">dimensionless</unitName>
+          <comment xml:lang="en">carbon content on a dry matter basis (reserved; not for manual entry)</comment>
+        </property>
+        <property propertyId="f2283db2-62e4-467f-b9ac-c4f45be563b4" amount="0" isDefiningValue="false" unitId="487df68b-4994-4027-8fdc-a4dc298257b7">
+          <name xml:lang="en">carbon allocation</name>
+          <unitName xml:lang="en">kg</unitName>
+          <comment xml:lang="en">carbon content per unit of product (reserved; not for manual entry)</comment>
+        </property>
+        <classification classificationId="39b0f0ab-1a2f-401b-9f4d-6e39400760a4">
+          <classificationSystem xml:lang="en">By-product classification</classificationSystem>
+          <classificationValue xml:lang="en">allocatable product</classificationValue>
+        </classification>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+    </flowData>
+    <modellingAndValidation>
+      <representativeness systemModelId="290c1f85-4cc4-4fa1-b0c8-2cb7f4276dce">
+        <systemModelName xml:lang="en">Allocation, cut-off by classification</systemModelName>
+        <extrapolations xml:lang="en">This dataset has been extrapolated from year 2019 to the year of the calculation (2021). The uncertainty has been adjusted accordingly.</extrapolations>
+      </representativeness>
+      <review reviewerId="35d091e9-38c2-4037-9efe-a73673c57123" reviewerName="Emilia Moreno Ruiz" reviewerEmail="moreno@ecoinvent.org" reviewDate="2019-06-19" reviewedMajorRelease="3" reviewedMinorRelease="0" reviewedMajorRevision="1" reviewedMinorRevision="5">
+        <details>
+          <text xml:lang="en" index="0"></text>
+        </details>
+        <otherDetails xml:lang="en"></otherDetails>
+      </review>
+      <review reviewerId="c4597934-ecac-422c-b431-382e85fdcb83" reviewerName="[System]" reviewerEmail="support@ecoinvent.org" reviewDate="2018-03-19" reviewedMajorRelease="3" reviewedMinorRelease="0" reviewedMajorRevision="0" reviewedMinorRevision="19">
+        <details />
+        <otherDetails xml:lang="en">Validation warnings:
+
+- Property 'carbon content, non-fossil=0' of master data exchange was removed from exchange 'granulated blast furnace slag'.
+Property 'price=0' of master data exchange was removed from exchange 'granulated blast furnace slag'.
+Property 'dry mass=1' of master data exchange was removed from exchange 'granulated blast furnace slag'.
+Property 'water in wet mass=0' of master data exchange was removed from exchange 'granulated blast furnace slag'.
+Property 'carbon content, fossil=0' of master data exchange was removed from exchange 'granulated blast furnace slag'.
+Property 'water content=0' of master data exchange was removed from exchange 'granulated blast furnace slag'.
+Property 'wet mass=1' of master data exchange was removed from exchange 'granulated blast furnace slag'.
+Property 'carbon content, non-fossil=0' of master data exchange was removed from exchange 'granulated blast furnace slag'.
+Property 'price=0' of master data exchange was removed from exchange 'granulated blast furnace slag'.
+Property 'dry mass=1' of master data exchange was removed from exchange 'granulated blast furnace slag'.
+Property 'water in wet mass=0' of master data exchange was removed from exchange 'granulated blast furnace slag'.
+Property 'carbon content, fossil=0' of master data exchange was removed from exchange 'granulated blast furnace slag'.
+Property 'water content=0' of master data exchange was removed from exchange 'granulated blast furnace slag'.
+Property 'wet mass=1' of master data exchange was removed from exchange 'granulated blast furnace slag'.
+
+- Non-global market activities should have a geography comment.
+- Uncertainty shall always be provided for all primary data inputs (exchange amounts, properties and parameters), except for the amount and properties of reference products.
+ -- Property(ies): consequential=1
+
+- Pedigree information shall always be provided for all uncertainties of primary data inputs (exchange amounts, properties and parameters), except for the amount and properties of reference products.
+ -- Property(ies): consequential=1
+
+</otherDetails>
+      </review>
+      <review reviewerId="c4597934-ecac-422c-b431-382e85fdcb83" reviewerName="[System]" reviewerEmail="support@ecoinvent.org" reviewDate="2019-06-19" reviewedMajorRelease="3" reviewedMinorRelease="0" reviewedMajorRevision="1" reviewedMinorRevision="5">
+        <details />
+        <otherDetails xml:lang="en">Validation warnings:
+
+- Property 'dry mass=1' of master data exchange was removed from exchange 'granulated blast furnace slag'.
+Property 'water in wet mass=0' of master data exchange was removed from exchange 'granulated blast furnace slag'.
+Property 'carbon content, fossil=0' of master data exchange was removed from exchange 'granulated blast furnace slag'.
+Property 'water content=0' of master data exchange was removed from exchange 'granulated blast furnace slag'.
+Property 'wet mass=1' of master data exchange was removed from exchange 'granulated blast furnace slag'.
+Property 'carbon content, non-fossil=0' of master data exchange was removed from exchange 'granulated blast furnace slag'.
+Property 'price=0' of master data exchange was removed from exchange 'granulated blast furnace slag'.
+Property 'dry mass=1' of master data exchange was removed from exchange 'granulated blast furnace slag'.
+Property 'water in wet mass=0' of master data exchange was removed from exchange 'granulated blast furnace slag'.
+Property 'carbon content, fossil=0' of master data exchange was removed from exchange 'granulated blast furnace slag'.
+Property 'water content=0' of master data exchange was removed from exchange 'granulated blast furnace slag'.
+Property 'wet mass=1' of master data exchange was removed from exchange 'granulated blast furnace slag'.
+Property 'carbon content, non-fossil=0' of master data exchange was removed from exchange 'granulated blast furnace slag'.
+Property 'price=0' of master data exchange was removed from exchange 'granulated blast furnace slag'.
+
+- Non-global market activities should have a geography comment.
+- Uncertainty shall always be provided for all primary data inputs (exchange amounts, properties and parameters), except for the amount and properties of reference products.
+ -- Property(ies): consequential=1
+
+- Pedigree information shall always be provided for all uncertainties of primary data inputs (exchange amounts, properties and parameters), except for the amount and properties of reference products.
+ -- Property(ies): consequential=1
+
+- The output exchange 'granulated blast furnace slag' has an activity link and therefore requires a valid product exchange for that output to be available. If the valid product exchange is not available the dataset will be put on hold at the end of its review and will remain on hold until such a valid product exchange has been accepted into the ecoinvent database.
+
+</otherDetails>
+      </review>
+      <review reviewerId="35d091e9-38c2-4037-9efe-a73673c57123" reviewerName="Emilia Moreno Ruiz" reviewerEmail="moreno@ecoinvent.org" reviewDate="2017-11-17" reviewedMajorRelease="3" reviewedMinorRelease="0" reviewedMajorRevision="0" reviewedMinorRevision="19">
+        <details>
+          <text xml:lang="en" index="0"></text>
+        </details>
+        <otherDetails xml:lang="en"></otherDetails>
+      </review>
+    </modellingAndValidation>
+    <administrativeInformation>
+      <dataEntryBy personId="7f185a26-9e2b-45ce-9c74-fe6d6cfc8947" isActiveAuthor="true" personName="Marcella Ruschi Mendes Saade" personEmail="rms.marcella@gmail.com" />
+      <dataGeneratorAndPublication personId="1db3a71d-dcf4-4266-9721-025ec9783105" personName="Fernanda Belizario Silva" personEmail="fbsilva@ipt.br" dataPublishedIn="1" publishedSourceId="fb5dbd0f-bb14-41ce-aefb-06ffc9938145" publishedSourceYear="2017" publishedSourceFirstAuthor="Silva, F. B." isCopyrightProtected="true" accessRestrictedTo="1" />
+      <fileAttributes majorRelease="3" minorRelease="0" majorRevision="4" minorRevision="0" internalSchemaVersion="2.0.11" defaultLanguage="en" creationTimestamp="2017-11-14T11:24:50" lastEditTimestamp="2019-06-19T11:56:13" fileGenerator="EcoEditor 3.11.1000.19016" fileTimestamp="2019-06-19T11:56:13" contextId="de659012-50c4-4e96-b54a-fc781bf987ab">
+        <contextName xml:lang="en">ecoinvent</contextName>
+      </fileAttributes>
+    </administrativeInformation>
+  </childActivityDataset>
+</ecoSpold>
