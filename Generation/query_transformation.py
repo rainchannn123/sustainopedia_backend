@@ -15,6 +15,7 @@ from .functions.vectorstore import build_and_save_vectorstores, load_vectorstore
 from .functions.after_bw2 import final_mode_output_bw2_included
 from .functions.bw2_calculation import start_lca_calculation
 from.functions.RAG_methods import query_decomposition_retrieval
+from .functions.intent_classifier import classify_intent  # query intent classification and parameter extraction
 from dotenv import load_dotenv
 load_dotenv('./.env')  # loads from .env file
 
@@ -37,10 +38,10 @@ load_dotenv('./.env')  # loads from .env file
 LCI_DATABASE = "Ecoinvent"
 # LCI_DATABASE = "Tiangong"
 
-def _fast_response(question: str, product: str, gpt5_client, embeddings) -> dict:
-    """Fast mode: retrieve from chroma_db_lca_knowledge then generate a direct LLM response."""
+def _fast_response(question: str, product: str, gpt5_client, embeddings, intent_params=None) -> dict:
+    """Fast-path: RAG retrieval from chroma_db_lca_knowledge + single LLM call, no BW2 pipeline."""
     context = ""
-    # Load lca_knowledge vectorstore for context if available
+    # Retrieve relevant LCA knowledge if vectorstores are available
     if all(os.path.isdir(d) for d in ['./chroma_db_lca_knowledge', './chroma_db_eco_methods',
                                        './chroma_db_tg_methods', './chroma_db_eco_activity']):
         vs_knowledge, parent_lookup, _, _, _ = load_vectorstores(
@@ -54,16 +55,38 @@ def _fast_response(question: str, product: str, gpt5_client, embeddings) -> dict
         docs = retriever.invoke(question)
         context = "\n\n".join(d.page_content for d in docs) if docs else ""
 
-    product_hint = f"Product: {product}\n" if product and product.strip() else ""
+    product_hint = f"Product: {product}\n" if product and product.strip() and product != 'Not Specified' else ""
 
-    template = """{product_hint} User Query: {question}
+    # Select role instruction based on classified intent
+    intent = (intent_params.intent if intent_params else 'computation')
+    if intent == 'literature':
+        role_instruction = (
+            "You are an expert LCA researcher. Summarize relevant peer-reviewed studies, "
+            "methodologies, and findings from the knowledge provided. "
+            "Highlight key data points and cite specific values where available. "
+            "Structure your response with ## headings for major themes."
+        )
+    elif intent == 'general':
+        role_instruction = (
+            "You are a Senior LCA Consultant. Explain the concept clearly and concisely "
+            "using the knowledge provided. Use practical examples where helpful."
+        )
+    else:  # computation or fast mode
+        role_instruction = (
+            "You are a Senior LCA Consultant. Provide a concise, evidence-based answer "
+            "to this LCA query using the retrieved context. "
+            "Include key numeric estimates where available."
+        )
 
-Relevant LCA Knowledge:
-{context}
-
-You are a Senior LCA Consultant. Answer the user query professionally and concisely using the knowledge above where relevant.
-Output valid Markdown using ## for sections and - for bullet points.
-Use inline code for numeric values (e.g., `12.5 kg CO\u2082-eq`). Do not fabricate data not present in the context."""
+    # Build template with role_instruction embedded directly (not as a LangChain template variable)
+    template = (
+        role_instruction + "\n\n"
+        "{product_hint}User Query: {question}\n\n"
+        "Relevant LCA Knowledge:\n{context}\n\n"
+        "Output valid Markdown. Use ## for section headings and - for bullet points. "
+        "Use inline code for numeric values (e.g., `12.5 kg CO\u2082-eq`). "
+        "Do not fabricate data not present in the context."
+    )
 
     chain = ChatPromptTemplate.from_template(template) | gpt5_client | StrOutputParser()
     answer = chain.invoke({"question": question, "product_hint": product_hint, "context": context})
@@ -127,9 +150,29 @@ def generate_response(question, product, mode='thinking'):
         product = infer_product_from_query(question, gpt5_client)
         logging.info(f"Inferred product: {product}")
 
+    # Classify intent and extract structured LCA parameters for routing and storage
+    intent_params = classify_intent(question, product, gpt5_client)
+    logging.info(
+        f"Intent: {intent_params.intent} | Product: {intent_params.product} | "
+        f"{intent_params.amount} {intent_params.unit} | {intent_params.system_boundary}"
+    )
+
+    # Use the classifier's product if it is more specific than the provided value
+    if intent_params.product and intent_params.product not in ('Not Specified', ''):
+        product = intent_params.product
+
     # Fast mode: skip BW2 pipeline and return a direct LLM+RAG response
     if mode == 'fast':
-        return _fast_response(question, product, gpt5_client, embeddings)
+        result = _fast_response(question, product, gpt5_client, embeddings, intent_params)
+        result['intent_params'] = intent_params.to_dict()
+        return result
+
+    # Thinking mode: non-computation intents bypass the BW2 pipeline
+    if intent_params.intent in ('literature', 'general'):
+        logging.info(f"Routing '{intent_params.intent}' query to fast response")
+        result = _fast_response(question, product, gpt5_client, embeddings, intent_params)
+        result['intent_params'] = intent_params.to_dict()
+        return result
 
 
     ###########1st stage -- Decision making: whether to do LCA analysis######
@@ -172,7 +215,11 @@ def generate_response(question, product, mode='thinking'):
 
     #1st results = bw2 input
     section5_start = time.time()
-    bw2_input_filepath = generate_response_bw2_input(question, gpt5_client, query_decomposition_retrival, LCIA_method_list, product, LCI_DATABASE, retriever_eco_activity)
+    bw2_input_filepath = generate_response_bw2_input(
+        question, gpt5_client, query_decomposition_retrival, LCIA_method_list,
+        product, LCI_DATABASE, retriever_eco_activity,
+        n_simulations=intent_params.n_simulations
+    )
     section5_end = time.time()
     logging.info(f"generate bw2 input took {section5_end - section5_start:.2f} seconds")
     
@@ -216,7 +263,8 @@ def generate_response(question, product, mode='thinking'):
         "answer": final_output_with_bw2,
         "markdown": markdown_output,
         "processed_json": json_output,
-        "lcia_table": lcia_data
+        "lcia_table": lcia_data,
+        "intent_params": intent_params.to_dict(),  # stored for frontend display and MongoDB
     }
     
     return answer_pack

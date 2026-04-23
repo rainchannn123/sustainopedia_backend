@@ -159,7 +159,7 @@ def Get_LCIA_methods(question, gpt5_client, retriever_lca_methods):
     
 #     return activity_list
     
-def generate_response_bw2_input(question, gpt5_client, query_decomposition_retrival, LCIA_method_list, product, LCI_DATABASE, retriever_eco_activity):
+def generate_response_bw2_input(question, gpt5_client, query_decomposition_retrival, LCIA_method_list, product, LCI_DATABASE, retriever_eco_activity, n_simulations=25):
     print("Generating Brightway2 input JSON...")
     
     final_template_1st = """
@@ -248,6 +248,8 @@ def generate_response_bw2_input(question, gpt5_client, query_decomposition_retri
                 if matched:
                     activity["activity_name"] = str(matched)
     
+    # Inject n_simulations so the BW2 calculator can read it when supported
+    results_dict['n_simulations'] = n_simulations
     current_time = datetime.now(timezone(timedelta(hours=8))).strftime("%Y%m%d%H%M%S")
     output_filepath = f"bw2_input_templates/{product}_{LCI_DATABASE}_{current_time}.json"
     with open(output_filepath, "w", encoding="utf-8") as f:

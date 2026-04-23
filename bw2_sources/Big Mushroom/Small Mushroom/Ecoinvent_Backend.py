@@ -271,31 +271,31 @@ class EcoinventEngine:
                 # MonteCarloLCA uses scipy cgs(atol='legacy') which is broken on
                 # scipy >= 1.12. DirectSolvingMonteCarloLCA uses spsolve (LU) instead
                 # and is both correct and stable.
-                # if n_simulations > 1:
-                #     try:
-                #         mc_lca = bc.DirectSolvingMonteCarloLCA(func_unit, method=self.method.name)
-                #         scores = [next(mc_lca) for _ in range(n_simulations)]
-                #         logger.info(
-                #             f"DirectSolvingMonteCarloLCA ({n_simulations} runs): "
-                #             f"mean={np.mean(scores):.4g}, sd={np.std(scores):.4g}, "
-                #             f"p5={np.percentile(scores, 5):.4g}, p95={np.percentile(scores, 95):.4g}"
-                #         )
-                #     except Exception as mc_err:
-                #         import traceback as _tb
-                #         logger.error(
-                #             f"DirectSolvingMonteCarloLCA failed for '{matched_activity['name']}': {mc_err}\n"
-                #             + _tb.format_exc()
-                #         )
-                #         scores = [det_score]
+                if n_simulations > 1:
+                    try:
+                        mc_lca = bc.DirectSolvingMonteCarloLCA(func_unit, method=self.method.name)
+                        scores = [next(mc_lca) for _ in range(n_simulations)]
+                        logger.info(
+                            f"DirectSolvingMonteCarloLCA ({n_simulations} runs): "
+                            f"mean={np.mean(scores):.4g}, sd={np.std(scores):.4g}, "
+                            f"p5={np.percentile(scores, 5):.4g}, p95={np.percentile(scores, 95):.4g}"
+                        )
+                    except Exception as mc_err:
+                        import traceback as _tb
+                        logger.error(
+                            f"DirectSolvingMonteCarloLCA failed for '{matched_activity['name']}': {mc_err}\n"
+                            + _tb.format_exc()
+                        )
+                        scores = [det_score]
 
-                #     if np.std(scores) == 0.0 and n_simulations > 1:
-                #         logger.warning(
-                #             f"MC std_dev is exactly 0 for '{matched_activity['name']}'. "
-                #             "This usually means the database has no uncertainty data encoded "
-                #             "(uncertainty_type=0 on all exchanges)."
-                #         )
-                # else:
-                scores = [det_score]
+                    if np.std(scores) == 0.0 and n_simulations > 1:
+                        logger.warning(
+                            f"MC std_dev is exactly 0 for '{matched_activity['name']}'. "
+                            "This usually means the database has no uncertainty data encoded "
+                            "(uncertainty_type=0 on all exchanges)."
+                        )
+                else:
+                    scores = [det_score]
 
                 impact_stats = {
                     "mean": float(np.mean(scores)),
