@@ -76,7 +76,8 @@ def init_ecoinvent():
     # 请把以下变量改成你的实际值（推荐通过环境变量传入，避免硬编码）
     connection_string = os.environ.get("AZURE_STORAGE_CONNECTION_STRING")
     if not connection_string:
-        logging.info("请设置环境变量 AZURE_STORAGE_CONNECTION_STRING")
+        logging.error("AZURE_STORAGE_CONNECTION_STRING env var is not set — cannot download database.")
+        return False
 
     container_name = os.environ.get("AZURE_CONTAINER_NAME")
     zip_blob_name  = os.environ.get("ECOINVENT_ZIP_BLOB")
@@ -84,17 +85,16 @@ def init_ecoinvent():
     # 可选：如果本地已经存在数据库文件，就跳过下载（防止每次 init 都重新下载）
     if os.listdir(bw2_dir):
         logging.info(f"本地数据库已存在 ({bw2_dir})，跳过 Azure 下载")
-        return
+        return True
 
     logging.info(f"从 Azure Blob Storage 下载 Ecoinvent 数据库...")
+    local_zip = os.path.join(bw2_dir, "temp_ecoinvent.zip")
     try:
         blob_service_client = BlobServiceClient.from_connection_string(connection_string)
         blob_client = blob_service_client.get_blob_client(
             container=container_name,
             blob=zip_blob_name
         )
-
-        local_zip = os.path.join(bw2_dir, "temp_ecoinvent.zip")
 
         logging.info("开始下载 zip 文件...")
         with open(local_zip, "wb") as f:

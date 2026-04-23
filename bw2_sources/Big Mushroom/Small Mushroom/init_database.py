@@ -117,18 +117,18 @@ def init_databases(method=None):
     try:
         logger.info(f"从 {datasets_path} 导入 {db_name}...")
         #?
-        DEFAULT_METHOD = ('IPCC 2021 no LT',
-          'climate change: fossil, including SLCFs no LT',
-          'global warming potential (GWP100) no LT')
+        # DEFAULT_METHOD = ('IPCC 2021 no LT',
+        #   'climate change: fossil, including SLCFs no LT',
+        #   'global warming potential (GWP100) no LT')
         
-        if method is None:
-            method = DEFAULT_METHOD
+        # if method is None:
+        #     method = DEFAULT_METHOD
             
 
-        m = Method(method)
-        logging.info(f"method::::{m}")
-        loaded_cf = list(m.load())
-        logging.info(f"CF count: {len(loaded_cf)}")
+        # m = Method(method)
+        # logging.info(f"method::::{m}")
+        # loaded_cf = list(m.load())
+        # logging.info(f"CF count: {len(loaded_cf)}")
         # cf_dict = {cf[0]: cf[1] for cf in loaded_cf}
         # logging.info(f"Sample CFs: {list(itertools.islice(cf_dict.items(), 10))}")
         # 检查数据库是否已存在
