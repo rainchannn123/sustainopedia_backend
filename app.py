@@ -15,7 +15,31 @@ from datetime import datetime, timezone
 from flask import Flask, request, jsonify
 from Generation.query_transformation import generate_response
 from flask_cors import CORS
+
+# ── JSON encoder: handle numpy scalars / arrays and datetime objects ───────────
+# BW2 / numpy return float64, int64, ndarray etc. which Flask's default encoder
+# cannot serialise → 500 with empty body on Azure.
+from flask.json.provider import DefaultJSONProvider
+
+class _SafeJSONProvider(DefaultJSONProvider):
+    def default(self, obj):
+        try:
+            import numpy as np
+            if isinstance(obj, np.integer):
+                return int(obj)
+            if isinstance(obj, np.floating):
+                return float(obj)
+            if isinstance(obj, np.ndarray):
+                return obj.tolist()
+        except ImportError:
+            pass
+        if isinstance(obj, datetime):
+            return obj.isoformat()
+        return super().default(obj)
+
 app = Flask(__name__)
+app.json_provider_class = _SafeJSONProvider
+app.json = _SafeJSONProvider(app)
 from dotenv import load_dotenv
 load_dotenv('./.env') 
 # explicitly allow all origins on API endpoints to satisfy frontend CORS requirements
