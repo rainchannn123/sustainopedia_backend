@@ -3,10 +3,16 @@ import json
 import logging
 import re
 import shutil
-# __import__('pysqlite3')
 import sys
 
-# sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+# Override system sqlite3 with pysqlite3-binary BEFORE chromadb is imported.
+# Azure App Service Linux ships SQLite < 3.35.0 which ChromaDB rejects.
+try:
+    import pysqlite3
+    sys.modules['sqlite3'] = pysqlite3
+except ImportError:
+    pass  # local dev — system SQLite is fine
+
 from langchain_community.vectorstores import Chroma
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_core.prompts import ChatPromptTemplate
