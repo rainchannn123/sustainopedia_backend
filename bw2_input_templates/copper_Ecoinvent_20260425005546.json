@@ -2,12 +2,19 @@
     "goal": "lifecycle impact assessment",
     "Project": "Ecoinvent",
     "method": [
-        "IPCC 2021 no LT",
-        "climate change: fossil, including SLCFs no LT",
-        "global warming potential (GWP100) no LT"
+        "EF v3.1",
+        "climate change: fossil",
+        "global warming potential (GWP100)"
     ],
     "system_boundary": "cradle-to-gate",
     "functional_unit": [
+        {
+            "activity_name": "market for copper, cathode",
+            "amount": 1000.0,
+            "unit": "kilogram",
+            "location": "GLO",
+            "stage": "manufacturing"
+        },
         {
             "activity_name": "market for copper concentrate, sulfide ore",
             "amount": 4410.0,
@@ -17,28 +24,14 @@
         },
         {
             "activity_name": "market for electricity, medium voltage",
-            "amount": 35.4,
-            "unit": "kilowatt hour",
-            "location": "GLO",
-            "stage": "raw material extraction"
-        },
-        {
-            "activity_name": "diesel, burned in agricultural machinery",
-            "amount": 6.17,
-            "unit": "kilogram",
-            "location": "GLO",
-            "stage": "raw material extraction"
-        },
-        {
-            "activity_name": "market for electricity, medium voltage",
-            "amount": 1196.59,
+            "amount": 1232.0,
             "unit": "kilowatt hour",
             "location": "GLO",
             "stage": "manufacturing"
         },
         {
             "activity_name": "market for coke",
-            "amount": 267.44,
+            "amount": 110.0,
             "unit": "kilogram",
             "location": "GLO",
             "stage": "manufacturing"
@@ -58,8 +51,8 @@
             "stage": "manufacturing"
         },
         {
-            "activity_name": "diesel, burned in agricultural machinery",
-            "amount": 1.0,
+            "activity_name": "diesel production, low-sulfur",
+            "amount": 7.17,
             "unit": "kilogram",
             "location": "GLO",
             "stage": "manufacturing"
@@ -77,8 +70,16 @@
             "unit": "kilogram",
             "location": "GLO",
             "stage": "manufacturing"
+        },
+        {
+            "activity_name": "hydrochloric acid production, from the reaction of hydrogen with chlorine",
+            "amount": 1.66,
+            "unit": "kilogram",
+            "location": "GLO",
+            "stage": "manufacturing"
         }
     ],
     "project_name": "Ecoinvent",
-    "dataset": "ecoinvent"
+    "dataset": "ecoinvent",
+    "n_simulations": 25
 }
