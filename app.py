@@ -1,13 +1,13 @@
 # Override system sqlite3 with pysqlite3-binary BEFORE any ChromaDB import.
 # Azure App Service Linux ships SQLite < 3.35.0 which ChromaDB rejects.
 import sys
-# try:
-#     import pysqlite3
-#     sys.modules['sqlite3'] = pysqlite3
-# except ImportError:
-#     pass  # local dev — system SQLite is fine
-__import__('pysqlite3')
-sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+try:
+    import pysqlite3
+    sys.modules['sqlite3'] = pysqlite3
+except ImportError:
+    pass  # local dev — system SQLite is fine
+# __import__('pysqlite3')
+# sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 
 import os
 import threading
