@@ -16,8 +16,9 @@ from .functions.after_bw2 import final_mode_output_bw2_included
 from .functions.bw2_calculation import start_lca_calculation
 from.functions.RAG_methods import query_decomposition_retrieval
 from .functions.intent_classifier import classify_intent  # query intent classification and parameter extraction
-from dotenv import load_dotenv
-load_dotenv('./.env')  # loads from .env file
+from .functions.prebuild_bw2db import preinstall_ecoinvent_database  # pre-build BW2 databases to speed up first run
+# from dotenv import load_dotenv
+# load_dotenv('./.env')  # loads from .env file
 
 # import psutil, threading
 
@@ -103,7 +104,7 @@ def generate_response(question, product, mode='thinking'):
     # }
     
     # return answer_pack
-
+    preinstall_ecoinvent_database()  # pre-build BW2 databases to speed up first run
     start_time = time.time()
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 

@@ -390,7 +390,6 @@
 #         return {"error": "invalid_choice", "message": "choice must be '1', '2' or '3'"}
 
 
-
 import os
 import importlib
 import sys
@@ -466,9 +465,9 @@ def connect_and_calculate_lca(engine_arg, json_path, background=False):
     os.environ["ENGINE_TYPE"] = "ecoinvent"
     os.environ["BRIGHTWAY2_DIR"] = str(ECO_DIR)
 
-    ok_db, msg_db = _initialize_ecoinvent_if_needed()
-    if not ok_db:
-        return {"error": "db_not_initialized", "message": msg_db}
+    # ok_db, msg_db = _initialize_ecoinvent_if_needed()
+    # if not ok_db:
+    #     return {"error": "db_not_initialized", "message": msg_db}
 
     try:
         _refresh_engine_modules()
