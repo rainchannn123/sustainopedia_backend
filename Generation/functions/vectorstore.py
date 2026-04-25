@@ -7,14 +7,14 @@ import sys
 
 # Override system sqlite3 with pysqlite3-binary BEFORE chromadb is imported.
 # Azure App Service Linux ships SQLite < 3.35.0 which ChromaDB rejects.
-try:
-    import pysqlite3
-    sys.modules['sqlite3'] = pysqlite3
-except ImportError:
-    pass  # local dev — system SQLite is fine
+# try:
+#     import pysqlite3
+#     sys.modules['sqlite3'] = pysqlite3
+# except ImportError:
+#     pass  # local dev — system SQLite is fine
     
-# __import__('pysqlite3')
-# sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+__import__('pysqlite3')
+sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 
 from langchain_community.vectorstores import Chroma
 from langchain_text_splitters import RecursiveCharacterTextSplitter
@@ -128,3 +128,10 @@ def load_vectorstores(
 
     logging.info("Vectorstores loaded from disk successfully.")
     return vectorstore_lca_knowledge, parent_lookup, vectorstore_eco_methods, vectorstore_tg_methods, vectorstore_eco_activity
+
+def load_vectorstores_fast(embeddings, persist_dir_lca_knowledge='./chroma_db_lca_knowledge'):
+    # Fast load: skip existence checks and directly load (will raise error if not found)
+    vectorstore_lca_knowledge, parent_lookup = load_lca_knowledge_store(embeddings, persist_dir=persist_dir_lca_knowledge)
+
+    logging.info("Vectorstores loaded from disk successfully (fast mode).")
+    return vectorstore_lca_knowledge, parent_lookup

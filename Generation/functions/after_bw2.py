@@ -142,7 +142,7 @@ def result_data_processing(filename, product, scale_factor=1.0):
     return lcia_data, markdown_output, json_output
 
 
-def final_mode_output_bw2_included(filename, question, gpt5_client, product, scale_factor=1.0):
+def final_mode_output_bw2_included(filename, question, gpt5_client, product, scale_factor=1.0, n_simulations=25):
     # with open ("/trinity/home/hychan928/llm_env/LLM2/multi-query-methods/response/result_text/florescent_lamp.txt", 'r') as file:
     #     results = file.read()
     
@@ -172,8 +172,8 @@ def final_mode_output_bw2_included(filename, question, gpt5_client, product, sca
         - Use `- ` for bullet points and `1. ` for numbered lists. 
         - Ensure a single blank line before lists and between paragraphs.
         - Maintain a professional, objective tone. Do not use fluff or introductory "bridge" phrases like "Based on the data..." or "I can see that..."
-        -Make sure the final response adheres strictly to these instructions and formatting rules and clean to be rendered and viewed on client side.
-        
+        - Make sure the final response adheres strictly to these instructions and formatting rules and clean to be rendered and viewed on client side.
+        - The no. of simulation to run Monte Carlo analysis is {n_simulations}. You can add this information in your answer shortly and clearly. No need further explanation on what Monte Carlo analysis is or why is this no. of simulations unless the user explicitly ask for it.     
         Structure the output as:
         ## Answer to Your Query
         [Direct answer to query]
@@ -216,17 +216,19 @@ def final_mode_output_bw2_included(filename, question, gpt5_client, product, sca
 
     final_rag_chain = (
         {"results": itemgetter("results"),
-        "question": itemgetter("question")}
+        "question": itemgetter("question"),
+        "n_simulations": itemgetter("n_simulations"),
+        }
         | final_prompt 
         | gpt5_client
         | StrOutputParser()
     )
 
     try:
-        final_results = final_rag_chain.invoke({"question":question, "results":lcia_data})
+        final_results = final_rag_chain.invoke({"question":question, "results":lcia_data, "n_simulations": n_simulations})
     except:
         # Rerun once to mitigate occasional LLM generation failures
-        final_results = final_rag_chain.invoke({"question":question, "results":lcia_data})
+        final_results = final_rag_chain.invoke({"question":question, "results":lcia_data, "n_simulations": n_simulations})
     
     return final_results, lcia_data, markdown_output, json_output
 

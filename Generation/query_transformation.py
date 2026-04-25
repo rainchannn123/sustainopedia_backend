@@ -11,7 +11,7 @@ from langchain_core.output_parsers import StrOutputParser
 from langchain_openai import AzureChatOpenAI, AzureOpenAIEmbeddings
 import sqlite3
 from .functions.non_RAG_methods import conduct_lca_anaylsis, Get_LCIA_methods, generate_response_bw2_input, extract_functional_unit, infer_product_from_query
-from .functions.vectorstore import build_and_save_vectorstores, load_vectorstores, LcaKnowledgeRetriever
+from .functions.vectorstore import build_and_save_vectorstores, load_vectorstores, LcaKnowledgeRetriever, load_vectorstores_fast
 from .functions.after_bw2 import final_mode_output_bw2_included
 from .functions.bw2_calculation import start_lca_calculation
 from.functions.RAG_methods import query_decomposition_retrieval
@@ -39,24 +39,19 @@ from .functions.prebuild_bw2db import preinstall_ecoinvent_database  # pre-build
 LCI_DATABASE = "Ecoinvent"
 # LCI_DATABASE = "Tiangong"
 
-def _fast_response(question: str, product: str, gpt5_client, embeddings, intent_params=None) -> dict:
+def _fast_response(question: str, product_hint: str, gpt5_client, embeddings, intent_params=None) -> dict:
     """Fast-path: RAG retrieval from chroma_db_lca_knowledge + single LLM call, no BW2 pipeline."""
     context = ""
     # Retrieve relevant LCA knowledge if vectorstores are available
     if all(os.path.isdir(d) for d in ['./chroma_db_lca_knowledge', './chroma_db_eco_methods',
                                        './chroma_db_tg_methods', './chroma_db_eco_activity']):
-        vs_knowledge, parent_lookup, _, _, _ = load_vectorstores(
+        vs_knowledge, parent_lookup = load_vectorstores_fast(
             embeddings,
             persist_dir_lca_knowledge='./chroma_db_lca_knowledge',
-            persist_dir_eco_methods='./chroma_db_eco_methods',
-            persist_dir_tg_methods='./chroma_db_tg_methods',
-            persist_dir_eco_activity='./chroma_db_eco_activity'
         )
         retriever = LcaKnowledgeRetriever(vs_knowledge, parent_lookup, k_children=4).as_langchain_retriever()
         docs = retriever.invoke(question)
         context = "\n\n".join(d.page_content for d in docs) if docs else ""
-
-    product_hint = f"Product: {product}\n" if product and product.strip() and product != 'Not Specified' else ""
 
     # Select role instruction based on classified intent
     intent = (intent_params.intent if intent_params else 'computation')
@@ -65,7 +60,8 @@ def _fast_response(question: str, product: str, gpt5_client, embeddings, intent_
             "You are an expert LCA researcher. Summarize relevant peer-reviewed studies, "
             "methodologies, and findings from the knowledge provided. "
             "Highlight key data points and cite specific values where available. "
-            "Structure your response with ## headings for major themes."
+            "Structure your response with ## headings for major themes. "
+            "Do not make up studies or data not present in the context. Focus on summarizing the existing literature."
         )
     elif intent == 'general':
         role_instruction = (
@@ -82,11 +78,13 @@ def _fast_response(question: str, product: str, gpt5_client, embeddings, intent_
     # Build template with role_instruction embedded directly (not as a LangChain template variable)
     template = (
         role_instruction + "\n\n"
-        "{product_hint}User Query: {question}\n\n"
+        "Product: {product_hint}\n"
+        "User Query: {question}\n\n"
         "Relevant LCA Knowledge:\n{context}\n\n"
         "Output valid Markdown. Use ## for section headings and - for bullet points. "
         "Use inline code for numeric values (e.g., `12.5 kg CO\u2082-eq`). "
-        "Do not fabricate data not present in the context."
+        "Do not fabricate data not present in the context. "
+        "If Product is not specified, try to guess it if you are confident, otherwise do not make assumptions and focus on general insights from the context."
     )
 
     chain = ChatPromptTemplate.from_template(template) | gpt5_client | StrOutputParser()
@@ -148,7 +146,7 @@ def generate_response(question, product, mode='thinking'):
     )
     section1_end = time.time()
     logging.info(f"Environment Setting took {section1_end - section1_start:.2f} seconds")
-
+    
     # Infer product from the query if the user left the product field empty
     if not product or not product.strip():
         logging.info("Product field is empty — inferring product from user query...")
@@ -161,11 +159,11 @@ def generate_response(question, product, mode='thinking'):
         f"Intent: {intent_params.intent} | Product: {intent_params.product} | "
         f"{intent_params.amount} {intent_params.unit} | {intent_params.system_boundary}"
     )
-
+    
     # Use the classifier's product if it is more specific than the provided value
     if intent_params.product and intent_params.product not in ('Not Specified', ''):
         product = intent_params.product
-
+    
     # Fast mode: skip BW2 pipeline and return a direct LLM+RAG response
     if mode == 'fast':
         result = _fast_response(question, product, gpt5_client, embeddings, intent_params)
@@ -245,7 +243,7 @@ def generate_response(question, product, mode='thinking'):
     # bw2_results_raw_filename = f"bw2_results/Crude Steel_Ecoinvent_20260421184356_output.json"
     
     _, _, scale_factor = extract_functional_unit(question)
-    res = final_mode_output_bw2_included(bw2_results_raw_filename, question, gpt5_client, product, scale_factor=scale_factor)
+    res = final_mode_output_bw2_included(bw2_results_raw_filename, question, gpt5_client, product, scale_factor=scale_factor, n_simulations=intent_params.n_simulations)
     logging.info(f"Final output generation completed, starting to prepare answer pack")
     final_output_with_bw2 = None
     lcia_data = {}
