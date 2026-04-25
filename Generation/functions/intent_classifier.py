@@ -104,7 +104,11 @@ def classify_intent(question: str, product: str, gpt5_client) -> IntentParams:
     chain = ChatPromptTemplate.from_template(_EXTRACTION_PROMPT) | gpt5_client | StrOutputParser()
     raw = ""
     try:
-        raw = chain.invoke({"question": question, "product": product or "Not Specified"})
+        try:
+            raw = chain.invoke({"question": question, "product": product or "Not Specified"})
+        except:
+            # Rerun once to mitigate occasional LLM generation failures
+            raw = chain.invoke({"question": question, "product": product or "Not Specified"})
 
         # Strip markdown code fences if the model wraps its response
         stripped = raw.strip()

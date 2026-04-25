@@ -90,7 +90,11 @@ def _fast_response(question: str, product: str, gpt5_client, embeddings, intent_
     )
 
     chain = ChatPromptTemplate.from_template(template) | gpt5_client | StrOutputParser()
-    answer = chain.invoke({"question": question, "product_hint": product_hint, "context": context})
+    try:
+        answer = chain.invoke({"question": question, "product_hint": product_hint, "context": context})
+    except:
+        # rerun-it to prevent occasional LLM generation failure
+        answer = chain.invoke({"question": question, "product_hint": product_hint, "context": context})
 
     return {"answer": answer, "markdown": None, "processed_json": None, "lcia_table": None}
 

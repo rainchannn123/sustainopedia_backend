@@ -88,7 +88,11 @@ def query_decomposition_retrieval(query, gpt5_client, retriever_j, vectorstore, 
         | StrOutputParser()
         | RunnableLambda(lambda x: [q for q in re.split(r'\n+', x) if q.strip()])
     )
-    fused_docs = generate_queries | retriever_j.map() | get_unique_union
+    try:
+        fused_docs = generate_queries | retriever_j.map() | get_unique_union
+    except:
+        #rerun-it to prevent occasional LLM generation failure
+        fused_docs = generate_queries | retriever_j.map() | get_unique_union
     return fused_docs
 
 # # 5. Reranking

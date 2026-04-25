@@ -222,7 +222,11 @@ def final_mode_output_bw2_included(filename, question, gpt5_client, product, sca
         | StrOutputParser()
     )
 
-    final_results = final_rag_chain.invoke({"question":question, "results":lcia_data})
+    try:
+        final_results = final_rag_chain.invoke({"question":question, "results":lcia_data})
+    except:
+        # Rerun once to mitigate occasional LLM generation failures
+        final_results = final_rag_chain.invoke({"question":question, "results":lcia_data})
     
     return final_results, lcia_data, markdown_output, json_output
 

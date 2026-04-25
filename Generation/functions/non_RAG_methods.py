@@ -71,7 +71,11 @@ def infer_product_from_query(question: str, gpt5_client) -> str:
     )
     prompt = ChatPromptTemplate.from_template(template)
     chain = prompt | gpt5_client | StrOutputParser()
-    result = chain.invoke({"question": question})
+    try:
+        result = chain.invoke({"question": question})
+    except:
+        # rerun-it to prevent occasional LLM generation failure
+        result = chain.invoke({"question": question})
     return result.strip() or "Unknown Product"
 
 
@@ -109,7 +113,11 @@ def conduct_lca_anaylsis(question, gpt5_client):
         | StrOutputParser()
     )
 
-    decision_results = decision_chain.invoke({"question": question})
+    try:
+        decision_results = decision_chain.invoke({"question": question})
+    except:
+        # rerun-it to prevent occasional LLM generation failure
+        decision_results = decision_chain.invoke({"question": question})
     print(decision_results)
     return decision_results
 
@@ -131,7 +139,12 @@ def Get_LCIA_methods(question, gpt5_client, retriever_lca_methods):
         | gpt5_client
         | StrOutputParser()
     )
-    methods_output = generate_methods.invoke({"question": question})
+    try:
+        methods_output = generate_methods.invoke({"question": question})
+    except:
+        #rerun-it to prevent occasional LLM generation failure
+        methods_output = generate_methods.invoke({"question": question})
+        
     methods_list = retriever_lca_methods.invoke(methods_output)
     
     return methods_list
@@ -224,7 +237,12 @@ def generate_response_bw2_input(question, gpt5_client, query_decomposition_retri
         | StrOutputParser()
     )
 
-    final_results_1st = final_rag_chain_1st.invoke({"question": question, "product":product, "database":LCI_DATABASE})
+    try:
+        final_results_1st = final_rag_chain_1st.invoke({"question": question, "product":product, "database":LCI_DATABASE})
+    except:
+        # rerun-it to prevent occasional LLM generation failure
+        final_results_1st = final_rag_chain_1st.invoke({"question": question, "product":product, "database":LCI_DATABASE})
+    
     os.makedirs("bw2_input_templates", exist_ok=True)
     results_dict = json.loads(final_results_1st)
 
