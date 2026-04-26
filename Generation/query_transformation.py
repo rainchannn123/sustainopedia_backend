@@ -61,7 +61,7 @@ def _fast_response(question: str, product_hint: str, gpt5_client, embeddings, in
             "methodologies, and findings from the knowledge provided. "
             "Highlight key data points and cite specific values where available. "
             "Structure your response with ## headings for major themes. "
-            "Do not make up studies or data not present in the context. Focus on summarizing the existing literature."
+            "You must not make up studies or data not present in the context. Focus on summarizing the existing literature."
         )
     elif intent == 'general':
         role_instruction = (
