@@ -17,46 +17,166 @@ from .RAG_methods import join_docs, join_methods
 from datetime import datetime, timezone, timedelta
 
 
+def _word_to_num_en(text: str):
+    """
+    Convert an English number-word phrase (e.g. 'two hundred fifty') to float.
+    Returns None if the phrase cannot be parsed as a valid positive number.
+    """
+    ones = {
+        'zero': 0, 'a': 1, 'an': 1,
+        'one': 1, 'two': 2, 'three': 3, 'four': 4, 'five': 5,
+        'six': 6, 'seven': 7, 'eight': 8, 'nine': 9, 'ten': 10,
+        'eleven': 11, 'twelve': 12, 'thirteen': 13, 'fourteen': 14,
+        'fifteen': 15, 'sixteen': 16, 'seventeen': 17, 'eighteen': 18,
+        'nineteen': 19, 'twenty': 20, 'thirty': 30, 'forty': 40,
+        'fifty': 50, 'sixty': 60, 'seventy': 70, 'eighty': 80, 'ninety': 90,
+    }
+    multipliers = {
+        'hundred': 100, 'thousand': 1_000,
+        'million': 1_000_000, 'billion': 1_000_000_000,
+    }
+    tokens = [t for t in text.strip().lower().replace('-', ' ').split()
+              if t not in ('and', '')]
+    if not tokens:
+        return None
+    result = 0.0
+    current = 0.0
+    for token in tokens:
+        if token in ones:
+            current += ones[token]
+        elif token in multipliers:
+            mult = multipliers[token]
+            if mult == 100:
+                current = (current if current > 0 else 1.0) * 100
+            else:
+                result += (current if current > 0 else 1.0) * mult
+                current = 0.0
+        else:
+            return None  # unrecognised token — bail out
+    result += current
+    return float(result) if result > 0 else None
+
+
+def _word_to_num_zh(text: str):
+    """
+    Convert a Chinese number string (e.g. '两百五十', '一万') to float.
+    Returns None if the string cannot be parsed as a valid positive number.
+    Handles bare 十X as 1X (e.g. '十五' → 15, '十' → 10).
+    """
+    digits = {
+        '零': 0, '一': 1, '二': 2, '两': 2,
+        '三': 3, '四': 4, '五': 5, '六': 6, '七': 7, '八': 8, '九': 9,
+    }
+    magnitudes = {'十': 10, '百': 100, '千': 1_000, '万': 10_000, '亿': 100_000_000, '萬': 10_000, '億': 100_000_000}
+    if not text:
+        return None
+    result = 0
+    current_digit = None
+    section = 0
+    for ch in text:
+        if ch in digits:
+            current_digit = digits[ch]
+        elif ch in magnitudes:
+            mag = magnitudes[ch]
+            if mag == 10 and current_digit is None:
+                current_digit = 1  # bare 十X → 1*10 + X
+            if current_digit is None:
+                return None
+            if mag >= 10_000:
+                section += current_digit
+                result += section * mag
+                section = 0
+            else:
+                section += current_digit * mag
+            current_digit = None
+        else:
+            return None  # non-numeric character — bail out
+    if current_digit is not None:
+        section += current_digit
+    result += section
+    return float(result) if result > 0 else None
+
+
 def extract_functional_unit(question: str):
     """
     Parse the requested quantity from a user LCA query.
+    Handles Arabic numerals, English number words (e.g. 'five kilograms',
+    'two hundred tonnes'), and Chinese number characters (e.g. '五吨', '两百千克').
     Returns (display_amount, display_unit, scale_factor) where scale_factor
     is the multiplier to apply to BW2 results computed at the 1-tonne reference.
     Defaults to (1.0, 'tonne', 1.0) when no quantity is detected.
     """
     # (regex_pattern, canonical_unit, kg_equivalent)
+    # Patterns cover both English and Chinese unit keywords.
     unit_map = [
-        (r'metric\s*tons?',               'tonne',          1000.0),
-        (r'tonnes?',                      'tonne',          1000.0),
-        (r'tons?',                        'tonne',          1000.0),
-        (r'kilograms?',                   'kilogram',       1.0),
-        (r'kg',                           'kilogram',       1.0),
-        (r'grams?',                       'gram',           0.001),
-        (r'pounds?|lbs?',                 'kilogram',       0.453592),
-        (r'litres?|liters?',              'litre',          1.0),
-        (r'cubic\s*met(?:er|re)s?|m[³3]', 'cubic meter',   1.0),
-        (r'kwh',                          'kilowatt hour',  1.0),
-        (r'mwh',                          'megawatt hour',  1000.0),
-        (r'mj',                           'megajoule',      1.0),
-        (r'gj',                           'gigajoule',      1000.0),
-        (r'units?|pieces?',               'unit',           1.0),
+        (r'metric\s*tons?|公吨',                   'tonne',         1000.0),
+        (r'tonnes?|吨',                            'tonne',         1000.0),
+        (r'tons?',                                 'tonne',         1000.0),
+        (r'kilograms?|千克|公斤',                  'kilogram',         1.0),
+        (r'kg',                                    'kilogram',         1.0),
+        (r'grams?|克(?!拉)',                        'gram',           0.001),
+        (r'pounds?|lbs?|磅',                       'kilogram',    0.453592),
+        (r'litres?|liters?|升',                    'litre',            1.0),
+        (r'cubic\s*met(?:er|re)s?|m[³3]|立方米',   'cubic meter',      1.0),
+        (r'kwh|千瓦时|度电',                        'kilowatt hour',    1.0),
+        (r'mwh|兆瓦时',                             'megawatt hour', 1000.0),
+        (r'mj|兆焦',                                'megajoule',        1.0),
+        (r'gj|吉焦',                                'gigajoule',     1000.0),
+        (r'units?|pieces?|件|个',                  'unit',             1.0),
     ]
+
+    # ── Pass 1: Arabic numerals  "100 kg", "1.5 tonnes", "2,000吨" ────────────
     for unit_pattern, canonical, kg_equiv in unit_map:
-        # Match "1 kg", "1kg", "100 tonnes", etc.
         m = re.search(
             rf'(\d+(?:[.,]\d+)?)\s*(?:{unit_pattern})\b',
             question, re.IGNORECASE
         )
         if m:
             num = float(m.group(1).replace(',', '.'))
-            scale_factor = (num * kg_equiv) / 1000.0  # relative to BW2 1-tonne reference
-            return num, canonical, scale_factor
-        # Match "per kg", "per tonne", etc. (implicit quantity of 1)
-        m = re.search(rf'\bper\s+(?:{unit_pattern})\b', question, re.IGNORECASE)
+            return num, canonical, (num * kg_equiv) / 1000.0
+
+    # ── Pass 2: English word numbers  "five kilograms", "two hundred tonnes" ──
+    _EN_WORD = (
+        r'(?:a\b|an\b|(?:'
+        r'one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|'
+        r'thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen|'
+        r'twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety|'
+        r'hundred|thousand|million|billion'
+        r')(?:[\s\-]+(?:and[\s\-]+)?(?:'
+        r'one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|'
+        r'thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen|'
+        r'twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety|'
+        r'hundred|thousand|million|billion'
+        r'))*)'
+    )
+    for unit_pattern, canonical, kg_equiv in unit_map:
+        m = re.search(
+            rf'\b({_EN_WORD})\s+(?:{unit_pattern})\b',
+            question, re.IGNORECASE
+        )
         if m:
-            scale_factor = kg_equiv / 1000.0
-            return 1.0, canonical, scale_factor
-    # Default: 1 tonne (matches BW2 reference — no scaling needed)
+            num = _word_to_num_en(m.group(1))
+            if num is not None and num > 0:
+                return num, canonical, (num * kg_equiv) / 1000.0
+
+    # ── Pass 3: Chinese word numbers  "五吨", "两百千克", "一万吨" ──────────────
+    _ZH_NUM = r'[零一二两三四五六七八九十百千万亿萬億]+'
+    for unit_pattern, canonical, kg_equiv in unit_map:
+        m = re.search(
+            rf'({_ZH_NUM})\s*(?:{unit_pattern})',
+            question, re.IGNORECASE
+        )
+        if m:
+            num = _word_to_num_zh(m.group(1))
+            if num is not None and num > 0:
+                return num, canonical, (num * kg_equiv) / 1000.0
+
+    # ── Pass 4: "per <unit>" / "每<unit>" — implicit quantity of 1 ─────────────
+    for unit_pattern, canonical, kg_equiv in unit_map:
+        if re.search(rf'(?:\bper\s+|每\s*)(?:{unit_pattern})\b', question, re.IGNORECASE):
+            return 1.0, canonical, kg_equiv / 1000.0
+
+    # ── Default: 1 tonne (matches BW2 reference — no scaling needed) ──────────
     return 1.0, 'tonne', 1.0
 
 
