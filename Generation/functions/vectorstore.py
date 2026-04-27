@@ -4,6 +4,7 @@ import logging
 import re
 import shutil
 import sys
+import chromadb
 
 # Override system sqlite3 with pysqlite3-binary BEFORE chromadb is imported.
 # Azure App Service Linux ships SQLite < 3.35.0 which ChromaDB rejects.
@@ -106,6 +107,7 @@ def build_and_save_vectorstores(
     vectorstore_eco_methods.persist()
     vectorstore_tg_methods.persist()
     vectorstore_eco_activity.persist()
+    chromadb.api.client.SharedSystemClient.clear_system_cache()
     logging.info("Vectorstores built and saved successfully.")
     return vectorstore_lca_knowledge, parent_lookup, vectorstore_eco_methods, vectorstore_tg_methods, vectorstore_eco_activity
 
@@ -125,6 +127,8 @@ def load_vectorstores(
     vectorstore_eco_methods   = Chroma(persist_directory=persist_dir_eco_methods,   embedding_function=embeddings)
     vectorstore_tg_methods    = Chroma(persist_directory=persist_dir_tg_methods,    embedding_function=embeddings)
     vectorstore_eco_activity  = Chroma(persist_directory=persist_dir_eco_activity,  embedding_function=embeddings)
+    
+    chromadb.api.client.SharedSystemClient.clear_system_cache()
 
     logging.info("Vectorstores loaded from disk successfully.")
     return vectorstore_lca_knowledge, parent_lookup, vectorstore_eco_methods, vectorstore_tg_methods, vectorstore_eco_activity

@@ -25,7 +25,7 @@ import shutil
 import uuid
 from pathlib import Path
 from typing import Optional
-
+import chromadb
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_community.vectorstores import Chroma
 from langchain_core.documents import Document
@@ -391,6 +391,7 @@ def build_lca_knowledge_store(
         collection_name  = KNOWLEDGE_COLLECTION,
     )
     vectorstore.persist()
+    chromadb.api.client.SharedSystemClient.clear_system_cache()
     logger.info(
         "Knowledge store persisted: %d child chunks at '%s'.",
         len(child_docs), persist_dir,
@@ -428,6 +429,8 @@ def load_lca_knowledge_store(
         embedding_function=embeddings,
         collection_name=KNOWLEDGE_COLLECTION,
     )
+    
+    chromadb.api.client.SharedSystemClient.clear_system_cache()
     # Load persisted parent_lookup
     lookup_path = persist_dir_path / "parent_lookup.json"
     if lookup_path.exists():
