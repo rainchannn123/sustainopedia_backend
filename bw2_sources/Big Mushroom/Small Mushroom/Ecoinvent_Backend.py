@@ -190,46 +190,64 @@ class EcoinventEngine:
         }
         logger.warning(f"Resolving activity: '{name}' (location: {location}, unit: {unit})")
 
-        # # 1. 精确匹配
-        # exact_matches = [act for act in self.db
-        #                  if act['name'].lower() == name.lower()
-        #                  and (location is None or act['location'] == location)]
-        # for match in exact_matches:
-        #     result["matched_activity"] = match
-        #     result["match_type"] = "exact"
-        #     logger.warning(f"Exact match: {match['name']} (code: {match['code']})")
-        #     return result
+        # ── Step 1: Exact name match (case-insensitive) ───────────────────────
+        # This is the highest-confidence match and must run first.  Semantic
+        # embeddings can confuse structurally similar names (e.g. all "mine
+        # construction, *" activities) so an exact hit must short-circuit.
+        exact_matches = [
+            act for act in self.db
+            if act['name'].lower() == name.lower()
+            and (location is None or act['location'] == location)
+        ]
+        if exact_matches:
+            result["matched_activity"] = exact_matches[0]
+            result["match_type"] = "exact"
+            logger.warning(f"Exact match: '{exact_matches[0]['name']}' (code: {exact_matches[0]['code']})")
+            return result
 
-        # # 2. 模糊匹配
-        # fuzzy_matches = self.find_process_fuzzy(name, location, cutoff=0.6, n=5)
-        # logger.warning(f"Fuzzy matches for '{name}': {len(fuzzy_matches)} found")
-        # for match_dict in fuzzy_matches:
-        #     try:
-        #         matched_activity = self.db.get(match_dict['code'])
-        #         result["matched_activity"] = matched_activity
-        #         result["match_type"] = "fuzzy"
-        #         result["suggestions"] = fuzzy_matches
-        #         logger.warning(f"Fuzzy match: {matched_activity['name']} (code: {matched_activity['code']})")
-        #         return result
-        #     except KeyError:
-        #         logger.warning(f"No Activity found for fuzzy match code: {match_dict['code']}")
-
-        # 3. 语义匹配 (unit-filtered)
-        semantic_matches = self.find_process_semantic(name, location, top_k=3, min_score=0.2, unit=unit)
+        # ── Step 2: Semantic search + hybrid re-rank ──────────────────────────
+        # top_k=10 gives the re-ranker enough candidates to find the best one.
+        semantic_matches = self.find_process_semantic(name, location, top_k=10, min_score=0.2, unit=unit)
         logger.warning(
-            f"Semantic matches for '{name}': {len(semantic_matches)} found, top scores: {[m['score'] for m in semantic_matches[:5]]}")
-        for match in semantic_matches:
-            try:
-                matched_activity = self.db.get(match["activity"]['code'])
-                result["matched_activity"] = matched_activity
-                result["match_type"] = "semantic"
-                result["score"] = match["score"]
-                result["suggestions"] = semantic_matches
-                logger.warning(
-                    f"Semantic match: {matched_activity['name']} (code: {matched_activity['code']}), score: {match['score']}")
-                return result
-            except KeyError:
-                logger.warning(f"No Activity found for semantic match code: {match['activity']['code']}")
+            f"Semantic matches for '{name}': {len(semantic_matches)} found, "
+            f"top scores: {[m['score'] for m in semantic_matches[:5]]}")
+
+        if semantic_matches:
+            # Hybrid re-ranking: blend cosine similarity with word-level
+            # containment so that candidates sharing the query's specific
+            # material/type words (e.g. "iron") rank above semantically close
+            # but categorically different ones (e.g. "non-ferrous metal").
+            import re as _re
+            def _word_tokens(s: str) -> set:
+                return set(_re.sub(r'[,\-/]', ' ', s.lower()).split())
+
+            query_tokens = _word_tokens(name)
+
+            def _hybrid_score(m: dict) -> float:
+                cand_tokens = _word_tokens(m["activity"]["name"])
+                if not query_tokens:
+                    containment = 0.0
+                else:
+                    containment = len(query_tokens & cand_tokens) / len(query_tokens)
+                return 0.6 * m["score"] + 0.4 * containment
+
+            semantic_matches = sorted(semantic_matches, key=_hybrid_score, reverse=True)
+
+            for match in semantic_matches:
+                try:
+                    matched_activity = self.db.get(match["activity"]["code"])
+                    h_score = _hybrid_score(match)
+                    result["matched_activity"] = matched_activity
+                    result["match_type"] = "semantic"
+                    result["score"] = match["score"]
+                    result["suggestions"] = semantic_matches
+                    logger.warning(
+                        f"Hybrid-ranked match: '{matched_activity['name']}' "
+                        f"(code: {matched_activity['code']}), "
+                        f"sem={match['score']:.3f}, hybrid={h_score:.3f}")
+                    return result
+                except KeyError:
+                    logger.warning(f"No Activity found for code: {match['activity']['code']}")
 
         logger.error(f"No activity matched for input: {item}")
         return result
@@ -251,7 +269,7 @@ class EcoinventEngine:
 
             func_unit = {matched_activity: input_item.get("amount", 1.0)}
             logger.warning(
-                f"Computing LCA for {matched_activity['name']} (code: {matched_activity['code']}) with method {self.method.name}")
+                f"Computing LCA for {matched_activity['name']} with method {self.method.name}", extra={"frontend": True})
 
             try:
                 # ── Step 1: deterministic LCA for the mean score ──────────────────
@@ -259,9 +277,9 @@ class EcoinventEngine:
                 lca.lci()
 
                 inventory_sum = lca.inventory.sum()
-                logger.info(f"LCI inventory sum: {inventory_sum}")
+                logger.info(f"LCI inventory sum: {inventory_sum}", extra={"frontend": True})
                 if inventory_sum == 0:
-                    logger.warning("LCI inventory is zero; check technosphere resolution or database import.")
+                    logger.warning("LCI inventory is zero; check technosphere resolution or database import.", extra={"frontend": True})
 
                 lca.lcia()
                 det_score = lca.score
@@ -271,6 +289,7 @@ class EcoinventEngine:
                 # MonteCarloLCA uses scipy cgs(atol='legacy') which is broken on
                 # scipy >= 1.12. DirectSolvingMonteCarloLCA uses spsolve (LU) instead
                 # and is both correct and stable.
+                logger.warning(f"Starting Monte Carlo Simulation for {matched_activity['name']}...", extra={"frontend": True})
                 if n_simulations > 1:
                     try:
                         mc_lca = bc.DirectSolvingMonteCarloLCA(func_unit, method=self.method.name)
@@ -304,6 +323,8 @@ class EcoinventEngine:
                     "percentile_95": float(np.percentile(scores, 95)),
                     "unit": self.method.metadata.get("unit", "unit")
                 }
+                
+                logger.info(f"LCIA computation for {matched_activity['name']} completed", extra={"frontend": True})
 
                 results.append({
                 "input": input_item,
@@ -315,7 +336,7 @@ class EcoinventEngine:
 
             except Exception as e:
              # 如果 LCA 计算本身失败（如方法不匹配），报错
-                logger.error(f"LCA calculation failed for {matched_activity['name']}: {e}")
+                logger.error(f"LCA calculation failed for {matched_activity['name']}: {e}", extra={"frontend": True})
                 results.append({
             "input": input_item,
             "error": str(e),

@@ -116,12 +116,14 @@ class UnifiedLCAEngine:
                 db = engine.setup_database()
             else:  # EcoinventEngineAdapter
                 logger.info(f"Setting up Ecoinvent database for project: {project_name}")
+                logger.info(f"Setting up Ecoinvent database for project...", extra={"frontend": True})
                 db = engine.setup_database_and_methods(
                     db_name=input_data.get('dataset', 'ecoinvent'),
                     datasets_path=input_data.get('datasets_path', './bw2_sources/Big Mushroom/Small Mushroom/ecoinvent_data'))
                 
                 # Ensure the database is accessible on the adapter and engine
                 logger.info(f"Finish Setting up Ecoinvent database for project: {project_name}")
+                logger.info(f"Finish Setting up Ecoinvent database for project ✔", extra={"frontend": True})
                 engine.db = db
                 engine.engine.db = db
 
@@ -132,9 +134,11 @@ class UnifiedLCAEngine:
                 logger.warning(f"LCA TIANGONG RESULTS: {result}")
             else:  # EcoinventEngineAdapter
                 logger.info("Using Ecoinvent engine for LCA calculation")
+                logger.info("Starting LCA calculation with Ecoinvent engine...", extra={"frontend": True})
                 uncertainty = input_data.get('uncertainty', True)
                 n_simulations = input_data.get('n_simulations', 25)  # 25 runs ≈ 80% precision of 100, ~4× faster
                 result = engine.from_json_and_compute(input_data, uncertainty=uncertainty, n_simulations=n_simulations)
+                logger.info("LCA calculation completed", extra={"frontend": True})
 
             # Convert result to serializable format
             import ast

@@ -16,6 +16,16 @@ from langchain_openai import AzureChatOpenAI, AzureOpenAIEmbeddings
 from .RAG_methods import join_docs, join_methods
 from datetime import datetime, timezone, timedelta
 
+def input_q_to_json(question):
+    lines = question.splitlines()
+
+    data = {}
+    for line in lines:
+        if ": " in line:
+            key, value = line.split(": ", 1)
+            data[key.strip()] = value.strip()
+
+    return data
 
 def _word_to_num_en(text: str):
     """
@@ -248,11 +258,13 @@ def Get_LCIA_methods(question, gpt5_client, retriever_lca_methods):
     LCIA method list: ['CML v4.8 2016 no LT', 'CML v4.8 2016', 'EF v3.0 EN15804', 'EF v3.0 no LT', 'EF v3.0', 'EF v3.1 EN15804', 'EF v3.1 no LT', 'EF v3.1', 'IPCC 2013 no LT', 'IPCC 2013', 'IPCC 2021 no LT', 'IPCC 2021', 'ReCiPe 2016 v1.0', 'TRACI v2.1 no LT', 'TRACI v2.1', 'USEtox no LT', 'USEtox']
 
     Then, your task is to choose top five relevent keywords in the below list of keywords that help to retrieve relevant LCIA methods of user question: {question}
-    ['acidification no LT', 'acidification (incl. fat', 'climate change no LT', 'global warming potential (GWP100) no LT', 'ecotoxicity: freshwater no LT', 'freshwater aquatic ecotoxicity (FAETP inf) no LT', 'ecotoxicity: marine no LT', 'marine aquatic ecotoxicity (MAETP inf) no LT', 'ecotoxicity: terrestrial no LT', 'terrestrial ecotoxicity (TETP inf) no LT', 'energy resources: non-renewable no LT', 'abiotic depletion potential (ADP): fossil fuels no LT', 'eutrophication no LT', 'eutrophication (fate not incl.) no LT', 'human toxicity no LT', 'human toxicity (HTP inf) no LT', 'material resources: metals/minerals no LT', 'abiotic depletion potential (ADP): elements (ultimate reserves) no LT', 'ozone depletion no LT', 'ozone layer depletion (ODP steady state) no LT', 'photochemical oxidant formation no LT', 'photochemical oxidation (high NOx) no LT', 'acidification', 'climate change', 'global warming potential (GWP100)', 'ecotoxicity: freshwater', 'freshwater aquatic ecotoxicity (FAETP inf)', 'ecotoxicity: marine', 'marine aquatic ecotoxicity (MAETP inf)', 'ecotoxicity: terrestrial', 'terrestrial ecotoxicity (TETP inf)', 'energy resources: non-renewable', 'abiotic depletion potential (ADP): fossil fuels', 'eutrophication', 'eutrophication (fate not incl.)', 'human toxicity', 'human toxicity (HTP inf)', 'material resources: metals/minerals', 'abiotic depletion potential (ADP): elements (ultimate reserves)', 'ozone depletion', 'ozone layer depletion (ODP steady state)', 'photochemical oxidant formation', 'photochemical oxidation (high NOx)', 'accumulated exceedance (AE)', 'climate change: biogenic', 'climate change: fossil', 'climate change: land use and land use change', 'comparative toxic unit for ecosystems (CTUe)', 'eutrophication: freshwater', 'fraction of nutrients reaching freshwater end compartment (P)', 'eutrophication: marine', 'fraction of nutrients reaching marine end compartment (N)', 'eutrophication: terrestrial', 'human toxicity: carcinogenic', 'comparative toxic unit for human (CTUh)', 'human toxicity: non-carcinogenic', 'ionising radiation: human health', 'human exposure efficiency relative to u235', 'land use', 'soil quality index', 'ozone depletion potential (ODP)', 'particulate matter formation', 'impact on human health', 'photochemical oxidant formation: human health', 'tropospheric ozone concentration increase', 'water use', 'user deprivation potential (deprivation-weighted water consumption)', 'accumulated exceedance (AE) no LT', 'climate change: biogenic no LT', 'climate change: fossil no LT', 'climate change: land use and land use change no LT', 'comparative toxic unit for ecosystems (CTUe) no LT', 'ecotoxicity: freshwate', 'norganics no LT', 'etals no LT', 'rganics no LT', 'eutrophication: freshwater no LT', 'fraction of nutrients reaching freshwater end compartment (P) no LT', 'eutrophication: marine no LT', 'fraction of nutrients reaching marine end compartment (N) no LT', 'eutrophication: terrestrial no LT', 'human toxicity: carcinogenic no LT', 'comparative toxic unit for human (CTUh) no LT', 'human toxicity: carcinogeni', 'human toxicity: non-carcinogenic no LT', 'human toxicity: non-carcinogeni', 'ionising radiation: human health no LT', 'human exposure efficiency relative to u235 no LT', 'land use no LT', 'soil quality index no LT', 'ozone depletion potential (ODP) no LT', 'particulate matter formation no LT', 'impact on human health no LT', 'photochemical oxidant formation: human health no LT', 'tropospheric ozone concentration increase no LT', 'water use no LT', 'user deprivation potential (deprivation-weighted water consumption) no LT', 'norganics', 'etals', 'rganics', 'global temperature change potential (GTP100) no LT', 'global temperature change potential (GTP20) no LT', 'global warming potential (GWP20) no LT', 'global temperature change potential (GTP100)', 'global temperature change potential (GTP20)', 'global warming potential (GWP20)', 'global temperature change potential (GTP50) no LT', 'global warming potential (GWP500) no LT', 'climate change: biogeni', 'ncluding SLCFs no LT', 'climate change: fossi', 'climate change: including SLCFs no LT', 'climate change: land use no LT', 'climate change: land us', 'global temperature change potential (GTP50)', 'global warming potential (GWP500)', 'ncluding SLCFs', 'climate change: including SLCFs', 'climate change: land use', 'ndpoint (E) no LT', 'ecosystem quality no LT', 'human health no LT', 'natural resources no LT', 'total: ecosystem quality no LT', 'total: human health no LT', 'total: natural resources no LT', 'ndpoint (E)', 'ecosystem quality', 'human health', 'natural resources', 'total: ecosystem quality', 'total: human health', 'total: natural resources', 'ndpoint (H) no LT', 'ndpoint (H)', 'ndpoint (I) no LT', 'ndpoint (I)', 'idpoint (E) no LT', 'acidification: terrestrial no LT', 'energy resources: non-renewabl', 'ionising radiation no LT', 'photochemical oxidant formation: terrestrial ecosystems no LT', 'idpoint (E)', 'acidification: terrestrial', 'ionising radiation', 'photochemical oxidant formation: terrestrial ecosystems', 'idpoint (H) no LT', 'idpoint (H)', 'idpoint (I) no LT', 'idpoint (I)', 'acidification potential (AP) no LT', 'eutrophication potential no LT', 'particulate matter formation potential (PMFP) no LT', 'maximum incremental reactivity (MIR) no LT', 'acidification potential (AP)', 'eutrophication potential', 'particulate matter formation potential (PMFP)', 'maximum incremental reactivity (MIR)', 'ecotoxicity no LT', 'total no LT', 'carcinogenic no LT', 'non-carcinogenic no LT', 'ecotoxicity', 'total', 'carcinogenic', 'non-carcinogenic']
+    ['climate change no LT', 'global warming potential (GWP100) no LT', 'climate change', 'global warming potential (GWP100)', 'climate change: biogenic', 'climate change: fossil', 'climate change: land use and land use change', 'climate change: biogenic no LT', 'climate change: fossil no LT', 'climate change: land use and land use change no LT', 'global temperature change potential (GTP100) no LT', 'global temperature change potential (GTP20) no LT', 'global warming potential (GWP20) no LT', 'global temperature change potential (GTP100)', 'global temperature change potential (GTP20)', 'global warming potential (GWP20)', 'global temperature change potential (GTP50) no LT', 'global warming potential (GWP500) no LT', 'climate change: including SLCFs no LT', 'climate change: land use no LT', 'global temperature change potential (GTP50)', 'global warming potential (GWP500)', 'climate change: including SLCFs', 'climate change: land use']
 
     Output the methods and keywords in one line separated by commas. Do not use any other sentences or explanations.
     """
     prompt_methods = ChatPromptTemplate.from_template(method_search_template)
+
+    # Unused full list of methods: ['acidification no LT', 'acidification (incl. fat', 'climate change no LT', 'global warming potential (GWP100) no LT', 'ecotoxicity: freshwater no LT', 'freshwater aquatic ecotoxicity (FAETP inf) no LT', 'ecotoxicity: marine no LT', 'marine aquatic ecotoxicity (MAETP inf) no LT', 'ecotoxicity: terrestrial no LT', 'terrestrial ecotoxicity (TETP inf) no LT', 'energy resources: non-renewable no LT', 'abiotic depletion potential (ADP): fossil fuels no LT', 'eutrophication no LT', 'eutrophication (fate not incl.) no LT', 'human toxicity no LT', 'human toxicity (HTP inf) no LT', 'material resources: metals/minerals no LT', 'abiotic depletion potential (ADP): elements (ultimate reserves) no LT', 'ozone depletion no LT', 'ozone layer depletion (ODP steady state) no LT', 'photochemical oxidant formation no LT', 'photochemical oxidation (high NOx) no LT', 'acidification', 'climate change', 'global warming potential (GWP100)', 'ecotoxicity: freshwater', 'freshwater aquatic ecotoxicity (FAETP inf)', 'ecotoxicity: marine', 'marine aquatic ecotoxicity (MAETP inf)', 'ecotoxicity: terrestrial', 'terrestrial ecotoxicity (TETP inf)', 'energy resources: non-renewable', 'abiotic depletion potential (ADP): fossil fuels', 'eutrophication', 'eutrophication (fate not incl.)', 'human toxicity', 'human toxicity (HTP inf)', 'material resources: metals/minerals', 'abiotic depletion potential (ADP): elements (ultimate reserves)', 'ozone depletion', 'ozone layer depletion (ODP steady state)', 'photochemical oxidant formation', 'photochemical oxidation (high NOx)', 'accumulated exceedance (AE)', 'climate change: biogenic', 'climate change: fossil', 'climate change: land use and land use change', 'comparative toxic unit for ecosystems (CTUe)', 'eutrophication: freshwater', 'fraction of nutrients reaching freshwater end compartment (P)', 'eutrophication: marine', 'fraction of nutrients reaching marine end compartment (N)', 'eutrophication: terrestrial', 'human toxicity: carcinogenic', 'comparative toxic unit for human (CTUh)', 'human toxicity: non-carcinogenic', 'ionising radiation: human health', 'human exposure efficiency relative to u235', 'land use', 'soil quality index', 'ozone depletion potential (ODP)', 'particulate matter formation', 'impact on human health', 'photochemical oxidant formation: human health', 'tropospheric ozone concentration increase', 'water use', 'user deprivation potential (deprivation-weighted water consumption)', 'accumulated exceedance (AE) no LT', 'climate change: biogenic no LT', 'climate change: fossil no LT', 'climate change: land use and land use change no LT', 'comparative toxic unit for ecosystems (CTUe) no LT', 'ecotoxicity: freshwate', 'norganics no LT', 'etals no LT', 'rganics no LT', 'eutrophication: freshwater no LT', 'fraction of nutrients reaching freshwater end compartment (P) no LT', 'eutrophication: marine no LT', 'fraction of nutrients reaching marine end compartment (N) no LT', 'eutrophication: terrestrial no LT', 'human toxicity: carcinogenic no LT', 'comparative toxic unit for human (CTUh) no LT', 'human toxicity: carcinogeni', 'human toxicity: non-carcinogenic no LT', 'human toxicity: non-carcinogeni', 'ionising radiation: human health no LT', 'human exposure efficiency relative to u235 no LT', 'land use no LT', 'soil quality index no LT', 'ozone depletion potential (ODP) no LT', 'particulate matter formation no LT', 'impact on human health no LT', 'photochemical oxidant formation: human health no LT', 'tropospheric ozone concentration increase no LT', 'water use no LT', 'user deprivation potential (deprivation-weighted water consumption) no LT', 'norganics', 'etals', 'rganics', 'global temperature change potential (GTP100) no LT', 'global temperature change potential (GTP20) no LT', 'global warming potential (GWP20) no LT', 'global temperature change potential (GTP100)', 'global temperature change potential (GTP20)', 'global warming potential (GWP20)', 'global temperature change potential (GTP50) no LT', 'global warming potential (GWP500) no LT', 'climate change: biogeni', 'ncluding SLCFs no LT', 'climate change: fossi', 'climate change: including SLCFs no LT', 'climate change: land use no LT', 'climate change: land us', 'global temperature change potential (GTP50)', 'global warming potential (GWP500)', 'ncluding SLCFs', 'climate change: including SLCFs', 'climate change: land use', 'ndpoint (E) no LT', 'ecosystem quality no LT', 'human health no LT', 'natural resources no LT', 'total: ecosystem quality no LT', 'total: human health no LT', 'total: natural resources no LT', 'ndpoint (E)', 'ecosystem quality', 'human health', 'natural resources', 'total: ecosystem quality', 'total: human health', 'total: natural resources', 'ndpoint (H) no LT', 'ndpoint (H)', 'ndpoint (I) no LT', 'ndpoint (I)', 'idpoint (E) no LT', 'acidification: terrestrial no LT', 'energy resources: non-renewabl', 'ionising radiation no LT', 'photochemical oxidant formation: terrestrial ecosystems no LT', 'idpoint (E)', 'acidification: terrestrial', 'ionising radiation', 'photochemical oxidant formation: terrestrial ecosystems', 'idpoint (H) no LT', 'idpoint (H)', 'idpoint (I) no LT', 'idpoint (I)', 'acidification potential (AP) no LT', 'eutrophication potential no LT', 'particulate matter formation potential (PMFP) no LT', 'maximum incremental reactivity (MIR) no LT', 'acidification potential (AP)', 'eutrophication potential', 'particulate matter formation potential (PMFP)', 'maximum incremental reactivity (MIR)', 'ecotoxicity no LT', 'total no LT', 'carcinogenic no LT', 'non-carcinogenic no LT', 'ecotoxicity', 'total', 'carcinogenic', 'non-carcinogenic']
 
     generate_methods = (
         prompt_methods
@@ -269,48 +281,127 @@ def Get_LCIA_methods(question, gpt5_client, retriever_lca_methods):
     
     return methods_list
 
-# def Get_LCIA_recommended_activity(question, gpt5_client, retriever_eco_activity, product):
-#     print("Recommending LCIA activities...")
-    
-#     activity_search_template = """You are a life-cycle assessment (LCA) expert. First, You must choose only one to three the most relevant LCIA methods from the following list based on the user question: {question}.
-#     LCIA method list: ['CML v4.8 2016 no LT', 'CML v4.8 2016', 'EF v3.0 EN15804', 'EF v3.0 no LT', 'EF v3.0', 'EF v3.1 EN15804', 'EF v3.1 no LT', 'EF v3.1', 'IPCC 2013 no LT', 'IPCC 2013', 'IPCC 2021 no LT', 'IPCC 2021', 'ReCiPe 2016 v1.0', 'TRACI v2.1 no LT', 'TRACI v2.1', 'USEtox no LT', 'USEtox']
+# -------------- To retrieve the best sets of activity that align with user's requests ----------------#
+def join_activities_by_stage(activities_by_stage: dict) -> str:
+    """Format stage-grouped activity docs into a string for LLM consumption."""
+    parts = []
+    for stage, docs in activities_by_stage.items():
+        names = "; ".join(doc.page_content for doc in docs)
+        parts.append(f"[{stage}]: {names}")
+    return "\n".join(parts)
 
-#     Then, your task is to choose top five relevent keywords in the below list of keywords that help to retrieve relevant LCIA methods of user question: {question}
-#     ['acidification no LT', 'acidification (incl. fat', 'climate change no LT', 'global warming potential (GWP100) no LT', 'ecotoxicity: freshwater no LT', 'freshwater aquatic ecotoxicity (FAETP inf) no LT', 'ecotoxicity: marine no LT', 'marine aquatic ecotoxicity (MAETP inf) no LT', 'ecotoxicity: terrestrial no LT', 'terrestrial ecotoxicity (TETP inf) no LT', 'energy resources: non-renewable no LT', 'abiotic depletion potential (ADP): fossil fuels no LT', 'eutrophication no LT', 'eutrophication (fate not incl.) no LT', 'human toxicity no LT', 'human toxicity (HTP inf) no LT', 'material resources: metals/minerals no LT', 'abiotic depletion potential (ADP): elements (ultimate reserves) no LT', 'ozone depletion no LT', 'ozone layer depletion (ODP steady state) no LT', 'photochemical oxidant formation no LT', 'photochemical oxidation (high NOx) no LT', 'acidification', 'climate change', 'global warming potential (GWP100)', 'ecotoxicity: freshwater', 'freshwater aquatic ecotoxicity (FAETP inf)', 'ecotoxicity: marine', 'marine aquatic ecotoxicity (MAETP inf)', 'ecotoxicity: terrestrial', 'terrestrial ecotoxicity (TETP inf)', 'energy resources: non-renewable', 'abiotic depletion potential (ADP): fossil fuels', 'eutrophication', 'eutrophication (fate not incl.)', 'human toxicity', 'human toxicity (HTP inf)', 'material resources: metals/minerals', 'abiotic depletion potential (ADP): elements (ultimate reserves)', 'ozone depletion', 'ozone layer depletion (ODP steady state)', 'photochemical oxidant formation', 'photochemical oxidation (high NOx)', 'accumulated exceedance (AE)', 'climate change: biogenic', 'climate change: fossil', 'climate change: land use and land use change', 'comparative toxic unit for ecosystems (CTUe)', 'eutrophication: freshwater', 'fraction of nutrients reaching freshwater end compartment (P)', 'eutrophication: marine', 'fraction of nutrients reaching marine end compartment (N)', 'eutrophication: terrestrial', 'human toxicity: carcinogenic', 'comparative toxic unit for human (CTUh)', 'human toxicity: non-carcinogenic', 'ionising radiation: human health', 'human exposure efficiency relative to u235', 'land use', 'soil quality index', 'ozone depletion potential (ODP)', 'particulate matter formation', 'impact on human health', 'photochemical oxidant formation: human health', 'tropospheric ozone concentration increase', 'water use', 'user deprivation potential (deprivation-weighted water consumption)', 'accumulated exceedance (AE) no LT', 'climate change: biogenic no LT', 'climate change: fossil no LT', 'climate change: land use and land use change no LT', 'comparative toxic unit for ecosystems (CTUe) no LT', 'ecotoxicity: freshwate', 'norganics no LT', 'etals no LT', 'rganics no LT', 'eutrophication: freshwater no LT', 'fraction of nutrients reaching freshwater end compartment (P) no LT', 'eutrophication: marine no LT', 'fraction of nutrients reaching marine end compartment (N) no LT', 'eutrophication: terrestrial no LT', 'human toxicity: carcinogenic no LT', 'comparative toxic unit for human (CTUh) no LT', 'human toxicity: carcinogeni', 'human toxicity: non-carcinogenic no LT', 'human toxicity: non-carcinogeni', 'ionising radiation: human health no LT', 'human exposure efficiency relative to u235 no LT', 'land use no LT', 'soil quality index no LT', 'ozone depletion potential (ODP) no LT', 'particulate matter formation no LT', 'impact on human health no LT', 'photochemical oxidant formation: human health no LT', 'tropospheric ozone concentration increase no LT', 'water use no LT', 'user deprivation potential (deprivation-weighted water consumption) no LT', 'norganics', 'etals', 'rganics', 'global temperature change potential (GTP100) no LT', 'global temperature change potential (GTP20) no LT', 'global warming potential (GWP20) no LT', 'global temperature change potential (GTP100)', 'global temperature change potential (GTP20)', 'global warming potential (GWP20)', 'global temperature change potential (GTP50) no LT', 'global warming potential (GWP500) no LT', 'climate change: biogeni', 'ncluding SLCFs no LT', 'climate change: fossi', 'climate change: including SLCFs no LT', 'climate change: land use no LT', 'climate change: land us', 'global temperature change potential (GTP50)', 'global warming potential (GWP500)', 'ncluding SLCFs', 'climate change: including SLCFs', 'climate change: land use', 'ndpoint (E) no LT', 'ecosystem quality no LT', 'human health no LT', 'natural resources no LT', 'total: ecosystem quality no LT', 'total: human health no LT', 'total: natural resources no LT', 'ndpoint (E)', 'ecosystem quality', 'human health', 'natural resources', 'total: ecosystem quality', 'total: human health', 'total: natural resources', 'ndpoint (H) no LT', 'ndpoint (H)', 'ndpoint (I) no LT', 'ndpoint (I)', 'idpoint (E) no LT', 'acidification: terrestrial no LT', 'energy resources: non-renewabl', 'ionising radiation no LT', 'photochemical oxidant formation: terrestrial ecosystems no LT', 'idpoint (E)', 'acidification: terrestrial', 'ionising radiation', 'photochemical oxidant formation: terrestrial ecosystems', 'idpoint (H) no LT', 'idpoint (H)', 'idpoint (I) no LT', 'idpoint (I)', 'acidification potential (AP) no LT', 'eutrophication potential no LT', 'particulate matter formation potential (PMFP) no LT', 'maximum incremental reactivity (MIR) no LT', 'acidification potential (AP)', 'eutrophication potential', 'particulate matter formation potential (PMFP)', 'maximum incremental reactivity (MIR)', 'ecotoxicity no LT', 'total no LT', 'carcinogenic no LT', 'non-carcinogenic no LT', 'ecotoxicity', 'total', 'carcinogenic', 'non-carcinogenic']
 
-#     Output the methods and keywords in one line separated by commas. Do not use any other sentences or explanations.
-#     """
-#     prompt_activity = ChatPromptTemplate.from_template(activity_search_template)
+def generate_list_of_activities(gpt5_client, retriever_eco_activity, product, user_input_params):
+    stage_description_template = """
+    You are a life-cycle assessment (LCA) expert. Based on the product and user request parameters below,
+    identify the LCA stages within the requested system boundary and write a short paragraph for each stage
+    describing the key industrial processes that {product} typically undergoes at that stage.
 
-#     generate_activity = (
-#         prompt_activity
-#         | gpt5_client
-#         | StrOutputParser()
-#     )
-#     activity_output = generate_activity.invoke({"question": question})
-#     activity_list = retriever_eco_activity.invoke(activity_output)
+    User Request Parameters:
+    {user_input_params}
     
-#     return activity_list
-    
-def generate_response_bw2_input(question, gpt5_client, query_decomposition_retrival, LCIA_method_list, product, LCI_DATABASE, retriever_eco_activity, n_simulations=25):
+    For your reference, there are only four possible system boundaries: "cradle-to-gate", "cradle-to-grave", "gate-to-gate", and "cradle-to-cradle", and you should learn the stages associated with each system boundary in the following knowledge text provided:
+    ## Cradle-to-Gate
+    - Raw material extraction (mining, harvesting, primary production)
+    - Material processing/beneficiation (ore concentration, refining, intermediate chemicals)
+    - Manufacturing/production (smelting, fabrication, assembly)
+    - Gate (finished product leaving the factory)
+    ## Cradle-to-Grave
+    - Raw material extraction
+    - Material processing
+    - Manufacturing/production
+    - Distribution/transport
+    - Use phase (operation, maintenance, energy consumption during use)
+    - End-of-life (disposal, recycling, incineration, landfill)
+    ## Gate-to-Gate
+    - Single process or facility boundary (e.g., only the smelting plant or only the assembly line)
+    - Focuses on inputs/outputs of that specific stage without upstream or downstream
+    ## Cradle-to-Cradle (Circular economy perspective)
+    - Raw material extraction
+    - Processing/manufacturing
+    - Use phase
+    - End-of-life recovery (recycling, remanufacturing, closed-loop material flows)
+
+    Based on the "system_boundary" in the user parameters (default to "cradle-to-grave" if not specified),
+    output a JSON object where:
+    - Each key is a stage name (e.g., "raw material extraction", "processing", "manufacturing", "transport", "use phase", "end-of-life")
+    - Each value is a short paragraph describing the specific activities and processes for {product} at that stage
+
+    Only include stages relevant to the system boundary. Output only the JSON object. No other text.
+    """
+    prompt_stages = ChatPromptTemplate.from_template(stage_description_template)
+    generate_stages = (
+        prompt_stages
+        | gpt5_client
+        | StrOutputParser()
+    )
+
+    stages_json_str = generate_stages.invoke({"product": product, "user_input_params": user_input_params})
+
+    try:
+        clean = re.sub(r"```(?:json)?|```", "", stages_json_str).strip()
+        stages_dict = json.loads(clean)
+    except json.JSONDecodeError:
+        stages_dict = {"general": f"Key lifecycle activities for {product} production"}
+
+    activities_by_stage = {}
+    for stage, description in stages_dict.items():
+        query = f"{product} {stage}: {description}"
+        docs = retriever_eco_activity.invoke(query)
+        activities_by_stage[stage] = docs
+
+    return activities_by_stage
+
+
+def generate_response_bw2_input(
+    gpt5_client,
+    query_decomposition_retrival,
+    LCIA_method_list,
+    retrieved_acitivity_list,
+    product,
+    LCI_DATABASE,
+    retriever_eco_activity,
+    user_input_params=None,
+):
     print("Generating Brightway2 input JSON...")
+
+    params = user_input_params or {}
+    resolved_n_simulations = int(params.get("n_simulations", 25))
     
     final_template_1st = """
-    You are an assistant that converts lifecycle assessment (LCA) queries into structured JSON instructions for the Brightway2 LCA engine.  
-    Extract key activities along the value chain and sort by stage based on collected information of product {product} given by the user query: {question} and some useful related reliable paragraphs in the database: {context}, and output a JSON with:
-    #Please strictly note that the maximum number of activities in the functional unit should not exceed 10, and the amount of each activity should be normalized to the functional unit of 1 ton of product production. If there are more than 10 activities, please select the most relevant ones based on the user query and the database information.
+    You are an assistant that converts lifecycle assessment (LCA) queries into structured JSON instructions for the Brightway2 LCA engine.
 
+    ## Your Task
+    - Read the section **User Requests** carefully. You should primarily rely on this section to insert the values for the required fields in the output JSON.
+    - Regarding the activities inside the functional unit section for a complete value chain in your output JSON, you must reference from the section **List of available activities by stages** below. From your LCA expertise, select the most relevant activities for each stage. Choose at least one activity per stage, and include as many additional activities as possible in the list if they are related and do not conflict. Ensure the selected activities together form a complete and detailed supply chain. Do not repeat any activity in your JSON output. Insert each selected activity into the functional unit section of the output JSON in order with the stages.
+    - The section **Supplementary Context** are ground-truth sources that are retrieved from peer-reviewed journals or facts. You may use them to revise your identified key activities and their associated stages, validate them, and make them be more accurate.
+    - Finally, output the result as a structured JSON object.
+
+    ## Input Sections
+    ### User Requests
+    {user_input_params}
+
+    ### List of available activities by stages (note: activities in each stage are separated by semicolons)
+    {retrieved_acitivity_list}
+
+    ### Supplementary Context
+    {context}
+
+    ## Output Requirements
+    Regarding the output JSON, please strictly follows the following instructions:
     - "goal": Always "lifecycle impact assessment"  
     - "Project": Insert the project name as "{database}"  
-    - "method": Select the top 1 most relevant LCIA methods from provided list: {methods}.
-    - "system_boundary": Use "cradle-to-gate" or "cradle-to-grave"  
+    - "method": Select the most relevant LCIA methods from provided list: {methods}. If no specific impact category is requested, default to a climate change / GWP100 method (e.g., IPCC 2021, EF v3.1).
+    - "system_boundary": reference to the user's strcutured parameter "system_boundary" if provided, otherwise default to "cradle-to-grave".
     - "functional_unit": A list of multiple activity objects, each describing one process involved in the product system:  
     Each object includes:  
     - "activity_name": The name of a process of the given product that usually involves in the product value chain and its lifecycle.
-    - "amount": A float value representing the quantity of the given product involved in each subprocess, normalized to the functional unit of 1 ton of product production. This ensures consistency across all stages of the product's lifecycle value chain.
-    - "unit": e.g., "kilogram"  
-    - "location": ISO country code. If "{database}" == "Ecoinvent" or "ecoinvent", use "GLO", otherwise "CN"
+    - "amount": A float value representing the quantity of the given product involved in each subprocess, and you may reference to the supplementary context if exists. You must normalize it to the functional unit of 1 ton of product production. This ensures consistency across all stages of the product's lifecycle value chain.
+    - "unit": Use units that are commonly used in LCA databases,e.g., "kilogram"
+    - "location": ISO country code. Select the most appropriate ISO country or region code based on 'region' information in the User Requests section; available codes are Global:`GLO`, Europe:`RER`, Western Europe:`WEU`, Eastern Europe:`EEU`, Middle East & Africa:`MEA`, Asia:`ASI`, North America:`NAM`, South America:`SAM`, Switzerland:`CH`, China:`CN`, United States:`US`, Brazil:`BR`, India:`IN`; if no region is specified, default to `GLO`.
     - "stage": The value chain stage (e.g., "raw material extraction", "manufacturing", "transport", "use", "disposal")
+    **Critical exclusion rule — capital infrastructure activities**: Do NOT include activities whose names contain words such as "construction", "building", "facility", "plant construction", or "infrastructure" (e.g., "mine construction, iron", "factory construction", "road construction") as standalone entries in the functional unit, unless the study goal is explicitly the construction of that specific facility. These are one-time capital goods activities whose unit is typically "unit" (one whole facility), and they carry enormous embedded impacts (tens to hundreds of millions of kg CO₂-eq per unit). Their impacts are already proportionally allocated in the corresponding per-mass or per-energy operation activities (e.g., per-kilogram mine operation, per-kWh power plant operation). Listing them separately as a top-level functional unit item constitutes severe double-counting. For a product value-chain LCA, only include the operational flow activities (e.g., "copper mine operation and beneficiation", "steel production, converter") and let the background system handle infrastructure allocation automatically.
+   
     After defining the functional unit, also include:
     - "project_name": Insert "{database}"  
     - "dataset": Insert "{database}", but in lowercase  
@@ -326,14 +417,14 @@ def generate_response_bw2_input(question, gpt5_client, query_decomposition_retri
         "activity_name": "hard coal production",
         "amount": 1.0,
         "unit": "kilogram",
-        "location": "CN",
+        "location": "GLO",
         "stage": "manufacturing"
         }},
         {{
         "activity_name": "transport, freight, lorry 16-32 metric ton, EURO6",
         "amount": 0.1,
         "unit": "ton kilometer",
-        "location": "CN",
+        "location": "GLO",
         "stage": "transport"
         }}
     ],
@@ -346,22 +437,36 @@ def generate_response_bw2_input(question, gpt5_client, query_decomposition_retri
 
     final_prompt_1st = ChatPromptTemplate.from_template(final_template_1st)
 
+    activities_by_stage_str = join_activities_by_stage(retrieved_acitivity_list)
+
     final_rag_chain_1st = (
         {"context": query_decomposition_retrival | RunnableLambda(join_docs),
-        "methods": RunnableLambda(lambda x: LCIA_method_list) | RunnableLambda(join_methods),  # Adjusted to use methods_list directly
-        "question": itemgetter("question"),
+        "methods": RunnableLambda(lambda x: LCIA_method_list) | RunnableLambda(join_methods),
+        "retrieved_acitivity_list": RunnableLambda(lambda x: activities_by_stage_str),
         "product": itemgetter("product"),
-        "database": itemgetter("database")}
+        "database": itemgetter("database"),
+        "user_input_params": itemgetter("user_input_params")
+        }
         | final_prompt_1st
         | gpt5_client
         | StrOutputParser()
     )
 
     try:
-        final_results_1st = final_rag_chain_1st.invoke({"question": question, "product":product, "database":LCI_DATABASE})
+        final_results_1st = final_rag_chain_1st.invoke({
+            "question": json.dumps(params, ensure_ascii=False),
+            "product": product,
+            "database": LCI_DATABASE,
+            "user_input_params": json.dumps(params, ensure_ascii=False, indent=2),
+        })
     except:
         # rerun-it to prevent occasional LLM generation failure
-        final_results_1st = final_rag_chain_1st.invoke({"question": question, "product":product, "database":LCI_DATABASE})
+        final_results_1st = final_rag_chain_1st.invoke({
+            "question": json.dumps(params, ensure_ascii=False),
+            "product": product,
+            "database": LCI_DATABASE,
+            "user_input_params": json.dumps(params, ensure_ascii=False, indent=2),
+        })
     
     os.makedirs("bw2_input_templates", exist_ok=True)
     results_dict = json.loads(final_results_1st)
@@ -387,13 +492,34 @@ def generate_response_bw2_input(question, gpt5_client, query_decomposition_retri
                     activity["activity_name"] = str(matched)
     
     # Inject n_simulations so the BW2 calculator can read it when supported
-    results_dict['n_simulations'] = n_simulations
+    results_dict['n_simulations'] = resolved_n_simulations
     current_time = datetime.now(timezone(timedelta(hours=8))).strftime("%Y%m%d%H%M%S")
     output_filepath = f"bw2_input_templates/{product}_{LCI_DATABASE}_{current_time}.json"
     with open(output_filepath, "w", encoding="utf-8") as f:
         json.dump(results_dict, f, indent=4, ensure_ascii=False)
 
-    return output_filepath
+    # Return filepath and activities_by_stage as dict {stage_name: [Document, ...]}
+    return output_filepath, retrieved_acitivity_list
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -405,7 +531,7 @@ def generate_response_bw2_input(question, gpt5_client, query_decomposition_retri
 
     - "goal": Always "lifecycle impact assessment"  
     - "Project": Insert the project name as "{database}"  
-    - "method": Select the most relevant LCIA methods from provided list: {methods}. Insert the first element of your chosen LCIA method, and insert the second and third element as "climate change" and "GWP 100a" respectively, as the "method" value in the template. Also, Please note that if "{database}" is "Tiangong", you must replace the first element in the method list with "Tiangong". 
+    - "method": Select the LCIA method most relevant to the user's request from the provided list: {methods}. If no specific impact category is requested, default to a climate change / GWP100 method (e.g., IPCC 2021, EF v3.1).
     - "system_boundary": Use "cradle-to-gate" or "cradle-to-grave"  
     - "functional_unit": A list of multiple activity objects, each describing one process involved in the product system:  
     Each object includes:  

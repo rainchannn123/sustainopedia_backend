@@ -14,13 +14,40 @@ from operator import itemgetter
 from langchain_core.runnables import RunnableLambda
 from langchain_openai import AzureChatOpenAI, AzureOpenAIEmbeddings
 
-def result_data_processing(filename, product, scale_factor=1.0):
+_UPSTREAM_KEYWORDS = {
+    "raw material", "extraction", "mining", "beneficiation",
+    "processing", "manufacturing", "production", "smelting",
+    "fabrication", "assembly", "refining"
+}
+_DOWNSTREAM_KEYWORDS = {
+    "distribution", "transport", "use phase", "use",
+    "end-of-life", "end of life", "disposal", "recycling",
+    "landfill", "incineration", "recovery", "remanufacturing"
+}
+
+def _classify_stream(stage: str) -> str:
+    """Classify a stage name as upstream, downstream, or gate-to-gate."""
+    s = (stage or "").lower()
+    if any(kw in s for kw in _UPSTREAM_KEYWORDS):
+        return "upstream"
+    if any(kw in s for kw in _DOWNSTREAM_KEYWORDS):
+        return "downstream"
+    return "gate-to-gate"
+
+
+def result_data_processing(filename, product, scale_factor=1.0, display_amount=1.0, display_unit='tonne', activities_by_stage_dict=None):
     with open(filename, 'r') as file:
         rdata = json.load(file)
     
     source = 'Tiangong' if 'Tiangong' in rdata['method'] else 'EcoInvent'
     methods = ", ".join(rdata['method'])
-    
+
+    # Build a stage→stream lookup from the activities_by_stage_dict keys (if provided)
+    stage_stream_map = {}
+    if activities_by_stage_dict:
+        for stage_key in activities_by_stage_dict.keys():
+            stage_stream_map[stage_key.lower()] = _classify_stream(stage_key)
+
     # Create JSON structure
     lcia_data = {
         "metadata": {
@@ -76,6 +103,9 @@ def result_data_processing(filename, product, scale_factor=1.0):
 
         notes = 'N/A' if mean_val != "" else 'Cannot match LCI activity at this moment'
 
+        # Classify stream: prefer lookup from activities_by_stage_dict, fall back to keywords
+        stream = stage_stream_map.get(stage.lower(), _classify_stream(stage))
+
         process = {
             "process": process_field,
             "amount_location": amount_location,
@@ -88,13 +118,21 @@ def result_data_processing(filename, product, scale_factor=1.0):
             "sd": sd_val,
             "percentile": percentile_val,
             "impact_unit": impact_unit_field,
-            "notes": notes
+            "notes": notes,
+            "stream": stream
         }
 
         lcia_data["processes"].append(process)
     
     total_mean = sum(process["mean_impact"] for process in lcia_data['processes'] if isinstance(process.get("mean_impact"), float))
-    # lcia_data["total_mean_impact"] = round(total_mean, 3)
+
+    # Tally stream counts for the pie chart
+    stream_counts = {"upstream": 0, "downstream": 0, "gate_to_gate": 0}
+    for p in lcia_data["processes"]:
+        key = p.get("stream", "gate-to-gate").replace("-", "_")
+        if key in stream_counts:
+            stream_counts[key] += 1
+    lcia_data["metadata"]["stream_summary"] = stream_counts
 
     ###Problem, some may dont have suggestions: su_name = results[i]['match_history']['suggestions'][j]['activity']['name'].title()
     # list_of_suggested_activity = '''List of Suggested Activities For Each Process: '''
@@ -130,7 +168,7 @@ def result_data_processing(filename, product, scale_factor=1.0):
     # os.makedirs(dir_path, exist_ok=True)
 
     product = product  # Default product name
-    markdown_output = generate_markdown(product, lcia_data, total_mean)
+    markdown_output = generate_markdown(product, lcia_data, total_mean, display_amount=display_amount, display_unit=display_unit)
     json_output = generate_json(product, lcia_data, total_mean)
 
     # with open("lcia_results.md", "w") as f:
@@ -142,16 +180,17 @@ def result_data_processing(filename, product, scale_factor=1.0):
     return lcia_data, markdown_output, json_output
 
 
-def final_mode_output_bw2_included(filename, question, gpt5_client, product, scale_factor=1.0, n_simulations=25):
+def final_mode_output_bw2_included(filename, question, gpt5_client, product, scale_factor=1.0, n_simulations=25, display_amount=1.0, display_unit='tonne', activities_by_stage_dict=None):
     # with open ("/trinity/home/hychan928/llm_env/LLM2/multi-query-methods/response/result_text/florescent_lamp.txt", 'r') as file:
     #     results = file.read()
     
-    lcia_data, markdown_output, json_output = result_data_processing(filename, product, scale_factor)
+    lcia_data, markdown_output, json_output = result_data_processing(filename, product, scale_factor, display_amount=display_amount, display_unit=display_unit, activities_by_stage_dict=activities_by_stage_dict)
     
     final_output_template = """
         LCIA Data Result Context:
         {results}
 
+        Functional Unit: {functional_unit}
         User Query: {question}
 
         Role: You are a Senior Life Cycle Assessment (LCA) Consultant. Your goal is to provide high-level synthesis and technical insights based on the provided LCIA results.
@@ -172,10 +211,12 @@ def final_mode_output_bw2_included(filename, question, gpt5_client, product, sca
         - Use `- ` for bullet points and `1. ` for numbered lists. 
         - Ensure a single blank line before lists and between paragraphs.
         - Maintain a professional, objective tone. Do not use fluff or introductory "bridge" phrases like "Based on the data..." or "I can see that..."
-        - Make sure the final response adheres strictly to these instructions and formatting rules and clean to be rendered and viewed on client side.
-        - The no. of simulation to run Monte Carlo analysis is {n_simulations}. You can add this information in your answer shortly and clearly. No need further explanation on what Monte Carlo analysis is or why is this no. of simulations unless the user explicitly ask for it.     
+        - Make sure the final response adheres strictly to these instructions and formatting rules and is clean to be rendered and viewed on the client side.
+        - The number of simulations to run Monte Carlo analysis is {n_simulations}. You can add this information in your answer shortly and clearly. No need for further explanation on what Monte Carlo analysis is or why this number of simulations unless the user explicitly asks for it.     
+        - All reported emissions or impacts must be expressed exclusively in kg CO₂-eq. Do not use other equivalence units (e.g., Sb-eq, SO₂-eq, PO₄³⁻-eq). Always normalize results to CO₂-eq.
+        
         Structure the output as:
-        ## Answer to Your Query
+        ## Summary of LCIA Results
         [Direct answer to query]
 
         ## Detailed Interpretation
@@ -218,21 +259,23 @@ def final_mode_output_bw2_included(filename, question, gpt5_client, product, sca
         {"results": itemgetter("results"),
         "question": itemgetter("question"),
         "n_simulations": itemgetter("n_simulations"),
+        "functional_unit": itemgetter("functional_unit"),
         }
         | final_prompt 
         | gpt5_client
         | StrOutputParser()
     )
 
+    functional_unit_str = f"{display_amount} {display_unit} of {product}"
     try:
-        final_results = final_rag_chain.invoke({"question":question, "results":lcia_data, "n_simulations": n_simulations})
+        final_results = final_rag_chain.invoke({"question":question, "results":lcia_data, "n_simulations": n_simulations, "functional_unit": functional_unit_str})
     except:
         # Rerun once to mitigate occasional LLM generation failures
-        final_results = final_rag_chain.invoke({"question":question, "results":lcia_data, "n_simulations": n_simulations})
+        final_results = final_rag_chain.invoke({"question":question, "results":lcia_data, "n_simulations": n_simulations, "functional_unit": functional_unit_str})
     
     return final_results, lcia_data, markdown_output, json_output
 
-def generate_markdown(product, lcia_data, total_mean):
+def generate_markdown(product, lcia_data, total_mean, display_amount=1.0, display_unit='tonne'):
     process_rows = "\n".join(
         f'| {p["process"]} | {p["amount_location"]} | {p["system_boundary"]} | '
         f'{p["matched_activity"]} | {p["unit_location"]} | {p["db_version_code"]} | '
@@ -240,7 +283,7 @@ def generate_markdown(product, lcia_data, total_mean):
         for p in lcia_data['processes']
     )
     
-    markdown_content = f'''## LCIA Results for Producing 1 Unit of {product}
+    markdown_content = f'''## LCIA Results for Producing {display_amount} {display_unit} of {product}
 
     Database: {lcia_data['metadata']['database']}
     LCA Methods: {lcia_data['metadata']['lca_methods']}
@@ -259,7 +302,8 @@ def generate_json(product, lcia_data, total_mean):
         "database": lcia_data['metadata']['database'],
         "lcaMethods": lcia_data['metadata']['lca_methods'],
         "processes": lcia_data['processes'],
-        "totalMeanImpact": round(total_mean, 1)
+        "totalMeanImpact": round(total_mean, 1),
+        "streamSummary": lcia_data['metadata'].get('stream_summary', {})
     }
     return json.dumps(json_data, indent=2)
 
