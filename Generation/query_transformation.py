@@ -24,7 +24,6 @@ load_dotenv(dotenv_path="./.env")
 LCI_DATABASE = "Ecoinvent"
 # LCI_DATABASE = "Tiangong"
 
-preinstall_ecoinvent_database()  # pre-build BW2 databases to speed up first run
 start_time = time.time()
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
@@ -156,7 +155,7 @@ def generate_response_full_lca(user_input_params, product):
     #     "processed_json": None,
     #     "lcia_table": None
     # }
-
+    preinstall_ecoinvent_database()  # pre-build BW2 databases to speed up first run
     section1_end = time.time()
     logging.info(f"Environment Setting took {section1_end - section1_start:.2f} seconds")
     
