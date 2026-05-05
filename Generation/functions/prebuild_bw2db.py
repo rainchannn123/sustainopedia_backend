@@ -107,7 +107,8 @@ def preinstall_ecoinvent_database():
 
         os.remove(local_zip)
         logging.info(f"解压完成!Ecoinvent 数据库已就绪：{bw2_dir}")
-        
+        return True
+
     except Exception as e:
         logging.error(f"下载/解压失败: {e}")
         # 清理可能产生的残留文件，避免下次又被当成“已存在”
