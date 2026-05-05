@@ -64,6 +64,8 @@ embeddings = AzureOpenAIEmbeddings(
     api_key=subscription_key
 )
 
+preinstall_ecoinvent_database()  # pre-build BW2 databases to speed up first run
+    
 if os.path.isdir('./chroma_db_lca_knowledge') and os.path.isdir('./chroma_db_eco_methods') and os.path.isdir('./chroma_db_tg_methods') and os.path.isdir('./chroma_db_eco_activity'):
     pass
 else:
@@ -155,7 +157,6 @@ def generate_response_full_lca(user_input_params, product):
     #     "processed_json": None,
     #     "lcia_table": None
     # }
-    preinstall_ecoinvent_database()  # pre-build BW2 databases to speed up first run
     section1_end = time.time()
     logging.info(f"Environment Setting took {section1_end - section1_start:.2f} seconds")
     
