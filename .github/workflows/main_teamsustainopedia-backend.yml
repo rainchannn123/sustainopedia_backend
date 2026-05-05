@@ -48,7 +48,45 @@ jobs:
               print('ERROR: preinstall_ecoinvent_database() returned False')
               sys.exit(1)
           "
-                
+
+      - name: Pre-build ChromaDB vectorstores
+        env:
+          AZURE_API_KEY: ${{ secrets.AZURE_API_KEY }}
+        run: |
+          source antenv/bin/activate
+          python -c "
+          import sys, os
+          sys.path.insert(0, '.')
+          chroma_dirs = [
+              './chroma_db_lca_knowledge', './chroma_db_eco_methods',
+              './chroma_db_tg_methods',    './chroma_db_eco_activity'
+          ]
+          if all(os.path.isdir(d) for d in chroma_dirs):
+              print('ChromaDB vectorstores already exist, skipping build.')
+          else:
+              from langchain_openai import AzureOpenAIEmbeddings
+              from Generation.functions.vectorstore import build_and_save_vectorstores
+              embeddings = AzureOpenAIEmbeddings(
+                  azure_endpoint='https://seesustainopedia-gpt5-resource.cognitiveservices.azure.com/',
+                  api_version='2024-02-01',
+                  azure_deployment='text-embedding-3-large',
+                  model='text-embedding-3-large',
+                  api_key=os.getenv('AZURE_API_KEY')
+              )
+              build_and_save_vectorstores(
+                  embeddings,
+                  eco_methods='./_additionals/methods/EcoInvent_methods.txt',
+                  tg_methods='./_additionals/methods/tiangong_methods.txt',
+                  eco_activity='./_additionals/methods/Ecoinvent_activity.txt',
+                  pdf_dir='./_raw knowledge pdfs',
+                  persist_dir_lca_knowledge='./chroma_db_lca_knowledge',
+                  persist_dir_eco_methods='./chroma_db_eco_methods',
+                  persist_dir_tg_methods='./chroma_db_tg_methods',
+                  persist_dir_eco_activity='./chroma_db_eco_activity'
+              )
+              print('ChromaDB vectorstores built successfully.')
+          "
+
       # By default, when you enable GitHub CI/CD integration through the Azure portal, the platform automatically sets the SCM_DO_BUILD_DURING_DEPLOYMENT application setting to true. This triggers the use of Oryx, a build engine that handles application compilation and dependency installation (e.g., pip install) directly on the platform during deployment. Hence, we exclude the antenv virtual environment directory from the deployment artifact to reduce the payload size. 
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v4
