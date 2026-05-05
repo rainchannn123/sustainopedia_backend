@@ -57,6 +57,7 @@ CORS(app, resources={r"/api/*": {"origins": allowed_origins}})
 # Each job: { status, question, product, created_at, finished_at, result, error }
 _jobs: dict = {}
 _jobs_lock = threading.Lock()
+_cancel_events: dict = {}  # job_id -> threading.Event; set() to request cancellation
 _JOB_TTL_SECONDS = 3600  # expire jobs after 1 hour
 
 # ── Per-job log capture ────────────────────────────────────────────────────────
@@ -103,53 +104,74 @@ def _purge_stale_jobs():
     ]
     for jid in stale:
         del _jobs[jid]
+        _cancel_events.pop(jid, None)
 
 
 def _run_job_fast(job_id: str, question: str, product: str):
     """Background thread: execute LCA pipeline and store the result."""
     _thread_local.job_id = job_id
-    with _jobs_lock:
-        _jobs[job_id]['status'] = 'running'
+    cancel_event = _cancel_events.get(job_id)
     try:
+        with _jobs_lock:
+            if cancel_event and cancel_event.is_set():
+                _jobs[job_id]['status'] = 'cancelled'
+                return
+            _jobs[job_id]['status'] = 'running'
         answer_pack = generate_response_fast(question, product)
         with _jobs_lock:
-            _jobs[job_id].update({
-                'status': 'done',
-                'result': answer_pack,
-                'finished_at': datetime.now(timezone.utc).isoformat()
-            })
+            if cancel_event and cancel_event.is_set():
+                _jobs[job_id]['status'] = 'cancelled'
+            else:
+                _jobs[job_id].update({
+                    'status': 'done',
+                    'result': answer_pack,
+                    'finished_at': datetime.now(timezone.utc).isoformat()
+                })
     except Exception as exc:
         app.logger.exception(f"Job {job_id} failed: {exc}")
         with _jobs_lock:
-            _jobs[job_id].update({
-                'status': 'error',
-                'error': str(exc),
-                'finished_at': datetime.now(timezone.utc).isoformat()
-            })
+            if cancel_event and cancel_event.is_set():
+                _jobs[job_id]['status'] = 'cancelled'
+            else:
+                _jobs[job_id].update({
+                    'status': 'error',
+                    'error': str(exc),
+                    'finished_at': datetime.now(timezone.utc).isoformat()
+                })
     finally:
         _thread_local.job_id = None
 
 def _run_job_full_lca(job_id: str, user_input_params: str, product: str):
     """Background thread: execute LCA pipeline and store the result."""
     _thread_local.job_id = job_id
-    with _jobs_lock:
-        _jobs[job_id]['status'] = 'running'
+    cancel_event = _cancel_events.get(job_id)
     try:
+        with _jobs_lock:
+            if cancel_event and cancel_event.is_set():
+                _jobs[job_id]['status'] = 'cancelled'
+                return
+            _jobs[job_id]['status'] = 'running'
         answer_pack = generate_response_full_lca(user_input_params, product)
         with _jobs_lock:
-            _jobs[job_id].update({
-                'status': 'done',
-                'result': answer_pack,
-                'finished_at': datetime.now(timezone.utc).isoformat()
-            })
+            if cancel_event and cancel_event.is_set():
+                _jobs[job_id]['status'] = 'cancelled'
+            else:
+                _jobs[job_id].update({
+                    'status': 'done',
+                    'result': answer_pack,
+                    'finished_at': datetime.now(timezone.utc).isoformat()
+                })
     except Exception as exc:
         app.logger.exception(f"Job {job_id} failed: {exc}")
         with _jobs_lock:
-            _jobs[job_id].update({
-                'status': 'error',
-                'error': str(exc),
-                'finished_at': datetime.now(timezone.utc).isoformat()
-            })
+            if cancel_event and cancel_event.is_set():
+                _jobs[job_id]['status'] = 'cancelled'
+            else:
+                _jobs[job_id].update({
+                    'status': 'error',
+                    'error': str(exc),
+                    'finished_at': datetime.now(timezone.utc).isoformat()
+                })
     finally:
         _thread_local.job_id = None
             
@@ -176,6 +198,8 @@ def create_job():
                 'logs':       []
             }
 
+        cancel_event = threading.Event()
+        _cancel_events[job_id] = cancel_event
         thread = threading.Thread(target=_run_job_fast, args=(job_id, question, product), daemon=True)
         thread.start()
         
@@ -193,6 +217,8 @@ def create_job():
                 'logs':       []
             }
 
+        cancel_event = threading.Event()
+        _cancel_events[job_id] = cancel_event
         thread = threading.Thread(target=_run_job_full_lca, args=(job_id, user_input_params, product), daemon=True)
         thread.start()
     
@@ -219,6 +245,24 @@ def get_job(job_id: str):
     if status == 'error':
         return jsonify({'status': 'error', 'error': error or 'Unknown error', 'logs': logs})
     return jsonify({'status': status, 'logs': logs})
+
+
+@app.route('/api/jobs/<job_id>', methods=['DELETE'])
+def cancel_job(job_id: str):
+    """Request cancellation of a pending or running job.
+    The worker thread aborts after its current pipeline step completes.
+    """
+    with _jobs_lock:
+        job = _jobs.get(job_id)
+        if not job:
+            return jsonify({'status': 'not_found'}), 404
+        if job['status'] in ('done', 'error', 'cancelled', 'cancelling'):
+            return jsonify({'status': job['status'], 'message': 'Job already finished'}), 200
+        job['status'] = 'cancelling'
+    event = _cancel_events.get(job_id)
+    if event:
+        event.set()
+    return jsonify({'status': 'cancelling'}), 200
 
 
 # ── Legacy synchronous endpoint (kept for compatibility) ───────────────────────
