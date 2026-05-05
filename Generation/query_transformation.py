@@ -138,6 +138,7 @@ def generate_response_fast(question: str, product: str) -> dict:
         "Use inline code for numeric values (e.g., `12.5 kg CO\u2082-eq`). "
         "Do not fabricate data not present in the context. "
         "If Product is not specified, try to guess it if you are confident, otherwise do not make assumptions and focus on general insights from the context."
+        "If User's query is completely unrelated to LCA, energy and environmental impact, or sustainability fields, politely decline to answer and explain in one sentence that you can only assist with LCA-related queries."
     )
 
     chain = ChatPromptTemplate.from_template(template) | gpt5_client | StrOutputParser()
