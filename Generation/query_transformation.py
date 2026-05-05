@@ -16,7 +16,7 @@ from .functions.after_bw2 import final_mode_output_bw2_included
 from .functions.bw2_calculation import start_lca_calculation
 from.functions.RAG_methods import query_decomposition_retrieval
 # from .functions.intent_classifier import _DEFAULTS, classify_intent  # query intent classification and parameter extraction
-from .functions.prebuild_bw2db import preinstall_ecoinvent_database  # pre-build BW2 databases to speed up first run
+# from .functions.prebuild_bw2db import preinstall_ecoinvent_database  # pre-build BW2 databases to speed up first run
 
 from dotenv import load_dotenv
 load_dotenv(dotenv_path="./.env")
@@ -64,7 +64,7 @@ embeddings = AzureOpenAIEmbeddings(
     api_key=subscription_key
 )
 
-preinstall_ecoinvent_database()  # pre-build BW2 databases to speed up first run
+# preinstall_ecoinvent_database()  # pre-build BW2 databases in deployment
     
 if os.path.isdir('./chroma_db_lca_knowledge') and os.path.isdir('./chroma_db_eco_methods') and os.path.isdir('./chroma_db_tg_methods') and os.path.isdir('./chroma_db_eco_activity'):
     pass

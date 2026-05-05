@@ -19,6 +19,9 @@ from flask import Flask, request, jsonify
 from Generation.query_transformation import generate_response_fast, generate_response_full_lca
 from flask_cors import CORS
 
+from dotenv import load_dotenv
+load_dotenv(dotenv_path="./.env")
+
 # ── JSON encoder: handle numpy scalars / arrays and datetime objects ───────────
 # BW2 / numpy return float64, int64, ndarray etc. which Flask's default encoder
 # cannot serialise → 500 with empty body on Azure.
@@ -47,7 +50,7 @@ from dotenv import load_dotenv
 load_dotenv('./.env') 
 # explicitly allow all origins on API endpoints to satisfy frontend CORS requirements
 # CORS(app)
-allowed_origins = [o.strip() for o in os.environ.get("ALLOWED_ORIGINS", "https://www.sustainopedia.net").split(",") if o.strip()]
+allowed_origins = os.environ.get("ALLOWED_ORIGINS", "").split(",")
 CORS(app, resources={r"/api/*": {"origins": allowed_origins}})
 
 # ── In-memory job store ────────────────────────────────────────────────────────
