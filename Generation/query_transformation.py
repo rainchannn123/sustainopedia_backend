@@ -39,8 +39,8 @@ os.environ["TOKENIZERS_PARALLELISM"] = 'false'
 
 endpoint = "https://seesustainopedia-gpt5-resource.cognitiveservices.azure.com/"
 
-gpt5_model_name = "gpt-5"
-gpt5_deployment = "sustainopedia-gpt-5"
+gpt5_model_name = "gpt-5.4"
+gpt5_deployment = "gpt-5.4"
 subscription_key = os.getenv("AZURE_API_KEY") 
 gpt5_api_version = "2024-12-01-preview"
 

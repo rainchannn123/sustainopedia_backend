@@ -387,6 +387,55 @@ def generate_response_bw2_input(
 
     ### Supplementary Context
     {context}
+    
+    
+    ### Typical LCA values for recovery rates if not provided in the Supplementary Context:
+    a) ORE MINING & BENEFICIATION (Flotation/Concentration):
+        - Base Metals (Sulfide Cu, Ni, Zn, Pb): 0.80 - 0.95
+        - Base Metals (Oxide Leaching): 0.65 - 0.85
+        - Precious Metals (Au, Ag, PGMs): 0.85 - 0.95
+        - Iron Ore: 0.75 - 0.90
+        - Critical Minerals / REEs / Lithium Spodumene: 0.60 - 0.82
+        *Note: If calculating from raw run-of-mine (ROM) ore mass, multiply recovery rate by Ore Grade (Base: 0.004-0.02; Precious: 0.000001-0.00001).
+    
+    b) SMELTING & HYDRO/PYROMETALLURGICAL EXTRACTION:
+        - Flash/Bath Smelting (Cu, Ni): 0.95 - 0.98
+        - Iron/Steel Blast Furnace: 0.96 - 0.99
+        - Aluminum Smelting (Alumina to Metal): 0.98 - 0.995 (Bauxite to Alumina: 0.40 - 0.50)
+        - REE Solvent Extraction Cascades: 0.85 - 0.93
+    
+    c) REFINING & INTERMEDIATE CHEMICAL SYNTHESIS:
+        - Electrolytic Refining (Cu, Pb, Zn): 0.98 - 0.995
+        - Precious Metals (Aqua Regia/Wohlwill): 0.995 - 0.999
+        - Electronic/PV Grade Silicon Ingots: 0.85 - 0.95
+        - Battery Chemicals (Lithium Carbonate/Hydroxide): 0.80 - 0.90
+        - Battery Active Material Synthesis (pCAM to CAM): 0.92 - 0.97
+        - Industrial Organic Chemical Synthesis (Batch): 0.80 - 0.95
+        - Solvent Distillation & On-Site Recovery: 0.75 - 0.92
+    
+    d) ELECTRONICS & SEMICONDUCTOR MANUFACTURING:
+        - Silicon Ingot Slicing (Wafer Production): 0.45 - 0.55
+        - Printed Circuit Board (PCB) Fabrication (Etching/Trimming): 0.75 - 0.88
+        - SMT Component Placement / Assembly: 0.97 - 0.99
+        - Cable & Wire Harness Assembly: 0.92 - 0.96
+    
+    e) POLYMERS & ADVANCED COMPOSITES PROCESSING:
+        - Plastic Injection Molding: 0.94 - 0.98
+        - Plastic Extrusion (Film/Blow Molding): 0.96 - 0.99
+        - Carbon Fiber Reinforced Polymer (CFRP) Layup: 0.65 - 0.85
+    
+    f) METALLURGICAL FABRICATION / MANUFACTURING / SHAPING:
+        - Primary Casting, Rolling, & Extrusion: 0.90 - 0.97
+        - Metal Sheet Stamping / Deep Drawing: 0.55 - 0.75
+        - High-Precision Machining (Subtractive): 0.40 - 0.85
+        - Powder Metallurgy / Sintering: 0.95 - 0.98
+        - CVD / PVD Coating Deposition: 0.15 - 0.40
+    
+    g) RECYCLING & SECONDARY MATERIAL PROCESSING:
+        - Mechanical Sorting / Shredder Separation: 0.70 - 0.90
+        - Hydrometallurgical Recycling (Battery NMC/Co): 0.92 - 0.98
+        - Hydrometallurgical Recycling (Battery Lithium): 0.80 - 0.90
+        - E-Waste Pyrometallurgical Smelting: 0.90 - 0.96
 
     ## Output Requirements
     Regarding the output JSON, please strictly follows the following instructions:
@@ -404,20 +453,22 @@ def generate_response_bw2_input(
     **Before filling in "amount", "mass_in_kg", "mass_out_kg", and "recovery_rate", follow this procedure in order:**
     Step 1 — Determine mass flow for each stage by working BACKWARDS from the final product:
       - The last material-producing stage must output exactly 1000 kg (mass_out_kg = 1000).
-      - For each earlier stage, use recovery rates from the Supplementary Context if available; otherwise use typical LCA values (ore mining/beneficiation: 0.003-0.05; flotation/concentration: 0.80-0.92; smelting: 0.80-0.92; refining: 0.95-0.99; fabrication/assembly: 0.93-0.99).
-      - Compute: mass_in_kg[i] = mass_out_kg[i] / recovery_rate[i], then set mass_out_kg[i] = mass_in_kg[i+1] to maintain chain continuity.
+      - For each earlier stage, use recovery rates from the Supplementary Context if available; otherwise use typical LCA values for recovery rates provided above to estimate the recovery rate for that stage. Then,
+      - Compute: mass_in_kg[i] = mass_out_kg[i] / recovery_rate[i]; set amount[i] = mass_out_kg[i]; set mass_out_kg[i] = mass_in_kg[i+1] to maintain chain continuity.
       - If the Supplementary Context provides specific material quantities or yields for a stage, use those exact values instead of guessing.
-    Step 2 — Set "amount" and "mass_in_kg"/"mass_out_kg":
-      - For mass-bearing activities (unit = "kilogram", "tonne", etc.): **amount must equal mass_in_kg**. Both represent the total input mass to this process per 1 tonne of final product.
+    Step 2 — Set "amount", "mass_in_kg", and "mass_out_kg":
+      - In ecoinvent, every activity is defined per unit of its OUTPUT (reference product). Therefore **"amount" must equal "mass_out_kg"** for mass-bearing activities. This is the quantity BW2 uses to scale the environmental inventory.
+      - "mass_in_kg" is the input material to this process (= mass_out_kg / recovery_rate). It is used only for the mass flow balance chain and does NOT go into the BW2 calculation directly.
       - For non-mass activities (transport, energy, services): set amount to the appropriate service quantity (e.g., tonne-kilometres for transport); set mass_in_kg = 0, mass_out_kg = 0, recovery_rate = 1.0.
     Step 3 — Set "recovery_rate" = mass_out_kg / mass_in_kg for mass-bearing activities.
 
-    - "amount": For mass-bearing activities, this equals mass_in_kg (input mass to this process per 1 tonne final product). For non-mass activities, this is the service quantity (e.g., transport distance * cargo mass).
-    - "mass_in_kg": Input mass (kg) of the primary material entering this process per 1 tonne of final product. Equals amount for mass-bearing activities. Set to 0 for non-mass activities.
-    - "mass_out_kg": Useful output mass (kg) of the primary material leaving this process. The final material-producing stage must output 1000 kg. Set to 0 for non-mass activities.
+    - "amount": For mass-bearing activities, this equals mass_out_kg (the reference product output of this ecoinvent process per 1 tonne final product). For non-mass activities, this is the service quantity (e.g., transport distance * cargo mass).
+    - "mass_in_kg": Input mass (kg) of the primary material entering this process per 1 tonne of final product (= amount / recovery_rate). Used for mass flow chain validation only. Set to 0 for non-mass activities.
+    - "mass_out_kg": Useful output mass (kg) of the primary material leaving this process. Equals amount for mass-bearing activities. The final material-producing stage must output 1000 kg. Set to 0 for non-mass activities.
     - "recovery_rate": mass_out_kg / mass_in_kg (0.0-1.0). Use 1.0 for non-mass activities.
     **Mass flow consistency rule (ISO 14040/44)**: mass_out_kg of stage i must equal mass_in_kg of stage i+1 (within ~10 %). Non-mass activities (transport, energy) are exempt.
     **Critical exclusion rule — capital infrastructure activities**: Do NOT include activities whose names contain words such as "construction", "building", "facility", "plant construction", or "infrastructure" (e.g., "mine construction, iron", "factory construction", "road construction") as standalone entries in the functional unit, unless the study goal is explicitly the construction of that specific facility. These are one-time capital goods activities whose unit is typically "unit" (one whole facility), and they carry enormous embedded impacts (tens to hundreds of millions of kg CO₂-eq per unit). Their impacts are already proportionally allocated in the corresponding per-mass or per-energy operation activities (e.g., per-kilogram mine operation, per-kWh power plant operation). Listing them separately as a top-level functional unit item constitutes severe double-counting. For a product value-chain LCA, only include the operational flow activities (e.g., "copper mine operation and beneficiation", "steel production, converter") and let the background system handle infrastructure allocation automatically.
+    **Critical unit-check rule — "unit"-referenced activities in disposal/end-of-life stages**: In ecoinvent, activities with reference unit "unit" represent one complete physical facility or asset (a landfill cell, an incineration plant, a treatment plant). They are capital goods, NOT per-mass treatment services. NEVER use a "unit"-referenced activity for disposal, end-of-life, recycling, or waste treatment stages where you intend to model the treatment of N kg of waste. Doing so causes BW2 to scale the entire facility's impact by N, producing absurdly large results (e.g., 100,000 kg of waste × [1 landfill facility @ 1,400 tonne CO₂-eq/unit] = 1.4×10¹¹ kg CO₂-eq). For disposal/end-of-life stages, ONLY select activities whose ecoinvent reference unit is "kilogram", "m³", or "tonne". Correct per-mass disposal activities include (but are not limited to): "market for inert waste, for final disposal" (kg), "treatment of inert waste, sanitary landfill" (kg), "market for waste concrete, not reinforced" (kg), "market for waste, for final disposal" (kg). If the available activity list only contains "unit"-referenced activities for a disposal stage, omit that stage entirely rather than including a facility-level activity.
    
     After defining the functional unit, also include:
     - "project_name": Insert "{database}"  
@@ -432,7 +483,7 @@ def generate_response_bw2_input(
     "functional_unit": [
         {{
         "activity_name": "hard coal production",
-        "amount": 1050.0,
+        "amount": 1000.0,
         "unit": "kilogram",
         "location": "GLO",
         "stage": "manufacturing",
