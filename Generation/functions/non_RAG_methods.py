@@ -436,6 +436,100 @@ def generate_response_bw2_input(
         - Hydrometallurgical Recycling (Battery NMC/Co): 0.92 - 0.98
         - Hydrometallurgical Recycling (Battery Lithium): 0.80 - 0.90
         - E-Waste Pyrometallurgical Smelting: 0.90 - 0.96
+    
+    h) GLASS, CERAMICS, & INORGANIC INSULATION:
+        - Container / Hollow Glass Production: 0.85 - 0.92
+        - Flat / Float Glass Production (Windows, PV Substrates): 0.78 - 0.88
+        - Technical Ceramics (Firing & Machining): 0.70 - 0.85
+        - Mineral Wool Fiber Insulation: 0.90 - 0.95
+        
+    i) TEXTILES & APPAREL FABRICATION:
+        - Natural Fiber Spinning (Cotton/Wool Yarn): 0.68 - 0.82
+        - Synthetic Fiber Melt Extrusion (PET, Nylon): 0.95 - 0.98
+        - Fabric Weaving & Knitting: 0.90 - 0.95
+        - Textile Cutting & Garment Assembly: 0.75 - 0.85
+    
+    j) PULP, PAPER, & BIO-BASED MATERIALS:
+        - Chemical Wood Pulping (Kraft Process): 0.45 - 0.52
+        - Paper & Cardboard Machine Forming: 0.88 - 0.94
+        - Box Converting & Corrugated Board Cutting: 0.85 - 0.92
+    
+    k) INDUSTRIAL COATING & FINAL ASSEMBLY:
+        - Automated Adhesive / Sealant Dispensing: 0.92 - 0.97
+        - Industrial Spray Painting / Coating (Transfer Efficiency): 0.35 - 0.65
+        - Final Mechanical Assembly Integration: 0.99 - 1.00
+        
+        
+    l) CONSTRUCTION & BULK MINERALS INFRASTRUCTURE:
+        - Cement Raw Material Preparation (Quarrying/Crushing): 0.35 - 0.45
+        - Clinker Pyro-processing & Rotary Kiln Calcination: 0.35 - 0.40
+        - Cement Finish Grinding & Blending: 0.22 - 0.28
+        - Concrete Batching & Readymix Plant Mixing: 0.96 - 0.98
+        - Brick & Structural Clay Kiln Firing: 0.88 - 0.94
+        - Dimension Stone Cutting & Quarry Slab Dressing: 0.40 - 0.60
+        
+    m) PRECISION ADDITIVE MANUFACTURING (AM):
+        - Laser Powder Bed Fusion (L-PBF) Metal Printing: 0.94 - 0.98
+        - Fused Filament Fabrication (FFF/FDM) Thermoplastic Printing: 0.85 - 0.92
+        - Stereolithography (SLA) Liquid Resin Photopolymerization: 0.90 - 0.96
+        - Wire Arc Additive Manufacturing (WAAM): 0.88 - 0.95
+        *Note: AM recovery depends heavily on post-processing support structure removal and powder/resin sieve recycling loop efficiencies.
+    
+    n) FOOD, AGRO-PROCESSING, & INDUSTRIAL BIOMASS CONVERSION:
+        - Biomass Acid Pretreatment & Sugar Extraction (e.g., Straw to Glucose): 0.45 - 0.55
+        - Industrial Starch Production (Wet Milling Corn/Wheat): 0.60 - 0.70
+        - Oilseed Mechanical Pressing & Solvent Extraction (Crude Oil Yield): 0.18 - 0.42
+        - High-Value Bio-Chemical Synthesis (e.g., HMF to FDCA Oxidation): 0.95 - 0.99
+        - Fruit/Vegetable Commercial Juicing & Concentration: 0.45 - 0.65
+        - Grain Milling & Flour Refining (Wheat to White Flour): 0.72 - 0.78
+    
+    o) PHARMACEUTICAL & SPECIALTY FINE CHEMICALS:
+        - Active Pharmaceutical Ingredient (API) Multi-Step Organic Synthesis: 0.10 - 0.45
+        - Bioactive Plant Extraction (Microwave/Supercritical Fluid): 0.01 - 0.15
+        - Chromatographic Purification & Crystallization (Fine Chemicals): 0.60 - 0.85
+        - Automated Liquid Formulation & Dose Filling: 0.97 - 0.99
+    
+    p) ADVANCED WATER TREATMENT & DESALINATION SEPARATION:
+        - Seawater Reverse Osmosis (SWRO) Desalination (Permeate Yield): 0.40 - 0.50
+        - Brackish Water Reverse Osmosis (BWRO) Desalination: 0.75 - 0.85
+        - Multi-Effect Distillation (MED) Thermal Desalination: 0.20 - 0.40
+        - Industrial Ion Exchange Demineralization: 0.90 - 0.95
+    
+    q) MUNICIPAL SOLID WASTE SEPARATION FACILITIES (MRFs):
+        - Single-Stream MRF Automated Optical Sortation (PET/HDPE): 0.82 - 0.90
+        - Mixed Waste Mechanical Processing Facility (Fiber/Paper Drop): 0.55 - 0.70
+        - Glass Density & Air Classification Separation (Cullet Sort): 0.65 - 0.80
+        - Eddy Current Non-Ferrous Metal Sorting from Shredded MSW: 0.85 - 0.93
+    
+    r) SPECIALTY METALLURGY, REFRACTORY METALS, & CO-PRODUCTS:
+        - Titanium Sponge Production (Kroll Process via TiCl4): 0.78 - 0.88
+        - Magnesium Extraction (Pidgeon Silicothermic Process): 0.75 - 0.85
+        - Tungsten Powder Production (APT Hydrogen Reduction): 0.94 - 0.98
+        - Secondary Precious Metals Slime Electrolysis (Anode Slime Loop): 0.88 - 0.94
+        - Anodizing / Surface Passivation Layering (Anodic Yield): 0.82 - 0.90
+        
+    s) INDUSTRIAL GASES & CRYOGENIC FRACTIONATION:
+        - Atmospheric Air Separation (ASU Cryogenic Distillation for O2/N2): 0.18 - 0.22
+        - Steam Methane Reforming (SMR Hydrogen Yield based on Carbon Balance): 0.28 - 0.35
+        - Carbon Capture & Storage (CCS Amine Scrubbing Absorption Efficiency): 0.85 - 0.92
+    
+    t) HEAVY MECHANICAL STRUCTURAL MANUFACTURING:
+        - Open-Die & Closed-Die Heavy Metal Forging: 0.70 - 0.85
+        - Large-Scale Industrial Sand Casting (Iron/Steel Foundry): 0.82 - 0.92
+        - Structural Profile Laser / Plasma Cutting (Skeleton Waste): 0.65 - 0.80
+        - Thermal Spray / Plasma Arc Coating Application: 0.45 - 0.65
+    
+    u) SILICON PHOTOVOLTAIC (PV) & GRAPHITE SUPPLY CHAINS:
+        - Quartzite Reduction to Metallurgical Grade Silicon (MG-Si): 0.78 - 0.85
+        - Trichlorosilane Distillation to Poly-Silicon (Siemens Process): 0.88 - 0.94
+        - Synthetic Graphite Calcination & Graphitization (Petroleum Coke Base): 0.60 - 0.70
+        - Natural Flake Graphite Spheroidization (Battery Anode Precursor): 0.35 - 0.50
+    
+    v) PRINTING, PACKAGING, & GRAPHIC MEDIA MANUFACTURING:
+        - Commercial Web Offset Printing (Paper Runaround & Web Breaks): 0.88 - 0.94
+        - Flexible Multi-Layer Packaging Lamination (Plastic/Foil/Paper): 0.90 - 0.96
+        - Industrial Cardboard Die-Cutting & Structural Creasing: 0.78 - 0.88
+        
 
     ## Output Requirements
     Regarding the output JSON, please strictly follows the following instructions:
