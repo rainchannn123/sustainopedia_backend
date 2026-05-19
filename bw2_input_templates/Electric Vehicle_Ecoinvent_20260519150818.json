@@ -1,0 +1,160 @@
+{
+    "goal": "lifecycle impact assessment",
+    "Project": "Ecoinvent",
+    "method": [
+        "EF v3.1",
+        "climate change: fossil",
+        "global warming potential (GWP100)"
+    ],
+    "system_boundary": "cradle-to-grave",
+    "functional_unit": [
+        {
+            "activity_name": "processing of nickel-rich materials",
+            "amount": 1256.2474,
+            "unit": "kilogram",
+            "location": "GLO",
+            "stage": "raw material extraction",
+            "mass_in_kg": 1256.2474,
+            "mass_out_kg": 1130.6226,
+            "recovery_rate": 0.9
+        },
+        {
+            "activity_name": "synthetic graphite production, battery grade",
+            "amount": 1130.6226,
+            "unit": "kilogram",
+            "location": "GLO",
+            "stage": "material processing",
+            "mass_in_kg": 1130.6226,
+            "mass_out_kg": 1074.0915,
+            "recovery_rate": 0.95
+        },
+        {
+            "activity_name": "battery cell production, Li-ion, NMC811",
+            "amount": 1074.0915,
+            "unit": "kilogram",
+            "location": "GLO",
+            "stage": "manufacturing/production",
+            "mass_in_kg": 1074.0915,
+            "mass_out_kg": 1030.9278,
+            "recovery_rate": 0.96
+        },
+        {
+            "activity_name": "powertrain production, for electric passenger car",
+            "amount": 1030.9278,
+            "unit": "kilogram",
+            "location": "GLO",
+            "stage": "manufacturing/production",
+            "mass_in_kg": 1030.9278,
+            "mass_out_kg": 1000.0,
+            "recovery_rate": 0.97
+        },
+        {
+            "activity_name": "transport, freight, light commercial vehicle",
+            "amount": 2000.0,
+            "unit": "ton kilometer",
+            "location": "GLO",
+            "stage": "distribution/transport",
+            "mass_in_kg": 0,
+            "mass_out_kg": 0,
+            "recovery_rate": 1.0
+        },
+        {
+            "activity_name": "energy use and operation emissions, electric bicycle, electricity from renewable energy products",
+            "amount": 18000.0,
+            "unit": "kilowatt hour",
+            "location": "GLO",
+            "stage": "use phase",
+            "mass_in_kg": 0,
+            "mass_out_kg": 0,
+            "recovery_rate": 1.0
+        },
+        {
+            "activity_name": "treatment of scrap steel, inert material landfill",
+            "amount": 1000.0,
+            "unit": "kilogram",
+            "location": "GLO",
+            "stage": "end-of-life",
+            "mass_in_kg": 1000.0,
+            "mass_out_kg": 1000.0,
+            "recovery_rate": 1.0
+        }
+    ],
+    "project_name": "Ecoinvent",
+    "dataset": "ecoinvent",
+    "n_simulations": 1,
+    "mass_flow_audit": {
+        "status": "pass",
+        "overall_yield": 0.796022,
+        "activities": [
+            {
+                "stage": "raw material extraction",
+                "activity_name": "processing of nickel-rich materials",
+                "mass_in_kg": 1256.2474,
+                "mass_out_kg": 1130.6226,
+                "recovery_rate": 0.9
+            },
+            {
+                "stage": "material processing",
+                "activity_name": "synthetic graphite production, battery grade",
+                "mass_in_kg": 1130.6226,
+                "mass_out_kg": 1074.0915,
+                "recovery_rate": 0.95
+            },
+            {
+                "stage": "manufacturing/production",
+                "activity_name": "battery cell production, Li-ion, NMC811",
+                "mass_in_kg": 1074.0915,
+                "mass_out_kg": 1030.9278,
+                "recovery_rate": 0.96
+            },
+            {
+                "stage": "manufacturing/production",
+                "activity_name": "powertrain production, for electric passenger car",
+                "mass_in_kg": 1030.9278,
+                "mass_out_kg": 1000.0,
+                "recovery_rate": 0.97
+            },
+            {
+                "stage": "end-of-life",
+                "activity_name": "treatment of scrap steel, inert material landfill",
+                "mass_in_kg": 1000.0,
+                "mass_out_kg": 1000.0,
+                "recovery_rate": 1.0
+            }
+        ],
+        "transitions": [
+            {
+                "from_stage": "raw material extraction",
+                "to_stage": "material processing",
+                "expected_mass_in_kg": 1130.6226,
+                "actual_mass_in_kg": 1130.6226,
+                "discrepancy_pct": 0.0,
+                "status": "ok"
+            },
+            {
+                "from_stage": "material processing",
+                "to_stage": "manufacturing/production",
+                "expected_mass_in_kg": 1074.0915,
+                "actual_mass_in_kg": 1074.0915,
+                "discrepancy_pct": 0.0,
+                "status": "ok"
+            },
+            {
+                "from_stage": "manufacturing/production",
+                "to_stage": "manufacturing/production",
+                "expected_mass_in_kg": 1030.9278,
+                "actual_mass_in_kg": 1030.9278,
+                "discrepancy_pct": 0.0,
+                "status": "ok"
+            },
+            {
+                "from_stage": "manufacturing/production",
+                "to_stage": "end-of-life",
+                "expected_mass_in_kg": 1000.0,
+                "actual_mass_in_kg": 1000.0,
+                "discrepancy_pct": 0.0,
+                "status": "ok"
+            }
+        ]
+    }
+}

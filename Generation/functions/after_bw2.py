@@ -35,12 +35,198 @@ def _classify_stream(stage: str) -> str:
     return "gate-to-gate"
 
 
+# ─── Mass flow balance constants and functions ──────────────────────────────────
+#: ISO 14040/44 mass balance tolerance thresholds.
+#: 10 %/25 % are practical bounds for LLM-estimated flows;
+#: stricter 1-2 % would apply to measured plant data.
+_MASS_FLOW_TOLERANCE_WARN: float = 10.0   # % discrepancy → warning
+_MASS_FLOW_TOLERANCE_GAP: float  = 25.0   # % discrepancy → gap (hard miss)
+
+#: Physical mass units eligible for flow tracking.
+_MASS_BEARING_UNITS: frozenset = frozenset({
+    "kg", "kilogram", "kilograms", "g", "gram", "grams",
+    "tonne", "ton", "metric ton", "metric tons",
+    "lb", "pound", "pounds",
+})
+
+
+def _is_mass_bearing(unit: str) -> bool:
+    """Return True when *unit* represents a physical mass quantity."""
+    return unit.strip().lower() in _MASS_BEARING_UNITS
+
+
+def _validate_mass_flow_chain(functional_unit: list) -> dict:
+    """
+    Validate material mass flow consistency across unit processes.
+
+    Implements ISO 14040/44 per-process mass balance checking: for each
+    consecutive pair of mass-bearing activities carrying explicit
+    ``mass_in_kg`` / ``mass_out_kg`` annotations, verifies that
+
+        mass_out_kg[i]  ≈  mass_in_kg[i+1]
+
+    within *_MASS_FLOW_TOLERANCE_WARN* / *_MASS_FLOW_TOLERANCE_GAP* thresholds.
+    Activities that lack mass flow annotations or have non-mass units
+    (transport, energy, services) are silently skipped.
+
+    Parameters
+    ----------
+    functional_unit : list
+        Activity dicts from a bw2 input template.  Each dict may optionally
+        carry ``mass_in_kg``, ``mass_out_kg``, and ``recovery_rate`` fields.
+
+    Returns
+    -------
+    dict
+        ``status``        - "pass" | "warning" | "gap" | "skipped"
+        ``overall_yield`` - last_mass_out / first_mass_in  (None if skipped)
+        ``activities``    - per-activity mass summary list
+        ``transitions``   - per-stage transition audit list
+    """
+    mass_activities = []
+    for act in functional_unit:
+        m_in  = act.get("mass_in_kg")
+        m_out = act.get("mass_out_kg")
+        if m_in is None or m_out is None:
+            continue
+        if not _is_mass_bearing(act.get("unit", "")):
+            continue
+        m_in_f  = float(m_in)
+        m_out_f = float(m_out)
+        r = act.get("recovery_rate")
+        if r is not None:
+            recovery = float(r)
+        elif m_in_f > 0:
+            recovery = round(m_out_f / m_in_f, 6)
+        else:
+            recovery = 1.0
+        mass_activities.append({
+            "stage":         act.get("stage", "unspecified"),
+            "activity_name": act.get("activity_name", ""),
+            "mass_in_kg":    round(m_in_f,  4),
+            "mass_out_kg":   round(m_out_f, 4),
+            "recovery_rate": round(recovery, 6),
+        })
+
+    if len(mass_activities) < 2:
+        return {
+            "status":        "skipped",
+            "reason":        "fewer than 2 mass-annotated activities found",
+            "overall_yield": None,
+            "activities":    mass_activities,
+            "transitions":   [],
+        }
+
+    transitions = []
+    for i in range(len(mass_activities) - 1):
+        cur      = mass_activities[i]
+        nxt      = mass_activities[i + 1]
+        expected = cur["mass_out_kg"]
+        actual   = nxt["mass_in_kg"]
+        disc_pct = abs(expected - actual) / expected * 100.0 if expected > 0 else 0.0
+        if disc_pct > _MASS_FLOW_TOLERANCE_GAP:
+            t_status = "gap"
+        elif disc_pct > _MASS_FLOW_TOLERANCE_WARN:
+            t_status = "warning"
+        else:
+            t_status = "ok"
+        transitions.append({
+            "from_stage":          cur["stage"],
+            "to_stage":            nxt["stage"],
+            "expected_mass_in_kg": round(expected, 4),
+            "actual_mass_in_kg":   round(actual,   4),
+            "discrepancy_pct":     round(disc_pct, 2),
+            "status":              t_status,
+        })
+
+    first_in      = mass_activities[0]["mass_in_kg"]
+    last_out      = mass_activities[-1]["mass_out_kg"]
+    overall_yield = round(last_out / first_in, 6) if first_in > 0 else None
+
+    t_statuses = {t["status"] for t in transitions}
+    agg_status = (
+        "gap"     if "gap"     in t_statuses else
+        "warning" if "warning" in t_statuses else
+        "pass"
+    )
+    return {
+        "status":        agg_status,
+        "overall_yield": overall_yield,
+        "activities":    mass_activities,
+        "transitions":   transitions,
+    }
+
+
+def compute_mass_flow_balance(output_filepath: str) -> dict:
+    """
+    Load the corresponding bw2 input template and run mass flow chain
+    validation on its ``functional_unit`` activities.
+
+    The input template path is derived by replacing the ``_output.json``
+    suffix with ``.json`` and the ``bw2_results/`` directory with
+    ``bw2_input_templates/``.
+
+    Returns the structured audit dict from :func:`_validate_mass_flow_chain`,
+    or a ``"skipped"`` dict when the template cannot be located or parsed.
+    """
+    basename   = os.path.basename(output_filepath)
+    input_name = basename.replace("_output.json", ".json")
+    input_path = os.path.join("bw2_input_templates", input_name)
+
+    if not os.path.isfile(input_path):
+        logging.warning("Mass flow balance: input template not found at %s", input_path)
+        return {
+            "status":        "skipped",
+            "reason":        f"input template not found: {input_path}",
+            "overall_yield": None,
+            "activities":    [],
+            "transitions":   [],
+        }
+
+    try:
+        with open(input_path, "r", encoding="utf-8") as fh:
+            input_data = json.load(fh)
+        return _validate_mass_flow_chain(input_data.get("functional_unit", []))
+    except Exception as exc:
+        logging.warning("Mass flow balance: error reading input template: %s", exc)
+        return {
+            "status":        "skipped",
+            "reason":        str(exc),
+            "overall_yield": None,
+            "activities":    [],
+            "transitions":   [],
+        }
+
+
 def result_data_processing(filename, product, scale_factor=1.0, display_amount=1.0, display_unit='tonne', activities_by_stage_dict=None):
     with open(filename, 'r') as file:
         rdata = json.load(file)
-    
+
     source = 'Tiangong' if 'Tiangong' in rdata['method'] else 'EcoInvent'
     methods = ", ".join(rdata['method'])
+
+    # ── Mass flow balance audit ────────────────────────────────────────────────
+    mass_flow_balance = compute_mass_flow_balance(filename)
+    # Per-activity mass annotation lookup: activity_name (lower) → mass fields
+    _mf_act_map: dict = {}
+    _input_path = os.path.join(
+        "bw2_input_templates",
+        os.path.basename(filename).replace("_output.json", ".json")
+    )
+    if os.path.isfile(_input_path):
+        try:
+            with open(_input_path, "r", encoding="utf-8") as _fh:
+                _tpl = json.load(_fh)
+            for _act in _tpl.get("functional_unit", []):
+                _key = _act.get("activity_name", "").lower()
+                if _key:
+                    _mf_act_map[_key] = {
+                        "mass_in_kg":   _act.get("mass_in_kg"),
+                        "mass_out_kg":  _act.get("mass_out_kg"),
+                        "recovery_rate": _act.get("recovery_rate"),
+                    }
+        except Exception:
+            pass
 
     # Build a stage→stream lookup from the activities_by_stage_dict keys (if provided)
     stage_stream_map = {}
@@ -106,6 +292,9 @@ def result_data_processing(filename, product, scale_factor=1.0, display_amount=1
         # Classify stream: prefer lookup from activities_by_stage_dict, fall back to keywords
         stream = stage_stream_map.get(stage.lower(), _classify_stream(stage))
 
+        # Per-activity mass flow annotation (from input template lookup)
+        _mf = _mf_act_map.get(name.lower()) or _mf_act_map.get(m_name.lower())
+
         process = {
             "process": process_field,
             "amount_location": amount_location,
@@ -119,7 +308,10 @@ def result_data_processing(filename, product, scale_factor=1.0, display_amount=1
             "percentile": percentile_val,
             "impact_unit": impact_unit_field,
             "notes": notes,
-            "stream": stream
+            "stream": stream,
+            "mass_in_kg":    _mf["mass_in_kg"]    if _mf else None,
+            "mass_out_kg":   _mf["mass_out_kg"]   if _mf else None,
+            "recovery_rate": _mf["recovery_rate"] if _mf else None,
         }
 
         lcia_data["processes"].append(process)
@@ -133,6 +325,9 @@ def result_data_processing(filename, product, scale_factor=1.0, display_amount=1
         if key in stream_counts:
             stream_counts[key] += 1
     lcia_data["metadata"]["stream_summary"] = stream_counts
+
+    # ── Embed mass flow balance audit in metadata ─────────────────────────────
+    lcia_data["metadata"]["mass_flow_balance"] = mass_flow_balance
 
     ###Problem, some may dont have suggestions: su_name = results[i]['match_history']['suggestions'][j]['activity']['name'].title()
     # list_of_suggested_activity = '''List of Suggested Activities For Each Process: '''
@@ -279,20 +474,44 @@ def generate_markdown(product, lcia_data, total_mean, display_amount=1.0, displa
     process_rows = "\n".join(
         f'| {p["process"]} | {p["amount_location"]} | {p["system_boundary"]} | '
         f'{p["matched_activity"]} | {p["unit_location"]} | {p["db_version_code"]} | '
-        f'{p["ref_product"]} | {p["mean_impact"]} | {p["sd"]} | {p["percentile"]} | {p["notes"]} |'
+        f'{p["ref_product"]} | {p["mean_impact"]} | '
+        f'{"{:.1f}".format(p["contribution_pct"]) if isinstance(p.get("contribution_pct"), float) else "N/A"} | '
+        f'{p["sd"]} | {p["percentile"]} | {p["notes"]} |'
         for p in lcia_data['processes']
     )
-    
+
+    _mfb             = lcia_data['metadata'].get('mass_flow_balance', {})
+    _mfb_status      = _mfb.get('status', 'skipped')
+    _mfb_transitions = _mfb.get('transitions', [])
+    _mfb_yield       = _mfb.get('overall_yield')
+    if _mfb_status not in ('skipped',) and _mfb_transitions:
+        _mf_rows = "\n    ".join(
+            f'- {t["from_stage"]} → {t["to_stage"]}: '
+            f'expected `{t["expected_mass_in_kg"]:.1f} kg` / '
+            f'actual `{t["actual_mass_in_kg"]:.1f} kg` '
+            f'(discrepancy `{t["discrepancy_pct"]:.1f} %`) [{t["status"].upper()}]'
+            for t in _mfb_transitions
+        )
+        _yield_str   = f"`{_mfb_yield:.4f}`" if _mfb_yield is not None else "N/A"
+        _mfb_section = (
+            f"\n    ### Mass Flow Balance Audit (ISO 14040/44)\n"
+            f"    Status: **{_mfb_status.upper()}** | "
+            f"Overall Material Yield: {_yield_str}\n"
+            f"    {_mf_rows}\n"
+        )
+    else:
+        _mfb_section = ''
+
     markdown_content = f'''## LCIA Results for Producing {display_amount} {display_unit} of {product}
 
     Database: {lcia_data['metadata']['database']}
     LCA Methods: {lcia_data['metadata']['lca_methods']}
 
-    | Process | Amount & Location | System Boundary | Matched Activity | Unit / Location | Database Version (Activity Code) | Ref. Product | Mean Impact (kg CO2-Eq) | SD (kg CO2-Eq) | 5/95 Percentile (kg CO2-Eq) |      Notes      |
-    |---------|-------------------|-----------------|------------------|-----------------|----------------------------------|--------------|-------------------------|----------------|-----------------------------|-----------------|
+    | Process | Amount & Location | System Boundary | Matched Activity | Unit / Location | Database Version (Activity Code) | Ref. Product | Mean Impact (kg CO2-Eq) | Contribution (%) | SD (kg CO2-Eq) | 5/95 Percentile (kg CO2-Eq) |      Notes      |
+    |---------|-------------------|-----------------|------------------|-----------------|----------------------------------|--------------|-------------------------|------------------|----------------|-----------------------------|-----------------|
     {process_rows}
 
-    Total Estimated Impact: {round(total_mean, 1):.1f} kg CO2-Eq
+    Total Estimated Impact: {round(total_mean, 1):.1f} kg CO2-Eq{_mfb_section}
     '''
     return markdown_content
 
@@ -303,7 +522,9 @@ def generate_json(product, lcia_data, total_mean):
         "lcaMethods": lcia_data['metadata']['lca_methods'],
         "processes": lcia_data['processes'],
         "totalMeanImpact": round(total_mean, 1),
-        "streamSummary": lcia_data['metadata'].get('stream_summary', {})
+        "streamSummary": lcia_data['metadata'].get('stream_summary', {}),
+        "stageImpacts": lcia_data['metadata'].get('stage_impacts', {}),
+        "massFlowBalance": lcia_data['metadata'].get('mass_flow_balance', {}),
     }
     return json.dumps(json_data, indent=2)
 

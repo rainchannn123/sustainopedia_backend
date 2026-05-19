@@ -14,6 +14,7 @@ from operator import itemgetter
 from langchain_core.runnables import RunnableLambda
 from langchain_openai import AzureChatOpenAI, AzureOpenAIEmbeddings
 from .RAG_methods import join_docs, join_methods
+from .after_bw2 import _validate_mass_flow_chain
 from datetime import datetime, timezone, timedelta
 
 def input_q_to_json(question):
@@ -396,10 +397,26 @@ def generate_response_bw2_input(
     - "functional_unit": A list of multiple activity objects, each describing one process involved in the product system:  
     Each object includes:  
     - "activity_name": The name of a process of the given product that usually involves in the product value chain and its lifecycle.
-    - "amount": A float value representing the quantity of the given product involved in each subprocess, and you may reference to the supplementary context if exists. If not exist, guess it with your best judgment from a LCA expert perspective. You must ensure the amounts of all activities along the value chain are consistent logically. After that, You must normalize it to the functional unit of 1 ton of product production. This ensures consistency across all stages of the product's lifecycle value chain.
-    - "unit": Use units that are commonly used in LCA databases,e.g., "kilogram"
+    - "unit": Use units that are commonly used in LCA databases, e.g., "kilogram" for mass-bearing steps, "ton kilometer" for transport, "kilowatt hour" for energy.
     - "location": ISO country code. Select the most appropriate ISO country or region code based on 'region' information in the User Requests section; available codes are Global:`GLO`, Europe:`RER`, Western Europe:`WEU`, Eastern Europe:`EEU`, Middle East & Africa:`MEA`, Asia:`ASI`, North America:`NAM`, South America:`SAM`, Switzerland:`CH`, China:`CN`, United States:`US`, Brazil:`BR`, India:`IN`; if no region is specified, default to `GLO`.
     - "stage": The value chain stage (e.g., "raw material extraction", "manufacturing", "transport", "use", "disposal")
+
+    **Before filling in "amount", "mass_in_kg", "mass_out_kg", and "recovery_rate", follow this procedure in order:**
+    Step 1 — Determine mass flow for each stage by working BACKWARDS from the final product:
+      - The last material-producing stage must output exactly 1000 kg (mass_out_kg = 1000).
+      - For each earlier stage, use recovery rates from the Supplementary Context if available; otherwise use typical LCA values (ore mining/beneficiation: 0.003-0.05; flotation/concentration: 0.80-0.92; smelting: 0.80-0.92; refining: 0.95-0.99; fabrication/assembly: 0.93-0.99).
+      - Compute: mass_in_kg[i] = mass_out_kg[i] / recovery_rate[i], then set mass_out_kg[i] = mass_in_kg[i+1] to maintain chain continuity.
+      - If the Supplementary Context provides specific material quantities or yields for a stage, use those exact values instead of guessing.
+    Step 2 — Set "amount" and "mass_in_kg"/"mass_out_kg":
+      - For mass-bearing activities (unit = "kilogram", "tonne", etc.): **amount must equal mass_in_kg**. Both represent the total input mass to this process per 1 tonne of final product.
+      - For non-mass activities (transport, energy, services): set amount to the appropriate service quantity (e.g., tonne-kilometres for transport); set mass_in_kg = 0, mass_out_kg = 0, recovery_rate = 1.0.
+    Step 3 — Set "recovery_rate" = mass_out_kg / mass_in_kg for mass-bearing activities.
+
+    - "amount": For mass-bearing activities, this equals mass_in_kg (input mass to this process per 1 tonne final product). For non-mass activities, this is the service quantity (e.g., transport distance * cargo mass).
+    - "mass_in_kg": Input mass (kg) of the primary material entering this process per 1 tonne of final product. Equals amount for mass-bearing activities. Set to 0 for non-mass activities.
+    - "mass_out_kg": Useful output mass (kg) of the primary material leaving this process. The final material-producing stage must output 1000 kg. Set to 0 for non-mass activities.
+    - "recovery_rate": mass_out_kg / mass_in_kg (0.0-1.0). Use 1.0 for non-mass activities.
+    **Mass flow consistency rule (ISO 14040/44)**: mass_out_kg of stage i must equal mass_in_kg of stage i+1 (within ~10 %). Non-mass activities (transport, energy) are exempt.
     **Critical exclusion rule — capital infrastructure activities**: Do NOT include activities whose names contain words such as "construction", "building", "facility", "plant construction", or "infrastructure" (e.g., "mine construction, iron", "factory construction", "road construction") as standalone entries in the functional unit, unless the study goal is explicitly the construction of that specific facility. These are one-time capital goods activities whose unit is typically "unit" (one whole facility), and they carry enormous embedded impacts (tens to hundreds of millions of kg CO₂-eq per unit). Their impacts are already proportionally allocated in the corresponding per-mass or per-energy operation activities (e.g., per-kilogram mine operation, per-kWh power plant operation). Listing them separately as a top-level functional unit item constitutes severe double-counting. For a product value-chain LCA, only include the operational flow activities (e.g., "copper mine operation and beneficiation", "steel production, converter") and let the background system handle infrastructure allocation automatically.
    
     After defining the functional unit, also include:
@@ -415,17 +432,23 @@ def generate_response_bw2_input(
     "functional_unit": [
         {{
         "activity_name": "hard coal production",
-        "amount": 1.0,
+        "amount": 1050.0,
         "unit": "kilogram",
         "location": "GLO",
-        "stage": "manufacturing"
+        "stage": "manufacturing",
+        "mass_in_kg": 1050.0,
+        "mass_out_kg": 1000.0,
+        "recovery_rate": 0.952
         }},
         {{
         "activity_name": "transport, freight, lorry 16-32 metric ton, EURO6",
         "amount": 0.1,
         "unit": "ton kilometer",
         "location": "GLO",
-        "stage": "transport"
+        "stage": "transport",
+        "mass_in_kg": 0,
+        "mass_out_kg": 0,
+        "recovery_rate": 1.0
         }}
     ],
     "project_name": "Ecoinvent",
@@ -493,6 +516,18 @@ def generate_response_bw2_input(
     
     # Inject n_simulations so the BW2 calculator can read it when supported
     results_dict['n_simulations'] = resolved_n_simulations
+
+    # ── Pre-flight mass flow balance validation ────────────────────────────────
+    mass_flow_audit = _validate_mass_flow_chain(results_dict.get("functional_unit", []))
+    results_dict["mass_flow_audit"] = mass_flow_audit
+    if mass_flow_audit["status"] == "pass":
+        logging.info("Mass flow audit passed. Overall material yield: %.4f",
+                     mass_flow_audit.get("overall_yield") or 0.0)
+    elif mass_flow_audit["status"] in ("warning", "gap"):
+        logging.warning("Mass flow audit - %s. Transitions: %s",
+                        mass_flow_audit["status"],
+                        mass_flow_audit.get("transitions", []))
+
     current_time = datetime.now(timezone(timedelta(hours=8))).strftime("%Y%m%d%H%M%S")
     output_filepath = f"bw2_input_templates/{product}_{LCI_DATABASE}_{current_time}.json"
     with open(output_filepath, "w", encoding="utf-8") as f:
