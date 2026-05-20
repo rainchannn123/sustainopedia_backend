@@ -13,7 +13,7 @@ import sys
 from langchain_core.language_models.chat_models import BaseChatModel
 from langchain_core.outputs import ChatResult, ChatGeneration
 from langchain_core.messages import AIMessage
-from langchain_core.runnables import RunnableLambda
+from langchain_core.runnables import RunnableLambda, RunnablePassthrough
 from operator import itemgetter
 import time
 import re
@@ -93,6 +93,85 @@ def query_decomposition_retrieval(query, gpt5_client, retriever_j, vectorstore, 
     except:
         #rerun-it to prevent occasional LLM generation failure
         fused_docs = generate_queries | retriever_j.map() | get_unique_union
+    return fused_docs
+
+
+# # 4b. LCA Template-Targeted Knowledge Retrieval
+def lca_template_knowledge_retrieval(query, gpt5_client, retriever_j, vectorstore, k_per_sub=4):
+    """
+    Targeted multi-objective RAG retrieval pipeline for BW2 input template generation.
+
+    Whereas generic query decomposition generates perspective reformulations of the
+    original question, this function generates sub-queries structured around the three
+    knowledge dimensions that directly determine BW2 input template accuracy:
+
+      Objective A — Recovery rates & process yields (3 sub-queries)
+        Numeric yield percentages, material recovery fractions, conversion efficiencies,
+        or process-loss data at each production stage of the product.
+
+      Objective B — Life cycle process chain & activity sequence (3 sub-queries)
+        Ordered unit processes, manufacturing stages, and supply chain activities
+        involved in producing the product from raw material extraction to end-of-life.
+
+      Objective C — Mass flows & material quantities per stage (3 sub-queries)
+        Quantitative input/output data: kilograms of raw material consumed or converted
+        at each stage per kilogram of product output (the basis for mass_in_kg /
+        mass_out_kg fields in the BW2 template).
+
+    The original query is prepended to the 9 sub-queries before retrieval so that
+    baseline document coverage is always guaranteed regardless of sub-query quality.
+    All 10 retrieval result sets are merged and deduplicated via get_unique_union (RRF).
+
+    Returns a LangChain Runnable that accepts {"question": <str>} and produces
+    list[Document], fully compatible with the context-injection chain in
+    generate_response_bw2_input.
+    """
+    _targeted_template = """\
+You are an LCA knowledge retrieval specialist preparing queries for a scientific \
+literature vector database. From the user query below, generate exactly 9 targeted \
+sub-questions covering three retrieval objectives. Output ONLY the 9 questions, \
+one per line, no labels, no numbering, no extra text.
+
+Objective A — Recovery rates & process yields (questions 1-3):
+  Each question must target a numeric yield percentage, recovery rate, conversion \
+efficiency, or material-loss fraction at a specific production stage of the product. \
+Example form: "What is the recovery rate of [material] during [process stage]?"
+
+Objective B — Life cycle process chain & activity sequence (questions 4-6):
+  Each question must target the ordered set of unit processes, manufacturing stages, \
+or supply chain activities for producing the product from cradle to grave. \
+Example form: "What are the main life cycle stages and unit processes for [product]?"
+
+Objective C — Mass flows & material quantities per stage (questions 7-9):
+  Each question must target quantitative material input/output data: how many kilograms \
+of raw material are consumed or transformed at each stage to yield one kilogram of \
+product output. \
+Example form: "How many kg of [raw material] are required per kg of [product] output at [stage]?"
+
+User query: {question}"""
+
+    prompt = ChatPromptTemplate.from_template(_targeted_template)
+
+    # Parse LLM output into a clean list of at most 9 sub-questions
+    _parse_sub_queries = RunnableLambda(
+        lambda x: [q.strip() for q in re.split(r'\n+', x) if q.strip()][:9]
+    )
+
+    # Build a chain that keeps the original question alongside the generated sub-queries
+    # so the retriever always has baseline coverage from the unmodified input.
+    _sub_query_chain = prompt | gpt5_client | StrOutputParser() | _parse_sub_queries
+
+    generate_queries = (
+        RunnablePassthrough.assign(sub_questions=_sub_query_chain)
+        | RunnableLambda(lambda x: [x["question"]] + x["sub_questions"])
+    )
+
+    try:
+        fused_docs = generate_queries | retriever_j.map() | get_unique_union
+    except:
+        # Rerun to guard against occasional LLM generation failures
+        fused_docs = generate_queries | retriever_j.map() | get_unique_union
+
     return fused_docs
 
 # # 5. Reranking

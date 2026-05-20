@@ -396,6 +396,11 @@ def generate_response_bw2_input(
         - Precious Metals (Au, Ag, PGMs): 0.85 - 0.95
         - Iron Ore: 0.75 - 0.90
         - Critical Minerals / REEs / Lithium Spodumene: 0.60 - 0.82
+        - Sand & Gravel Quarrying (Aggregate Crushing & Screening): 0.88 - 0.95
+        - Limestone Quarrying & Crushing (Construction / Cement Grade): 0.90 - 0.96
+        - Bauxite Open-Cast Mining & Primary Screening: 0.88 - 0.94
+        - Phosphate Rock Wet-Process Flotation Beneficiation: 0.72 - 0.85
+        - Kaolin / Ball Clay Primary Processing (Washing & Screening): 0.70 - 0.82
         *Note: If calculating from raw run-of-mine (ROM) ore mass, multiply recovery rate by Ore Grade (Base: 0.004-0.02; Precious: 0.000001-0.00001).
     
     b) SMELTING & HYDRO/PYROMETALLURGICAL EXTRACTION:
@@ -403,6 +408,9 @@ def generate_response_bw2_input(
         - Iron/Steel Blast Furnace: 0.96 - 0.99
         - Aluminum Smelting (Alumina to Metal): 0.98 - 0.995 (Bauxite to Alumina: 0.40 - 0.50)
         - REE Solvent Extraction Cascades: 0.85 - 0.93
+        - Zinc Roast-Leach-Electrowin (RLE) Process: 0.94 - 0.97
+        - Lead Blast Furnace Smelting & Softening Refinery: 0.94 - 0.97
+        - Manganese Ferroalloy Smelting (Submerged Arc Furnace): 0.88 - 0.94
     
     c) REFINING & INTERMEDIATE CHEMICAL SYNTHESIS:
         - Electrolytic Refining (Cu, Pb, Zn): 0.98 - 0.995
@@ -412,6 +420,8 @@ def generate_response_bw2_input(
         - Battery Active Material Synthesis (pCAM to CAM): 0.92 - 0.97
         - Industrial Organic Chemical Synthesis (Batch): 0.80 - 0.95
         - Solvent Distillation & On-Site Recovery: 0.75 - 0.92
+        - Zinc Electrowinning (SHG-Grade, Post-Purification): 0.96 - 0.98
+        - Nickel Carbonyl Refining (Mond Process): 0.97 - 0.99
     
     d) ELECTRONICS & SEMICONDUCTOR MANUFACTURING:
         - Silicon Ingot Slicing (Wafer Production): 0.45 - 0.55
@@ -457,6 +467,9 @@ def generate_response_bw2_input(
     k) INDUSTRIAL COATING & FINAL ASSEMBLY:
         - Automated Adhesive / Sealant Dispensing: 0.92 - 0.97
         - Industrial Spray Painting / Coating (Transfer Efficiency): 0.35 - 0.65
+        - Interior Wall Paint Application (Roller / Brush Method): 0.92 - 0.97
+        - Exterior Masonry Render & Stucco Wall Coating Application: 0.85 - 0.93
+        - Architectural Powder Coating (Electrostatic Spray, Transfer Efficiency): 0.95 - 0.99
         - Final Mechanical Assembly Integration: 0.99 - 1.00
         
         
@@ -466,7 +479,12 @@ def generate_response_bw2_input(
         - Cement Finish Grinding & Blending: 0.22 - 0.28
         - Concrete Batching & Readymix Plant Mixing: 0.96 - 0.98
         - Brick & Structural Clay Kiln Firing: 0.88 - 0.94
+        - Fired Clay Brick Wet/Stiff Extrusion & Tunnel Kiln Processing (Clay to Product): 0.80 - 0.88
+        - Clay Roof Tile Extrusion & Kiln Firing: 0.82 - 0.90
+        - Quicklime Production via Rotary/Shaft Kiln Calcination (CaO mass yield from CaCO₃): 0.54 - 0.58
+        - Gypsum Rock Calcination to β-Hemihydrate Plaster / Stucco: 0.82 - 0.88
         - Dimension Stone Cutting & Quarry Slab Dressing: 0.40 - 0.60
+        *Note: Quicklime recovery of 0.54-0.58 reflects stoichiometric CO₂ release during CaCO₃ calcination (not a process loss); gypsum value reflects bound water loss during calcination.
         
     m) PRECISION ADDITIVE MANUFACTURING (AM):
         - Laser Powder Bed Fusion (L-PBF) Metal Printing: 0.94 - 0.98
@@ -562,7 +580,33 @@ def generate_response_bw2_input(
     - "recovery_rate": mass_out_kg / mass_in_kg (0.0-1.0). Use 1.0 for non-mass activities.
     **Mass flow consistency rule (ISO 14040/44)**: mass_out_kg of stage i must equal mass_in_kg of stage i+1 (within ~10 %). Non-mass activities (transport, energy) are exempt.
     **Critical exclusion rule — capital infrastructure activities**: Do NOT include activities whose names contain words such as "construction", "building", "facility", "plant construction", or "infrastructure" (e.g., "mine construction, iron", "factory construction", "road construction") as standalone entries in the functional unit, unless the study goal is explicitly the construction of that specific facility. These are one-time capital goods activities whose unit is typically "unit" (one whole facility), and they carry enormous embedded impacts (tens to hundreds of millions of kg CO₂-eq per unit). Their impacts are already proportionally allocated in the corresponding per-mass or per-energy operation activities (e.g., per-kilogram mine operation, per-kWh power plant operation). Listing them separately as a top-level functional unit item constitutes severe double-counting. For a product value-chain LCA, only include the operational flow activities (e.g., "copper mine operation and beneficiation", "steel production, converter") and let the background system handle infrastructure allocation automatically.
-    **Critical unit-check rule — "unit"-referenced activities in disposal/end-of-life stages**: In ecoinvent, activities with reference unit "unit" represent one complete physical facility or asset (a landfill cell, an incineration plant, a treatment plant). They are capital goods, NOT per-mass treatment services. NEVER use a "unit"-referenced activity for disposal, end-of-life, recycling, or waste treatment stages where you intend to model the treatment of N kg of waste. Doing so causes BW2 to scale the entire facility's impact by N, producing absurdly large results (e.g., 100,000 kg of waste × [1 landfill facility @ 1,400 tonne CO₂-eq/unit] = 1.4×10¹¹ kg CO₂-eq). For disposal/end-of-life stages, ONLY select activities whose ecoinvent reference unit is "kilogram", "m³", or "tonne". Correct per-mass disposal activities include (but are not limited to): "market for inert waste, for final disposal" (kg), "treatment of inert waste, sanitary landfill" (kg), "market for waste concrete, not reinforced" (kg), "market for waste, for final disposal" (kg). If the available activity list only contains "unit"-referenced activities for a disposal stage, omit that stage entirely rather than including a facility-level activity.
+    **Critical unit-check rule — "unit"-referenced activities in disposal/end-of-life stages**: In ecoinvent, activities with reference unit "unit" represent one complete physical facility or asset (a landfill cell, an incineration plant, a treatment plant). They are capital goods, NOT per-mass treatment services. NEVER use a "unit"-referenced activity for disposal, end-of-life, recycling, or waste treatment stages where you intend to model the treatment of N kg of waste. Doing so causes BW2 to scale the entire facility's impact by N, producing absurdly large results (e.g., 100,000 kg of waste * [1 landfill facility @ 1,400 tonne CO₂-eq/unit] = 1.4*10^(11) kg CO₂-eq). For disposal/end-of-life stages, ONLY select activities whose ecoinvent reference unit is "kilogram", "m³", or "tonne". Correct per-mass disposal activities include (but are not limited to): "market for inert waste, for final disposal" (kg), "treatment of inert waste, sanitary landfill" (kg), "market for waste concrete, not reinforced" (kg), "market for waste, for final disposal" (kg). If the available activity list only contains "unit"-referenced activities for a disposal stage, omit that stage entirely rather than including a facility-level activity.
+    **Discrete component quantity rule — "unit"-referenced activities for countable product components**: Some legitimate ecoinvent activities carry a reference unit of "unit" because they represent a discrete, manufactured, countable item rather than a bulk material or a facility. Examples include: a lithium-ion battery pack, an electric motor, a heat exchanger, a photovoltaic module, a wind turbine nacelle, a fuel cell stack, a transformer, a pump, a compressor, or an airbag module. These are NOT infrastructure capital goods and must NOT be confused with facility-level activities. When such an activity appears in the functional unit, you MUST reason from first principles about how many of that component the studied product physically contains, then set "amount" to that integer or fractional count. Follow this decision procedure:
+      1. Identify the component type and the studied product (e.g., "battery pack" for a 3-tonne electric vehicle).
+      2. Apply engineering common sense to determine the typical count per unit of final product. Use the following as guidance (scale proportionally if the user specifies a non-standard product size):
+         - Battery pack (EV passenger car, any size): 1 unit
+         - Electric traction motor (single-motor EV): 1 unit; (dual-motor EV): 2 units
+         - Photovoltaic module (rooftop residential 5 kWp system, ~400 W/module): ~12-13 units
+         - Wind turbine nacelle / generator (single turbine LCA): 1 unit
+         - Heat exchanger (industrial HVAC unit): 1-4 units depending on circuit count
+         - Fuel cell stack (passenger car FCEV): 1 unit
+         - Automotive airbag module (standard car): 6-10 units
+         - Hydraulic pump (industrial machine): 1-3 units
+         - Large power transformer (substation): 1 unit
+         - Tire / wheel assembly (passenger car): 4 units; (truck): 6-18 units
+      3. If the product size or configuration deviates from the typical case (e.g., an articulated bus vs. a passenger car), scale the count accordingly using your domain knowledge.
+      4. Set "amount" to the inferred count. Set "mass_in_kg" = 0, "mass_out_kg" = 0, "recovery_rate" = 1.0 (treat like a non-mass service activity for the mass flow chain, since the component's internal mass balance is already captured inside its own ecoinvent dataset).
+      5. Never set "amount" = 1000 or any bulk-mass figure for a discrete-component "unit" activity. Never set "amount" = 0. If you genuinely cannot determine a reasonable count, default to 1.
+    **Product mass descriptor vs. product quantity rule**: When a user describes the studied product with a mass qualifier (e.g., "a 2-tonne electric vehicle", "a 500 kg industrial pump", "a 12-tonne lorry", "a 250 g smartphone"), that number is the PHYSICAL MASS of ONE product unit — it is NOT the number of product units to study. The entire functional unit must represent exactly one (1) product of that described mass. Do NOT assign any activity amount equal to the product's stated mass value simply because that value appears in the product description. Component counts are governed exclusively by the Discrete component quantity rule above, and bulk material amounts are derived from the 1-tonne backward mass-flow calculation. Treating a mass descriptor as a quantity multiplier will systematically over-scale every impact in the inventory by that factor.
+    **Activity retrieval coherence rule**: After an `activity_name` is resolved to an ecoinvent dataset by the retrieval system, verify that the resolved reference product is semantically coherent with the intended process before accepting it. Reject the match and omit or substitute if any of the following conditions are met:
+      - A PRODUCTION or MANUFACTURING activity (e.g., "battery cell production", "motor winding") resolves to a FACILITY or FACTORY dataset (reference product name contains words such as "factory", "plant", "workshop", or an unrelated technology, e.g., "photovoltaic cell factory"). This is a capital-goods mismatch that inflates GWP by orders of magnitude. Substitute the closest per-kg or per-unit operational production dataset for the same material instead.
+      - A PRODUCTION activity resolves to a MAINTENANCE, MARKET FOR, or DISPOSAL dataset. The resulting impact will be near-zero or physically meaningless. Substitute a production-stage dataset.
+      - Two distinct `activity_name` entries in the functional unit resolve to the exact same ecoinvent reference product name. One is a duplicate. Keep only the more specific entry and remove the other.
+      - When in doubt, prefer omitting an activity over retaining a semantically mismatched one that will produce an absurd result.
+    **End-of-life recovery physical ceiling rule**: Activities representing material recovery, recycling credits, or avoided burdens — identifiable by negative GWP contributions or names containing phrases such as "treatment of used", "market for non-Fe", "hydrometallurgical processing", "pyrometallurgical processing of used", or "collection for recycling" — have amounts that are strictly bounded by the mass of the recoverable material actually present in ONE unit of the studied product. Before finalising any such amount:
+      1. Estimate the mass of the relevant material sub-component within one product unit (e.g., Li-ion battery pack in a passenger car ≈ 300-600 kg; copper wiring in a household appliance ≈ 1-5 kg; aluminium body panels in a car ≈ 150-250 kg).
+      2. Apply a realistic end-of-life collection and separation efficiency for that material stream (typically 0.70-0.95 for well-regulated industrial recycling).
+      3. The final amount must satisfy: amount ≤ component_mass_in_product * collection_efficiency. If a mass-flow calculation yields an amount exceeding this ceiling, cap it at the ceiling value. An end-of-life recovery amount that exceeds the total mass of the studied product is always an error and must be corrected before output.
    
     After defining the functional unit, also include:
     - "project_name": Insert "{database}"  

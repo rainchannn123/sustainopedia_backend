@@ -14,7 +14,7 @@ from .functions.non_RAG_methods import conduct_lca_anaylsis, Get_LCIA_methods, g
 from .functions.vectorstore import build_and_save_vectorstores, load_vectorstores, LcaKnowledgeRetriever, load_vectorstores_fast
 from .functions.after_bw2 import final_mode_output_bw2_included
 from .functions.bw2_calculation import start_lca_calculation
-from.functions.RAG_methods import query_decomposition_retrieval
+from.functions.RAG_methods import query_decomposition_retrieval, lca_template_knowledge_retrieval
 # from .functions.intent_classifier import _DEFAULTS, classify_intent  # query intent classification and parameter extraction
 # from .functions.prebuild_bw2db import preinstall_ecoinvent_database  # pre-build BW2 databases to speed up first run
 
@@ -206,7 +206,7 @@ def generate_response_full_lca(user_input_params, product):
     #RAG retrieval
     logging.info(f"Retrieving more knowledge from localized knowledge database...", extra={"frontend": True})
     section4_start = time.time()
-    query_decomposition_retrival = query_decomposition_retrieval(user_input_params, gpt5_client, retriever_lca_knowledge, vectorstore_lca_knowledge, k_per_sub=3)
+    query_decomposition_retrival = lca_template_knowledge_retrieval(user_input_params, gpt5_client, retriever_lca_knowledge, vectorstore_lca_knowledge, k_per_sub=4)
     section4_end = time.time()
     logging.info(f"retrieve alternative questions took {section4_end - section4_start:.2f} seconds")
     logging.info(f"Knowledge retrieval completed ✔", extra={"frontend": True})

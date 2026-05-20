@@ -247,11 +247,14 @@ def result_data_processing(filename, product, scale_factor=1.0, display_amount=1
         # print(result)
         inp = result.get('input', {}) or {}
         name = inp.get('name', "")
-        amount = round(float(inp.get('amount') or 0) * scale_factor, 4) if inp.get('amount') else None
         unit = inp.get('unit', "")
         location = inp.get('location', "")
         system_boundary = inp.get('system_boundary', "")
         stage = inp.get('stage', "")
+
+        # Discrete countable components (unit = "unit") must not be scaled by
+        # scale_factor: a 2-tonne product still contains 1 motor, 1 battery, etc.
+        _eff_scale = 1.0 if unit.strip().lower() == "unit" else scale_factor
 
         matched = result.get('matched_activity', {}) or {}
         m_name = matched.get('name', "")
@@ -267,19 +270,19 @@ def result_data_processing(filename, product, scale_factor=1.0, display_amount=1
             m_unit = m_unit.replace("kilogram", "kg")
 
         impact = result.get('impact') or {}
-        mean_raw = float(impact.get('mean', "")) * scale_factor if impact.get('mean', "") else None
+        mean_raw = float(impact.get('mean', "")) * _eff_scale if impact.get('mean', "") else None
         sd_raw = impact.get('std_dev', "")
-        p5 = round(float(impact.get('percentile_5', "")) * scale_factor, 4) if impact.get('percentile_5', "") else None
-        p95 = round(float(impact.get('percentile_95', "")) * scale_factor, 4) if impact.get('percentile_95', "") else None
+        p5 = round(float(impact.get('percentile_5', "")) * _eff_scale, 4) if impact.get('percentile_5', "") else None
+        p95 = round(float(impact.get('percentile_95', "")) * _eff_scale, 4) if impact.get('percentile_95', "") else None
         impact_unit = impact.get('unit', "")
 
         # normalize numeric fields or use empty string
         mean_val = round(mean_raw, 4) if isinstance(mean_raw, (int, float)) else ""
-        sd_val = f"{round(float(sd_raw) * scale_factor, 4)}" if sd_raw not in ("", None) else ""
+        sd_val = f"{round(float(sd_raw) * _eff_scale, 4)}" if sd_raw not in ("", None) else ""
         percentile_val = f"{p5:.4g} / {p95:.4g}" if isinstance(p5, (int, float)) and isinstance(p95, (int, float)) else ""
 
         process_field = f"Process {i+1}: {name.title()}" if isinstance(name, str) and name else ""
-        amount_location = f"{amount} {unit}, {location}" if amount or unit or location else ""
+        amount_location = f"{round(float(inp.get('amount') or 0) * _eff_scale, 4)} {unit}, {location}" if inp.get('amount') else (f"{unit}, {location}" if unit or location else "")
         system_boundary_field = f"{system_boundary} (Stage: {stage})" if system_boundary or stage else ""
         matched_activity_field = m_name.title() if isinstance(m_name, str) and m_name else ""
         unit_location_field = f"{m_unit.capitalize()} / {m_location}" if m_unit or m_location else ""
