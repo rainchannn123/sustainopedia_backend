@@ -23,7 +23,6 @@ logging.basicConfig(
     level=logging.INFO,  # 可选: DEBUG, INFO, WARNING, ERROR, CRITICAL
     format="%(asctime)s [%(levelname)s] %(message)s",
     handlers=[
-        logging.StreamHandler(),
         logging.FileHandler('ecoinvent_parse.log')
     ]
 )

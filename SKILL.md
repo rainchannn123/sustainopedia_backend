@@ -189,6 +189,28 @@ def generate_list_of_activities(gpt5_client, retriever_eco_activity, product, us
     # Then retrieves ecoinvent activity docs per stage from chroma_db_eco_activity.
     # Returns {stage_name: [Document, ...]} dict.
 
+def _rerank_eco_activities(query: str, docs: list[Document]) -> list[Document]
+    # Keyword-overlap re-ranker applied after ChromaDB retrieval.
+    # Scores each Document by counting query-word hits in page_content; returns docs sorted
+    # by descending score (ties preserve original order). Called inside generate_list_of_activities.
+
+ def _refine_activities_with_ref_product_critique(
+    gpt5_client,
+    functional_unit: list,
+    product: str,
+    activities_by_stage: dict,    # {stage_name: [Document, ...]} from generate_list_of_activities
+    ref_product_lookup: dict,     # from lookup_activity_ref_products_batch — may be empty
+) -> list
+    # Second-pass LLM quality gate called from generate_response_bw2_input AFTER name correction.
+    # For each activity the LLM receives: stage, inferred reference_product (from BW2), top-3 BW2
+    # close-match names, and up to 10 retrieval candidates for that stage.
+    # Decisions returned as JSON array: {"decision": "keep"|"substitute"|"omit",
+    #   "replacement": null|"<exact candidate name>", "reason": "..."}
+    # Substitution replacement MUST be verbatim from retrieval_candidates_for_stage.
+    # Falls back to original functional_unit on any LLM or parse failure.
+    # Key rejection rules: maintenance ≠ manufacturing; invented names → substitute/omit;
+    # wrong product technology → omit; wrong lifecycle scope for stage → omit.
+
 def generate_response_bw2_input(
     question, product, context, methods, activities_by_stage,
     gpt5_client, retriever_eco_activity,
@@ -197,7 +219,12 @@ def generate_response_bw2_input(
 ) -> dict
     # Core LLM call that generates the BW2 input JSON.
     # Uses final_template_1st (ChatPromptTemplate) with embedded 3-step mass flow procedure.
-    # Post-generation: calls _validate_mass_flow_chain on functional_unit.
+    # Post-generation pipeline:
+    #   1. Retriever name-correction loop (retriever_eco_activity top-1 match per activity)
+    #   2. lookup_activity_ref_products_batch → BW2 reference_product metadata
+    #   3. _refine_activities_with_ref_product_critique → LLM second-pass validation
+    #   4. _remove_market_activity_duplicates → prevent double-counting
+    #   5. _validate_mass_flow_chain → ISO 14040/44 mass balance check
     # Saves JSON to bw2_input_templates/<Product>_Ecoinvent_<timestamp>.json.
     # Returns the parsed dict (results_dict) with mass_flow_audit embedded.
 ```
@@ -327,6 +354,14 @@ lcia_data = {
 
 ## 6. BW2 Calculation Engine — `Generation/functions/bw2_calculation.py`
 
+### Module-Level State
+```python
+_bw2_ref_product_index: dict = None
+    # Lazy-built cache: {activity_name.lower(): {name, reference_product, unit, location}}
+    # Populated by _build_bw2_ref_product_index() on first call; reused for process lifetime.
+    # None until first lookup; {} if BW2 was unavailable at build time.
+```
+
 ### Functions
 ```python
 def _ensure_lca_source_path() -> None
@@ -353,6 +388,29 @@ def start_lca_calculation(choice: str, json_path: str, background: bool = False)
     # choice: "Ecoinvent" | "Tiangong".
     # Calls _initialize_ecoinvent_if_needed then connect_and_calculate_lca.
     # Returns output file path.
+
+def _build_bw2_ref_product_index() -> dict
+    # Lazily builds _bw2_ref_product_index from bw2data.Database("ecoinvent").
+    # Sets BRIGHTWAY2_DIR env var, imports bw2data via importlib, calls
+    # projects.set_current("Ecoinvent"), iterates all activities.
+    # Returns {name.lower(): {name, reference_product, unit, location}}.
+    # Returns {} on any exception (graceful degradation — no SentenceTransformer needed).
+    # NOTE: bw2data field is 'reference product' (space, not underscore).
+
+def lookup_activity_ref_products_batch(activity_names: list, n_close: int = 5) -> dict
+    # Public API: resolve reference_product metadata for a list of activity names.
+    # Uses _bw2_ref_product_index (built lazily, then cached).
+    # Matching strategy:
+    #   1. Exact match (name.lower() in index)
+    #   2. difflib.get_close_matches(cutoff=0.45, n=n_close) — no ML model required
+    # Returns:
+    #   {activity_name: {
+    #       "reference_product": str,   # from best BW2 match
+    #       "unit":             str,
+    #       "close_matches":    [{"name", "reference_product", "unit"}, ...]
+    #   }}
+    # Missing entries = no match found. Returns {} if BW2 unavailable.
+    # Called by generate_response_bw2_input before the LLM critique pass.
 ```
 
 ---

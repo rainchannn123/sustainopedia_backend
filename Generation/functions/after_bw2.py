@@ -55,6 +55,82 @@ def _is_mass_bearing(unit: str) -> bool:
     return unit.strip().lower() in _MASS_BEARING_UNITS
 
 
+
+# following function is temporaryly closed
+_EOL_STAGE_KEYWORDS: frozenset = frozenset({
+    "disposal", "end-of-life", "end of life", "recycling", "waste",
+})
+
+_DISMANTLING_KEYWORDS: frozenset = frozenset({
+    "dismantling", "Treatment", "dismantle", "collection for recycling", "collection for final",
+})
+
+
+def _balance_disposal_mass(functional_unit: list) -> list:
+    """
+    Remove whole-product dismantling/collection activities from the
+    end-of-life stage when explicit sub-component treatment activities
+    already cover the same mass stream, preventing ~2x double-counting.
+
+    In ecoinvent, a "manual dismantling of used X" dataset and the
+    individual per-material treatment datasets (powertrain, glider,
+    electronics, etc.) both represent the same physical mass moving
+    through disposal.  Including both a whole-product dismantling
+    activity *and* its per-material downstream treatments in the
+    functional unit counts every kg of the product twice through
+    end-of-life, inflating (or deflating for credit streams) disposal
+    impacts by approximately 2x.
+
+    Rule: when the disposal stage contains mass-bearing
+    dismantling/collection activities *and* mass-bearing sub-component
+    treatment activities, and the sub-treatment total is ≥ 50 % of the
+    dismantling total, the dismantling activities are removed — the
+    sub-component breakdown is the more detailed representation.
+    """
+    def _is_eol(stage: str) -> bool:
+        s = (stage or "").lower()
+        return any(kw in s for kw in _EOL_STAGE_KEYWORDS)
+
+    eol_pairs = [
+        (i, a) for i, a in enumerate(functional_unit)
+        if _is_eol(a.get("stage", "")) and _is_mass_bearing(a.get("unit", ""))
+    ]
+    if len(eol_pairs) < 2:
+        return functional_unit
+
+    dismantling_idxs = []
+    sub_treatment_idxs = []
+    for i, a in eol_pairs:
+        name = (a.get("activity_name") or "").lower()
+        if any(kw in name for kw in _DISMANTLING_KEYWORDS):
+            dismantling_idxs.append(i)
+        else:
+            sub_treatment_idxs.append(i)
+
+    if not dismantling_idxs or not sub_treatment_idxs:
+        return functional_unit
+
+    d_mass = sum((functional_unit[i].get("amount") or 0) for i in dismantling_idxs)
+    s_mass = sum((functional_unit[i].get("amount") or 0) for i in sub_treatment_idxs)
+
+    if d_mass <= 0 or s_mass < 0.5 * d_mass:
+        return functional_unit
+
+    to_remove = set(dismantling_idxs)
+    removed_names = [functional_unit[i]["activity_name"] for i in sorted(to_remove)]
+    logging.warning(
+        "[disposal_mass_balance] Removing %d whole-product dismantling/collection "
+        "activit%s %s (%.1f kg) — sub-component treatments (%.1f kg) already cover "
+        "the same mass stream; retaining both would double-count end-of-life impacts.",
+        len(removed_names),
+        "y" if len(removed_names) == 1 else "ies",
+        removed_names,
+        d_mass,
+        s_mass,
+    )
+    return [a for i, a in enumerate(functional_unit) if i not in to_remove]
+
+
 def _validate_mass_flow_chain(functional_unit: list) -> dict:
     """
     Validate material mass flow consistency across unit processes.

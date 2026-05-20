@@ -14,7 +14,8 @@ from operator import itemgetter
 from langchain_core.runnables import RunnableLambda
 from langchain_openai import AzureChatOpenAI, AzureOpenAIEmbeddings
 from .RAG_methods import join_docs, join_methods
-from .after_bw2 import _validate_mass_flow_chain
+from .after_bw2 import _validate_mass_flow_chain, _balance_disposal_mass
+from .bw2_calculation import lookup_activity_ref_products_batch
 from datetime import datetime, timezone, timedelta
 
 def input_q_to_json(question):
@@ -292,6 +293,63 @@ def join_activities_by_stage(activities_by_stage: dict) -> str:
     return "\n".join(parts)
 
 
+def _rerank_eco_activities(query: str, docs: list) -> list:
+    """
+    Re-rank a small list of ecoinvent activity candidate documents by keyword-
+    overlap relevance against the stage retrieval query.
+
+    Vector-similarity search alone can surface false positives because short
+    technical activity names share embedding space with unrelated activities
+    that happen to contain overlapping general terms (e.g. "power supply unit,
+    for desktop computer" surfacing for an EV powertrain query). This function
+    re-scores each candidate by counting how many meaningful tokens from the
+    query appear in the activity name, then sorts descending. Ties are broken
+    by preserving the original vector rank so that among equal-overlap
+    candidates the best cosine match still wins.
+
+    Note: a neural cross-encoder (e.g. ms-marco-MiniLM) is NOT used here
+    because it is trained on web passages, not on 2-8 word ecoinvent technical
+    labels — it would add latency and degrade ranking quality for this domain.
+
+    Parameters
+    ----------
+    query : str
+        The full stage retrieval query (product + stage name + stage description).
+    docs : list[Document]
+        Candidate documents returned by the vector retriever.
+
+    Returns
+    -------
+    list[Document]
+        Same documents, re-ordered by descending keyword-overlap score.
+    """
+    _STOP = frozenset({
+        'a', 'an', 'at', 'be', 'by', 'for', 'in', 'is', 'it', 'its', 'of',
+        'or', 'the', 'to', 'are', 'and', 'but', 'from', 'into', 'this', 'that',
+        'with', 'used', 'which', 'have', 'been', 'also', 'such', 'these',
+        'their', 'each', 'more', 'both', 'some', 'than', 'then', 'them',
+        'stage', 'process', 'involves', 'include', 'includes', 'typically',
+        'describes', 'undergoes', 'products', 'using', 'during', 'where',
+    })
+
+    def _tokens(text: str) -> set:
+        return {t.lower() for t in re.split(r'[\s,;/\-\(\)\.]+', text)
+                if len(t) > 3 and t.lower() not in _STOP}
+
+    query_tokens = _tokens(query)
+
+    scored: list = []
+    for rank, doc in enumerate(docs):
+        name_tokens = _tokens(doc.page_content)
+        overlap = len(query_tokens & name_tokens)
+        # Negative rank so lower original vector rank breaks ties in favour of
+        # the better cosine match when keyword overlap is equal.
+        scored.append((overlap, -rank, doc))
+
+    scored.sort(key=lambda x: (x[0], x[1]), reverse=True)
+    return [doc for _, _, doc in scored]
+
+
 def generate_list_of_activities(gpt5_client, retriever_eco_activity, product, user_input_params):
     stage_description_template = """
     You are a life-cycle assessment (LCA) expert. Based on the product and user request parameters below,
@@ -353,6 +411,7 @@ def generate_list_of_activities(gpt5_client, retriever_eco_activity, product, us
     for stage, description in stages_dict.items():
         query = f"{product} {stage}: {description}"
         docs = retriever_eco_activity.invoke(query)
+        docs = _rerank_eco_activities(query, docs)
         activities_by_stage[stage] = docs
 
     return activities_by_stage
@@ -427,6 +486,267 @@ def _remove_market_activity_duplicates(functional_unit: list) -> list:
         )
 
     return [act for i, act in enumerate(functional_unit) if i not in to_remove]
+
+
+def _refine_activities_with_ref_product_critique(
+    gpt5_client,
+    functional_unit: list,
+    product: str,
+    activities_by_stage: dict,
+    ref_product_lookup: dict,
+    retriever_eco_activity,
+) -> list:
+    """
+    Second-pass LLM quality gate: validates each activity's ecoinvent
+    reference_product against its assigned LCA stage and the product being studied.
+
+    Decision strategy
+    -----------------
+    KEEP      — activity is valid (real ecoinvent name, correct stage, correct technology).
+    SUBSTITUTE — the stage/technology assignment is conceptually right but the activity name
+                 may be slightly wrong, unverifiable, or missing from BW2 close-matches.
+                 The function re-queries the vectorstore with a targeted query
+                 (product + stage + original name) to find the best real ecoinvent name,
+                 preserving the slot in the mass-flow chain.
+    OMIT      — reserved ONLY for fundamental stage/technology mismatches that a re-retrieval
+                 cannot fix: e.g., a maintenance/servicing activity in a manufacturing stage,
+                 or a process for a completely different product technology.
+                 Absence from the candidate sample is NOT grounds for omission.
+
+    Returns a refined functional_unit list.  Falls back to the original list
+    on any LLM or parsing failure.
+    """
+    # ── Step 0: drop "unit"-scale duplicates when a mass-based twin exists ──────
+    # e.g. "powertrain production, for electric passenger car, 1.0 unit" is
+    # dropped when the same name also appears with unit="kilogram".
+    _MASS_UNITS = frozenset({
+        "kilogram", "kg", "gram", "g", "tonne", "ton", "metric ton",
+        "metric tonne", "pound", "lb",
+    })
+    _name_unit_sets: dict = {}
+    for _a in functional_unit:
+        _n = _a.get("activity_name", "")
+        _u = (_a.get("unit") or "").lower().strip()
+        _name_unit_sets.setdefault(_n, set()).add(_u)
+    _has_mass_twin = {
+        _n for _n, _us in _name_unit_sets.items()
+        if any(_u in _MASS_UNITS for _u in _us)
+    }
+    _pre_filtered = []
+    for _a in functional_unit:
+        _n = _a.get("activity_name", "")
+        _u = (_a.get("unit") or "").lower().strip()
+        if _u == "unit" and _n in _has_mass_twin:
+            logging.info(
+                "[ref_product_critique] Pre-filtering unit-scale duplicate of '%s'"
+                " (mass-based version present)", _n,
+            )
+            continue
+        _pre_filtered.append(_a)
+    functional_unit = _pre_filtered
+
+    # Build the per-activity review payload
+    review_items = []
+    for act in functional_unit:
+        name = act.get("activity_name", "")
+        stage = act.get("stage", "")
+
+        ref_info = ref_product_lookup.get(name, {})
+        ref_product = ref_info.get("reference_product", "")
+        close_matches = ref_info.get("close_matches", [])
+
+        # Retrieval candidates are a SAMPLE, not an exhaustive list
+        stage_docs = activities_by_stage.get(stage, [])
+        candidates = [d.page_content for d in stage_docs]
+        
+
+        review_items.append({
+            "activity_name": name,
+            "stage": stage,
+            "unit": act.get("unit", ""),
+            "inferred_reference_product": ref_product,
+            "bw2_close_matches": [
+                {
+                    "name": m["name"],
+                    "reference_product": m["reference_product"],
+                    "unit": m["unit"],
+                }
+                for m in close_matches[:3]
+            ],
+            "retrieval_candidates_for_stage": candidates[:10],
+        })
+
+    critique_template = """You are a senior LCA expert and ecoinvent database specialist reviewing an LCA activity list for the product: {product}.
+
+CRITICAL CONTEXT: The retrieval_candidates_for_stage list is a small SAMPLE (≤10) drawn from tens of thousands of ecoinvent datasets — it is NOT a complete list of valid activities. An activity name that is absent from this sample may still be a perfectly real and correct ecoinvent dataset. Judge validity using your expert LCA knowledge, not solely by list membership.
+
+For each activity you are given:
+- Its assigned **stage** in the lifecycle
+- Its **inferred_reference_product** from BW2 (what the dataset actually produces — may be empty)
+- **bw2_close_matches** (closest real ecoinvent datasets by name similarity)
+- **retrieval_candidates_for_stage** (a sample of valid ecoinvent names for that stage)
+
+## Decision rules — read carefully:
+
+### KEEP — use when the activity is valid:
+- The name is a known or plausible ecoinvent dataset for this stage
+- The reference_product confirm the process produces/provides what is expected at this stage, and the current activity is the most appropriate one to describe the process among the closest matches activities.
+- The technology matches {product} (e.g., electric drive components for an EV LCA)
+- Minor name uncertainty is NOT a reason to avoid KEEP if the concept is clearly right
+
+### SUBSTITUTE — use when the name may be imprecise or unverifiable, but the function is right:
+- The stage assignment is conceptually correct for {product}
+- The underlying industrial process clearly belongs at this stage
+- There is a better and more precisely accurate activity listed in the closest matches activities that should replace the current activity.
+- An activity with `unit = "unit"` (discrete count) when the same activity name also appears with a mass-based unit (kilogram, tonne, etc.) elsewhere inside the "bw2_close_matches" objects in the list — you must indicate in the search hint that the correct activity should be the mass-based version, not the unit-based one, with the same activity name.
+- A targeted re-retrieval from the vectorstore (done automatically after this step) will find the best real ecoinvent name
+- Examples where SUBSTITUTE is correct: "blast furnace production" (stage right, name slightly off), "iron sinter production" (real process, name needs verification)
+- You MUST provide a **search_hint**: a short, precise English description of what the correct ecoinvent activity should produce or do at this stage. This is used as the retrieval query — write it as a description of the DESIRED process function, NOT a repeat of the wrong name. Good examples:
+  - For "blast furnace production": search_hint = "iron smelting in blast furnace using coke and iron ore"
+  - For "iron sinter production": search_hint = "sintering of iron ore fines for blast furnace feed"
+  - For "blast oxygen furnace converter production": search_hint = "basic oxygen steelmaking converter crude steel from pig iron"
+
+### OMIT — use ONLY for fundamental mismatches that re-retrieval cannot fix:
+- A MAINTENANCE, SERVICING, or REPAIR activity assigned to a MANUFACTURING or RAW MATERIAL stage
+- A process for a COMPLETELY DIFFERENT product technology (e.g., gasoline engine components in an electric vehicle LCA)
+- An END-OF-LIFE or DISPOSAL activity assigned to a PRODUCTION or RAW MATERIAL stage
+- Absence from the candidate sample alone is NEVER grounds for omission
+- An activity with `unit = "unit"` (discrete count) when the same activity name also appears with a mass-based unit (kilogram, tonne, etc.) elsewhere in the "activity_name" key's value in the list (not bw2_close_matches listed activities) — OMIT the unit-based variant; the mass-based version covers the same process
+
+## Concrete examples for {product}:
+- "maintenance, passenger car" in "manufacturing" → OMIT (servicing ≠ production)
+- "treatment of scrap steel" in "use phase" → OMIT (disposal ≠ use)
+- "desktop computer production" in "manufacturing" of an EV → OMIT (wrong technology)
+- "iron sinter production" in "raw material extraction" → SUBSTITUTE (real process, name needs re-retrieval)
+- "blast furnace production" in "manufacturing" → SUBSTITUTE (correct stage, name may be off)
+- "steel production, converter, unalloyed" in "manufacturing" → KEEP (known valid ecoinvent dataset)
+- "hot rolling, steel" in "manufacturing" → KEEP (legitimate shaping process)
+- "hard coal mine operation" in "raw material extraction" → KEEP (valid)
+
+## Activities to review:
+{review_items}
+
+Return a JSON array with one object per activity: {{"activity_name": "...", "decision": "keep"|"substitute"|"omit", "search_hint": null|"description of desired process", "reason": "one sentence"}}.
+For SUBSTITUTE decisions, search_hint must be a precise description of what the correct ecoinvent activity should produce or do — describe the desired process function, not the wrong name.
+For KEEP and OMIT decisions, set search_hint to null.
+Return ONLY the JSON array. No prose, no markdown fences."""
+
+    prompt = ChatPromptTemplate.from_template(critique_template)
+    chain = prompt | gpt5_client | StrOutputParser()
+
+    try:
+        critique_result = chain.invoke({
+            "product": product,
+            "review_items": json.dumps(review_items, indent=2, ensure_ascii=False),
+        })
+    except Exception as exc:
+        logging.warning("Reference-product critique LLM call failed — keeping original activities: %s", exc)
+        return functional_unit
+
+    # Parse decisions
+    try:
+        clean = re.sub(r"```(?:json)?|```", "", critique_result).strip()
+        decisions = json.loads(clean)
+        if not isinstance(decisions, list):
+            raise ValueError("Expected a JSON array")
+    except Exception as exc:
+        logging.warning("Could not parse reference-product critique output — keeping original activities: %s", exc)
+        return functional_unit
+
+    decision_map = {
+        d["activity_name"]: d
+        for d in decisions
+        if isinstance(d, dict) and "activity_name" in d
+    }
+
+    refined = []
+    n_substituted = 0
+    n_omitted = 0
+    for act in functional_unit:
+        name = act.get("activity_name", "")
+        stage = act.get("stage", "")
+        decision = decision_map.get(name, {})
+        action = decision.get("decision", "keep")
+        reason = decision.get("reason", "")
+
+        if action == "omit":
+            logging.info("[ref_product_critique] Omitting '%s': %s", name, reason)
+            n_omitted += 1
+            continue
+
+        if action == "substitute":
+            # Build a retrieval query from the LLM's search_hint — a semantic
+            # description of the DESIRED process function written by the LLM.
+            # Using the original (wrong) name as the query would simply return
+            # itself as the top hit, so we use the hint instead.
+            search_hint = (decision.get("search_hint") or "").strip()
+            if search_hint:
+                retr_query = f"{product} {stage}: {search_hint}"
+            else:
+                # Fallback: describe the stage generically without the wrong name
+                retr_query = f"{product} {stage} process"
+            new_name = None
+            try:
+                matches = retriever_eco_activity.invoke(retr_query)
+                if isinstance(matches, list) and matches:
+                    new_name = matches[0].page_content
+                elif hasattr(matches, "page_content"):
+                    new_name = matches.page_content
+            except Exception as exc:
+                logging.warning(
+                    "[ref_product_critique] Re-retrieval failed for '%s': %s — keeping original name",
+                    name, exc,
+                )
+
+            if new_name and new_name != name:
+                logging.info(
+                    "[ref_product_critique] Re-retrieved '%s' → '%s' (stage: %s): %s",
+                    name, new_name, stage, reason,
+                )
+                act = dict(act)
+                act["activity_name"] = new_name
+                n_substituted += 1
+            else:
+                logging.info(
+                    "[ref_product_critique] Re-retrieval for '%s' returned same or empty — keeping original name",
+                    name,
+                )
+
+        refined.append(act)
+
+    logging.info(
+        "[ref_product_critique] Review complete: %d kept, %d re-retrieved, %d omitted (of %d original)",
+        len(refined) - n_substituted, n_substituted, n_omitted, len(functional_unit),
+    )
+
+    # ── Deduplicate: a substitution may have pointed two slots to the same name
+    seen_names: set = set()
+    deduped: list = []
+    for act in refined:
+        n = act.get("activity_name", "")
+        if n in seen_names:
+            logging.info("[ref_product_critique] Dropping post-substitution duplicate '%s'", n)
+            continue
+        seen_names.add(n)
+        deduped.append(act)
+
+    # ── Re-stitch mass flow chain after deduplication ─────────────────────────
+    # For consecutive mass-bearing activities, set mass_in_kg[i] = mass_out_kg[i-1]
+    # and recompute mass_out_kg[i] = mass_in_kg[i] * recovery_rate[i].
+    for i in range(1, len(deduped)):
+        prev = deduped[i - 1]
+        curr = deduped[i]
+        if ((prev.get("unit") or "").lower() in _MASS_UNITS and
+                (curr.get("unit") or "").lower() in _MASS_UNITS):
+            prev_out = prev.get("mass_out_kg") or 0.0
+            if prev_out > 0.0:
+                recovery = curr.get("recovery_rate") or 1.0
+                curr = dict(curr)
+                curr["mass_in_kg"] = prev_out
+                curr["mass_out_kg"] = round(prev_out * recovery, 6)
+                deduped[i] = curr
+
+    return deduped
 
 
 def generate_response_bw2_input(
@@ -747,8 +1067,9 @@ def generate_response_bw2_input(
     7. **recovery_rate arithmetic**: For each mass-bearing activity, does `recovery_rate = mass_out_kg / mass_in_kg`? If not, recompute and correct the value.
     8. **unit-activity physical count**: For every "unit"-referenced activity, does `amount` equal the actual physical count of that component in ONE product unit (e.g., 1 motor per car, 1 battery per car, 4 tires per car)? The amount must be a reasonable integer.
     9. **Verbatim activity names**: For every entry in the functional_unit, is the `activity_name` copied exactly (character-for-character, lowercase) from the **List of available activities by stages**? If any name was paraphrased, reworded, capitalised differently, or invented, replace it with the exact string from the list — or remove the entry entirely if no suitable name exists in the list.
+    10. **Disposal double-counting**: Does the disposal / end-of-life stage contain both a whole-product dismantling or collection activity AND separate per-material treatment activities for sub-components? If yes, remove the whole-product dismantling activity — the sub-component treatments represent the same mass stream with greater specificity, and retaining both counts the product mass twice through end-of-life. You MUST ensure the sum of mass in disposal or recycling activities is equal or acceptably close to the total product mass (1000 kg) to avoid an impossible mass flow. If the sum of sub-component treatments is significantly less than the product mass, you may retain a single whole-product disposal activity to balance the mass flow, but do NOT include both.
 
-    Only after all nine checks pass, return the final JSON. Do not include explanations, comments, or any text outside the JSON object. Answer in English only.
+    Only after all ten checks pass, return the final JSON. Do not include explanations, comments, or any text outside the JSON object. Answer in English only.
     """
 
     final_prompt_1st = ChatPromptTemplate.from_template(final_template_1st)
@@ -807,11 +1128,41 @@ def generate_response_bw2_input(
                 if matched:
                     activity["activity_name"] = str(matched)
 
+    # ── Reference-product critique pass (second-pass quality gate) ────────────
+    # Query BW2 for the actual reference_product of each activity, then ask the
+    # LLM to validate semantic coherence with the assigned stage.  Falls back
+    # silently to the original list if BW2 or the LLM are unavailable.
+    draft_names = [
+        a.get("activity_name", "")
+        for a in results_dict.get("functional_unit", [])
+        if a.get("activity_name")
+    ]
+    ref_product_lookup = {}
+    try:
+        ref_product_lookup = lookup_activity_ref_products_batch(draft_names)
+    except Exception as exc:
+        logging.warning("Reference product lookup skipped: %s", exc)
+
+    results_dict["functional_unit"] = _refine_activities_with_ref_product_critique(
+        gpt5_client,
+        results_dict.get("functional_unit", []),
+        product,
+        retrieved_acitivity_list,
+        ref_product_lookup,
+        retriever_eco_activity,
+    )
+
     # ── Remove 'market for X' duplicates to prevent double-counting ───────────
     # Must run AFTER retriever name resolution so activity names are final.
     results_dict["functional_unit"] = _remove_market_activity_duplicates(
         results_dict.get("functional_unit", [])
     )
+
+    # # ── Disposal mass balance: remove whole-product dismantling when ──────────
+    # # sub-component treatments already cover the same mass stream.
+    # results_dict["functional_unit"] = _balance_disposal_mass(
+    #     results_dict.get("functional_unit", [])
+    # )
 
     # Inject n_simulations so the BW2 calculator can read it when supported
     results_dict['n_simulations'] = resolved_n_simulations

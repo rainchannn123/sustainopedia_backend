@@ -506,3 +506,156 @@ def start_lca_calculation(choice, json_path, background=False):
         return {"tiangong": {"error": "unsupported_choice", "message": "Tiangong execution is disabled in the current single-environment deployment."}, "ecoinvent": out2}
     else:
         return {"error": "invalid_choice", "message": "choice must be '1', '2' or '3'"}
+
+
+# ─── Lightweight BW2 reference-product lookup for pre-calculation validation ──
+
+_bw2_ref_product_index: dict = None  # {name_lower: {name, reference_product, unit, location}}
+
+
+def _build_bw2_ref_product_index() -> dict:
+    """
+    Build an in-memory name→metadata index from the BW2 ecoinvent database.
+    Uses bw2data directly (no SentenceTransformer — lightweight).
+    Cached at module level after the first successful build.
+    Returns empty dict on any failure so callers degrade gracefully.
+    """
+    try:
+        _ensure_lca_source_path()
+        os.environ["BRIGHTWAY2_DIR"] = str(ECO_DIR)
+
+        # Import bw2data inside the function so that BRIGHTWAY2_DIR is set first.
+        import importlib as _il
+        bw2data_mod = _il.import_module("bw2data")
+
+        # bw2data.ProjectManager reads BRIGHTWAY2_DIR only during __init__.
+        # If the module was already cached in sys.modules (e.g., loaded by a
+        # previous LCA calculation with a different BRIGHTWAY2_DIR), the
+        # projects._base_data_dir attribute will be wrong and set_current()
+        # will fail to find the "Ecoinvent" project.
+        # Fix: override _base_data_dir directly on the existing singleton, then
+        # re-open the projects registry database so has_project() queries the
+        # right file.
+        current_base = getattr(bw2data_mod.projects, "_base_data_dir", None)
+        if current_base != ECO_DIR:
+            logger.info(
+                "bw2data projects._base_data_dir was '%s'; overriding to '%s'",
+                current_base, ECO_DIR,
+            )
+            bw2data_mod.projects._base_data_dir = ECO_DIR
+            # Re-point the projects registry SQLite file to the new location
+            projects_db_path = ECO_DIR / "projects.db"
+            try:
+                bw2data_mod.projects.db.database.init(str(projects_db_path))
+            except Exception as db_exc:
+                logger.debug(
+                    "projects.db reinit skipped (will proceed anyway): %s", db_exc
+                )
+
+        projects = bw2data_mod.projects
+        Database = bw2data_mod.Database
+
+        projects.set_current("ecoinvent")
+        db = Database("ecoinvent")
+
+        index: dict = {}
+        for act in db:
+            name = act.get("name", "") or ""
+            if name:
+                index[name.lower()] = {
+                    "name": name,
+                    "reference_product": act.get("reference product", "") or "",
+                    "unit": act.get("unit", "") or "",
+                    "location": act.get("location", "") or "",
+                }
+
+        logger.info("BW2 reference-product index built: %d activities", len(index))
+        return index
+    except Exception as exc:
+        logger.warning(
+            "Could not build BW2 reference-product index "
+            "(template validation will use LLM-only mode): %s", exc,
+            exc_info=True,
+        )
+        return {}
+
+
+def lookup_activity_ref_products_batch(activity_names: list, n_close: int = 5) -> dict:
+    """
+    Return reference_product metadata for a list of ecoinvent activity names.
+
+    Uses an in-memory BW2 index (built lazily on first call, then cached for the
+    lifetime of the process).  Falls back gracefully to an empty dict when the
+    BW2 ecoinvent database has not yet been initialised.
+
+    Parameters
+    ----------
+    activity_names : list[str]
+        Activity names to look up (verbatim strings from the LLM-generated template).
+    n_close : int
+        Maximum number of difflib fuzzy candidates to return per name.
+
+    Returns
+    -------
+    dict
+        {activity_name: {
+            "reference_product": str,   # from the closest BW2 match
+            "unit":             str,
+            "close_matches":    [{"name": ..., "reference_product": ..., "unit": ...}, ...]
+        }}
+        Missing entries mean no match was found.  Returns {} if BW2 unavailable.
+    """
+    global _bw2_ref_product_index
+    if _bw2_ref_product_index is None:
+        _bw2_ref_product_index = _build_bw2_ref_product_index()
+        if not _bw2_ref_product_index:
+            # Build failed — reset to None so the next request retries rather
+            # than permanently returning empty results.
+            _bw2_ref_product_index = None
+            return {}
+
+    if not _bw2_ref_product_index:
+        return {}
+
+    from difflib import get_close_matches as _gcm
+
+    index = _bw2_ref_product_index
+    all_names_lower = list(index.keys())
+
+    results: dict = {}
+    for name in activity_names:
+        if not name:
+            continue
+        name_lower = name.lower()
+
+        # Exact match — highest confidence, short-circuit fuzzy search
+        if name_lower in index:
+            entry = index[name_lower]
+            results[name] = {
+                "reference_product": entry["reference_product"],
+                "unit": entry["unit"],
+                "close_matches": [{
+                    "name": entry["name"],
+                    "reference_product": entry["reference_product"],
+                    "unit": entry["unit"],
+                }],
+            }
+            continue
+
+        # Fuzzy match via difflib (no model required)
+        close = _gcm(name_lower, all_names_lower, n=n_close, cutoff=0.45)
+        close_entries = [
+            {
+                "name": index[c]["name"],
+                "reference_product": index[c]["reference_product"],
+                "unit": index[c]["unit"],
+            }
+            for c in close
+        ]
+        results[name] = {
+            "reference_product": close_entries[0]["reference_product"] if close_entries else "",
+            "unit": close_entries[0]["unit"] if close_entries else "",
+            "close_matches": close_entries,
+        }
+
+    return results

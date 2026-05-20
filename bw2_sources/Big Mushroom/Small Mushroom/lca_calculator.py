@@ -25,7 +25,6 @@ def run_tiangong_calculation(json_file):
         result = engine.run_lca_calculation(json_file)
         
         print("✓ Tiangong计算完成")
-        print("结果:", json.dumps(result, indent=2, ensure_ascii=False))
         return result
         
     except Exception as e:
@@ -50,7 +49,6 @@ def run_ecoinvent_calculation(json_file):
         result = engine.run_lca_calculation(json_file)
         
         print("✓ Ecoinvent计算完成")
-        print("结果:", json.dumps(result, indent=2, ensure_ascii=False))
         return result
         
     except Exception as e:
