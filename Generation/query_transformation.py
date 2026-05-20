@@ -191,7 +191,7 @@ def generate_response_full_lca(user_input_params, product):
     retriever_lca_knowledge = LcaKnowledgeRetriever(vectorstore_lca_knowledge, parent_lookup, k_children=6).as_langchain_retriever()
     retriever_eco_methods = vectorstore_eco_methods.as_retriever(search_kwargs={"k": 5})
     retriever_tg_methods = vectorstore_tg_methods.as_retriever(search_kwargs={"k": 3})
-    retriever_eco_activity = vectorstore_eco_activity.as_retriever(search_kwargs={"k": 8})
+    retriever_eco_activity = vectorstore_eco_activity.as_retriever(search_kwargs={"k": 10})
 
     #start rendering RAG
     logging.info(f"Computing the best LCIA methods for current analysis...", extra={"frontend": True})
