@@ -337,7 +337,11 @@ def generate_list_of_activities(gpt5_client, retriever_eco_activity, product, us
         | StrOutputParser()
     )
 
-    stages_json_str = generate_stages.invoke({"product": product, "user_input_params": user_input_params})
+    #prevent occasional LLM generation failure by rerunning it once if it fails at the first time
+    try:
+        stages_json_str = generate_stages.invoke({"product": product, "user_input_params": user_input_params})
+    except:
+        stages_json_str = generate_stages.invoke({"product": product, "user_input_params": user_input_params})
 
     try:
         clean = re.sub(r"```(?:json)?|```", "", stages_json_str).strip()
@@ -352,6 +356,77 @@ def generate_list_of_activities(gpt5_client, retriever_eco_activity, product, us
         activities_by_stage[stage] = docs
 
     return activities_by_stage
+
+
+def _remove_market_activity_duplicates(functional_unit: list) -> list:
+    """
+    Remove 'market for X' activities that duplicate an already-present
+    production/operation activity in the functional unit.
+
+    In ecoinvent, 'market for X' is a background supply-mix aggregator that
+    internally calls the same production datasets you have already explicitly
+    listed.  Including both double-counts every upstream impact for material X
+    and makes the mass-flow sequence appear to go backwards.
+
+    Algorithm
+    ---------
+    For each 'market for [material]' entry, extract the core material tokens
+    and compare them against every non-market activity already in the list.
+    If >= 2 significant tokens match (or 1 token with > 6 characters that
+    unambiguously identifies the material), the market activity is removed and
+    a warning is logged.  The final-product market activity is only removed
+    when a production activity for the same final product is also present.
+    """
+    _MARKET_RE = re.compile(r'^market\s+for\s+', re.IGNORECASE)
+    _STOP = frozenset({'for', 'the', 'and', 'with', 'from', 'into', 'used',
+                       'market', 'activity', 'treatment'})
+
+    def _tokens(name: str) -> set:
+        return {t for t in re.split(r'[\s,;/\-\(\)]+', name.lower())
+                if len(t) > 3 and t not in _STOP}
+
+    non_market = [(i, act) for i, act in enumerate(functional_unit)
+                  if not _MARKET_RE.match(act.get("activity_name", ""))]
+
+    to_remove: set = set()
+    for i, act in enumerate(functional_unit):
+        name = act.get("activity_name", "")
+        if not _MARKET_RE.match(name):
+            continue
+        material_part = _MARKET_RE.sub("", name).strip()
+        m_tokens = _tokens(material_part)
+        if not m_tokens:
+            continue
+        for j, other_act in non_market:
+            if i == j:
+                continue
+            o_tokens = _tokens(other_act.get("activity_name", ""))
+            overlap = m_tokens & o_tokens
+            # Remove if >= 2 tokens overlap, or a single highly-specific token (>6 chars) matches
+            if len(overlap) >= 2 or (len(overlap) == 1 and any(len(t) > 6 for t in overlap)):
+                to_remove.add(i)
+                logging.warning(
+                    "Anti-double-counting: removing 'market for' activity '%s' "
+                    "because production activity '%s' already covers material '%s' "
+                    "(overlapping tokens: %s). Including both would double-count "
+                    "upstream impacts and break mass-flow continuity.",
+                    name,
+                    other_act.get("activity_name", ""),
+                    material_part,
+                    sorted(overlap),
+                )
+                break
+
+    if to_remove:
+        removed_names = [functional_unit[i]["activity_name"] for i in sorted(to_remove)]
+        logging.warning(
+            "Removed %d duplicate 'market for' activit%s from functional unit: %s",
+            len(to_remove),
+            "y" if len(to_remove) == 1 else "ies",
+            removed_names,
+        )
+
+    return [act for i, act in enumerate(functional_unit) if i not in to_remove]
 
 
 def generate_response_bw2_input(
@@ -562,25 +637,37 @@ def generate_response_bw2_input(
     - "location": ISO country code. Select the most appropriate ISO country or region code based on 'region' information in the User Requests section; available codes are Global:`GLO`, Europe:`RER`, Western Europe:`WEU`, Eastern Europe:`EEU`, Middle East & Africa:`MEA`, Asia:`ASI`, North America:`NAM`, South America:`SAM`, Switzerland:`CH`, China:`CN`, United States:`US`, Brazil:`BR`, India:`IN`; if no region is specified, default to `GLO`.
     - "stage": The value chain stage (e.g., "raw material extraction", "manufacturing", "transport", "use", "disposal")
 
+    **CRITICAL — 1-tonne (1000 kg) reference basis rule**: The functional unit template MUST ALWAYS be computed on a fixed 1-tonne (1000 kg) output reference basis, regardless of the quantity the user has requested. The "amount" and "unit" fields in the User Requests section (e.g., "amount": "10", "unit": "tonne") describe the USER'S DESIRED DISPLAY QUANTITY — they are NOT the target production mass for this template. A separate downstream scale_factor (= requested_quantity_in_tonnes) is applied after BW2 computes impacts. If you scale the template to the user's requested quantity, the scale_factor will multiply a result that is already scaled, causing a systematic N-fold overcount (e.g., for "10 tonnes": template scaled to 10,000 kg × scale_factor 10 = 100-tonne result instead of 10 tonnes). Therefore:
+      - The last mass-bearing activity MUST output exactly mass_out_kg = 1000.0 (1 tonne).
+      - ALL upstream amounts must be derived backwards from this fixed 1000 kg endpoint.
+      - NEVER use the user's requested amount as the template output mass.
+      - NEVER set the final mass_out_kg to anything other than 1000.0.
+
     **Before filling in "amount", "mass_in_kg", "mass_out_kg", and "recovery_rate", follow this procedure in order:**
     Step 1 — Determine mass flow for each stage by working BACKWARDS from the final product:
-      - The last material-producing stage must output exactly 1000 kg (mass_out_kg = 1000).
-      - For each earlier stage, use recovery rates from the Supplementary Context if available; otherwise use typical LCA values for recovery rates provided above to estimate the recovery rate for that stage. Then,
-      - Compute: mass_in_kg[i] = mass_out_kg[i] / recovery_rate[i]; set amount[i] = mass_out_kg[i]; set mass_out_kg[i] = mass_in_kg[i+1] to maintain chain continuity.
-      - If the Supplementary Context provides specific material quantities or yields for a stage, use those exact values instead of guessing.
+    - The last material-producing stage must output exactly 1000 kg (mass_out_kg = 1000).
+    - For each earlier stage, use recovery rates from the Supplementary Context if available; otherwise use typical LCA values for recovery rates provided above to estimate the recovery rate for that stage. Then,
+    - Compute: mass_in_kg[i] = mass_out_kg[i] / recovery_rate[i]; set amount[i] = mass_out_kg[i]; set mass_out_kg[i] = mass_in_kg[i+1] to maintain chain continuity.
+    - If the Supplementary Context provides specific material quantities or yields for a stage, use those exact values instead of guessing.
     Step 2 — Set "amount", "mass_in_kg", and "mass_out_kg":
-      - In ecoinvent, every activity is defined per unit of its OUTPUT (reference product). Therefore **"amount" must equal "mass_out_kg"** for mass-bearing activities. This is the quantity BW2 uses to scale the environmental inventory.
-      - "mass_in_kg" is the input material to this process (= mass_out_kg / recovery_rate). It is used only for the mass flow balance chain and does NOT go into the BW2 calculation directly.
-      - For non-mass activities (transport, energy, services): set amount to the appropriate service quantity (e.g., tonne-kilometres for transport); set mass_in_kg = 0, mass_out_kg = 0, recovery_rate = 1.0.
+    - In ecoinvent, every activity is defined per unit of its OUTPUT (reference product). Therefore **"amount" must equal "mass_out_kg"** for mass-bearing activities. This is the quantity BW2 uses to scale the environmental inventory.
+    - "mass_in_kg" is the input material to this process (= mass_out_kg / recovery_rate). It is used only for the mass flow balance chain and does NOT go into the BW2 calculation directly.
+    - For non-mass activities (transport, energy, services): set amount to the appropriate service quantity (e.g., tonne-kilometres for transport); set mass_in_kg = 0, mass_out_kg = 0, recovery_rate = 1.0.
     Step 3 — Set "recovery_rate" = mass_out_kg / mass_in_kg for mass-bearing activities.
-
     - "amount": For mass-bearing activities, this equals mass_out_kg (the reference product output of this ecoinvent process per 1 tonne final product). For non-mass activities, this is the service quantity (e.g., transport distance * cargo mass).
     - "mass_in_kg": Input mass (kg) of the primary material entering this process per 1 tonne of final product (= amount / recovery_rate). Used for mass flow chain validation only. Set to 0 for non-mass activities.
     - "mass_out_kg": Useful output mass (kg) of the primary material leaving this process. Equals amount for mass-bearing activities. The final material-producing stage must output 1000 kg. Set to 0 for non-mass activities.
     - "recovery_rate": mass_out_kg / mass_in_kg (0.0-1.0). Use 1.0 for non-mass activities.
+    
     **Mass flow consistency rule (ISO 14040/44)**: mass_out_kg of stage i must equal mass_in_kg of stage i+1 (within ~10 %). Non-mass activities (transport, energy) are exempt.
     **Critical exclusion rule — capital infrastructure activities**: Do NOT include activities whose names contain words such as "construction", "building", "facility", "plant construction", or "infrastructure" (e.g., "mine construction, iron", "factory construction", "road construction") as standalone entries in the functional unit, unless the study goal is explicitly the construction of that specific facility. These are one-time capital goods activities whose unit is typically "unit" (one whole facility), and they carry enormous embedded impacts (tens to hundreds of millions of kg CO₂-eq per unit). Their impacts are already proportionally allocated in the corresponding per-mass or per-energy operation activities (e.g., per-kilogram mine operation, per-kWh power plant operation). Listing them separately as a top-level functional unit item constitutes severe double-counting. For a product value-chain LCA, only include the operational flow activities (e.g., "copper mine operation and beneficiation", "steel production, converter") and let the background system handle infrastructure allocation automatically.
     **Critical unit-check rule — "unit"-referenced activities in disposal/end-of-life stages**: In ecoinvent, activities with reference unit "unit" represent one complete physical facility or asset (a landfill cell, an incineration plant, a treatment plant). They are capital goods, NOT per-mass treatment services. NEVER use a "unit"-referenced activity for disposal, end-of-life, recycling, or waste treatment stages where you intend to model the treatment of N kg of waste. Doing so causes BW2 to scale the entire facility's impact by N, producing absurdly large results (e.g., 100,000 kg of waste * [1 landfill facility @ 1,400 tonne CO₂-eq/unit] = 1.4*10^(11) kg CO₂-eq). For disposal/end-of-life stages, ONLY select activities whose ecoinvent reference unit is "kilogram", "m³", or "tonne". Correct per-mass disposal activities include (but are not limited to): "market for inert waste, for final disposal" (kg), "treatment of inert waste, sanitary landfill" (kg), "market for waste concrete, not reinforced" (kg), "market for waste, for final disposal" (kg). If the available activity list only contains "unit"-referenced activities for a disposal stage, omit that stage entirely rather than including a facility-level activity.
+    **Anti-double-counting rule — "market for" vs. production/operation activities**: In ecoinvent, every "market for [material X]" activity is a background supply-mix aggregator — it internally calls the corresponding production datasets to supply material X to a requesting foreground process. It is NOT an independent processing step. When your functional unit already contains a production or operation activity that PRODUCES or PROCESSES material X (e.g., "copper mine operation and beneficiation, sulfide ore" produces copper concentrate; "smelting of copper concentrate, sulfide ore" produces copper anode; "electrorefining of copper, anode" produces copper cathode), you MUST NOT also separately list the corresponding "market for [X]" activity (e.g., "market for copper concentrate, sulfide ore", "market for copper, anode") as a top-level entry. Including both constitutes SEVERE double-counting: the production impacts of material X are counted once via the explicit production activity entry AND again via the "market for" activity, which internally includes that same production dataset in its background supply mix. This error directly causes the mass flow sequence to appear physically impossible (the chain can appear to go "backwards" in mass — e.g., decreasing from 10,000 kg back to 10,248 kg) because the "market for" activity is assigned amounts corresponding to the input of the stage it duplicates.
+    STRICT APPLICATION: For each "market for [X]" activity you are considering adding to the functional unit, apply this test:
+      - If a production, operation, smelting, refining, beneficiation, or manufacturing activity that produces material X as its OUTPUT is ALREADY in your functional unit → OMIT "market for [X]" entirely.
+      - If NO production activity for X exists in your functional unit AND you need to represent the average market supply of X (e.g., grid electricity, generic steel input) → the "market for [X]" activity may be retained as a supply placeholder.
+    The ONLY legitimate top-level "market for" entry in a production-chain LCA is the market activity for the FINAL OUTPUT PRODUCT (e.g., "market for copper, cathode" as the last step representing market distribution to the buyer), and only when it is not duplicating a production step already listed. Even then, if the production step is explicitly modeled, prefer the production activity over the market activity.
+    Worked example (copper cathode): If your functional unit lists "copper mine operation and beneficiation" + "smelting of copper concentrate" + "electrorefining of copper, anode", then "market for copper concentrate, sulfide ore" and "market for copper, anode" are FORBIDDEN duplicates and must be omitted. "Market for copper, cathode" may be kept only if the system boundary explicitly calls for a market distribution step and it is the sole representative of the final output.
     **Discrete component quantity rule — "unit"-referenced activities for countable product components**: Some legitimate ecoinvent activities carry a reference unit of "unit" because they represent a discrete, manufactured, countable item rather than a bulk material or a facility. Examples include: a lithium-ion battery pack, an electric motor, a heat exchanger, a photovoltaic module, a wind turbine nacelle, a fuel cell stack, a transformer, a pump, a compressor, or an airbag module. These are NOT infrastructure capital goods and must NOT be confused with facility-level activities. When such an activity appears in the functional unit, you MUST reason from first principles about how many of that component the studied product physically contains, then set "amount" to that integer or fractional count. Follow this decision procedure:
       1. Identify the component type and the studied product (e.g., "battery pack" for a 3-tonne electric vehicle).
       2. Apply engineering common sense to determine the typical count per unit of final product. Use the following as guidance (scale proportionally if the user specifies a non-standard product size):
@@ -595,7 +682,12 @@ def generate_response_bw2_input(
          - Large power transformer (substation): 1 unit
          - Tire / wheel assembly (passenger car): 4 units; (truck): 6-18 units
       3. If the product size or configuration deviates from the typical case (e.g., an articulated bus vs. a passenger car), scale the count accordingly using your domain knowledge.
-      4. Set "amount" to the inferred count. Set "mass_in_kg" = 0, "mass_out_kg" = 0, "recovery_rate" = 1.0 (treat like a non-mass service activity for the mass flow chain, since the component's internal mass balance is already captured inside its own ecoinvent dataset).
+      3b. **CRITICAL — the 1-tonne reference basis does NOT apply to "unit" activities**: The post-processing engine applies a fixed scale factor of 1.0 to all "unit"-referenced activities, meaning the `amount` you write here is used exactly as-is in the final result — NO downstream scaling is ever applied to it. Therefore `amount` must be the true physical count of that component in ONE complete product unit, regardless of what quantity the user has requested (1 tonne, 2 tonnes, or 10 tonnes). Do NOT divide by the product mass. Do NOT multiply by any fraction derived from 1000 ÷ product_mass_kg. Examples for a 2-tonne (2000 kg) passenger car — correct amounts:
+         - Electric motor (single-motor EV): 1 unit 
+         - Battery pack: 1 unit
+         - Powertrain: 1 unit
+         - Tires: 4 units
+      4. Set "amount" to the physical count from steps 2-3. Set "mass_in_kg" = 0, "mass_out_kg" = 0, "recovery_rate" = 1.0 (treat like a non-mass service activity for the mass flow chain, since the component's internal mass balance is already captured inside its own ecoinvent dataset).
       5. Never set "amount" = 1000 or any bulk-mass figure for a discrete-component "unit" activity. Never set "amount" = 0. If you genuinely cannot determine a reasonable count, default to 1.
     **Product mass descriptor vs. product quantity rule**: When a user describes the studied product with a mass qualifier (e.g., "a 2-tonne electric vehicle", "a 500 kg industrial pump", "a 12-tonne lorry", "a 250 g smartphone"), that number is the PHYSICAL MASS of ONE product unit — it is NOT the number of product units to study. The entire functional unit must represent exactly one (1) product of that described mass. Do NOT assign any activity amount equal to the product's stated mass value simply because that value appears in the product description. Component counts are governed exclusively by the Discrete component quantity rule above, and bulk material amounts are derived from the 1-tonne backward mass-flow calculation. Treating a mass descriptor as a quantity multiplier will systematically over-scale every impact in the inventory by that factor.
     **Activity retrieval coherence rule**: After an `activity_name` is resolved to an ecoinvent dataset by the retrieval system, verify that the resolved reference product is semantically coherent with the intended process before accepting it. Reject the match and omit or substitute if any of the following conditions are met:
@@ -644,7 +736,17 @@ def generate_response_bw2_input(
     "dataset": "ecoinvent"
     }}
 
-    Only return the JSON object in text format. Do not explain or comment. Answer in English and do not use <think> mode if you have.
+    **Pre-output self-verification — mandatory before returning your answer. Work through each check in order; correct any violation before finalising the JSON:**
+    1. **1-tonne reference basis**: Is the final mass-bearing activity's `mass_out_kg` exactly 1000.0? If not, recompute the entire mass-flow chain backwards from 1000.0 and update all amounts.
+    2. **amount = mass_out_kg parity**: For every mass-bearing activity, does `amount` equal `mass_out_kg`? If any value differs, set `amount = mass_out_kg`.
+    3. **Mass-flow continuity (ISO 14040/44)**: For every consecutive pair of mass-bearing activities, does `mass_out_kg[i] ≈ mass_in_kg[i+1]` within 10 %? If not, adjust the chain to restore continuity.
+    4. **No "market for" duplicates**: Does the list contain a "market for [X]" activity alongside a production or operation activity that already produces material X? If yes, remove the "market for [X]" entry.
+    5. **No capital-infrastructure activities**: Does the list contain any activity named with words such as "construction", "building", or "facility" as a standalone top-level entry? If yes, remove it.
+    6. **No "unit"-referenced disposal activities**: Does the list contain a "unit"-referenced activity in a disposal or end-of-life stage? If yes, remove it or substitute the nearest per-kilogram treatment alternative.
+    7. **recovery_rate arithmetic**: For each mass-bearing activity, does `recovery_rate = mass_out_kg / mass_in_kg`? If not, recompute and correct the value.
+    8. **unit-activity physical count**: For every "unit"-referenced activity, does `amount` equal the actual physical count of that component in ONE product unit (e.g., 1 motor per car, 1 battery per car, 4 tires per car)? The amount must be a reasonable integer.
+
+    Only after all eight checks pass, return the final JSON. Do not include explanations, comments, or any text outside the JSON object. Answer in English only.
     """
 
     final_prompt_1st = ChatPromptTemplate.from_template(final_template_1st)
@@ -702,7 +804,13 @@ def generate_response_bw2_input(
 
                 if matched:
                     activity["activity_name"] = str(matched)
-    
+
+    # ── Remove 'market for X' duplicates to prevent double-counting ───────────
+    # Must run AFTER retriever name resolution so activity names are final.
+    results_dict["functional_unit"] = _remove_market_activity_duplicates(
+        results_dict.get("functional_unit", [])
+    )
+
     # Inject n_simulations so the BW2 calculator can read it when supported
     results_dict['n_simulations'] = resolved_n_simulations
 

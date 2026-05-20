@@ -226,6 +226,8 @@ def generate_response_bw2_input(
 ```
 **Critical mass flow rule:** `amount` **must equal** `mass_out_kg` for mass-bearing activities (unit = kilogram/tonne/etc.) because ecoinvent scales the activity by its reference product (output). Setting `amount = mass_in_kg` causes systematic overestimation proportional to `1/recovery_rate`.
 
+**Critical unit-activity rule:** For activities whose `unit = "unit"` (discrete countable components — electric motor, battery pack, tire, etc.), `amount` must equal the **physical count of that component per ONE product unit** (e.g., 1 motor per car, 4 tires per car). The 1-tonne reference basis does NOT apply to unit activities. `result_data_processing` sets `_eff_scale = 1.0` for all unit activities, so no downstream scaling is ever applied — the amount in the template is used as-is. Do NOT divide by the product mass or multiply by `(1000 ÷ product_mass_kg)`. A fleet count such as 50, or a fractional amount derived from 1000/product_mass (e.g., 0.5 for a 2-tonne car), is always wrong.
+
 ---
 
 ## 5. Post-Processing — `Generation/functions/after_bw2.py`
