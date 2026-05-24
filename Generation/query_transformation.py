@@ -229,7 +229,7 @@ def _rag_answer(question: str, product: str, context: str, intent: str) -> dict:
         "make assumptions and focus on general insights from the context. "
         "If User's query is completely unrelated to LCA, energy and environmental impact, or "
         "sustainability fields, politely decline and explain in one sentence that you can only "
-        "assist with LCA-related queries."
+        "assist with LCA-related queries. Also, your answer should be paragraph-based and concise, not a list of bullet points, if not specified by user's query."
     )
     chain = ChatPromptTemplate.from_template(template) | gpt5_client | StrOutputParser()
     try:

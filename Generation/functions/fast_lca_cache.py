@@ -71,11 +71,10 @@ def _scale_lca_result(
     - totalMeanImpact
     - stageImpacts values
 
-    Also generates a concise, accurate answer text for the scaled functional unit.
+    The original cached answer text is returned unchanged.
     """
     # ── Scale processed_json ─────────────────────────────────────────────────
     scaled_json_str = cached_doc.get("processed_json")
-    scaled_total: Optional[float] = None
     if scaled_json_str:
         try:
             data = json.loads(scaled_json_str)
@@ -85,7 +84,6 @@ def _scale_lca_result(
                     p["std"] = round(p["std"] * scale_factor, 6)
             if "totalMeanImpact" in data:
                 data["totalMeanImpact"] = round(data["totalMeanImpact"] * scale_factor, 6)
-                scaled_total = data["totalMeanImpact"]
             for k in list(data.get("stageImpacts", {})):
                 v = data["stageImpacts"][k]
                 if isinstance(v, (int, float)):
@@ -107,8 +105,6 @@ def _scale_lca_result(
                 scaled_table["totalMeanImpact"] = round(
                     scaled_table["totalMeanImpact"] * scale_factor, 6
                 )
-                if scaled_total is None:
-                    scaled_total = scaled_table["totalMeanImpact"]
             for k in list(scaled_table.get("stageImpacts", {})):
                 v = scaled_table["stageImpacts"][k]
                 if isinstance(v, (int, float)):
@@ -116,25 +112,8 @@ def _scale_lca_result(
         except Exception:
             scaled_table = cached_doc.get("lcia_table")  # keep original on failure
 
-    # ── Build answer narrative ────────────────────────────────────────────────
-    product_name = cached_doc.get("intent_params", {}).get("product", "the product")
-    cached_amount = cached_doc.get("mass_amount", 1.0)
-    cached_unit_str = cached_doc.get("mass_unit", "tonne")
-    impact_line = (
-        f"`{scaled_total:.4g}\u202fkg CO\u2082-eq`"
-        if scaled_total is not None
-        else "see the table below"
-    )
-    answer = (
-        f"## LCA Result: {product_name} \u2014 {req_amount}\u202f{req_unit}\n\n"
-        f"> *Linearly scaled from a cached {cached_amount}\u202f{cached_unit_str} result "
-        f"(\u00d7{scale_factor:.4g} scaling factor).*\n\n"
-        f"- **Total GWP (IPCC 2013, GWP100a):** {impact_line}\n"
-        f"- See the process breakdown table below for stage-by-stage contributions.\n"
-    )
-
     return {
-        "answer":         answer,
+        "answer":         cached_doc.get("answer"),
         "markdown":       None,
         "processed_json": scaled_json_str,
         "lcia_table":     scaled_table,
