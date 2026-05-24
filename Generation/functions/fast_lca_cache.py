@@ -179,8 +179,14 @@ class _FastLcaCache:
             self._col = None
         return self._col
 
-    def lookup(self, product_name: str, embedding: list) -> Optional[dict]:
-        """Return the best cached result with cosine similarity >= threshold, or None."""
+    def lookup(
+        self,
+        product_name: str,
+        embedding: list,
+        req_amount: float = 1.0,
+        req_unit: str = "tonne",
+    ) -> Optional[dict]:
+        """Return the best cached result scaled to (req_amount, req_unit), or None."""
         col = self._get_collection()
         if col is None:
             return None
@@ -193,6 +199,8 @@ class _FastLcaCache:
                 "processed_json": 1,
                 "lcia_table": 1,
                 "intent_params": 1,
+                "mass_amount": 1,
+                "mass_unit": 1,
             }
             best_score, best_doc = 0.0, None
             for doc in col.find({}, projection):
@@ -210,6 +218,11 @@ class _FastLcaCache:
                     best_doc.get("product_name", "?"),
                     best_score,
                 )
+                cached_kg = _normalize_to_kg(best_doc.get("mass_amount", 1.0), best_doc.get("mass_unit", "tonne"))
+                req_kg = _normalize_to_kg(req_amount, req_unit)
+                scale_factor = req_kg / cached_kg if cached_kg != 0.0 else 1.0
+                if abs(scale_factor - 1.0) > 1e-9:
+                    return _scale_lca_result(best_doc, scale_factor, req_amount, req_unit)
                 return best_doc
 
             logger.info("FastLcaCache MISS: '%s' (best=%.3f)", product_name, best_score)
