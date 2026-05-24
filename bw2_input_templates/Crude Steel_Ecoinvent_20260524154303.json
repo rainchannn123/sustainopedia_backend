@@ -1,0 +1,115 @@
+{
+    "goal": "lifecycle impact assessment",
+    "Project": "Ecoinvent",
+    "method": [
+        "IPCC 2021 no LT",
+        "climate change: fossil, including SLCFs no LT",
+        "global warming potential (GWP100) no LT"
+    ],
+    "system_boundary": "cradle-to-gate",
+    "functional_unit": [
+        {
+            "activity_name": "iron ore mine operation and beneficiation",
+            "amount": 1428.57,
+            "unit": "kilogram",
+            "location": "GLO",
+            "stage": "material processing/beneficiation",
+            "mass_in_kg": 1680.67,
+            "mass_out_kg": 1428.57,
+            "recovery_rate": 0.85
+        },
+        {
+            "activity_name": "iron pellet production",
+            "amount": 1285.71,
+            "unit": "kilogram",
+            "location": "GLO",
+            "stage": "raw material extraction",
+            "mass_in_kg": 1428.57,
+            "mass_out_kg": 1285.713,
+            "recovery_rate": 0.9
+        },
+        {
+            "activity_name": "pig iron production",
+            "amount": 1142.86,
+            "unit": "kilogram",
+            "location": "GLO",
+            "stage": "manufacturing/production",
+            "mass_in_kg": 1285.713,
+            "mass_out_kg": 1142.998857,
+            "recovery_rate": 0.889
+        },
+        {
+            "activity_name": "steel production, converter, unalloyed",
+            "amount": 1000.0,
+            "unit": "kilogram",
+            "location": "GLO",
+            "stage": "gate",
+            "mass_in_kg": 1142.998857,
+            "mass_out_kg": 1000.124,
+            "recovery_rate": 0.875
+        }
+    ],
+    "project_name": "Ecoinvent",
+    "dataset": "ecoinvent",
+    "n_simulations": 5,
+    "mass_flow_audit": {
+        "status": "pass",
+        "overall_yield": 0.595075,
+        "activities": [
+            {
+                "stage": "material processing/beneficiation",
+                "activity_name": "iron ore mine operation and beneficiation",
+                "mass_in_kg": 1680.67,
+                "mass_out_kg": 1428.57,
+                "recovery_rate": 0.85
+            },
+            {
+                "stage": "raw material extraction",
+                "activity_name": "iron pellet production",
+                "mass_in_kg": 1428.57,
+                "mass_out_kg": 1285.713,
+                "recovery_rate": 0.9
+            },
+            {
+                "stage": "manufacturing/production",
+                "activity_name": "pig iron production",
+                "mass_in_kg": 1285.713,
+                "mass_out_kg": 1142.9989,
+                "recovery_rate": 0.889
+            },
+            {
+                "stage": "gate",
+                "activity_name": "steel production, converter, unalloyed",
+                "mass_in_kg": 1142.9989,
+                "mass_out_kg": 1000.124,
+                "recovery_rate": 0.875
+            }
+        ],
+        "transitions": [
+            {
+                "from_stage": "material processing/beneficiation",
+                "to_stage": "raw material extraction",
+                "expected_mass_in_kg": 1428.57,
+                "actual_mass_in_kg": 1428.57,
+                "discrepancy_pct": 0.0,
+                "status": "ok"
+            },
+            {
+                "from_stage": "raw material extraction",
+                "to_stage": "manufacturing/production",
+                "expected_mass_in_kg": 1285.713,
+                "actual_mass_in_kg": 1285.713,
+                "discrepancy_pct": 0.0,
+                "status": "ok"
+            },
+            {
+                "from_stage": "manufacturing/production",
+                "to_stage": "gate",
+                "expected_mass_in_kg": 1142.9989,
+                "actual_mass_in_kg": 1142.9989,
+                "discrepancy_pct": 0.0,
+                "status": "ok"
+            }
+        ]
+    }
+}

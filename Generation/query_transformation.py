@@ -8,13 +8,16 @@ from operator import itemgetter
 from langchain_core.runnables import RunnableLambda
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
+from langchain_core.documents import Document
+from langchain_community.vectorstores import Chroma
 from langchain_openai import AzureChatOpenAI, AzureOpenAIEmbeddings
 import sqlite3
 from .functions.non_RAG_methods import conduct_lca_anaylsis, Get_LCIA_methods, generate_response_bw2_input, extract_functional_unit, infer_product_from_query, input_q_to_json, generate_list_of_activities
 from .functions.vectorstore import build_and_save_vectorstores, load_vectorstores, LcaKnowledgeRetriever, load_vectorstores_fast
 from .functions.after_bw2 import final_mode_output_bw2_included
 from .functions.bw2_calculation import start_lca_calculation
-from.functions.RAG_methods import query_decomposition_retrieval, lca_template_knowledge_retrieval
+from .functions.RAG_methods import query_decomposition_retrieval, lca_template_knowledge_retrieval
+from .functions.fast_lca_cache import cache_lookup, cache_store
 # from .functions.intent_classifier import _DEFAULTS, classify_intent  # query intent classification and parameter extraction
 # from .functions.prebuild_bw2db import preinstall_ecoinvent_database  # pre-build BW2 databases to speed up first run
 
@@ -72,63 +75,148 @@ embeddings = AzureOpenAIEmbeddings(
 #     vectorstore_lca_knowledge, parent_lookup, vectorstore_eco_methods, vectorstore_tg_methods, vectorstore_eco_activity = build_and_save_vectorstores(embeddings, eco_methods='./_additionals/methods/EcoInvent_methods.txt', tg_methods='./_additionals/methods/tiangong_methods.txt', eco_activity='./_additionals/methods/Ecoinvent_activity.txt', pdf_dir='./_raw knowledge pdfs', persist_dir_lca_knowledge='./chroma_db_lca_knowledge', persist_dir_eco_methods='./chroma_db_eco_methods', persist_dir_tg_methods='./chroma_db_tg_methods', persist_dir_eco_activity='./chroma_db_eco_activity')
 
 
-def generate_response_fast(question: str, product: str) -> dict:
-    """Fast-path: RAG retrieval from chroma_db_lca_knowledge + single LLM call, no BW2 pipeline."""
-    context = ""
-    # Retrieve relevant LCA knowledge if vectorstores are available
-    if all(os.path.isdir(d) for d in ['./chroma_db_lca_knowledge', './chroma_db_eco_methods',
-                                       './chroma_db_tg_methods', './chroma_db_eco_activity']):
-        vs_knowledge, parent_lookup = load_vectorstores_fast(
-            embeddings,
-            persist_dir_lca_knowledge='./chroma_db_lca_knowledge',
-        )
-        retriever = LcaKnowledgeRetriever(vs_knowledge, parent_lookup, k_children=4).as_langchain_retriever()
-        docs = retriever.invoke(question)
-        context = "\n\n".join(d.page_content for d in docs) if docs else ""
+# ── Fast-mode LCA helpers ──────────────────────────────────────────────────────
 
-    # Simple intent classification (no LLM call)
-    q_lower = (question or "").lower()
-    if any(word in q_lower for word in ["current lca result", "current lca context", "current lca insights", "current lca findings"]):
-        intent = "Specific_LCA_result_inquiry"
-    if any(word in q_lower for word in ["literature", "study", "studies", "review", "paper", "papers", "summarize"]):
-        intent = "literature"
-    elif any(word in q_lower for word in ["calculate", "estimate", "compute", "carbon footprint", "climate impact", "lca result", "lca analysis", "carbon emission", "co2 emission", "how many", "how much"]):
-        intent = "computation"
+# Pattern for specific numeric CO₂ values in retrieved context.
+_CO2_VALUE_RE = re.compile(
+    r"\d+(?:[.,]\d+)?\s*(?:kg\s*CO2|kgCO2|t\s*CO2|tonne\s*CO2|CO2[-\u2010]\s*eq|co2e|CO\u2082|GWP)",
+    re.IGNORECASE,
+)
+
+# Pattern for an explicit mass quantity in a user query, e.g. "10 tonnes", "500 kg".
+_MASS_QUERY_RE = re.compile(
+    r"(\d+(?:\.\d+)?)\s*(?:-\s*)?"
+    r"(tonnes?|metric\s*tons?|tons?|kilograms?|kg|grams?\b|g\b|lbs?|pounds?|mt\b)",
+    re.IGNORECASE,
+)
+
+
+def _extract_mass_from_query(question: str) -> tuple:
+    """
+    Extract (amount, unit) from the user query string.
+
+    Returns (1.0, 'tonne') when no explicit mass is found so that the BW2
+    pipeline defaults to a 1-tonne functional unit.
+    """
+    m = _MASS_QUERY_RE.search(question)
+    if m:
+        amount = float(m.group(1))
+        raw = m.group(2).lower().replace(" ", "").rstrip("s")  # normalise plural
+        _UNIT_NORM = {
+            "tonne": "tonne", "ton": "tonne", "metricton": "tonne", "mt": "tonne",
+            "kg": "kg", "kilogram": "kg",
+            "g": "g", "gram": "g",
+            "lb": "lb", "pound": "lb",
+        }
+        unit = _UNIT_NORM.get(raw, raw)
+        return amount, unit
+    return 1.0, "tonne"
+
+_LCA_INTENT_CLASSIFIER_PROMPT = ChatPromptTemplate.from_messages([
+    (
+        "system",
+        "You are a strict intent classifier for a Life Cycle Assessment (LCA) platform. "
+        "Answer ONLY with 'YES' or 'NO'.",
+    ),
+    (
+        "human",
+        "Does the following query ask to COMPUTE, CALCULATE, QUANTIFY, or ESTIMATE the "
+        "carbon footprint, CO\u2082 emissions, GWP, or any environmental impact of a specific "
+        "product, material, or process? \n"
+        "Answer YES only if the intent is to obtain actual emission/impact values through "
+        "LCA computation. Answer NO if the query is asking for a definition, explanation, "
+        "literature review, or general concept.\n\n"
+        "Query: {question}",
+    ),
+])
+
+
+def _is_lca_computation_query(question: str) -> bool:
+    """Return True when the LLM judges the query as requesting an LCA computation."""
+    try:
+        chain = _LCA_INTENT_CLASSIFIER_PROMPT | gpt5_client | StrOutputParser()
+        result = chain.invoke({"question": question}).strip().upper()
+        return result.startswith("YES")
+    except Exception as exc:
+        logging.warning("LCA intent classifier failed: %s", exc)
+        return False
+
+
+def _context_has_co2_values(context: str, product: str) -> bool:
+    """
+    Return True when the retrieved context already contains specific numeric CO₂
+    values relevant to the queried product, so BW2 computation can be skipped.
+    """
+    if not context:
+        return False
+    matches = _CO2_VALUE_RE.findall(context)
+    if not matches:
+        return False
+    if product and product.strip().lower() not in ("not specified", "unknown product", ""):
+        return product.lower() in context.lower()
+    return len(matches) >= 2
+
+
+def _build_fast_lca_user_params(
+    question: str,
+    product: str,
+    amount: float = 1.0,
+    unit: str = "tonne",
+) -> str:
+    """
+    Construct a minimal user_input_params string for the fast LCA BW2 pipeline.
+    System boundary is inferred from the query; amount/unit use the requested
+    functional unit so the BW2 result already reflects the correct mass.
+    """
+    q = question.lower()
+    if any(kw in q for kw in ("cradle to grave", "full lifecycle", "end of life", "end-of-life", "use phase")):
+        system_boundary = "cradle-to-grave"
+    elif "gate to gate" in q or "gate-to-gate" in q:
+        system_boundary = "gate-to-gate"
     else:
-        intent = "general"
+        system_boundary = "cradle-to-gate"
 
-    # Only include necessary fields for intent_params (frontend only expects intent and product for fast mode)
-    intent_params = {
-        "intent": intent,
-        "product": product or "Not Specified"
-    }
+    return (
+        f"product: {product}\n"
+        f"amount: {amount}\n"
+        f"unit: {unit}\n"
+        f"system_boundary: {system_boundary}\n"
+        f"n_simulations: 5\n"
+        f"further_notes: {question}"
+    )
 
-    if intent == 'Specific_LCA_result_inquiry':
+
+def _rag_answer(question: str, product: str, context: str, intent: str) -> dict:
+    """Generate a RAG-based answer using the retrieved context (no BW2 computation)."""
+    intent_params = {"intent": intent, "product": product or "Not Specified"}
+
+    if intent == "Specific_LCA_result_inquiry":
         role_instruction = (
-            "You are a Senior LCA Consultant. The user is asking about the current LCA results, which is shown in 'Current LCA Results Context for reference'. "
-            "Answer the question based on the current LCA results, and based on the external LCA knowledge provided if the information in the current LCA results is insufficient for answering user's question."
+            "You are a Senior LCA Consultant. The user is asking about the current LCA results, "
+            "which is shown in 'Current LCA Results Context for reference'. "
+            "Answer the question based on the current LCA results, and based on the external LCA "
+            "knowledge provided if the information in the current LCA results is insufficient."
         )
-    elif intent == 'literature':
+    elif intent == "literature":
         role_instruction = (
             "You are an expert LCA researcher. Summarize relevant peer-reviewed studies, "
             "methodologies, and findings from the knowledge provided. "
             "Highlight key data points and cite specific values where available. "
             "Structure your response with ## headings for major themes. "
-            "You must not make up studies or data not present in the context. Focus on summarizing the existing literature."
+            "You must not make up studies or data not present in the context."
         )
-    elif intent == 'general':
+    elif intent == "general":
         role_instruction = (
             "You are a Senior LCA Consultant. Explain the concept clearly and concisely "
             "using the knowledge provided. Use practical examples where helpful."
         )
-    else:  # computation or fast mode
+    else:
         role_instruction = (
             "You are a Senior LCA Consultant. Provide a concise, evidence-based answer "
             "to this LCA query using the retrieved context. "
             "Include key numeric estimates where available."
         )
 
-    # Build template with role_instruction embedded directly (not as a LangChain template variable)
     template = (
         role_instruction + "\n\n"
         "Product: {product_hint}\n"
@@ -137,18 +225,243 @@ def generate_response_fast(question: str, product: str) -> dict:
         "Output valid Markdown. Use ## for section headings and - for bullet points. "
         "Use inline code for numeric values (e.g., `12.5 kg CO\u2082-eq`). "
         "Do not fabricate data not present in the context. "
-        "If Product is not specified, try to guess it if you are confident, otherwise do not make assumptions and focus on general insights from the context."
-        "If User's query is completely unrelated to LCA, energy and environmental impact, or sustainability fields, politely decline to answer and explain in one sentence that you can only assist with LCA-related queries."
+        "If Product is not specified, try to guess it if you are confident, otherwise do not "
+        "make assumptions and focus on general insights from the context. "
+        "If User's query is completely unrelated to LCA, energy and environmental impact, or "
+        "sustainability fields, politely decline and explain in one sentence that you can only "
+        "assist with LCA-related queries."
     )
-
     chain = ChatPromptTemplate.from_template(template) | gpt5_client | StrOutputParser()
     try:
         answer = chain.invoke({"question": question, "product_hint": product, "context": context})
-    except:
-        # rerun-it to prevent occasional LLM generation failure
+    except Exception:
         answer = chain.invoke({"question": question, "product_hint": product, "context": context})
 
     return {"answer": answer, "markdown": None, "processed_json": None, "lcia_table": None, "intent_params": intent_params}
+
+
+def _run_fast_lca_pipeline(
+    question: str,
+    product: str,
+    knowledge_docs: list,
+    req_amount: float = 1.0,
+    req_unit: str = "tonne",
+) -> dict:
+    """
+    Run a streamlined BW2 LCA computation for the fast-response mode.
+
+    Differences from the full LCA pipeline:
+    - LCIA methods are resolved dynamically via Get_LCIA_methods (RAG + LLM), matching
+      the same method-selection logic used by the full pipeline.
+    - Supplementary context is taken directly from already-retrieved knowledge docs
+      (skips the multi-sub-query lca_template_knowledge_retrieval step).
+    - Monte Carlo simulations are capped at 5 for speed.
+    - Only the eco-activity and LCIA-methods vectorstores are loaded (not all four).
+    """
+    logging.info("Fast LCA: loading vectorstores...", extra={"frontend": True})
+    vectorstore_eco_activity = Chroma(
+        persist_directory="./chroma_db_eco_activity",
+        embedding_function=embeddings,
+    )
+    retriever_eco_activity = vectorstore_eco_activity.as_retriever(search_kwargs={"k": 10})
+
+    if LCI_DATABASE == "Tiangong":
+        vectorstore_methods = Chroma(
+            persist_directory="./chroma_db_tg_methods",
+            embedding_function=embeddings,
+        )
+        retriever_lca_methods = vectorstore_methods.as_retriever(search_kwargs={"k": 3})
+    else:  # Ecoinvent (default)
+        vectorstore_methods = Chroma(
+            persist_directory="./chroma_db_eco_methods",
+            embedding_function=embeddings,
+        )
+        retriever_lca_methods = vectorstore_methods.as_retriever(search_kwargs={"k": 5})
+
+    # Wrap already-retrieved docs as a LangChain Runnable (avoids extra LLM calls).
+    context_runnable = RunnableLambda(lambda _: knowledge_docs)
+
+    user_params_str = _build_fast_lca_user_params(question, product, req_amount, req_unit)
+    structured_params = input_q_to_json(user_params_str)
+
+    logging.info("Fast LCA: selecting LCIA methods...", extra={"frontend": True})
+    LCIA_method_list = Get_LCIA_methods(question, gpt5_client, retriever_lca_methods)
+
+    logging.info("Fast LCA: generating activity list...", extra={"frontend": True})
+    retrieved_activity_list = generate_list_of_activities(
+        gpt5_client, retriever_eco_activity, product, user_params_str
+    )
+
+    logging.info("Fast LCA: constructing BW2 input template...", extra={"frontend": True})
+    bw2_input_filepath, activities_by_stage_dict = generate_response_bw2_input(
+        gpt5_client,
+        context_runnable,
+        LCIA_method_list,
+        retrieved_activity_list,
+        product,
+        LCI_DATABASE,
+        retriever_eco_activity,
+        user_input_params=structured_params,
+    )
+
+    lcidb_choice = "2" if LCI_DATABASE == "Ecoinvent" else "1"
+    logging.info("Fast LCA: running BW2 engine...", extra={"frontend": True})
+    start_lca_calculation(lcidb_choice, bw2_input_filepath)
+
+    bw2_output_rawpath = os.path.splitext(os.path.basename(bw2_input_filepath))[0]
+    bw2_results_file = f"bw2_results/{bw2_output_rawpath}_output.json"
+
+    display_amount, display_unit, scale_factor = extract_functional_unit(
+        f"{structured_params.get('amount', '1')} {structured_params.get('unit', 'tonne')}"
+    )
+
+    logging.info("Fast LCA: generating final output...", extra={"frontend": True})
+    res = final_mode_output_bw2_included(
+        bw2_results_file,
+        question,
+        gpt5_client,
+        product,
+        scale_factor=scale_factor,
+        n_simulations=5,
+        display_amount=display_amount,
+        display_unit=display_unit,
+        activities_by_stage_dict=activities_by_stage_dict,
+    )
+
+    final_answer, lcia_data, markdown_output, json_output = (
+        res if isinstance(res, tuple) and len(res) == 4
+        else (res[0], res[1] if len(res) > 1 else {}, None, None)
+    )
+
+    intent_params = {"intent": "fast_lca_computation", "product": product}
+
+    # Return a table only when multiple processes are present; for single-process
+    # queries the LLM answer already contains the CO₂ value inline.
+    n_processes = len((lcia_data or {}).get("processes", []))
+    if n_processes > 1:
+        return {
+            "answer":        final_answer,
+            "markdown":      markdown_output,
+            "processed_json": json_output,
+            "lcia_table":    lcia_data,
+            "intent_params": intent_params,
+        }
+    else:
+        return {
+            "answer":        final_answer,
+            "markdown":      None,
+            "processed_json": None,
+            "lcia_table":    None,
+            "intent_params": intent_params,
+        }
+
+
+def generate_response_fast(question: str, product: str) -> dict:
+    """
+    Fast-path pipeline.
+
+    Routing logic:
+    1. Always retrieves context from chroma_db_lca_knowledge via RAG.
+    2. Classifies intent with keyword heuristics (no LLM call).
+    3. For LCA computation queries:
+       a. If retrieved context already contains specific CO₂ values for the product,
+          answer directly from context (skips BW2).
+       b. Check MongoDB cache: if a result for a similar product (cosine similarity ≥ 0.80)
+          was computed before, return it immediately.
+       c. Otherwise, run the simplified BW2 pipeline (IPCC 2013 / GWP100a, n_simulations=5).
+          Store the result in the MongoDB cache before returning.
+    4. For all other intents (literature, general), return a RAG-based LLM answer.
+    """
+    # ── Step 1: RAG retrieval from lca_knowledge ──────────────────────────────
+    context = ""
+    knowledge_docs: list = []
+    if os.path.isdir("./chroma_db_lca_knowledge"):
+        try:
+            vs_knowledge, parent_lookup = load_vectorstores_fast(
+                embeddings,
+                persist_dir_lca_knowledge="./chroma_db_lca_knowledge",
+            )
+            retriever = LcaKnowledgeRetriever(
+                vs_knowledge, parent_lookup, k_children=4
+            ).as_langchain_retriever()
+            knowledge_docs = retriever.invoke(question) or []
+            context = "\n\n".join(d.page_content for d in knowledge_docs)
+        except Exception as exc:
+            logging.warning("Fast RAG retrieval failed: %s", exc)
+
+    # ── Step 2: Intent classification (keyword-based, no LLM) ────────────────
+    q_lower = (question or "").lower()
+    if any(kw in q_lower for kw in ("current lca result", "current lca context",
+                                     "current lca insights", "current lca findings")):
+        intent = "Specific_LCA_result_inquiry"
+    elif any(kw in q_lower for kw in ("literature", "study", "studies", "review",
+                                       "paper", "papers", "summarize")):
+        intent = "literature"
+    elif _is_lca_computation_query(question):
+        intent = "computation"
+    else:
+        intent = "general"
+
+    # ── Step 3: LCA computation routing ──────────────────────────────────────
+    if intent == "computation":
+        # 3a. Context already has specific numeric CO₂ values → answer directly.
+        if _context_has_co2_values(context, product):
+            logging.info("Fast LCA: context contains CO\u2082 values, answering from RAG.")
+            return _rag_answer(question, product, context, intent)
+
+        # 3b. Infer product name if not supplied.
+        resolved_product = (product or "").strip()
+        if not resolved_product or resolved_product.lower() == "not specified":
+            resolved_product = infer_product_from_query(question, gpt5_client)
+
+        # 3c. Extract requested mass for cache-aware lookup and scaling.
+        req_amount, req_unit = _extract_mass_from_query(question)
+
+        # 3d. MongoDB cache lookup (returns mass-scaled result when masses differ).
+        try:
+            product_embedding = embeddings.embed_query(resolved_product)
+            cached = cache_lookup(resolved_product, product_embedding, req_amount, req_unit)
+            if cached:
+                logging.info(
+                    "Fast LCA: cache hit for '%s' — skipping BW2 computation.",
+                    resolved_product, extra={"frontend": True}
+                )
+                return cached
+        except Exception as exc:
+            logging.warning("Fast LCA: cache lookup error: %s", exc)
+
+        # 3e. Run fast BW2 computation pipeline with the requested functional unit.
+        try:
+            result = _run_fast_lca_pipeline(
+                question, resolved_product, knowledge_docs, req_amount, req_unit
+            )
+
+            # 3f. Persist result to MongoDB cache.
+            try:
+                product_embedding = embeddings.embed_query(resolved_product)
+                cache_store(
+                    resolved_product,
+                    product_embedding,
+                    result["answer"],
+                    result.get("processed_json"),
+                    result.get("lcia_table"),
+                    result["intent_params"],
+                    mass_amount=req_amount,
+                    mass_unit=req_unit,
+                )
+            except Exception as exc:
+                logging.warning("Fast LCA: cache store error: %s", exc)
+
+            return result
+        except Exception as exc:
+            logging.warning(
+                "Fast LCA: BW2 pipeline failed for '%s': %s — falling back to RAG.",
+                resolved_product, exc,
+            )
+            return _rag_answer(question, resolved_product, context, intent)
+
+    # ── Step 4: Literature / general intent → RAG answer ─────────────────────
+    return _rag_answer(question, product, context, intent)
 
 
 def generate_response_full_lca(user_input_params, product):
