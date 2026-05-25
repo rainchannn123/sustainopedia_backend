@@ -74,41 +74,80 @@ def _scale_lca_result(
     The original cached answer text is returned unchanged.
     """
     # ── Scale processed_json ─────────────────────────────────────────────────
+    # Field names in processed_json come from generate_json() / result_data_processing():
+    #   mean_impact  (float)          — primary per-process impact shown in the table
+    #   sd           (numeric string) — standard deviation, e.g. "0.0523"
+    #   percentile   (string)         — "p5 / p95", e.g. "0.41 / 0.63"
+    #   totalMeanImpact (float)       — top-level sum shown as the overall total
     scaled_json_str = cached_doc.get("processed_json")
     if scaled_json_str:
         try:
             data = json.loads(scaled_json_str)
             for p in data.get("processes", []):
-                p["mean"] = round(p.get("mean", 0.0) * scale_factor, 6)
-                if "std" in p:
-                    p["std"] = round(p["std"] * scale_factor, 6)
+                # Primary per-process impact field used by the frontend table
+                if isinstance(p.get("mean_impact"), (int, float)):
+                    p["mean_impact"] = round(p["mean_impact"] * scale_factor, 4)
+                # SD stored as a numeric string
+                if p.get("sd") not in ("", None, "N/A"):
+                    try:
+                        p["sd"] = str(round(float(p["sd"]) * scale_factor, 4))
+                    except (ValueError, TypeError):
+                        pass
+                # Percentile stored as "p5 / p95" string
+                if p.get("percentile") not in ("", None, "N/A"):
+                    try:
+                        parts = str(p["percentile"]).split(" / ")
+                        if len(parts) == 2:
+                            p["percentile"] = (
+                                f"{round(float(parts[0]) * scale_factor, 4):.4g}"
+                                f" / "
+                                f"{round(float(parts[1]) * scale_factor, 4):.4g}"
+                            )
+                    except (ValueError, TypeError):
+                        pass
             if "totalMeanImpact" in data:
-                data["totalMeanImpact"] = round(data["totalMeanImpact"] * scale_factor, 6)
+                data["totalMeanImpact"] = round(data["totalMeanImpact"] * scale_factor, 4)
             for k in list(data.get("stageImpacts", {})):
                 v = data["stageImpacts"][k]
                 if isinstance(v, (int, float)):
-                    data["stageImpacts"][k] = round(v * scale_factor, 6)
+                    data["stageImpacts"][k] = round(v * scale_factor, 4)
             scaled_json_str = json.dumps(data)
         except Exception:
             pass  # keep original string on parse failure
 
     # ── Scale lcia_table ─────────────────────────────────────────────────────
+    # lcia_table mirrors lcia_data from result_data_processing() — same field names.
     scaled_table = cached_doc.get("lcia_table")
     if scaled_table:
         try:
             scaled_table = copy.deepcopy(scaled_table)
             for p in scaled_table.get("processes", []):
-                p["mean"] = round(p.get("mean", 0.0) * scale_factor, 6)
-                if "std" in p:
-                    p["std"] = round(p["std"] * scale_factor, 6)
+                if isinstance(p.get("mean_impact"), (int, float)):
+                    p["mean_impact"] = round(p["mean_impact"] * scale_factor, 4)
+                if p.get("sd") not in ("", None, "N/A"):
+                    try:
+                        p["sd"] = str(round(float(p["sd"]) * scale_factor, 4))
+                    except (ValueError, TypeError):
+                        pass
+                if p.get("percentile") not in ("", None, "N/A"):
+                    try:
+                        parts = str(p["percentile"]).split(" / ")
+                        if len(parts) == 2:
+                            p["percentile"] = (
+                                f"{round(float(parts[0]) * scale_factor, 4):.4g}"
+                                f" / "
+                                f"{round(float(parts[1]) * scale_factor, 4):.4g}"
+                            )
+                    except (ValueError, TypeError):
+                        pass
             if "totalMeanImpact" in scaled_table:
                 scaled_table["totalMeanImpact"] = round(
-                    scaled_table["totalMeanImpact"] * scale_factor, 6
+                    scaled_table["totalMeanImpact"] * scale_factor, 4
                 )
             for k in list(scaled_table.get("stageImpacts", {})):
                 v = scaled_table["stageImpacts"][k]
                 if isinstance(v, (int, float)):
-                    scaled_table["stageImpacts"][k] = round(v * scale_factor, 6)
+                    scaled_table["stageImpacts"][k] = round(v * scale_factor, 4)
         except Exception:
             scaled_table = cached_doc.get("lcia_table")  # keep original on failure
 
