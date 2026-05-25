@@ -112,6 +112,39 @@ def _extract_mass_from_query(question: str) -> tuple:
         return amount, unit
     return 1.0, "tonne"
 
+
+# ── Shared response-style rules injected into every fast-mode RAG prompt ──────
+# These are embedded in the system message so the LLM never sees the RAG
+# context as 'external' — it treats it as its own internalized knowledge.
+_RAG_STYLE_RULES = (
+    "You are conversing directly with a user. Respond as a knowledgeable expert "
+    "speaking naturally and confidently, in the same register as modern AI assistants. "
+    "You have deep specialist knowledge relevant to this query — draw on it seamlessly "
+    "without ever acknowledging its origin.\n\n"
+    "STRICT PROHIBITION: Never mention, reference, or hint at any text, document, "
+    "retrieved information, context, knowledge base, or external source in your reply. "
+    "Banned phrases include (but are not limited to): 'the provided text', "
+    "'based on the context', 'the retrieved information', 'the context indicates', "
+    "'according to the knowledge provided', 'from the information given', "
+    "'the text shows', 'based on available context', 'the data provided'. "
+    "If you lack reliable data for a specific case, say so briefly and naturally "
+    "(e.g. 'Reliable figures for this specific case aren\'t well-established …') "
+    "without hedging via source references.\n\n"
+    "FORMATTING:\n"
+    "- Paragraphs are the default format. Write in clear, flowing prose.\n"
+    "- Use ## markdown headings only when the answer covers two or more clearly "
+    "distinct topics that benefit from separation.\n"
+    "- Use a bullet list only when presenting three or more genuinely discrete, "
+    "enumerable items that read awkwardly as prose. Never use bullets as a default "
+    "structure or to pad a short answer.\n"
+    "- Bold text very sparingly: at most one key value or conclusion per section, "
+    "only when it genuinely deserves emphasis. Do not bold general terms, "
+    "headings, or routine descriptive phrases.\n"
+    "- Format all numeric values with their units as inline code, e.g. `2.1\u202fkg\u202fCO\u2082-eq`.\n"
+    "- If the question is completely unrelated to LCA, sustainability, or environmental "
+    "science, decline politely in a single sentence and do not elaborate."
+)
+
 _LCA_INTENT_CLASSIFIER_PROMPT = ChatPromptTemplate.from_messages([
     (
         "system",
@@ -181,7 +214,7 @@ def _build_fast_lca_user_params(
         f"amount: {amount}\n"
         f"unit: {unit}\n"
         f"system_boundary: {system_boundary}\n"
-        f"n_simulations: 5\n"
+        f"n_simulations: 25\n"
         f"further_notes: {question}"
     )
 
@@ -190,52 +223,64 @@ def _rag_answer(question: str, product: str, context: str, intent: str) -> dict:
     """Generate a RAG-based answer using the retrieved context (no BW2 computation)."""
     intent_params = {"intent": intent, "product": product or "Not Specified"}
 
+    # ── Role persona (intent-specific) ───────────────────────────────────────
     if intent == "Specific_LCA_result_inquiry":
         role_instruction = (
-            "You are a Senior LCA Consultant. The user is asking about the current LCA results, "
-            "which is shown in 'Current LCA Results Context for reference'. "
-            "Answer the question based on the current LCA results, and based on the external LCA "
-            "knowledge provided if the information in the current LCA results is insufficient."
+            "You are a Senior LCA Consultant conversing directly with a user about their "
+            "Life Cycle Assessment results. The user has already run an LCA and is asking "
+            "follow-up questions about the findings. Interpret and explain the results clearly, "
+            "and draw on your broader LCA expertise to add insight where the data alone is "
+            "insufficient. Be concise and direct."
         )
     elif intent == "literature":
         role_instruction = (
-            "You are an expert LCA researcher. Summarize relevant peer-reviewed studies, "
-            "methodologies, and findings from the knowledge provided. "
-            "Highlight key data points and cite specific values where available. "
-            "Structure your response with ## headings for major themes. "
-            "You must not make up studies or data not present in the context."
+            "You are a leading LCA researcher with comprehensive knowledge of peer-reviewed "
+            "literature on Life Cycle Assessment, environmental science, and sustainable systems. "
+            "The user wants insight from academic research. Discuss findings, methodological "
+            "nuances, and quantitative data authoritatively. Do not fabricate studies or "
+            "cite specific papers unless you are certain they exist."
         )
     elif intent == "general":
         role_instruction = (
-            "You are a Senior LCA Consultant. Explain the concept clearly and concisely "
-            "using the knowledge provided. Use practical examples where helpful."
+            "You are a Senior LCA Consultant with broad expertise in Life Cycle Assessment, "
+            "environmental impact, and sustainable materials. The user has a conceptual or "
+            "general question about LCA. Explain clearly and engagingly, using concrete "
+            "examples where they genuinely add value."
         )
-    else:
+    else:  # computation fallback
         role_instruction = (
-            "You are a Senior LCA Consultant. Provide a concise, evidence-based answer "
-            "to this LCA query using the retrieved context. "
-            "Include key numeric estimates where available."
+            "You are a Senior LCA Consultant specialising in carbon footprint quantification "
+            "and environmental impact assessment. The user wants LCA-based estimates for a "
+            "product or material. Provide a well-grounded, quantitative answer rooted in "
+            "established LCA methodology."
         )
 
-    template = (
-        role_instruction + "\n\n"
-        "Product: {product_hint}\n"
-        "User Query: {question}\n\n"
-        "External LCA Knowledge:\n{context}\n\n"
-        "Output valid Markdown. Use ## for section headings and - for bullet points. "
-        "Use inline code for numeric values (e.g., `12.5 kg CO\u2082-eq`). "
-        "Do not fabricate data not present in the context. "
-        "If Product is not specified, try to guess it if you are confident, otherwise do not "
-        "make assumptions and focus on general insights from the context. "
-        "If User's query is completely unrelated to LCA, energy and environmental impact, or "
-        "sustainability fields, politely decline and explain in one sentence that you can only "
-        "assist with LCA-related queries. Also, your answer should be paragraph-based and concise, not a list of bullet points, if not specified by user's query."
+    # ── Build the system message: role + style rules + background knowledge ──
+    # The context is embedded directly — no label — so it reads as internalized
+    # expertise rather than an external document being quoted.
+    context_block = context.strip() if context and context.strip() else ""
+    system_content = (
+        role_instruction
+        + "\n\n"
+        + _RAG_STYLE_RULES
+        + ("\n\n" + context_block if context_block else "")
     )
-    chain = ChatPromptTemplate.from_template(template) | gpt5_client | StrOutputParser()
+
+    # Prepend product hint to the user turn when a product is known.
+    product_known = product and product.strip().lower() not in ("", "not specified")
+    user_message = (
+        f"[Product: {product.strip()}]\n\n{question}" if product_known else question
+    )
+
+    prompt = ChatPromptTemplate.from_messages([
+        ("system", system_content),
+        ("human", "{question}"),
+    ])
+    chain = prompt | gpt5_client | StrOutputParser()
     try:
-        answer = chain.invoke({"question": question, "product_hint": product, "context": context})
+        answer = chain.invoke({"question": user_message})
     except Exception:
-        answer = chain.invoke({"question": question, "product_hint": product, "context": context})
+        answer = ""
 
     return {"answer": answer, "markdown": None, "processed_json": None, "lcia_table": None, "intent_params": intent_params}
 
@@ -322,7 +367,7 @@ def _run_fast_lca_pipeline(
         gpt5_client,
         product,
         scale_factor=scale_factor,
-        n_simulations=5,
+        n_simulations=25,
         display_amount=display_amount,
         display_unit=display_unit,
         activities_by_stage_dict=activities_by_stage_dict,
@@ -368,7 +413,7 @@ def generate_response_fast(question: str, product: str) -> dict:
           answer directly from context (skips BW2).
        b. Check MongoDB cache: if a result for a similar product (cosine similarity ≥ 0.80)
           was computed before, return it immediately.
-       c. Otherwise, run the simplified BW2 pipeline (IPCC 2013 / GWP100a, n_simulations=5).
+       c. Otherwise, run the simplified BW2 pipeline (IPCC 2013 / GWP100a, n_simulations=25).
           Store the result in the MongoDB cache before returning.
     4. For all other intents (literature, general), return a RAG-based LLM answer.
     """

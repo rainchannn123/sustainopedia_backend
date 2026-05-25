@@ -1,0 +1,65 @@
+{
+    "goal": "lifecycle impact assessment",
+    "Project": "Ecoinvent",
+    "method": [
+        "IPCC 2021 no LT",
+        "climate change: fossil, including SLCFs no LT",
+        "global warming potential (GWP100) no LT"
+    ],
+    "system_boundary": "cradle-to-gate",
+    "functional_unit": [
+        {
+            "activity_name": "zinc mine operation",
+            "amount": 1139.6,
+            "unit": "kilogram",
+            "location": "GLO",
+            "stage": "raw material extraction",
+            "mass_in_kg": 1266.2,
+            "mass_out_kg": 1139.6,
+            "recovery_rate": 0.9
+        },
+        {
+            "activity_name": "primary zinc production from concentrate",
+            "amount": 1000.0,
+            "unit": "kilogram",
+            "location": "GLO",
+            "stage": "material processing/beneficiation",
+            "mass_in_kg": 1139.6,
+            "mass_out_kg": 999.999,
+            "recovery_rate": 0.8775
+        }
+    ],
+    "project_name": "Ecoinvent",
+    "dataset": "ecoinvent",
+    "n_simulations": 25,
+    "mass_flow_audit": {
+        "status": "pass",
+        "overall_yield": 0.789764,
+        "activities": [
+            {
+                "stage": "raw material extraction",
+                "activity_name": "zinc mine operation",
+                "mass_in_kg": 1266.2,
+                "mass_out_kg": 1139.6,
+                "recovery_rate": 0.9
+            },
+            {
+                "stage": "material processing/beneficiation",
+                "activity_name": "primary zinc production from concentrate",
+                "mass_in_kg": 1139.6,
+                "mass_out_kg": 999.999,
+                "recovery_rate": 0.8775
+            }
+        ],
+        "transitions": [
+            {
+                "from_stage": "raw material extraction",
+                "to_stage": "material processing/beneficiation",
+                "expected_mass_in_kg": 1139.6,
+                "actual_mass_in_kg": 1139.6,
+                "discrepancy_pct": 0.0,
+                "status": "ok"
+            }
+        ]
+    }
+}

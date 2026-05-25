@@ -18,7 +18,7 @@ import numpy as np
 
 logger = logging.getLogger(__name__)
 
-_SIMILARITY_THRESHOLD = 0.80   # cosine similarity required for a cache hit
+_SIMILARITY_THRESHOLD = 0.60   # cosine similarity required for a cache hit
 _COLLECTION_NAME = "fast_lca_cache"
 
 
