@@ -11,6 +11,7 @@ import copy
 import json
 import logging
 import os
+import re
 from datetime import datetime, timezone
 from typing import Optional
 
@@ -57,6 +58,31 @@ def _normalize_to_kg(amount: float, unit: str) -> float:
     return amount * _TO_KG.get(unit.lower().strip(), 1.0)
 
 
+# Matches the leading numeric amount in an amount_location string, e.g. "10.0 tonne, CN".
+_AMOUNT_LOC_RE = re.compile(r'^(\d+(?:\.\d+)?)\s+(.+)$')
+
+
+def _scale_amount_location(s: str, factor: float) -> str:
+    """Scale the leading numeric quantity in an amount_location display string.
+
+    Format: "<amount> <unit>, <location>"  e.g. "1.0 tonne, CN"
+    Discrete countable items (unit / piece / pcs) are left unchanged because
+    a product that contains 1 motor still contains 1 motor regardless of the
+    requested functional unit mass.
+    """
+    if not s:
+        return s
+    m = _AMOUNT_LOC_RE.match(s.strip())
+    if not m:
+        return s
+    num_str, rest = m.group(1), m.group(2)
+    # Skip countable units — these are not mass-proportional.
+    if rest.lower().lstrip().startswith(("unit", "piece", "pcs", "item")):
+        return s
+    scaled_num = round(float(num_str) * factor, 4)
+    return f"{scaled_num} {rest}"
+
+
 def _scale_lca_result(
     cached_doc: dict,
     scale_factor: float,
@@ -67,8 +93,11 @@ def _scale_lca_result(
     Return a new result dict with all numeric LCA values multiplied by *scale_factor*.
 
     Scaled fields inside *processed_json* (JSON string) and *lcia_table* (dict):
-    - processes[*].mean / processes[*].std
-    - totalMeanImpact
+    - processes[*].amount_location  — input activity amount display string
+    - processes[*].mean_impact      — per-process GWP impact
+    - processes[*].sd               — standard deviation (numeric string)
+    - processes[*].percentile       — "p5 / p95" string
+    - totalMeanImpact               — overall total
     - stageImpacts values
 
     The original cached answer text is returned unchanged.
@@ -84,6 +113,9 @@ def _scale_lca_result(
         try:
             data = json.loads(scaled_json_str)
             for p in data.get("processes", []):
+                # Input activity amount display string e.g. "1.0 tonne, CN"
+                if p.get("amount_location"):
+                    p["amount_location"] = _scale_amount_location(p["amount_location"], scale_factor)
                 # Primary per-process impact field used by the frontend table
                 if isinstance(p.get("mean_impact"), (int, float)):
                     p["mean_impact"] = round(p["mean_impact"] * scale_factor, 4)
@@ -122,6 +154,8 @@ def _scale_lca_result(
         try:
             scaled_table = copy.deepcopy(scaled_table)
             for p in scaled_table.get("processes", []):
+                if p.get("amount_location"):
+                    p["amount_location"] = _scale_amount_location(p["amount_location"], scale_factor)
                 if isinstance(p.get("mean_impact"), (int, float)):
                     p["mean_impact"] = round(p["mean_impact"] * scale_factor, 4)
                 if p.get("sd") not in ("", None, "N/A"):

@@ -1,0 +1,90 @@
+{
+    "goal": "lifecycle impact assessment",
+    "Project": "Ecoinvent",
+    "method": [
+        "IPCC 2021 no LT",
+        "climate change: including SLCFs no LT",
+        "global warming potential (GWP100) no LT"
+    ],
+    "system_boundary": "cradle-to-gate",
+    "functional_unit": [
+        {
+            "activity_name": "land use change, paddy rice",
+            "amount": 1176.4706,
+            "unit": "kilogram",
+            "location": "GLO",
+            "stage": "raw material extraction",
+            "mass_in_kg": 1384.0831,
+            "mass_out_kg": 1176.4706,
+            "recovery_rate": 0.85
+        },
+        {
+            "activity_name": "rice seed production, for sowing",
+            "amount": 1117.6471,
+            "unit": "kilogram",
+            "location": "GLO",
+            "stage": "material processing/beneficiation",
+            "mass_in_kg": 1176.4706,
+            "mass_out_kg": 1117.64707,
+            "recovery_rate": 0.95
+        },
+        {
+            "activity_name": "rice production, non-basmati",
+            "amount": 1000.0,
+            "unit": "kilogram",
+            "location": "GLO",
+            "stage": "manufacturing/production",
+            "mass_in_kg": 1117.64707,
+            "mass_out_kg": 999.958834,
+            "recovery_rate": 0.8947
+        }
+    ],
+    "project_name": "Ecoinvent",
+    "dataset": "ecoinvent",
+    "n_simulations": 25,
+    "mass_flow_audit": {
+        "status": "pass",
+        "overall_yield": 0.72247,
+        "activities": [
+            {
+                "stage": "raw material extraction",
+                "activity_name": "land use change, paddy rice",
+                "mass_in_kg": 1384.0831,
+                "mass_out_kg": 1176.4706,
+                "recovery_rate": 0.85
+            },
+            {
+                "stage": "material processing/beneficiation",
+                "activity_name": "rice seed production, for sowing",
+                "mass_in_kg": 1176.4706,
+                "mass_out_kg": 1117.6471,
+                "recovery_rate": 0.95
+            },
+            {
+                "stage": "manufacturing/production",
+                "activity_name": "rice production, non-basmati",
+                "mass_in_kg": 1117.6471,
+                "mass_out_kg": 999.9588,
+                "recovery_rate": 0.8947
+            }
+        ],
+        "transitions": [
+            {
+                "from_stage": "raw material extraction",
+                "to_stage": "material processing/beneficiation",
+                "expected_mass_in_kg": 1176.4706,
+                "actual_mass_in_kg": 1176.4706,
+                "discrepancy_pct": 0.0,
+                "status": "ok"
+            },
+            {
+                "from_stage": "material processing/beneficiation",
+                "to_stage": "manufacturing/production",
+                "expected_mass_in_kg": 1117.6471,
+                "actual_mass_in_kg": 1117.6471,
+                "discrepancy_pct": 0.0,
+                "status": "ok"
+            }
+        ]
+    }
+}

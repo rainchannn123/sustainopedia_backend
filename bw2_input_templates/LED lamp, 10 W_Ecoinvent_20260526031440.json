@@ -1,0 +1,165 @@
+{
+    "goal": "lifecycle impact assessment",
+    "Project": "Ecoinvent",
+    "method": [
+        "IPCC 2021 no LT",
+        "climate change: fossil, including SLCFs no LT",
+        "global warming potential (GWP100) no LT"
+    ],
+    "system_boundary": "cradle-to-gate",
+    "functional_unit": [
+        {
+            "activity_name": "silicon production, electronics grade",
+            "amount": 1331.0,
+            "unit": "kilogram",
+            "location": "GLO",
+            "stage": "material processing/beneficiation",
+            "mass_in_kg": 1478.89,
+            "mass_out_kg": 1331.0,
+            "recovery_rate": 0.9
+        },
+        {
+            "activity_name": "wafer production, fabricated, for integrated circuit",
+            "amount": 732.05,
+            "unit": "kilogram",
+            "location": "GLO",
+            "stage": "manufacturing/production",
+            "mass_in_kg": 1331.0,
+            "mass_out_kg": 732.05,
+            "recovery_rate": 0.55
+        },
+        {
+            "activity_name": "diode production, auxilliaries and energy use",
+            "amount": 1000.0,
+            "unit": "kilogram",
+            "location": "GLO",
+            "stage": "raw material extraction",
+            "mass_in_kg": 732.05,
+            "mass_out_kg": 673.486,
+            "recovery_rate": 0.92
+        },
+        {
+            "activity_name": "transistor production, auxilliaries and energy use",
+            "amount": 1000.0,
+            "unit": "kilogram",
+            "location": "GLO",
+            "stage": "raw material extraction",
+            "mass_in_kg": 673.486,
+            "mass_out_kg": 653.28142,
+            "recovery_rate": 0.97
+        },
+        {
+            "activity_name": "resistor production, auxilliaries and energy use",
+            "amount": 1000.0,
+            "unit": "kilogram",
+            "location": "GLO",
+            "stage": "raw material extraction",
+            "mass_in_kg": 653.28142,
+            "mass_out_kg": 633.682977,
+            "recovery_rate": 0.97
+        },
+        {
+            "activity_name": "light emitting diode production",
+            "amount": 1000.0,
+            "unit": "kilogram",
+            "location": "GLO",
+            "stage": "manufacturing/production",
+            "mass_in_kg": 633.682977,
+            "mass_out_kg": 582.988339,
+            "recovery_rate": 0.92
+        }
+    ],
+    "project_name": "Ecoinvent",
+    "dataset": "ecoinvent",
+    "n_simulations": 25,
+    "mass_flow_audit": {
+        "status": "pass",
+        "overall_yield": 0.394207,
+        "activities": [
+            {
+                "stage": "material processing/beneficiation",
+                "activity_name": "silicon production, electronics grade",
+                "mass_in_kg": 1478.89,
+                "mass_out_kg": 1331.0,
+                "recovery_rate": 0.9
+            },
+            {
+                "stage": "manufacturing/production",
+                "activity_name": "wafer production, fabricated, for integrated circuit",
+                "mass_in_kg": 1331.0,
+                "mass_out_kg": 732.05,
+                "recovery_rate": 0.55
+            },
+            {
+                "stage": "raw material extraction",
+                "activity_name": "diode production, auxilliaries and energy use",
+                "mass_in_kg": 732.05,
+                "mass_out_kg": 673.486,
+                "recovery_rate": 0.92
+            },
+            {
+                "stage": "raw material extraction",
+                "activity_name": "transistor production, auxilliaries and energy use",
+                "mass_in_kg": 673.486,
+                "mass_out_kg": 653.2814,
+                "recovery_rate": 0.97
+            },
+            {
+                "stage": "raw material extraction",
+                "activity_name": "resistor production, auxilliaries and energy use",
+                "mass_in_kg": 653.2814,
+                "mass_out_kg": 633.683,
+                "recovery_rate": 0.97
+            },
+            {
+                "stage": "manufacturing/production",
+                "activity_name": "light emitting diode production",
+                "mass_in_kg": 633.683,
+                "mass_out_kg": 582.9883,
+                "recovery_rate": 0.92
+            }
+        ],
+        "transitions": [
+            {
+                "from_stage": "material processing/beneficiation",
+                "to_stage": "manufacturing/production",
+                "expected_mass_in_kg": 1331.0,
+                "actual_mass_in_kg": 1331.0,
+                "discrepancy_pct": 0.0,
+                "status": "ok"
+            },
+            {
+                "from_stage": "manufacturing/production",
+                "to_stage": "raw material extraction",
+                "expected_mass_in_kg": 732.05,
+                "actual_mass_in_kg": 732.05,
+                "discrepancy_pct": 0.0,
+                "status": "ok"
+            },
+            {
+                "from_stage": "raw material extraction",
+                "to_stage": "raw material extraction",
+                "expected_mass_in_kg": 673.486,
+                "actual_mass_in_kg": 673.486,
+                "discrepancy_pct": 0.0,
+                "status": "ok"
+            },
+            {
+                "from_stage": "raw material extraction",
+                "to_stage": "raw material extraction",
+                "expected_mass_in_kg": 653.2814,
+                "actual_mass_in_kg": 653.2814,
+                "discrepancy_pct": 0.0,
+                "status": "ok"
+            },
+            {
+                "from_stage": "raw material extraction",
+                "to_stage": "manufacturing/production",
+                "expected_mass_in_kg": 633.683,
+                "actual_mass_in_kg": 633.683,
+                "discrepancy_pct": 0.0,
+                "status": "ok"
+            }
+        ]
+    }
+}
