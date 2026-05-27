@@ -113,6 +113,39 @@ def _extract_mass_from_query(question: str) -> tuple:
     return 1.0, "tonne"
 
 
+def _extract_n_simulations_from_query(question: str, default: int = 25) -> int:
+    """
+    Extract the number of Monte Carlo simulations requested in the user query.
+
+    Uses a lightweight LLM call to handle the full range of natural-language
+    phrasings (e.g. "run a hundred simulations", "n_simulations=200",
+    "fifty Monte Carlo runs").  Falls back to *default* (25) when the LLM
+    returns no valid number or the call fails.
+    """
+    _N_SIM_PROMPT = ChatPromptTemplate.from_messages([
+        (
+            "system",
+            "You are a parameter extractor for an LCA computation engine. "
+            "Your only job is to find the number of Monte Carlo simulations "
+            "explicitly requested in the user query. "
+            "Reply with a single integer only (no units, no explanation). "
+            "If no simulation count is mentioned, reply with exactly: None",
+        ),
+        ("human", "Query: {question}"),
+    ])
+    try:
+        chain = _N_SIM_PROMPT | gpt5_client | StrOutputParser()
+        raw = chain.invoke({"question": question}).strip()
+        if raw.lower() == "none":
+            return default
+        n = int(raw)
+        if 1 <= n <= 10_000:
+            return n
+    except Exception as exc:
+        logging.warning("n_simulations extraction failed: %s", exc)
+    return default
+
+
 # ── Shared response-style rules injected into every fast-mode RAG prompt ──────
 # These are embedded in the system message so the LLM never sees the RAG
 # context as 'external' — it treats it as its own internalized knowledge.
@@ -195,11 +228,13 @@ def _build_fast_lca_user_params(
     product: str,
     amount: float = 1.0,
     unit: str = "tonne",
+    n_simulations: int = 25,
 ) -> str:
     """
     Construct a minimal user_input_params string for the fast LCA BW2 pipeline.
     System boundary is inferred from the query; amount/unit use the requested
     functional unit so the BW2 result already reflects the correct mass.
+    n_simulations defaults to 25 when not explicitly specified by the user.
     """
     q = question.lower()
     if any(kw in q for kw in ("cradle to grave", "full lifecycle", "end of life", "end-of-life", "use phase")):
@@ -214,7 +249,7 @@ def _build_fast_lca_user_params(
         f"amount: {amount}\n"
         f"unit: {unit}\n"
         f"system_boundary: {system_boundary}\n"
-        f"n_simulations: 25\n"
+        f"n_simulations: {n_simulations}\n"
         f"further_notes: {question}"
     )
 
@@ -291,6 +326,7 @@ def _run_fast_lca_pipeline(
     knowledge_docs: list,
     req_amount: float = 1.0,
     req_unit: str = "tonne",
+    n_simulations: int = 25,
 ) -> dict:
     """
     Run a streamlined BW2 LCA computation for the fast-response mode.
@@ -326,7 +362,7 @@ def _run_fast_lca_pipeline(
     # Wrap already-retrieved docs as a LangChain Runnable (avoids extra LLM calls).
     context_runnable = RunnableLambda(lambda _: knowledge_docs)
 
-    user_params_str = _build_fast_lca_user_params(question, product, req_amount, req_unit)
+    user_params_str = _build_fast_lca_user_params(question, product, req_amount, req_unit, n_simulations)
     structured_params = input_q_to_json(user_params_str)
 
     logging.info("Fast LCA: selecting LCIA methods...", extra={"frontend": True})
@@ -367,7 +403,7 @@ def _run_fast_lca_pipeline(
         gpt5_client,
         product,
         scale_factor=scale_factor,
-        n_simulations=25,
+        n_simulations=structured_params.get("n_simulations", 25),
         display_amount=display_amount,
         display_unit=display_unit,
         activities_by_stage_dict=activities_by_stage_dict,
@@ -458,14 +494,31 @@ def generate_response_fast(question: str, product: str) -> dict:
         resolved_product = (product or "").strip()
         if not resolved_product or resolved_product.lower() == "not specified":
             resolved_product = infer_product_from_query(question, gpt5_client)
+            
+        elif resolved_product.isupper() and len(resolved_product) <= 10:
+            # Short all-caps acronym (e.g. "PDMS", "PET", "PVC", "HDPE").
+            # Expand to the full chemical name so vectorstore stage queries can
+            # match ecoinvent activity names via token overlap.  Without this,
+            # _rerank_eco_activities scores "polydimethylsiloxane production" as
+            # 0 overlap against a "PDMS …" query → activity never retrieved →
+            # functional_unit ends up empty.
+            expanded = infer_product_from_query(question, gpt5_client)
+            if expanded and expanded.lower() not in ("unknown product", "not specified"):
+                logging.info(
+                    "Fast LCA: expanding acronym '%s' → '%s'",
+                    resolved_product,
+                    expanded,
+                )
+                resolved_product = expanded
 
-        # 3c. Extract requested mass for cache-aware lookup and scaling.
+        # 3c. Extract requested mass and simulation count for cache-aware lookup and scaling.
         req_amount, req_unit = _extract_mass_from_query(question)
+        req_n_simulations = _extract_n_simulations_from_query(question)
 
         # 3d. MongoDB cache lookup (returns mass-scaled result when masses differ).
         try:
-            product_embedding = embeddings.embed_query(resolved_product)
-            cached = cache_lookup(resolved_product, product_embedding, req_amount, req_unit)
+            query_embedding = embeddings.embed_query(question)
+            cached = cache_lookup(resolved_product, query_embedding, req_amount, req_unit)
             if cached:
                 logging.info(
                     "Fast LCA: cache hit for '%s' — skipping BW2 computation.",
@@ -478,15 +531,15 @@ def generate_response_fast(question: str, product: str) -> dict:
         # 3e. Run fast BW2 computation pipeline with the requested functional unit.
         try:
             result = _run_fast_lca_pipeline(
-                question, resolved_product, knowledge_docs, req_amount, req_unit
+                question, resolved_product, knowledge_docs, req_amount, req_unit, req_n_simulations
             )
 
             # 3f. Persist result to MongoDB cache.
             try:
-                product_embedding = embeddings.embed_query(resolved_product)
+                query_embedding = embeddings.embed_query(question)
                 cache_store(
                     resolved_product,
-                    product_embedding,
+                    query_embedding,
                     result["answer"],
                     result.get("processed_json"),
                     result.get("lcia_table"),

@@ -1,9 +1,9 @@
 """fast_lca_cache.py — MongoDB-backed result cache for the fast-response LCA pipeline.
 
-Stores per-product LCA computation results so repeated queries for the same or
-similar product bypass the BW2 computation engine and are served from cache.
+Stores per-product LCA computation results so repeated queries with the same or
+similar intent bypass the BW2 computation engine and are served from cache.
 Similarity is measured via cosine distance between Azure OpenAI text embeddings
-of the product name; a configurable threshold (default 0.80) gates cache hits.
+of the full user query; a configurable threshold gates cache hits.
 """
 from __future__ import annotations
 
@@ -19,7 +19,7 @@ import numpy as np
 
 logger = logging.getLogger(__name__)
 
-_SIMILARITY_THRESHOLD = 0.60   # cosine similarity required for a cache hit
+_SIMILARITY_THRESHOLD = 0.85   # cosine similarity required for a cache hit (full-query embeddings)
 _COLLECTION_NAME = "fast_lca_cache"
 
 
@@ -332,11 +332,13 @@ def cache_lookup(
     req_unit: str = "tonne",
 ) -> Optional[dict]:
     """
-    Look up a cached LCA result by product embedding similarity.
+    Look up a cached LCA result by full-query embedding similarity.
 
-    Returns a result dict scaled to (req_amount, req_unit).  If the cached
-    functional unit differs, all impact values are linearly scaled before
-    returning so the caller always receives results for the requested mass.
+    *embedding* must be the vector of the complete user query (not just the
+    product name) so that queries for the same product under different
+    scenarios do not collide.  Returns a result dict scaled to
+    (req_amount, req_unit); if the cached functional unit differs, all impact
+    values are linearly scaled before returning.
     """
     return _cache.lookup(product_name, embedding, req_amount, req_unit)
 
@@ -351,7 +353,11 @@ def cache_store(
     mass_amount: float = 1.0,
     mass_unit: str = "tonne",
 ) -> None:
-    """Persist a new LCA result in the cache, recording the computed functional unit."""
+    """Insert or update a cached LCA result.
+
+    *embedding* must be the vector of the complete user query so that future
+    similarity lookups match on query intent, not just product name.
+    """
     _cache.store(
         product_name, embedding, answer, processed_json, lcia_table,
         intent_params, mass_amount, mass_unit,

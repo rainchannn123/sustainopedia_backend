@@ -359,6 +359,10 @@ def generate_list_of_activities(gpt5_client, retriever_eco_activity, product, us
     User Request Parameters:
     {user_input_params}
     
+    # Important note: "further_notes" in User Request Parameters refers to user's actual query. If there is any specific LCI activity or keywords requested for LCI activity search, you must note the full LCI activity name or keywords in your reply for precise retrieval of relevant LCI activities in the next step.
+    # Following the previous line of instruction, if there is a very specific LCI activity requested by the user, you may response with a single stage with the stage name as "general" and the stage description as the specific LCI activity name or keywords requested by the user for precise retrieval of relevant LCI activities in the next step.
+    # If the user request is general, like "What are the lifecycle emissions for steel production?", you can provide the response as what is indicated in following instructions.
+    
     For your reference, there are only four possible system boundaries: "cradle-to-gate", "cradle-to-grave", "gate-to-gate", and "cradle-to-cradle", and you should learn the stages associated with each system boundary in the following knowledge text provided:
     ## Cradle-to-Gate
     - Raw material extraction (mining, harvesting, primary production)
@@ -777,6 +781,8 @@ def generate_response_bw2_input(
     ## Input Sections
     ### User Requests
     {user_input_params}
+    
+    ** Important note for User Requests: if "further notes" exists in User Requests information, you must pay highest attention to it as it is the raw user query and may contain specific request for constructing the following bw2 input template, such as specific LCI activity, locations, and other parameters needed for constructing the bw2 input template in your response.
 
     ### List of available activities by stages (note: activities in each stage are separated by semicolons)
     {retrieved_acitivity_list}

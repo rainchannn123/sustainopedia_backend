@@ -184,11 +184,28 @@ def _validate_mass_flow_chain(functional_unit: list) -> dict:
             "recovery_rate": round(recovery, 6),
         })
 
-    if len(mass_activities) < 2:
+    if len(mass_activities) == 0:
         return {
             "status":        "skipped",
-            "reason":        "fewer than 2 mass-annotated activities found",
+            "reason":        "no mass-annotated activities found",
             "overall_yield": None,
+            "activities":    mass_activities,
+            "transitions":   [],
+        }
+
+    if len(mass_activities) == 1:
+        # Single-activity system: no inter-stage transitions to check.
+        # Accept the user-supplied mass as-is and report pass so that
+        # downstream LCIA computation is not altered or blocked.
+        act = mass_activities[0]
+        overall_yield = (
+            round(act["mass_out_kg"] / act["mass_in_kg"], 6)
+            if act["mass_in_kg"] > 0 else 1.0
+        )
+        return {
+            "status":        "pass",
+            "reason":        "single-activity system — no transitions to validate",
+            "overall_yield": overall_yield,
             "activities":    mass_activities,
             "transitions":   [],
         }
@@ -488,6 +505,7 @@ def final_mode_output_bw2_included(filename, question, gpt5_client, product, sca
         - Make sure the final response adheres strictly to these instructions and formatting rules and is clean to be rendered and viewed on the client side.
         - The number of simulations to run Monte Carlo analysis is {n_simulations}. You can add this information in your answer shortly and clearly. No need for further explanation on what Monte Carlo analysis is or why this number of simulations unless the user explicitly asks for it.     
         - All reported emissions or impacts must be expressed exclusively in kg CO₂-eq. Do not use other equivalence units (e.g., Sb-eq, SO₂-eq, PO₄³⁻-eq). Always normalize results to CO₂-eq.
+        - You must label the LCA methods used for the LCIA results in short for providing this information to the user.
         
         Structure the output as:
         ## Summary of LCIA Results
