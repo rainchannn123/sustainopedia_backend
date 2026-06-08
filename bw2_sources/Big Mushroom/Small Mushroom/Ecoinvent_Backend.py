@@ -2,6 +2,9 @@ import os
 import random
 import json
 import numpy as np
+
+
+os.environ.setdefault("BRIGHTWAY2_DIR", "./brightway_databases/brightway2_ecoinvent")
 import bw2io as bi
 from bw2data import Database, databases, Method, methods, projects
 from bw2io import create_default_biosphere3
@@ -283,6 +286,8 @@ class EcoinventEngine:
                 lca.lcia()
                 det_score = lca.score
                 logger.warning(f"Deterministic LCA score: {det_score}")
+                print(f"Characterized inventory: {lca.characterized_inventory}")
+
 
                 # ── Step 2: Monte Carlo for uncertainty propagation ───────────────
                 # MonteCarloLCA uses scipy cgs(atol='legacy') which is broken on

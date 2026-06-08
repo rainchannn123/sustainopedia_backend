@@ -3,6 +3,10 @@ import glob
 import logging
 import sys
 import warnings
+
+# Must be set before ANY bw2data import so brightway2 points at the right dir.
+os.environ.setdefault("BRIGHTWAY2_DIR", "./brightway_databases/brightway2_ecoinvent")
+
 from bw2data import projects, databases, Database, Method
 from bw2io import create_default_biosphere3
 from bw2io.importers import SingleOutputEcospold2Importer, EcoinventLCIAImporter
@@ -191,8 +195,40 @@ def init_databases(method=None):
             # 应用导入策略
             logger.info("应用导入策略...")
             importer.apply_strategies()
+
+            # ── PHANTOM LINK REPAIR ───────────────────────────────────────────
+            # apply_strategies() sets exc['input'] = ('biosphere3', uuid) using
+            # UUIDs embedded in each .spold file.  If those UUIDs are absent from
+            # the installed biosphere3 (version mismatch), the exchange becomes a
+            # dead reference: the B-matrix row resolves to nothing and the flow
+            # contributes ZERO to the inventory and LCIA score.
+            #
+            # Because 'input' is already set, importer.unlinked never includes
+            # these exchanges — all subsequent match_database() calls and
+            # add_unlinked_flows_to_biosphere_database() are blind to them.
+            #
+            # Fix: strip the bad 'input' key so the exchange becomes truly
+            # unlinked, then let the match_database() rounds below re-link it
+            # correctly by name + unit + categories against the live biosphere3.
+            _bio3_codes = {act["code"] for act in Database("biosphere3")}
+            _phantom_count = 0
+            for ds in importer.data:
+                for exc in ds.get("exchanges", []):
+                    if exc.get("type") != "biosphere":
+                        continue
+                    inp = exc.get("input")
+                    if inp and inp[0] == "biosphere3" and inp[1] not in _bio3_codes:
+                        del exc["input"]   # demote to truly-unlinked so matching can fix it
+                        _phantom_count += 1
+            logger.info(
+                f"Phantom link repair: stripped 'input' from {_phantom_count} biosphere "
+                "exchanges whose UUID was absent from biosphere3. "
+                "These will now be re-linked by name/unit/categories below."
+            )
+            # ─────────────────────────────────────────────────────────────────
+
             unlinked = [exc for ds in importer.data for exc in ds.get('exchanges', []) if exc['type'] == 'biosphere' and 'input' not in exc]
-            logger.info(f"Unlinked biosphere exchanges: {len(unlinked)}")
+            logger.info(f"Unlinked biosphere exchanges (after phantom repair): {len(unlinked)}")
             for exc in unlinked[:5]:  # Sample
                 logger.info(f"Unlinked: name={exc.get('name')}, categories={exc.get('categories')}, unit={exc.get('unit')}")
             logger.info(f"{importer.statistics()}")
@@ -218,15 +254,53 @@ def init_databases(method=None):
             if importer.unlinked:
                 importer.match_database("biosphere3", fields=['name', 'unit'])
                 logger.info(f"Still unlinked after name+unit: {len(list(importer.unlinked))}")
-            # Only add if truly missing
+            # If flows are still unlinked after all matching attempts, add them to
+            # biosphere3 so they remain in the database and contribute to LCIA.
+            # WARNING: silently dropping unlinked exchanges (the old behaviour)
+            # causes systematically low LCA scores because those elementary flows
+            # contribute zero to the inventory even when LCIA CFs exist for them.
             if importer.unlinked:
-                logger.info("Adding unlinked flows to biosphere3...")
-                removed_count = 0
-                for ds in importer.data:
-                    original_ex = len(ds['exchanges'])
-                    ds['exchanges'] = [exc for exc in ds['exchanges'] if 'input' in exc]
-                    removed_count += original_ex - len(ds['exchanges'])
-                logger.info(f"Removed {removed_count} unlinked exchanges")
+                unlinked_list = list(importer.unlinked)
+                logger.warning(
+                    f"{len(unlinked_list)} biosphere exchanges still unlinked after all "
+                    "matching strategies. Adding missing flows to biosphere3..."
+                )
+                for exc in unlinked_list[:10]:   # log a sample for diagnostics
+                    logger.info(
+                        f"  Unlinked sample: name={exc.get('name')}, "
+                        f"categories={exc.get('categories')}, unit={exc.get('unit')}"
+                    )
+                try:
+                    importer.add_unlinked_flows_to_biosphere_database("biosphere3")
+                    logger.info(
+                        f"add_unlinked_flows_to_biosphere_database() completed. "
+                        f"Remaining unlinked: {len(list(importer.unlinked))}"
+                    )
+                except Exception as add_err:
+                    logger.error(
+                        f"add_unlinked_flows_to_biosphere_database() failed: {add_err}. "
+                        "Falling back to name-only match then controlled drop."
+                    )
+                    importer.match_database("biosphere3", fields=['name'])
+                    logger.info(f"Still unlinked after name-only match: {len(list(importer.unlinked))}")
+
+                    # Last resort: log every dropped exchange so the user can audit
+                    # the inventory completeness from the log file, then drop.
+                    dropped = list(importer.unlinked)
+                    if dropped:
+                        logger.warning(
+                            f"Dropping {len(dropped)} truly unresolvable exchanges "
+                            "(no biosphere3 match found by any strategy):"
+                        )
+                        for exc in dropped:
+                            logger.warning(
+                                f"  DROPPED: name={exc.get('name')}, "
+                                f"categories={exc.get('categories')}, unit={exc.get('unit')}"
+                            )
+                        for ds in importer.data:
+                            ds['exchanges'] = [
+                                ex for ex in ds['exchanges'] if 'input' in ex
+                            ]
 
             logger.info(f"After final unlinked flow matching: {importer.statistics()}")
             importer.write_database()

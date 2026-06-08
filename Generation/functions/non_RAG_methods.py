@@ -1035,7 +1035,7 @@ def generate_response_bw2_input(
     {{
     "goal": "lifecycle impact assessment",
     "Project": "Ecoinvent",
-    "method": ["IPCC 2013", "climate change", "GWP 100a"],
+    "method": ["IPCC 2021", "climate change", "global warming potential (GWP100)"],
     "system_boundary": "cradle-to-grave",
     "functional_unit": [
         {{

@@ -266,6 +266,7 @@ def _rag_answer(question: str, product: str, context: str, intent: str) -> dict:
             "follow-up questions about the findings. Interpret and explain the results clearly, "
             "and draw on your broader LCA expertise to add insight where the data alone is "
             "insufficient. Be concise and direct."
+            "If you have used any retrieved journal articles to inform your answer, you must clearly indicate the full citation of those articles at the end of your answer in a separate subsection with title \"References\""
         )
     elif intent == "literature":
         role_instruction = (
@@ -274,6 +275,8 @@ def _rag_answer(question: str, product: str, context: str, intent: str) -> dict:
             "The user wants insight from academic research. Discuss findings, methodological "
             "nuances, and quantitative data authoritatively. Do not fabricate studies or "
             "cite specific papers unless you are certain they exist."
+            "If you have used any retrieved journal articles to inform your answer, you must clearly indicate the full citation of those articles at the end of your answer in a separate subsection with title \"References\""
+
         )
     elif intent == "general":
         role_instruction = (
@@ -288,6 +291,8 @@ def _rag_answer(question: str, product: str, context: str, intent: str) -> dict:
             "and environmental impact assessment. The user wants LCA-based estimates for a "
             "product or material. Provide a well-grounded, quantitative answer rooted in "
             "established LCA methodology."
+            "If you have used any retrieved journal articles to inform your answer, you must clearly indicate the full citation of those articles at the end of your answer in a separate subsection with title \"References\""
+
         )
 
     # ── Build the system message: role + style rules + background knowledge ──
