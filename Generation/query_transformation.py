@@ -331,6 +331,7 @@ def _rag_answer(question: str, product: str, context: str, intent: str) -> dict:
             "environmental impact, and sustainable materials. The user has a conceptual or "
             "general question about LCA. Explain clearly and engagingly, using concrete "
             "examples where they genuinely add value."
+            "IMPORTANT NOTE: If the question is completely unrelated to LCA, sustainability, or environmental science, decline politely in a single sentence and do not elaborate."
         )
     else:  # computation fallback
         role_instruction = (
