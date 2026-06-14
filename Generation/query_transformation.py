@@ -9,8 +9,10 @@ from langchain_core.runnables import RunnableLambda
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.documents import Document
+from langchain_core.messages import BaseMessage, AIMessage
 from langchain_community.vectorstores import Chroma
 from langchain_openai import AzureChatOpenAI, AzureOpenAIEmbeddings
+from openai import OpenAI
 import sqlite3
 from .functions.non_RAG_methods import conduct_lca_anaylsis, Get_LCIA_methods, generate_response_bw2_input, extract_functional_unit, infer_product_from_query, input_q_to_json, generate_list_of_activities
 from .functions.vectorstore import build_and_save_vectorstores, load_vectorstores, LcaKnowledgeRetriever, load_vectorstores_fast
@@ -40,27 +42,72 @@ if _langchain_api_key:
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "1"
 os.environ["TOKENIZERS_PARALLELISM"] = 'false'
 
-endpoint = "https://seesustainopedia-gpt5-resource.cognitiveservices.azure.com/"
+# endpoint = "https://seesustainopedia-gpt5-resource.cognitiveservices.azure.com/"
+#
+# gpt5_model_name = "gpt-5.4"
+# gpt5_deployment = "gpt-5.4"
+# subscription_key = os.getenv("AZURE_API_KEY")
+# gpt5_api_version = "2024-12-01-preview"
 
-gpt5_model_name = "gpt-5.4"
-gpt5_deployment = "gpt-5.4"
-subscription_key = os.getenv("AZURE_API_KEY") 
-gpt5_api_version = "2024-12-01-preview"
+# DeepSeek-V4-Flash (Azure AI Foundry OpenAI-compatible endpoint)
+deepseek_endpoint = os.getenv(
+    "AZURE_DEEPSEEK_ENDPOINT",
+    "https://seesustainopedia-gpt5-resource.services.ai.azure.com/openai/v1",
+)
+deepseek_deployment = os.getenv("AZURE_DEEPSEEK_DEPLOYMENT", "DeepSeek-V4-Flash")
+deepseek_api_key = os.getenv("AZURE_DEEPSEEK_API_KEY")
+
+# Keep this alias for existing embedding config usage below.
+subscription_key = os.getenv("AZURE_API_KEY")
 
 tm_model_name = "text-embedding-3-large"
 tm_deployment = "text-embedding-3-large"
 tm_api_version = "2024-02-01"
 
-gpt5_client = AzureChatOpenAI(
-    azure_endpoint=endpoint,
-    api_version=gpt5_api_version,
-    azure_deployment=gpt5_deployment,
-    api_key=subscription_key,
-    # temperature=0.2
+_deepseek_client = OpenAI(
+    base_url=deepseek_endpoint,
+    api_key=deepseek_api_key,
 )
 
+
+def _messages_to_openai_format(messages):
+    payload = []
+    for m in messages:
+        if isinstance(m, BaseMessage):
+            role = "user"
+            if m.type == "system":
+                role = "system"
+            elif m.type == "assistant":
+                role = "assistant"
+            payload.append({"role": role, "content": str(m.content)})
+        elif isinstance(m, dict) and "role" in m and "content" in m:
+            payload.append({"role": m["role"], "content": str(m["content"])})
+        else:
+            payload.append({"role": "user", "content": str(m)})
+    return payload
+
+
+def _deepseek_invoke(input_value):
+    """LangChain-compatible invoke target for `prompt | gpt5_client | StrOutputParser()`."""
+    if isinstance(input_value, list):
+        messages = _messages_to_openai_format(input_value)
+    elif isinstance(input_value, dict) and "messages" in input_value:
+        messages = _messages_to_openai_format(input_value["messages"])
+    else:
+        messages = [{"role": "user", "content": str(input_value)}]
+
+    completion = _deepseek_client.chat.completions.create(
+        model=deepseek_deployment,
+        messages=messages,
+    )
+    content = (completion.choices[0].message.content or "") if completion.choices else ""
+    return AIMessage(content=content)
+
+
+gpt5_client = RunnableLambda(_deepseek_invoke)
+
 embeddings = AzureOpenAIEmbeddings(
-    azure_endpoint=endpoint,
+    azure_endpoint="https://seesustainopedia-gpt5-resource.cognitiveservices.azure.com/",
     api_version=tm_api_version,
     azure_deployment=tm_deployment,
     model=tm_model_name,

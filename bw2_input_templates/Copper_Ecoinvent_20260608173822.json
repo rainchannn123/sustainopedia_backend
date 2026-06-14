@@ -1,0 +1,90 @@
+{
+    "goal": "lifecycle impact assessment",
+    "Project": "Ecoinvent",
+    "method": [
+        "EF v3.1",
+        "climate change",
+        "global warming potential (GWP100)"
+    ],
+    "system_boundary": "cradle-to-gate",
+    "functional_unit": [
+        {
+            "activity_name": "copper mine operation and beneficiation, sulfide ore",
+            "amount": 1055.41,
+            "unit": "kilogram",
+            "location": "GLO",
+            "stage": "raw material extraction",
+            "mass_in_kg": 1241.66,
+            "mass_out_kg": 1055.41,
+            "recovery_rate": 0.85
+        },
+        {
+            "activity_name": "smelting of copper concentrate, sulfide ore",
+            "amount": 1005.15,
+            "unit": "kilogram",
+            "location": "GLO",
+            "stage": "material processing/beneficiation",
+            "mass_in_kg": 1055.41,
+            "mass_out_kg": 1005.172484,
+            "recovery_rate": 0.9524
+        },
+        {
+            "activity_name": "copper production, cathode, solvent extraction and electrowinning process",
+            "amount": 1000.0,
+            "unit": "kilogram",
+            "location": "GLO",
+            "stage": "manufacturing/production",
+            "mass_in_kg": 1005.172484,
+            "mass_out_kg": 1000.046104,
+            "recovery_rate": 0.9949
+        }
+    ],
+    "project_name": "Ecoinvent",
+    "dataset": "ecoinvent",
+    "n_simulations": 25,
+    "mass_flow_audit": {
+        "status": "pass",
+        "overall_yield": 0.805411,
+        "activities": [
+            {
+                "stage": "raw material extraction",
+                "activity_name": "copper mine operation and beneficiation, sulfide ore",
+                "mass_in_kg": 1241.66,
+                "mass_out_kg": 1055.41,
+                "recovery_rate": 0.85
+            },
+            {
+                "stage": "material processing/beneficiation",
+                "activity_name": "smelting of copper concentrate, sulfide ore",
+                "mass_in_kg": 1055.41,
+                "mass_out_kg": 1005.1725,
+                "recovery_rate": 0.9524
+            },
+            {
+                "stage": "manufacturing/production",
+                "activity_name": "copper production, cathode, solvent extraction and electrowinning process",
+                "mass_in_kg": 1005.1725,
+                "mass_out_kg": 1000.0461,
+                "recovery_rate": 0.9949
+            }
+        ],
+        "transitions": [
+            {
+                "from_stage": "raw material extraction",
+                "to_stage": "material processing/beneficiation",
+                "expected_mass_in_kg": 1055.41,
+                "actual_mass_in_kg": 1055.41,
+                "discrepancy_pct": 0.0,
+                "status": "ok"
+            },
+            {
+                "from_stage": "material processing/beneficiation",
+                "to_stage": "manufacturing/production",
+                "expected_mass_in_kg": 1005.1725,
+                "actual_mass_in_kg": 1005.1725,
+                "discrepancy_pct": 0.0,
+                "status": "ok"
+            }
+        ]
+    }
+}
