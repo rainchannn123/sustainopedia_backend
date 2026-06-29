@@ -1,0 +1,90 @@
+{
+    "goal": "lifecycle impact assessment",
+    "Project": "Ecoinvent",
+    "method": [
+        "EF v3.1",
+        "climate change: fossil",
+        "global warming potential (GWP100)"
+    ],
+    "system_boundary": "cradle-to-gate",
+    "functional_unit": [
+        {
+            "activity_name": "copper mine operation and beneficiation, sulfide ore",
+            "amount": 1075.3,
+            "unit": "kilogram",
+            "location": "GLO",
+            "stage": "raw material extraction",
+            "mass_in_kg": 1194.8,
+            "mass_out_kg": 1075.3,
+            "recovery_rate": 0.9
+        },
+        {
+            "activity_name": "smelting of copper concentrate, sulfide ore",
+            "amount": 1024.1,
+            "unit": "kilogram",
+            "location": "GLO",
+            "stage": "material processing/beneficiation",
+            "mass_in_kg": 1075.3,
+            "mass_out_kg": 1023.6856,
+            "recovery_rate": 0.952
+        },
+        {
+            "activity_name": "electrorefining of copper, anode",
+            "amount": 1000.0,
+            "unit": "kilogram",
+            "location": "GLO",
+            "stage": "manufacturing",
+            "mass_in_kg": 1023.6856,
+            "mass_out_kg": 999.117146,
+            "recovery_rate": 0.976
+        }
+    ],
+    "project_name": "Ecoinvent",
+    "dataset": "ecoinvent",
+    "n_simulations": 1,
+    "mass_flow_audit": {
+        "status": "pass",
+        "overall_yield": 0.836221,
+        "activities": [
+            {
+                "stage": "raw material extraction",
+                "activity_name": "copper mine operation and beneficiation, sulfide ore",
+                "mass_in_kg": 1194.8,
+                "mass_out_kg": 1075.3,
+                "recovery_rate": 0.9
+            },
+            {
+                "stage": "material processing/beneficiation",
+                "activity_name": "smelting of copper concentrate, sulfide ore",
+                "mass_in_kg": 1075.3,
+                "mass_out_kg": 1023.6856,
+                "recovery_rate": 0.952
+            },
+            {
+                "stage": "manufacturing",
+                "activity_name": "electrorefining of copper, anode",
+                "mass_in_kg": 1023.6856,
+                "mass_out_kg": 999.1171,
+                "recovery_rate": 0.976
+            }
+        ],
+        "transitions": [
+            {
+                "from_stage": "raw material extraction",
+                "to_stage": "material processing/beneficiation",
+                "expected_mass_in_kg": 1075.3,
+                "actual_mass_in_kg": 1075.3,
+                "discrepancy_pct": 0.0,
+                "status": "ok"
+            },
+            {
+                "from_stage": "material processing/beneficiation",
+                "to_stage": "manufacturing",
+                "expected_mass_in_kg": 1023.6856,
+                "actual_mass_in_kg": 1023.6856,
+                "discrepancy_pct": 0.0,
+                "status": "ok"
+            }
+        ]
+    }
+}

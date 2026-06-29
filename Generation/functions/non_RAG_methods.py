@@ -1194,29 +1194,98 @@ def generate_response_bw2_input(
 
 
 
+def _build_workbench_stage_activity_list(strict_nodes: list) -> dict:
+    """Create deterministic stage->activity candidates from user-selected nodes."""
+    activities_by_stage = {}
+    for i, node in enumerate(strict_nodes):
+        process_name = (node.get("processName") or node.get("processId") or "").strip()
+        if not process_name:
+            continue
+        stage_key = f"step_{i + 1}"
+        activities_by_stage[stage_key] = [Document(page_content=process_name)]
+    return activities_by_stage
 
 
+def _resolve_workbench_activity_name(retriever_eco_activity, activity_name: str) -> str:
+    """Resolve a selected activity name to the closest ecoinvent entry, preserving fallback."""
+    name = (activity_name or "").strip()
+    if not name:
+        return name
+    try:
+        matches = retriever_eco_activity.invoke(name)
+        if isinstance(matches, list) and matches:
+            return str(matches[0].page_content or name)
+        if matches and getattr(matches, "page_content", None):
+            return str(matches.page_content)
+    except Exception as exc:
+        logging.warning("Workbench strict retrieval failed for '%s': %s", name, exc)
+    return name
 
 
+def generate_response_bw2_input_workbench_strict(
+    gpt5_client,
+    query_decomposition_retrival,
+    LCIA_method_list,
+    strict_nodes,
+    product,
+    LCI_DATABASE,
+    retriever_eco_activity,
+    user_input_params=None,
+):
+    """
+    Strict Workbench BW2 input generation:
+    - Uses exactly the user-selected node order as the primary functional chain.
+    - Allows fallback retrieval only to map selected names to closest ecoinvent labels.
+    """
+    strict_nodes = [n for n in (strict_nodes or []) if (n.get("processName") or n.get("processId"))]
+    if not strict_nodes:
+        raise ValueError("Workbench strict mode requires at least one selected node")
 
+    retrieved_activity_list = _build_workbench_stage_activity_list(strict_nodes)
 
+    output_filepath, activities_by_stage_dict = generate_response_bw2_input(
+        gpt5_client,
+        query_decomposition_retrival,
+        LCIA_method_list,
+        retrieved_activity_list,
+        product,
+        LCI_DATABASE,
+        retriever_eco_activity,
+        user_input_params=user_input_params,
+    )
 
+    with open(output_filepath, "r", encoding="utf-8") as f:
+        results_dict = json.load(f)
 
+    existing_fu = results_dict.get("functional_unit", []) or []
+    strict_fu = []
 
+    for idx, node in enumerate(strict_nodes):
+        selected_name = (node.get("processName") or node.get("processId") or "").strip()
+        resolved_name = _resolve_workbench_activity_name(retriever_eco_activity, selected_name)
+        base = existing_fu[idx] if idx < len(existing_fu) else {}
 
+        strict_fu.append({
+            "activity_name": resolved_name,
+            "amount": base.get("amount", 1000.0 if idx == len(strict_nodes) - 1 else 0.0),
+            "unit": base.get("unit", "kilogram"),
+            "location": base.get("location") or node.get("region") or "GLO",
+            "stage": base.get("stage", f"step {idx + 1}"),
+            "mass_in_kg": base.get("mass_in_kg", 0),
+            "mass_out_kg": base.get("mass_out_kg", 1000.0 if idx == len(strict_nodes) - 1 else 0),
+            "recovery_rate": base.get("recovery_rate", 1.0),
+        })
 
+    results_dict["functional_unit"] = strict_fu
 
+    with open(output_filepath, "w", encoding="utf-8") as f:
+        json.dump(results_dict, f, indent=4, ensure_ascii=False)
 
-
-
-
-
-
-
-
+    return output_filepath, activities_by_stage_dict
 
 
 '''
+
     You are an assistant that converts lifecycle assessment (LCA) queries into structured JSON instructions for the Brightway2 LCA engine.  
     Extract key activities along the value chain and sort by stage based on collected information of product {product} given by the user query: {question} and the database: {context}, and output a JSON with:
 

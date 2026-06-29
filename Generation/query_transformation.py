@@ -4,7 +4,18 @@ import logging
 import sys
 import time
 import re
+from datetime import datetime, timezone
+from io import BytesIO
 from operator import itemgetter
+from xml.sax.saxutils import escape as xml_escape
+
+from reportlab.lib import colors
+from reportlab.lib.pagesizes import A4
+from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
+from reportlab.lib.units import mm
+from reportlab.platypus import Paragraph, SimpleDocTemplate, Spacer, Table, TableStyle
+
+
 from langchain_core.runnables import RunnableLambda
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
@@ -14,7 +25,8 @@ from langchain_community.vectorstores import Chroma
 from langchain_openai import AzureChatOpenAI, AzureOpenAIEmbeddings
 from openai import OpenAI
 import sqlite3
-from .functions.non_RAG_methods import conduct_lca_anaylsis, Get_LCIA_methods, generate_response_bw2_input, extract_functional_unit, infer_product_from_query, input_q_to_json, generate_list_of_activities
+from .functions.non_RAG_methods import conduct_lca_anaylsis, Get_LCIA_methods, generate_response_bw2_input, generate_response_bw2_input_workbench_strict, extract_functional_unit, infer_product_from_query, input_q_to_json, generate_list_of_activities
+
 from .functions.vectorstore import build_and_save_vectorstores, load_vectorstores, LcaKnowledgeRetriever, load_vectorstores_fast
 from .functions.after_bw2 import final_mode_output_bw2_included
 from .functions.bw2_calculation import start_lca_calculation
@@ -42,77 +54,81 @@ if _langchain_api_key:
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "1"
 os.environ["TOKENIZERS_PARALLELISM"] = 'false'
 
-# endpoint = "https://seesustainopedia-gpt5-resource.cognitiveservices.azure.com/"
-#
-# gpt5_model_name = "gpt-5.4"
-# gpt5_deployment = "gpt-5.4"
-# subscription_key = os.getenv("AZURE_API_KEY")
-# gpt5_api_version = "2024-12-01-preview"
+endpoint = "https://seesustainopedia-gpt5-resource.cognitiveservices.azure.com/"
 
-# DeepSeek-V4-Flash (Azure AI Foundry OpenAI-compatible endpoint)
-deepseek_endpoint = os.getenv(
-    "AZURE_DEEPSEEK_ENDPOINT",
-    "https://seesustainopedia-gpt5-resource.services.ai.azure.com/openai/v1",
-)
-deepseek_deployment = os.getenv("AZURE_DEEPSEEK_DEPLOYMENT", "DeepSeek-V4-Flash")
-deepseek_api_key = os.getenv("AZURE_DEEPSEEK_API_KEY")
-
-# Keep this alias for existing embedding config usage below.
-subscription_key = os.getenv("AZURE_API_KEY")
+gpt5_model_name = "gpt-5.4"
+gpt5_deployment = "gpt-5.4"
+subscription_key = os.getenv("AZURE_API_KEY") 
+gpt5_api_version = "2024-12-01-preview"
 
 tm_model_name = "text-embedding-3-large"
 tm_deployment = "text-embedding-3-large"
 tm_api_version = "2024-02-01"
 
-_deepseek_client = OpenAI(
-    base_url=deepseek_endpoint,
-    api_key=deepseek_api_key,
+gpt5_client = AzureChatOpenAI(
+    azure_endpoint=endpoint,
+    api_version=gpt5_api_version,
+    azure_deployment=gpt5_deployment,
+    api_key=subscription_key,
+    # temperature=0.2
 )
 
-
-def _messages_to_openai_format(messages):
-    payload = []
-    for m in messages:
-        if isinstance(m, BaseMessage):
-            role = "user"
-            if m.type == "system":
-                role = "system"
-            elif m.type == "assistant":
-                role = "assistant"
-            payload.append({"role": role, "content": str(m.content)})
-        elif isinstance(m, dict) and "role" in m and "content" in m:
-            payload.append({"role": m["role"], "content": str(m["content"])})
-        else:
-            payload.append({"role": "user", "content": str(m)})
-    return payload
-
-
-def _deepseek_invoke(input_value):
-    """LangChain-compatible invoke target for `prompt | gpt5_client | StrOutputParser()`."""
-    if isinstance(input_value, list):
-        messages = _messages_to_openai_format(input_value)
-    elif isinstance(input_value, dict) and "messages" in input_value:
-        messages = _messages_to_openai_format(input_value["messages"])
-    else:
-        messages = [{"role": "user", "content": str(input_value)}]
-
-    completion = _deepseek_client.chat.completions.create(
-        model=deepseek_deployment,
-        messages=messages,
-    )
-    content = (completion.choices[0].message.content or "") if completion.choices else ""
-    return AIMessage(content=content)
-
-
-gpt5_client = RunnableLambda(_deepseek_invoke)
-
 embeddings = AzureOpenAIEmbeddings(
-    azure_endpoint="https://seesustainopedia-gpt5-resource.cognitiveservices.azure.com/",
+    azure_endpoint=endpoint,
     api_version=tm_api_version,
     azure_deployment=tm_deployment,
     model=tm_model_name,
     api_key=subscription_key
 )
+
+# DeepSeek-V4-Flash (Azure AI Foundry OpenAI-compatible endpoint)
+# deepseek_endpoint = os.getenv(
+#     "AZURE_DEEPSEEK_ENDPOINT",
+#     "https://seesustainopedia-gpt5-resource.services.ai.azure.com/openai/v1",
+# )
+# deepseek_deployment = os.getenv("AZURE_DEEPSEEK_DEPLOYMENT", "DeepSeek-V4-Flash")
+# deepseek_api_key = os.getenv("AZURE_DEEPSEEK_API_KEY")
+
+# _deepseek_client = OpenAI(
+#     base_url=deepseek_endpoint,
+#     api_key=deepseek_api_key,
+# )
+
+# def _messages_to_openai_format(messages):
+#     payload = []
+#     for m in messages:
+#         if isinstance(m, BaseMessage):
+#             role = "user"
+#             if m.type == "system":
+#                 role = "system"
+#             elif m.type == "assistant":
+#                 role = "assistant"
+#             payload.append({"role": role, "content": str(m.content)})
+#         elif isinstance(m, dict) and "role" in m and "content" in m:
+#             payload.append({"role": m["role"], "content": str(m["content"])})
+#         else:
+#             payload.append({"role": "user", "content": str(m)})
+#     return payload
+
+
+# def _deepseek_invoke(input_value):
+#     """LangChain-compatible invoke target for `prompt | gpt5_client | StrOutputParser()`."""
+#     if isinstance(input_value, list):
+#         messages = _messages_to_openai_format(input_value)
+#     elif isinstance(input_value, dict) and "messages" in input_value:
+#         messages = _messages_to_openai_format(input_value["messages"])
+#     else:
+#         messages = [{"role": "user", "content": str(input_value)}]
+
+#     completion = _deepseek_client.chat.completions.create(
+#         model=deepseek_deployment,
+#         messages=messages,
+#     )
+#     content = (completion.choices[0].message.content or "") if completion.choices else ""
+#     return AIMessage(content=content)
+
+
+# gpt5_client = RunnableLambda(_deepseek_invoke)
 
 # preinstall_ecoinvent_database()  # pre-build BW2 databases in deployment
     
@@ -729,7 +745,6 @@ def generate_response_full_lca(user_input_params, product):
     else:
         final_output_with_bw2 = res
 
-    # logging.info(f"Answer pack prepared:{markdown_output}") 
     answer_pack = {
         "answer": final_output_with_bw2,
         "markdown": markdown_output,
@@ -737,5 +752,753 @@ def generate_response_full_lca(user_input_params, product):
         "lcia_table": lcia_data,
         "intent_params": structured_user_input_json  # stored for frontend display and MongoDB
     }
-    
+
     return answer_pack
+
+
+
+def _to_float(value, default=1.0):
+    try:
+        v = float(value)
+        return v if v > 0 else default
+    except Exception:
+        return default
+
+
+def _to_int(value, default=25, min_v=1, max_v=10000):
+    try:
+        v = int(value)
+        return max(min_v, min(max_v, v))
+    except Exception:
+        return default
+
+
+def _build_workbench_query_text(product: str, params: dict, nodes: list) -> str:
+    chain_name = params.get("chain_name", "Workbench Value Chain")
+    lines = [
+        f"Please run a strict workbench LCA for product: {product}",
+        f"Value chain: {chain_name}",
+        f"System boundary: {params.get('system_boundary', 'cradle-to-gate')}",
+        f"Functional unit: {params.get('amount', 1)} {params.get('unit', 'tonne')}",
+        f"Monte Carlo simulations: {params.get('n_simulations', 25)}",
+        "Strict process order:",
+    ]
+    for idx, node in enumerate(nodes, start=1):
+        region = f" [{node.get('region')}]" if node.get("region") else ""
+        lines.append(f"{idx}. {node.get('processName') or node.get('processId')}{region}")
+    if params.get("further_notes"):
+        lines.append(f"Additional notes: {params['further_notes']}")
+    return "\n".join(lines)
+
+
+def _escape_latex(text: str) -> str:
+    value = str(text or "")
+    replacements = {
+        "\\": r"\\textbackslash{}",
+        "&": r"\\&",
+        "%": r"\\%",
+        "$": r"\\$",
+        "#": r"\\#",
+        "_": r"\\_",
+        "{": r"\\{",
+        "}": r"\\}",
+        "~": r"\\textasciitilde{}",
+        "^": r"\\textasciicircum{}",
+    }
+    for k, v in replacements.items():
+        value = value.replace(k, v)
+    return value
+
+
+def _safe_float(value, default: float = 0.0) -> float:
+    try:
+        return float(value)
+    except Exception:
+        return default
+
+
+def _normalise_scope_key(value: str) -> str:
+    key = str(value or "").strip().lower().replace("-", "").replace("_", "").replace(" ", "")
+    if key in {"scope1", "s1", "1"}:
+        return "scope1"
+    if key in {"scope2", "s2", "2"}:
+        return "scope2"
+    if key in {"scope3", "s3", "3"}:
+        return "scope3"
+    return ""
+
+
+def _normalise_scope_assignments(payload: dict) -> dict:
+    grouped = {"scope1": [], "scope2": [], "scope3": []}
+    raw_grouped = payload.get("scope_assignments") or payload.get("scopes") or {}
+
+    if isinstance(raw_grouped, dict):
+        for raw_key, raw_activities in raw_grouped.items():
+            scope_key = _normalise_scope_key(raw_key)
+            if not scope_key or not isinstance(raw_activities, list):
+                continue
+            for idx, item in enumerate(raw_activities):
+                if not isinstance(item, dict):
+                    continue
+                name = (
+                    item.get("process")
+                    or item.get("name")
+                    or item.get("matched_activity")
+                    or item.get("activity")
+                    or f"Activity {idx + 1}"
+                )
+                grouped[scope_key].append(
+                    {
+                        "name": str(name).strip() or f"Activity {idx + 1}",
+                        "mean_impact": _safe_float(item.get("mean_impact", item.get("impact", 0.0)), 0.0),
+                        "amount_location": str(item.get("amount_location") or "").strip(),
+                        "unit_location": str(item.get("unit_location") or "").strip(),
+                        "ref_product": str(item.get("ref_product") or "").strip(),
+                        "percentile": str(item.get("percentile") or "").strip(),
+                    }
+                )
+
+    flat = payload.get("activities")
+    if isinstance(flat, list):
+        for idx, item in enumerate(flat):
+            if not isinstance(item, dict):
+                continue
+            scope_key = _normalise_scope_key(item.get("scope"))
+            if scope_key not in grouped:
+                continue
+            name = (
+                item.get("process")
+                or item.get("name")
+                or item.get("matched_activity")
+                or item.get("activity")
+                or f"Activity {idx + 1}"
+            )
+            grouped[scope_key].append(
+                {
+                    "name": str(name).strip() or f"Activity {idx + 1}",
+                    "mean_impact": _safe_float(item.get("mean_impact", item.get("impact", 0.0)), 0.0),
+                    "amount_location": str(item.get("amount_location") or "").strip(),
+                    "unit_location": str(item.get("unit_location") or "").strip(),
+                    "ref_product": str(item.get("ref_product") or "").strip(),
+                    "percentile": str(item.get("percentile") or "").strip(),
+                }
+            )
+
+    for key in grouped:
+        grouped[key] = sorted(grouped[key], key=lambda x: x.get("mean_impact", 0.0), reverse=True)
+
+    return grouped
+
+
+def _load_scope_report_retriever():
+    try:
+        if os.path.isdir('./chroma_db_lca_knowledge') and os.path.isdir('./chroma_db_eco_methods') and os.path.isdir('./chroma_db_tg_methods') and os.path.isdir('./chroma_db_eco_activity'):
+            vectorstore_lca_knowledge, parent_lookup, _, _, _ = load_vectorstores(
+                embeddings,
+                persist_dir_lca_knowledge='./chroma_db_lca_knowledge',
+                persist_dir_eco_methods='./chroma_db_eco_methods',
+                persist_dir_tg_methods='./chroma_db_tg_methods',
+                persist_dir_eco_activity='./chroma_db_eco_activity',
+            )
+        else:
+            vectorstore_lca_knowledge, parent_lookup, _, _, _ = build_and_save_vectorstores(
+                embeddings,
+                eco_methods='./_additionals/methods/EcoInvent_methods.txt',
+                tg_methods='./_additionals/methods/tiangong_methods.txt',
+                eco_activity='./_additionals/methods/Ecoinvent_activity.txt',
+                pdf_dir='./_raw knowledge pdfs',
+                persist_dir_lca_knowledge='./chroma_db_lca_knowledge',
+                persist_dir_eco_methods='./chroma_db_eco_methods',
+                persist_dir_tg_methods='./chroma_db_tg_methods',
+                persist_dir_eco_activity='./chroma_db_eco_activity',
+            )
+        return LcaKnowledgeRetriever(vectorstore_lca_knowledge, parent_lookup, k_children=6).as_langchain_retriever()
+    except Exception as exc:
+        logging.warning("Scope report: failed to load knowledge retriever: %s", exc)
+        return None
+
+
+def _build_scope_report_paragraph(
+    product: str,
+    company_name: str,
+    system_boundary: str,
+    scope_label: str,
+    activities: list,
+    total_impact: float,
+    knowledge_context: str,
+) -> str:
+    if not activities:
+        return (
+            f"No activities were assigned to {scope_label}. "
+            "This section is therefore disclosed as not material for the current reporting cycle."
+        )
+
+    top_names = ", ".join(a["name"] for a in activities[:5])
+    prompt = ChatPromptTemplate.from_messages([
+        (
+            "system",
+            "You are a senior ESG reporting consultant. Write concise, professional disclosure text "
+            "for annual sustainability reports. Output plain text only (no markdown, no bullets). "
+            "Use a formal corporate tone and include risk/management implications where relevant.",
+        ),
+        (
+            "human",
+            "Company: {company_name}\n"
+            "Product / system assessed: {product}\n"
+            "System boundary: {system_boundary}\n"
+            "Scope section: {scope_label}\n"
+            "Total emissions in this scope (kg CO2-eq): {total_impact:.3f}\n"
+            "Top activities: {top_names}\n"
+            "\n"
+            "Activity details JSON:\n{activities_json}\n\n"
+            "Knowledge context (internal):\n{knowledge_context}\n\n"
+            "Write one polished paragraph (120-170 words) summarising this scope's emissions profile, "
+            "main drivers, and recommended management actions."
+            "Keep ALL numeric values in the text to 1 decimal place.",
+        ),
+    ])
+    chain = prompt | gpt5_client | StrOutputParser()
+    payload = {
+        "company_name": company_name,
+        "product": product,
+        "system_boundary": system_boundary,
+        "scope_label": scope_label,
+        "total_impact": total_impact,
+        "top_names": top_names,
+        "activities_json": json.dumps(activities, ensure_ascii=False),
+        "knowledge_context": knowledge_context,
+    }
+    try:
+        return chain.invoke(payload).strip()
+    except Exception:
+        return chain.invoke(payload).strip()
+
+
+def generate_scope_report_latex(report_payload: dict) -> dict:
+    product = str(report_payload.get("product") or report_payload.get("product_name") or "Unknown Product").strip()
+    company_name = str(report_payload.get("company_name") or "Reporting Entity").strip()
+
+    form = report_payload.get("form") if isinstance(report_payload.get("form"), dict) else {}
+    system_boundary = str(
+        report_payload.get("system_boundary")
+        or form.get("systemBoundary")
+        or "cradle-to-gate"
+    ).strip()
+
+    scopes = _normalise_scope_assignments(report_payload)
+    total_assigned = sum(len(v) for v in scopes.values())
+    if total_assigned == 0:
+        raise ValueError("No scoped activities were provided for report generation.")
+
+    retriever = _load_scope_report_retriever()
+
+    scope_meta = [
+        ("scope1", "Scope 1 (Direct Emissions)"),
+        ("scope2", "Scope 2 (Energy Indirect Emissions)"),
+        ("scope3", "Scope 3 (Other Indirect Emissions)"),
+    ]
+
+    preview_sections = []
+    latex_sections = []
+
+    for scope_key, scope_label in scope_meta:
+        activities = scopes.get(scope_key, [])
+        scope_total = round(sum(_safe_float(a.get("mean_impact"), 0.0) for a in activities), 6)
+
+        top_names = ", ".join(a.get("name", "") for a in activities[:6])
+        retrieval_query = (
+            f"ESG {scope_label} emissions accounting guidance for {product}. "
+            f"System boundary: {system_boundary}. Activities: {top_names}"
+        )
+        knowledge_context = ""
+        if retriever is not None:
+            try:
+                docs = retriever.invoke(retrieval_query) or []
+                joined = []
+                for d in docs[:4]:
+                    joined.append(d.page_content if hasattr(d, "page_content") else str(d))
+                knowledge_context = "\n\n".join(joined)
+            except Exception as exc:
+                logging.warning("Scope report retrieval failed for %s: %s", scope_key, exc)
+
+        paragraph = _build_scope_report_paragraph(
+            product=product,
+            company_name=company_name,
+            system_boundary=system_boundary,
+            scope_label=scope_label,
+            activities=activities,
+            total_impact=scope_total,
+            knowledge_context=knowledge_context,
+        )
+
+        preview_sections.append(
+            {
+                "scope": scope_key,
+                "label": scope_label,
+                "total_kg_co2eq": scope_total,
+                "paragraph": paragraph,
+                "activities": activities,
+            }
+        )
+
+        if activities:
+            rows = [
+                f"{_escape_latex(a['name'])} & {a['mean_impact']:.1f} & {_escape_latex(a.get('unit_location') or '-') } \\\\"
+                for a in activities
+            ]
+            rows_text = "\n".join(rows)
+            table_block = (
+                "\\begin{tabular}{p{0.57\\textwidth} r p{0.24\\textwidth}}\\n"
+                "\\toprule\\n"
+                "Activity & Mean Impact (kg CO$_2$-eq) & Unit / Location \\\\n"
+                "\\midrule\\n"
+                f"{rows_text}\\n"
+                "\\bottomrule\\n"
+                "\\end{tabular}"
+            )
+        else:
+            table_block = "No activities assigned in this scope."
+
+        latex_sections.append(
+            "\n".join(
+                [
+                    f"\\section*{{{_escape_latex(scope_label)}}}",
+                    f"\\textbf{{Reported total:}} {scope_total:.1f} kg CO$_2$-eq\\\\",
+                    _escape_latex(paragraph),
+                    "\\vspace{0.5em}",
+                    table_block,
+                ]
+            )
+        )
+
+    total_reported = round(sum(s["total_kg_co2eq"] for s in preview_sections), 6)
+    generated_at = datetime.now(timezone.utc).isoformat()
+
+    latex_document = "\n".join(
+        [
+            "\\documentclass[a4paper,11pt]{article}",
+            "\\usepackage[margin=1in]{geometry}",
+            "\\usepackage[T1]{fontenc}",
+            "\\usepackage[utf8]{inputenc}",
+            "\\usepackage{booktabs}",
+            "\\usepackage{array}",
+            "\\usepackage{setspace}",
+            "\\setstretch{1.15}",
+            "\\begin{document}",
+            f"\\title{{ESG Scope Emissions Report: {_escape_latex(product)}}}",
+            f"\\author{{{_escape_latex(company_name)}}}",
+            f"\\date{{Generated: {_escape_latex(generated_at)}}}",
+            "\\maketitle",
+            f"\\textbf{{System boundary:}} {_escape_latex(system_boundary)}\\\\",
+            f"\\textbf{{Total reported emissions:}} {total_reported:.1f} kg CO$_2$-eq",
+            "\\vspace{1em}",
+            *latex_sections,
+            "\\end{document}",
+        ]
+    )
+
+    return {
+        "latex": latex_document,
+        "preview": {
+            "product": product,
+            "company_name": company_name,
+            "system_boundary": system_boundary,
+            "generated_at": generated_at,
+            "total_kg_co2eq": total_reported,
+            "sections": preview_sections,
+        },
+    }
+
+
+def generate_scope_report_pdf(payload: dict) -> tuple[bytes, str]:
+    """Build a polished PDF ESG scope report.
+
+    Accepts either:
+    - a full report object: { report: { latex, preview } }
+    - a raw report object directly: { latex, preview }
+    - a scope assignment payload (same shape as /api/esg/scope-report generation input)
+      in which case LaTeX+preview are generated first.
+
+    Returns (pdf_bytes, product_name).
+    """
+    if not isinstance(payload, dict):
+        raise ValueError("Payload must be a JSON object.")
+
+    report = payload.get("report") if isinstance(payload.get("report"), dict) else payload
+    preview = report.get("preview") if isinstance(report, dict) else None
+
+    if not isinstance(preview, dict):
+        generated = generate_scope_report_latex(report if isinstance(report, dict) else {})
+        preview = generated.get("preview") if isinstance(generated, dict) else None
+
+    if not isinstance(preview, dict):
+        raise ValueError("A valid report preview is required to generate PDF.")
+
+    product = str(preview.get("product") or payload.get("product") or "Unknown Product").strip()
+    company_name = str(preview.get("company_name") or payload.get("company_name") or "Reporting Entity").strip()
+    system_boundary = str(preview.get("system_boundary") or payload.get("system_boundary") or "N/A").strip()
+    def _format_generated_at(value: str) -> str:
+        raw = str(value or "").strip()
+        if not raw:
+            return datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M")
+
+        candidates = [raw]
+        if raw.endswith("Z"):
+            candidates.append(raw[:-1] + "+00:00")
+
+        for candidate in candidates:
+            try:
+                return datetime.fromisoformat(candidate).strftime("%Y-%m-%d %H:%M")
+            except ValueError:
+                continue
+
+        fallback_match = re.search(r"(\d{4}-\d{2}-\d{2})[T\s](\d{2}:\d{2})", raw)
+        if fallback_match:
+            return f"{fallback_match.group(1)} {fallback_match.group(2)}"
+
+        return raw
+
+    generated_at = _format_generated_at(preview.get("generated_at") or datetime.now(timezone.utc).isoformat())
+    total_reported = _safe_float(preview.get("total_kg_co2eq"), 0.0)
+    sections = preview.get("sections") if isinstance(preview.get("sections"), list) else []
+
+
+    buffer = BytesIO()
+    doc = SimpleDocTemplate(
+        buffer,
+        pagesize=A4,
+        leftMargin=18 * mm,
+        rightMargin=18 * mm,
+        topMargin=16 * mm,
+        bottomMargin=16 * mm,
+        title=f"ESG Scope Emissions Report - {product}",
+        author=company_name,
+    )
+
+    styles = getSampleStyleSheet()
+    title_style = ParagraphStyle(
+        "ScopeReportTitle",
+        parent=styles["Title"],
+        fontName="Helvetica-Bold",
+        fontSize=18,
+        leading=22,
+        alignment=0,
+        spaceAfter=8,
+    )
+    heading_style = ParagraphStyle(
+        "ScopeSectionHeading",
+        parent=styles["Heading2"],
+        fontName="Helvetica-Bold",
+        fontSize=12,
+        leading=15,
+        spaceBefore=8,
+        spaceAfter=4,
+    )
+    body_style = ParagraphStyle(
+        "ScopeBody",
+        parent=styles["BodyText"],
+        fontName="Helvetica",
+        fontSize=9.5,
+        leading=13,
+        spaceAfter=6,
+    )
+    meta_style = ParagraphStyle(
+        "ScopeMeta",
+        parent=styles["BodyText"],
+        fontName="Helvetica",
+        fontSize=10,
+        leading=13,
+        spaceAfter=3,
+    )
+
+        
+    def _p(text: str) -> str:
+        return xml_escape(str(text or "")).replace("\n", "<br/>")
+
+    def _clean_activity_name(value: str, fallback: str) -> str:
+
+        raw = str(value or fallback).strip()
+        cleaned = re.sub(r"^\s*Process\s*\d+\s*:\s*", "", raw, flags=re.IGNORECASE)
+        return cleaned or fallback
+
+    location_display_map = {
+        "GLO": "Global (GLO)",
+        "RER": "Europe (RER)",
+        "WEU": "Western Europe (WEU)",
+        "EEU": "Eastern Europe (EEU)",
+        "MEA": "Middle East & Africa (MEA)",
+        "ASI": "Asia (ASI)",
+        "NAM": "North America (NAM)",
+        "SAM": "South America (SAM)",
+        "CN": "China (CN)",
+        "US": "United States (US)",
+        "CH": "Switzerland (CH)",
+        "BR": "Brazil (BR)",
+        "IN": "India (IN)",
+        "RoW": "Rest of World (RoW)",
+    }
+    location_codes = sorted(location_display_map.keys(), key=len, reverse=True)
+
+    def _extract_location_code(value: str) -> str:
+        raw = str(value or "").strip()
+        if not raw:
+            return ""
+
+        for code in location_codes:
+            esc = re.escape(code)
+            if re.search(rf"(?:\(\s*{esc}\s*\)|(?:[\/|,]|\s+-\s+|\s+){esc})\s*$", raw, flags=re.IGNORECASE):
+                return code
+            if raw.lower() == code.lower():
+                return code
+        return ""
+
+    def _expand_location(value: str) -> str:
+        code = _extract_location_code(value)
+        if code:
+            return location_display_map.get(code, code)
+        return str(value or "").strip()
+
+    def _parse_amount_and_location(activity: dict) -> tuple[str, str]:
+        raw_amount_location = str(activity.get("amount_location") or "").strip()
+        raw_unit_location = str(activity.get("unit_location") or "").strip()
+
+        location_code = _extract_location_code(raw_amount_location) or _extract_location_code(raw_unit_location)
+
+        amount = raw_amount_location
+        if location_code and raw_amount_location:
+            esc = re.escape(location_code)
+            amount = re.sub(rf"\(\s*{esc}\s*\)\s*$", "", amount, flags=re.IGNORECASE)
+            amount = re.sub(rf"(?:[\/|,]|\s+-\s+)\s*{esc}\s*$", "", amount, flags=re.IGNORECASE).strip()
+
+        location = location_display_map.get(location_code, location_code) if location_code else (_expand_location(raw_unit_location) or "-")
+        return (amount or raw_amount_location or "-", location or "-")
+
+
+    table_header_style = ParagraphStyle(
+        "ScopeTableHeader",
+        parent=styles["BodyText"],
+        fontName="Helvetica-Bold",
+        fontSize=8.6,
+        leading=10.2,
+        alignment=1,
+    )
+    table_cell_style = ParagraphStyle(
+        "ScopeTableCell",
+        parent=styles["BodyText"],
+        fontName="Helvetica",
+        fontSize=8.6,
+        leading=10.2,
+        wordWrap="CJK",
+    )
+    table_cell_right_style = ParagraphStyle(
+        "ScopeTableCellRight",
+        parent=table_cell_style,
+        alignment=2,
+    )
+
+    story = [
+
+        Paragraph("ESG Scope Emissions Report", title_style),
+        Paragraph(f"<b>Product:</b> {_p(product)}", meta_style),
+        Paragraph(f"<b>Company:</b> {_p(company_name)}", meta_style),
+        Paragraph(f"<b>System boundary:</b> {_p(system_boundary)}", meta_style),
+        Paragraph(f"<b>Generated:</b> {_p(generated_at)}", meta_style),
+        Paragraph(f"<b>Total reported emissions:</b> {total_reported:.1f} kg CO2-eq", meta_style),
+        Spacer(1, 6),
+    ]
+
+    for section in sections:
+        if not isinstance(section, dict):
+            continue
+
+        section_label = str(section.get("label") or section.get("scope") or "Scope Section")
+        section_total = _safe_float(section.get("total_kg_co2eq"), 0.0)
+        section_paragraph = str(section.get("paragraph") or "").strip()
+        activities = section.get("activities") if isinstance(section.get("activities"), list) else []
+
+        story.append(Paragraph(_p(section_label), heading_style))
+        story.append(Paragraph(f"<b>Reported total:</b> {section_total:.1f} kg CO2-eq", body_style))
+        if section_paragraph:
+            story.append(Paragraph(_p(section_paragraph), body_style))
+
+            table_rows = [[
+            Paragraph("Activity", table_header_style),
+            Paragraph("Amount", table_header_style),
+            Paragraph("Location", table_header_style),
+            Paragraph("Mean Impact (kg CO<sub>2</sub>-eq)", table_header_style),
+        ]]
+
+        if activities:
+            for idx, a in enumerate(activities, start=1):
+                if not isinstance(a, dict):
+                    continue
+                activity_name = _clean_activity_name(
+                    a.get("name") or a.get("process"),
+                    f"Activity {idx}",
+                )
+                amount, location = _parse_amount_and_location(a)
+                mean_impact = _safe_float(a.get("mean_impact"), 0.0)
+                table_rows.append([
+                    Paragraph(_p(activity_name), table_cell_style),
+                    Paragraph(_p(amount), table_cell_style),
+                    Paragraph(_p(location), table_cell_style),
+                    Paragraph(f"{mean_impact:.1f}", table_cell_right_style),
+                ])
+        else:
+            table_rows.append([
+                Paragraph("No activities assigned in this scope.", table_cell_style),
+                Paragraph("-", table_cell_style),
+                Paragraph("-", table_cell_style),
+                Paragraph("-", table_cell_right_style),
+            ])
+
+        table = Table(table_rows, colWidths=[80 * mm, 25 * mm, 25 * mm, 40 * mm], repeatRows=1)
+
+
+        table.setStyle(TableStyle([
+            ("BACKGROUND", (0, 0), (-1, 0), colors.HexColor("#EAF2FF")),
+            ("TEXTCOLOR", (0, 0), (-1, 0), colors.HexColor("#1E293B")),
+            ("FONTNAME", (0, 0), (-1, 0), "Helvetica-Bold"),
+            ("FONTSIZE", (0, 0), (-1, -1), 8.8),
+                        ("ALIGN", (3, 1), (3, -1), "RIGHT"),
+            ("VALIGN", (0, 0), (-1, -1), "TOP"),
+            ("GRID", (0, 0), (-1, -1), 0.35, colors.HexColor("#CBD5E1")),
+            ("ROWBACKGROUNDS", (0, 1), (-1, -1), [colors.white, colors.HexColor("#F8FAFC")]),
+            ("LEFTPADDING", (0, 0), (-1, -1), 5),
+            ("RIGHTPADDING", (0, 0), (-1, -1), 5),
+            ("TOPPADDING", (0, 0), (-1, -1), 4),
+            ("BOTTOMPADDING", (0, 0), (-1, -1), 4),
+        ]))
+
+        story.append(table)
+        story.append(Spacer(1, 8))
+
+    if len(story) <= 8:
+        story.append(Paragraph("No scope sections were available for rendering.", body_style))
+
+    doc.build(story)
+    pdf_bytes = buffer.getvalue()
+    buffer.close()
+
+    if not pdf_bytes:
+        raise ValueError("PDF generation produced an empty file.")
+
+    return pdf_bytes, product
+
+
+def generate_response_workbench_lca(workbench_payload: dict) -> dict:
+
+    section1_end = time.time()
+
+    logging.info(f"Environment Setting took {section1_end - section1_start:.2f} seconds")
+
+    nodes = workbench_payload.get("nodes") or []
+    strict_nodes = [n for n in nodes if (n.get("processName") or n.get("processId"))]
+    if not strict_nodes:
+        raise ValueError("workbench_lca requires at least one ordered node")
+
+    product = (
+        workbench_payload.get("product")
+        or workbench_payload.get("productName")
+        or "Unknown Product"
+    )
+
+    params = {
+        "chain_name": (workbench_payload.get("chainName") or "Workbench Value Chain").strip(),
+        "product": product,
+        "amount": _to_float(workbench_payload.get("functionalUnitAmount"), 1.0),
+        "unit": (workbench_payload.get("functionalUnitUnit") or "tonne").strip() or "tonne",
+        "system_boundary": (workbench_payload.get("systemBoundary") or "cradle-to-gate").strip() or "cradle-to-gate",
+        "n_simulations": _to_int(workbench_payload.get("nSimulations"), 25),
+        "further_notes": (workbench_payload.get("notes") or workbench_payload.get("additionalNotes") or "").strip(),
+        "strict_nodes": [
+            {
+                "order": idx,
+                "processId": n.get("processId", ""),
+                "processName": (n.get("processName") or n.get("processId") or "").strip(),
+                "region": (n.get("region") or "").strip(),
+                "providerName": (n.get("providerName") or "").strip(),
+            }
+            for idx, n in enumerate(strict_nodes)
+        ],
+    }
+
+    logging.info("Retreiving relative knowledge from localized knowledge database...", extra={"frontend": True})
+    if os.path.isdir('./chroma_db_lca_knowledge') and os.path.isdir('./chroma_db_eco_methods') and os.path.isdir('./chroma_db_tg_methods') and os.path.isdir('./chroma_db_eco_activity'):
+        vectorstore_lca_knowledge, parent_lookup, vectorstore_eco_methods, vectorstore_tg_methods, vectorstore_eco_activity = load_vectorstores(embeddings, persist_dir_lca_knowledge='./chroma_db_lca_knowledge', persist_dir_eco_methods='./chroma_db_eco_methods', persist_dir_tg_methods='./chroma_db_tg_methods', persist_dir_eco_activity='./chroma_db_eco_activity')
+    else:
+        vectorstore_lca_knowledge, parent_lookup, vectorstore_eco_methods, vectorstore_tg_methods, vectorstore_eco_activity = build_and_save_vectorstores(embeddings, eco_methods='./_additionals/methods/EcoInvent_methods.txt', tg_methods='./_additionals/methods/tiangong_methods.txt', eco_activity='./_additionals/methods/Ecoinvent_activity.txt', pdf_dir='./_raw knowledge pdfs', persist_dir_lca_knowledge='./chroma_db_lca_knowledge', persist_dir_eco_methods='./chroma_db_eco_methods', persist_dir_tg_methods='./chroma_db_tg_methods', persist_dir_eco_activity='./chroma_db_eco_activity')
+
+    retriever_lca_knowledge = LcaKnowledgeRetriever(vectorstore_lca_knowledge, parent_lookup, k_children=6).as_langchain_retriever()
+    retriever_eco_methods = vectorstore_eco_methods.as_retriever(search_kwargs={"k": 5})
+    retriever_tg_methods = vectorstore_tg_methods.as_retriever(search_kwargs={"k": 3})
+    retriever_eco_activity = vectorstore_eco_activity.as_retriever(search_kwargs={"k": 10})
+
+    logging.info("Computing the best LCIA methods for current analysis...", extra={"frontend": True})
+    retriever_lca_methods = retriever_tg_methods if LCI_DATABASE == "Tiangong" else retriever_eco_methods
+    query_text = _build_workbench_query_text(product, params, params["strict_nodes"])
+    LCIA_method_list = Get_LCIA_methods(query_text, gpt5_client, retriever_lca_methods)
+    logging.info("Found a list of suitable LCIA methods ✔", extra={"frontend": True})
+
+    logging.info("Retrieving more knowledge from localized knowledge database...", extra={"frontend": True})
+    query_decomposition_retrival = lca_template_knowledge_retrieval(query_text, gpt5_client, retriever_lca_knowledge, vectorstore_lca_knowledge, k_per_sub=4)
+    logging.info("Knowledge retrieval completed ✔", extra={"frontend": True})
+
+    logging.info("Constructing a detailed value chain template for LCA Engine computation...", extra={"frontend": True})
+    bw2_input_filepath, activities_by_stage_dict = generate_response_bw2_input_workbench_strict(
+        gpt5_client,
+        query_decomposition_retrival,
+        LCIA_method_list,
+        params["strict_nodes"],
+        product,
+        LCI_DATABASE,
+        retriever_eco_activity,
+        user_input_params=params,
+    )
+    logging.info("Template generation completed ✔", extra={"frontend": True})
+    logging.info("Routing to the LCA Engine...", extra={"frontend": True})
+
+    lcidb_choice = "2" if LCI_DATABASE == "Ecoinvent" else "1"
+    start_lca_calculation(lcidb_choice, bw2_input_filepath)
+
+    bw2_output_rawpath = os.path.splitext(os.path.basename(bw2_input_filepath))[0]
+    bw2_results_raw_filename = f"bw2_results/{bw2_output_rawpath}_output.json"
+
+    display_amount, display_unit, scale_factor = extract_functional_unit(f"{params['amount']} {params['unit']}")
+
+    res = final_mode_output_bw2_included(
+        bw2_results_raw_filename,
+        query_text,
+        gpt5_client,
+        product,
+        scale_factor=scale_factor,
+        n_simulations=params.get("n_simulations", 25),
+        display_amount=display_amount,
+        display_unit=display_unit,
+        activities_by_stage_dict=activities_by_stage_dict,
+    )
+    logging.info("Final output generation completed ✔, starting to prepare answer pack...", extra={"frontend": True})
+
+    final_output_with_bw2 = None
+    lcia_data = {}
+    markdown_output = None
+    json_output = None
+    if isinstance(res, tuple):
+        if len(res) == 2:
+            final_output_with_bw2, lcia_data = res
+        elif len(res) == 4:
+            final_output_with_bw2, lcia_data, markdown_output, json_output = res
+        else:
+            final_output_with_bw2 = res[0]
+            lcia_data = res[1] if len(res) > 1 else {}
+    else:
+        final_output_with_bw2 = res
+
+    return {
+        "answer": final_output_with_bw2,
+        "markdown": markdown_output,
+        "processed_json": json_output,
+        "lcia_table": lcia_data,
+        "intent_params": params,
+    }
+

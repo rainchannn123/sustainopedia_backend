@@ -10,13 +10,23 @@ except ImportError:
 # sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 
 import os
+import re
 import logging
 import threading
 import uuid
 from datetime import datetime, timezone
 
-from flask import Flask, request, jsonify
-from Generation.query_transformation import generate_response_fast, generate_response_full_lca
+from flask import Flask, request, jsonify, Response
+from Generation.query_transformation import (
+    generate_response_fast,
+    generate_response_full_lca,
+    generate_response_workbench_lca,
+    generate_scope_report_latex,
+    generate_scope_report_pdf,
+)
+
+
+
 from flask_cors import CORS
 
 from dotenv import load_dotenv
@@ -174,6 +184,44 @@ def _run_job_full_lca(job_id: str, user_input_params: str, product: str):
                 })
     finally:
         _thread_local.job_id = None
+
+
+def _run_job_workbench_lca(job_id: str, workbench_payload: dict):
+    """Background thread: execute strict Workbench LCA pipeline and store the result."""
+    _thread_local.job_id = job_id
+    cancel_event = _cancel_events.get(job_id)
+    try:
+        with _jobs_lock:
+            if cancel_event and cancel_event.is_set():
+                _jobs[job_id]['status'] = 'cancelled'
+                return
+            _jobs[job_id]['status'] = 'running'
+
+        answer_pack = generate_response_workbench_lca(workbench_payload)
+
+        with _jobs_lock:
+            if cancel_event and cancel_event.is_set():
+                _jobs[job_id]['status'] = 'cancelled'
+            else:
+                _jobs[job_id].update({
+                    'status': 'done',
+                    'result': answer_pack,
+                    'finished_at': datetime.now(timezone.utc).isoformat()
+                })
+    except Exception as exc:
+        app.logger.exception(f"Job {job_id} failed: {exc}")
+        with _jobs_lock:
+            if cancel_event and cancel_event.is_set():
+                _jobs[job_id]['status'] = 'cancelled'
+            else:
+                _jobs[job_id].update({
+                    'status': 'error',
+                    'error': str(exc),
+                    'finished_at': datetime.now(timezone.utc).isoformat()
+                })
+    finally:
+        _thread_local.job_id = None
+
             
 # ── Job endpoints ──────────────────────────────────────────────────────────────
 
@@ -221,9 +269,29 @@ def create_job():
         _cancel_events[job_id] = cancel_event
         thread = threading.Thread(target=_run_job_full_lca, args=(job_id, user_input_params, product), daemon=True)
         thread.start()
+
+    elif data.get('mode', '') == 'workbench_lca':
+        workbench_payload = data.get('workbench_payload') or data
+        product = workbench_payload.get('product') or workbench_payload.get('productName') or 'Not Specified'
+
+        with _jobs_lock:
+            _purge_stale_jobs()
+            _jobs[job_id] = {
+                'status': 'pending',
+                'question': workbench_payload.get('question', ''),
+                'product': product,
+                'created_at': created_at,
+                'logs': []
+            }
+
+        cancel_event = threading.Event()
+        _cancel_events[job_id] = cancel_event
+        thread = threading.Thread(target=_run_job_workbench_lca, args=(job_id, workbench_payload), daemon=True)
+        thread.start()
     
     else:
-        return jsonify({'error': 'Invalid mode. Must be "fast" or "full_lca".'}), 400
+        return jsonify({'error': 'Invalid mode. Must be "fast", "full_lca", or "workbench_lca".'}), 400
+
 
     return jsonify({'jobId': job_id}), 202
 
@@ -265,7 +333,47 @@ def cancel_job(job_id: str):
     return jsonify({'status': 'cancelling'}), 200
 
 
+@app.route('/api/esg/scope-report', methods=['POST'])
+def generate_esg_scope_report():
+    """Generate Scope 1/2/3 ESG disclosure report and return LaTeX + preview payload."""
+    payload = request.get_json(silent=True) or {}
+    try:
+        report = generate_scope_report_latex(payload)
+        return jsonify(report), 200
+    except ValueError as exc:
+        return jsonify({'error': str(exc)}), 400
+    except Exception as exc:
+        app.logger.exception('Failed to generate ESG scope report: %s', exc)
+        return jsonify({'error': 'Failed to generate ESG scope report'}), 500
+
+
+@app.route('/api/esg/scope-report/pdf', methods=['POST'])
+def download_esg_scope_report_pdf():
+    """Render an ESG scope report as a downloadable PDF."""
+    payload = request.get_json(silent=True) or {}
+    try:
+        pdf_bytes, product = generate_scope_report_pdf(payload)
+        safe_product = re.sub(r'[^A-Za-z0-9._-]+', '_', (product or 'scope_report').strip()).strip('._') or 'scope_report'
+        filename = f"{safe_product}_{datetime.now(timezone.utc).strftime('%Y%m%d_%H%M%S')}.pdf"
+
+        return Response(
+            pdf_bytes,
+            mimetype='application/pdf',
+            headers={
+                'Content-Disposition': f'attachment; filename="{filename}"',
+                'Cache-Control': 'no-store'
+            },
+        )
+    except ValueError as exc:
+        return jsonify({'error': str(exc)}), 400
+    except Exception as exc:
+        app.logger.exception('Failed to generate ESG scope PDF report: %s', exc)
+        return jsonify({'error': 'Failed to generate ESG scope PDF report'}), 500
+
+
 # ── Legacy synchronous endpoint (kept for compatibility) ───────────────────────
+
+
 
 # @app.route('/', methods=['GET'])
 # def health():

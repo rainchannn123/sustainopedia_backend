@@ -1,0 +1,50 @@
+{
+    "goal": "lifecycle impact assessment",
+    "Project": "Ecoinvent",
+    "method": [
+        "EF v3.1",
+        "climate change: fossil",
+        "global warming potential (GWP100)"
+    ],
+    "system_boundary": "cradle-to-gate",
+    "functional_unit": [
+        {
+            "activity_name": "treatment of sulfidic tailings, from copper mine operation, tailings impoundment",
+            "amount": 1000.0,
+            "unit": "kilogram",
+            "location": "GLO",
+            "stage": "manufacturing",
+            "mass_in_kg": 1020.41,
+            "mass_out_kg": 1000.0,
+            "recovery_rate": 0.98
+        },
+        {
+            "activity_name": "wire drawing, copper",
+            "amount": 1000.0,
+            "unit": "kilogram",
+            "location": "RoW",
+            "stage": "step 2",
+            "mass_in_kg": 0,
+            "mass_out_kg": 1000.0,
+            "recovery_rate": 1.0
+        }
+    ],
+    "project_name": "Ecoinvent",
+    "dataset": "ecoinvent",
+    "n_simulations": 25,
+    "mass_flow_audit": {
+        "status": "pass",
+        "reason": "single-activity system — no transitions to validate",
+        "overall_yield": 0.979998,
+        "activities": [
+            {
+                "stage": "manufacturing",
+                "activity_name": "wire drawing, copper",
+                "mass_in_kg": 1020.41,
+                "mass_out_kg": 1000.0,
+                "recovery_rate": 0.98
+            }
+        ],
+        "transitions": []
+    }
+}
