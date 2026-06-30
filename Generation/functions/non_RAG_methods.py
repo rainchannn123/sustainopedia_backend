@@ -212,18 +212,6 @@ def infer_product_from_query(question: str, gpt5_client) -> str:
 
 
 def conduct_lca_anaylsis(question, gpt5_client):
-    print("Deciding on whether to conduct LCA analysis...")
-    # template = """You are an expert in sustainability and environmental impact analysis. Your task is to determine whether a given user query requires a Life Cycle Assessment (LCA) to be properly addressed.
-
-    #             A Life Cycle Assessment (LCA) is a method used to evaluate the environmental impacts associated with all stages of a product's life—from raw material extraction through production, use, and disposal.
-
-    #             Instructions:
-    #             - If the query involves evaluating the environmental impact of a product, material, process, or decision across its life cycle, reply with **"Yes"**.
-    #             - If the query can be answered without considering life cycle impacts, reply with **"No"**.
-    #             - Do not explain your answer. Only reply with **"Yes"** or **"No"**.
-
-    #             User Query: "{question}"""
-    
     template = """You are an expert in sustainability and environmental impact analysis. Your task is to determine whether a given user query requires a Life Cycle Assessment (LCA) to be properly addressed.
 
             A Life Cycle Assessment (LCA) is a method used to evaluate the environmental impacts associated with all stages of a product's life—from raw material extraction through production, use, and disposal.
@@ -1164,12 +1152,6 @@ def generate_response_bw2_input(
         results_dict.get("functional_unit", [])
     )
 
-    # # ── Disposal mass balance: remove whole-product dismantling when ──────────
-    # # sub-component treatments already cover the same mass stream.
-    # results_dict["functional_unit"] = _balance_disposal_mass(
-    #     results_dict.get("functional_unit", [])
-    # )
-
     # Inject n_simulations so the BW2 calculator can read it when supported
     results_dict['n_simulations'] = resolved_n_simulations
 
@@ -1282,92 +1264,3 @@ def generate_response_bw2_input_workbench_strict(
         json.dump(results_dict, f, indent=4, ensure_ascii=False)
 
     return output_filepath, activities_by_stage_dict
-
-
-'''
-
-    You are an assistant that converts lifecycle assessment (LCA) queries into structured JSON instructions for the Brightway2 LCA engine.  
-    Extract key activities along the value chain and sort by stage based on collected information of product {product} given by the user query: {question} and the database: {context}, and output a JSON with:
-
-    - "goal": Always "lifecycle impact assessment"  
-    - "Project": Insert the project name as "{database}"  
-    - "method": Select the LCIA method most relevant to the user's request from the provided list: {methods}. If no specific impact category is requested, default to a climate change / GWP100 method (e.g., IPCC 2021, EF v3.1).
-    - "system_boundary": Use "cradle-to-gate" or "cradle-to-grave"  
-    - "functional_unit": A list of multiple activity objects, each describing one process involved in the product system:  
-    Each object includes:  
-    - "activity_name": The exact process name as used in Brightway2-compatible databases  
-    - "amount": A float  
-    - "unit": e.g., "kilogram"  
-    - "location": ISO country code  
-    - "stage": The value chain stage (e.g., "raw material extraction", "manufacturing", "transport", "use", "disposal")  
-    - "project_name": Insert "{database}"  
-    - "dataset": Insert "{database}", but in lowercase  
-
-    Example of expected output JSON format:
-    {{
-    "goal": "lifecycle impact assessment",
-    "Project": "Ecoinvent",
-    "method": ["IPCC 2013", "climate change", "GWP 100a"],
-    "system_boundary": "cradle-to-grave",
-    "functional_unit": [
-        {{
-        "activity_name": "hard coal coke production",
-        "amount": 1.0,
-        "unit": "kilogram",
-        "location": "CN",
-        "stage": "manufacturing"
-        }},
-        {{
-        "activity_name": "transport, freight, lorry 16-32 metric ton, EURO6",
-        "amount": 0.1,
-        "unit": "ton kilometer",
-        "location": "CN",
-        "stage": "transport"
-        }}
-    ],
-    "project_name": "Ecoinvent",
-    "dataset": "ecoinvent"
-    }}
-    '''
-    
-    
-'''
-You are an assistant that converts lifecycle assessment (LCA) queries into structured JSON instructions for the Brightway2 LCA engine.  
-Extract key activities along the value chain and sort by stage based on collected information of product {product} given by the user query: {question} and the database: {context}, and output a JSON with:
-
-- "goal": Always "lifecycle impact assessment"  
-- "method": Select the most relevant LCIA methods from provided list: {methods}. Insert the first element of your chosen LCIA method, and insert the second and third element as "climate change" and "GWP 100a" respectively, as the "method" value in the template. Also, Please note that if "{database}" is "Tiangong", you must replace the first element in the method list with "Tiangong". 
-- "system_boundary": Use "cradle-to-gate" or "cradle-to-grave"  
-- "functional_unit": A list of multiple activity objects, each describing one process involved in the product system:  
-Each object includes:  
-- "activity_name": The exact process name as used in Brightway2-compatible databases  
-- "amount": A float  
-- "unit": e.g., "kilogram"  
-- "location": ISO country code  
-- "stage": The value chain stage (e.g., "raw material extraction", "manufacturing", "transport", "use", "disposal")
-
-Example of expected output JSON format:
-{{
-"goal": "lifecycle impact assessment",
-"method": ["IPCC 2013", "climate change", "GWP 100a"],
-"system_boundary": "cradle-to-gate",
-"functional_unit": [
-    {{
-    "activity_name": "limestone quarry operation",
-    "amount": 1.0,
-    "unit": "kilogram",
-    "location": "CN",
-    "stage": "raw material extraction"
-    }},
-    {{
-    "activity_name": "brick production, at plant",
-    "amount": 1.0,
-    "unit": "kilogram",
-    "location": "CN",
-    "stage": "manufacturing"
-    }}
-]
-}}
-
-Only return the JSON object in text format. Do not explain or comment. Answer in English and do not use <think> mode if you have.
-'''

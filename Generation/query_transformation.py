@@ -8,14 +8,11 @@ from datetime import datetime, timezone
 from io import BytesIO
 from operator import itemgetter
 from xml.sax.saxutils import escape as xml_escape
-
 from reportlab.lib import colors
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
 from reportlab.lib.units import mm
 from reportlab.platypus import Paragraph, SimpleDocTemplate, Spacer, Table, TableStyle
-
-
 from langchain_core.runnables import RunnableLambda
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
@@ -26,7 +23,6 @@ from langchain_openai import AzureChatOpenAI, AzureOpenAIEmbeddings
 from openai import OpenAI
 import sqlite3
 from .functions.non_RAG_methods import conduct_lca_anaylsis, Get_LCIA_methods, generate_response_bw2_input, generate_response_bw2_input_workbench_strict, extract_functional_unit, infer_product_from_query, input_q_to_json, generate_list_of_activities
-
 from .functions.vectorstore import build_and_save_vectorstores, load_vectorstores, LcaKnowledgeRetriever, load_vectorstores_fast
 from .functions.after_bw2 import final_mode_output_bw2_included
 from .functions.bw2_calculation import start_lca_calculation
@@ -81,66 +77,6 @@ embeddings = AzureOpenAIEmbeddings(
     api_key=subscription_key
 )
 
-# DeepSeek-V4-Flash (Azure AI Foundry OpenAI-compatible endpoint)
-# deepseek_endpoint = os.getenv(
-#     "AZURE_DEEPSEEK_ENDPOINT",
-#     "https://seesustainopedia-gpt5-resource.services.ai.azure.com/openai/v1",
-# )
-# deepseek_deployment = os.getenv("AZURE_DEEPSEEK_DEPLOYMENT", "DeepSeek-V4-Flash")
-# deepseek_api_key = os.getenv("AZURE_DEEPSEEK_API_KEY")
-
-# _deepseek_client = OpenAI(
-#     base_url=deepseek_endpoint,
-#     api_key=deepseek_api_key,
-# )
-
-# def _messages_to_openai_format(messages):
-#     payload = []
-#     for m in messages:
-#         if isinstance(m, BaseMessage):
-#             role = "user"
-#             if m.type == "system":
-#                 role = "system"
-#             elif m.type == "assistant":
-#                 role = "assistant"
-#             payload.append({"role": role, "content": str(m.content)})
-#         elif isinstance(m, dict) and "role" in m and "content" in m:
-#             payload.append({"role": m["role"], "content": str(m["content"])})
-#         else:
-#             payload.append({"role": "user", "content": str(m)})
-#     return payload
-
-
-# def _deepseek_invoke(input_value):
-#     """LangChain-compatible invoke target for `prompt | gpt5_client | StrOutputParser()`."""
-#     if isinstance(input_value, list):
-#         messages = _messages_to_openai_format(input_value)
-#     elif isinstance(input_value, dict) and "messages" in input_value:
-#         messages = _messages_to_openai_format(input_value["messages"])
-#     else:
-#         messages = [{"role": "user", "content": str(input_value)}]
-
-#     completion = _deepseek_client.chat.completions.create(
-#         model=deepseek_deployment,
-#         messages=messages,
-#     )
-#     content = (completion.choices[0].message.content or "") if completion.choices else ""
-#     return AIMessage(content=content)
-
-
-# gpt5_client = RunnableLambda(_deepseek_invoke)
-
-# preinstall_ecoinvent_database()  # pre-build BW2 databases in deployment
-    
-# if os.path.isdir('./chroma_db_lca_knowledge') and os.path.isdir('./chroma_db_eco_methods') and os.path.isdir('./chroma_db_tg_methods') and os.path.isdir('./chroma_db_eco_activity'):
-#     pass
-# else:
-#     vectorstore_lca_knowledge, parent_lookup, vectorstore_eco_methods, vectorstore_tg_methods, vectorstore_eco_activity = build_and_save_vectorstores(embeddings, eco_methods='./_additionals/methods/EcoInvent_methods.txt', tg_methods='./_additionals/methods/tiangong_methods.txt', eco_activity='./_additionals/methods/Ecoinvent_activity.txt', pdf_dir='./_raw knowledge pdfs', persist_dir_lca_knowledge='./chroma_db_lca_knowledge', persist_dir_eco_methods='./chroma_db_eco_methods', persist_dir_tg_methods='./chroma_db_tg_methods', persist_dir_eco_activity='./chroma_db_eco_activity')
-
-
-# ── Fast-mode LCA helpers ──────────────────────────────────────────────────────
-
-# Pattern for specific numeric CO₂ values in retrieved context.
 _CO2_VALUE_RE = re.compile(
     r"\d+(?:[.,]\d+)?\s*(?:kg\s*CO2|kgCO2|t\s*CO2|tonne\s*CO2|CO2[-\u2010]\s*eq|co2e|CO\u2082|GWP)",
     re.IGNORECASE,
@@ -155,12 +91,6 @@ _MASS_QUERY_RE = re.compile(
 
 
 def _extract_mass_from_query(question: str) -> tuple:
-    """
-    Extract (amount, unit) from the user query string.
-
-    Returns (1.0, 'tonne') when no explicit mass is found so that the BW2
-    pipeline defaults to a 1-tonne functional unit.
-    """
     m = _MASS_QUERY_RE.search(question)
     if m:
         amount = float(m.group(1))
@@ -177,14 +107,6 @@ def _extract_mass_from_query(question: str) -> tuple:
 
 
 def _extract_n_simulations_from_query(question: str, default: int = 25) -> int:
-    """
-    Extract the number of Monte Carlo simulations requested in the user query.
-
-    Uses a lightweight LLM call to handle the full range of natural-language
-    phrasings (e.g. "run a hundred simulations", "n_simulations=200",
-    "fifty Monte Carlo runs").  Falls back to *default* (25) when the LLM
-    returns no valid number or the call fails.
-    """
     _N_SIM_PROMPT = ChatPromptTemplate.from_messages([
         (
             "system",
@@ -210,8 +132,6 @@ def _extract_n_simulations_from_query(question: str, default: int = 25) -> int:
 
 
 # ── Shared response-style rules injected into every fast-mode RAG prompt ──────
-# These are embedded in the system message so the LLM never sees the RAG
-# context as 'external' — it treats it as its own internalized knowledge.
 _RAG_STYLE_RULES = (
     "You are conversing directly with a user. Respond as a knowledgeable expert "
     "speaking naturally and confidently, in the same register as modern AI assistants. "
@@ -272,10 +192,6 @@ def _is_lca_computation_query(question: str) -> bool:
 
 
 def _context_has_co2_values(context: str, product: str) -> bool:
-    """
-    Return True when the retrieved context already contains specific numeric CO₂
-    values relevant to the queried product, so BW2 computation can be skipped.
-    """
     if not context:
         return False
     matches = _CO2_VALUE_RE.findall(context)
@@ -293,12 +209,6 @@ def _build_fast_lca_user_params(
     unit: str = "tonne",
     n_simulations: int = 25,
 ) -> str:
-    """
-    Construct a minimal user_input_params string for the fast LCA BW2 pipeline.
-    System boundary is inferred from the query; amount/unit use the requested
-    functional unit so the BW2 result already reflects the correct mass.
-    n_simulations defaults to 25 when not explicitly specified by the user.
-    """
     q = question.lower()
     if any(kw in q for kw in ("cradle to grave", "full lifecycle", "end of life", "end-of-life", "use phase")):
         system_boundary = "cradle-to-grave"
@@ -509,7 +419,6 @@ def _run_fast_lca_pipeline(
 def generate_response_fast(question: str, product: str) -> dict:
     """
     Fast-path pipeline.
-
     Routing logic:
     1. Always retrieves context from chroma_db_lca_knowledge via RAG.
     2. Classifies intent with keyword heuristics (no LLM call).
@@ -565,12 +474,6 @@ def generate_response_fast(question: str, product: str) -> dict:
             resolved_product = infer_product_from_query(question, gpt5_client)
             
         elif resolved_product.isupper() and len(resolved_product) <= 10:
-            # Short all-caps acronym (e.g. "PDMS", "PET", "PVC", "HDPE").
-            # Expand to the full chemical name so vectorstore stage queries can
-            # match ecoinvent activity names via token overlap.  Without this,
-            # _rerank_eco_activities scores "polydimethylsiloxane production" as
-            # 0 overlap against a "PDMS …" query → activity never retrieved →
-            # functional_unit ends up empty.
             expanded = infer_product_from_query(question, gpt5_client)
             if expanded and expanded.lower() not in ("unknown product", "not specified"):
                 logging.info(
@@ -632,12 +535,6 @@ def generate_response_fast(question: str, product: str) -> dict:
 
 
 def generate_response_full_lca(user_input_params, product):
-    # answer_pack = {
-    #     "answer": None,
-    #     "markdown": {},
-    #     "processed_json": None,
-    #     "lcia_table": None
-    # }
     section1_end = time.time()
     logging.info(f"Environment Setting took {section1_end - section1_start:.2f} seconds")
     
@@ -648,17 +545,6 @@ def generate_response_full_lca(user_input_params, product):
         logging.info(f"Inferred product: {product}")
         
     structured_user_input_json = input_q_to_json(user_input_params)
-
-    # Classify intent and extract structured LCA parameters for routing and storage
-    # intent_params = classify_intent(question, product, gpt5_client)
-    # logging.info(
-    #     f"Intent: {intent_params.intent} | Product: {intent_params.product} | "
-    #     f"{intent_params.amount} {intent_params.unit} | {intent_params.system_boundary}"
-    # )
-    
-    # # Use the classifier's product if it is more specific than the provided value
-    # if intent_params.product and intent_params.product not in ('Not Specified', ''):
-    #     product = intent_params.product
     logging.info(f"Retreiving relative knowledge from localized knowledge database...", extra={"frontend": True})
 
 
@@ -705,7 +591,6 @@ def generate_response_full_lca(user_input_params, product):
     logging.info(f"Template generation completed ✔", extra={"frontend": True})
     logging.info(f"Routing to the LCA Engine...", extra={"frontend": True})
     
-    
     # # #BW2 Calculation
     if LCI_DATABASE == "Tiangong":
         lcidb_choice = "1"
@@ -714,15 +599,11 @@ def generate_response_full_lca(user_input_params, product):
     
     initialize_bw2_calculation = start_lca_calculation(lcidb_choice, bw2_input_filepath)
     bw2_output_rawpath = os.path.splitext(os.path.basename(bw2_input_filepath))[0]
-    # initialize_bw2_calculation = start_lca_calculation(lcidb_choice, f"bw2_input_templates/Crude Steel_Ecoinvent_20260302195453.json")
-    # bw2_output_rawpath = os.path.splitext(os.path.basename(f"bw2_input_templates/Crude Steel_Ecoinvent_20260302195453.json"))[0]
-    
+
     logging.info(f"BW2 calculation completed, output raw path: {bw2_output_rawpath}")
     logging.info(f"LCA computation completed. Ready to generate final output.", extra={"frontend": True})
     
     bw2_results_raw_filename = f"bw2_results/{bw2_output_rawpath}_output.json"
-    # bw2_results_raw_filename = f"bw2_results/Crude Steel_Ecoinvent_20260421184356_output.json"
-    
 
     _amount_str = str(structured_user_input_json.get("amount", "1"))
     _unit_str = structured_user_input_json.get("unit", "tonne")
@@ -1108,7 +989,6 @@ def generate_scope_report_latex(report_payload: dict) -> dict:
             "sections": preview_sections,
         },
     }
-
 
 def generate_scope_report_pdf(payload: dict) -> tuple[bytes, str]:
     """Build a polished PDF ESG scope report.

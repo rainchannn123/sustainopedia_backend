@@ -1,30 +1,4 @@
-"""
-lca_knowledge_pipeline.py  (v2 — state-of-the-art PDF ingestion)
-─────────────────────────────────────────────────────────────────
-High-fidelity data-preparation and ingestion pipeline for academic LCA PDFs.
-
-Key improvements over v1:
-  1. pdfplumber extraction  — layout-aware text + structured table detection
-  2. Atomic table blocks    — tables preserved as Markdown, never split across chunks
-  3. Row-group children     — large tables split with header repeated in each group
-  4. Section-aware chunking — heading detection groups text into Abstract / Methods /
-                               Results / Discussion / Conclusion segments
-  5. Sentence-group children — 2-sentence overlap, respects academic boundaries
-  6. Header/footer filtering — removes page numbers, DOI lines, copyright notices
-  7. Reference exclusion    — References section is not indexed
-  8. Enriched metadata      — chunk_type, section_type, table_caption, table_index
-
-Public API (unchanged from v1):
-    build_lca_knowledge_store(embeddings, pdf_dir, persist_dir, rebuild) → (Chroma, dict)
-    load_lca_knowledge_store(embeddings, persist_dir) → (Chroma, dict)
-    LcaKnowledgeRetriever(vectorstore, parent_lookup, k_children)
-
-Usage (standalone):
-    python -m Generation.functions.lca_knowledge_pipeline
-"""
-
 from __future__ import annotations
-
 import json
 import logging
 import re
@@ -33,7 +7,6 @@ import uuid
 from dataclasses import dataclass, field as dc_field
 from pathlib import Path
 from typing import Optional
-
 import chromadb
 
 try:

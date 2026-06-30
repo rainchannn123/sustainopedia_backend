@@ -1,10 +1,3 @@
-"""fast_lca_cache.py — MongoDB-backed result cache for the fast-response LCA pipeline.
-
-Stores per-product LCA computation results so repeated queries with the same or
-similar intent bypass the BW2 computation engine and are served from cache.
-Similarity is measured via cosine distance between Azure OpenAI text embeddings
-of the full user query; a configurable threshold gates cache hits.
-"""
 from __future__ import annotations
 
 import copy

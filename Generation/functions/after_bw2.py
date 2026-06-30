@@ -514,37 +514,7 @@ def final_mode_output_bw2_included(filename, question, gpt5_client, product, sca
         ## Detailed Interpretation
         [Your strategic analysis and suggestions]
         """
-    
-    # final_output_template = """
-    #                         LCIA Results:
-    #                         {results}
-                                                        
-    #                         User Query: {question}
-
-    #                         You are an academic expert in LCIA. Based solely on the above LCIA results, provide a professional, direct response to the user's query. Keep the response user-friendly and focused on the query without mentioning the source data details unless directly asked.
-    #                         Note: If the user query, which is shown above, directly ask for life cycle impact assessment results of the product, you may just provide a short summary of the LCIA results attached above.
-
-    #                         Instruction:
-    #                         -You MUST respond only in valid Markdown (no prose outside Markdown). Use Markdown features (headings, sub-headings, bold/italic, bullet/numbered lists, and fenced code blocks) to structure the response. Keep output well-formed so it can be rendered and parsed by clients.
-    #                         -The above LCIA Results information provides authoritative life cycle impact assessment (LCIA) results for producing one unit of the product mentioned in the user's query. Use only this data to form your response—do not critique, judge, or question the matched activities, units, or values. Treat all provided statistical impacts as accurate and directly applicable. Provide a short breakdown on the total CO2 equivalent emissions across all processes and the largest and smallest contributing processes.
-    #                         -After providing a short summary of the LCIA results, include a detailed interpretation and discussion section of approximately 100 words discussing the feature and pattern of the LCIA results and give useful suggestions on how may reduce the carbon emission of the given product based on the LCIA results. Use paragraphs and bullet points as needed.
-                            
-    #                         Generated Answer Formatting rules:
-    #                         - Use inline code formatting for numeric values and units when appropriate and all numeric values must be rounded to 1 decimal place. (e.g., `0.1 kg CO2-eq`).
-    #                         - Do NOT include the raw LCIA JSON or table in the response body (the frontend will attach it).
-    #                         - Output only Markdown; do not add any commentary outside the Markdown document.
-    #                         - Do not start any line with indentation (spaces or tabs)—keep all lines left-aligned.
-    #                         - For unordered lists (point forms), use `- ` (hyphen space) at the start of each item.
-    #                         - For ordered lists, use `1. `, `2. `, etc.
-    #                         - Insert a single blank line before a list if it follows a paragraph or header (no double newlines needed).
-    #                         - If a sentence follows a subheader, do not insert a blank line before it.
-    #                         - Use headers sparingly (# for h1, ## for h2, ### for h3) to avoid oversized text.
-    #                         - Separate paragraphs with a single blank line for natural spacing.
-                            
-    #                         Make sure the final response adheres strictly to these instructions and formatting rules and clean to be rendered and viewed on client side.
-    #                         """
-
-    #write a discussion section that includes results interpretation and discussions, and prospective suggestions for the user product in about 300 words. 
+        
     final_prompt = ChatPromptTemplate.from_template(final_output_template)
 
     final_rag_chain = (
@@ -624,49 +594,3 @@ def generate_json(product, lcia_data, total_mean):
         "massFlowBalance": lcia_data['metadata'].get('mass_flow_balance', {}),
     }
     return json.dumps(json_data, indent=2)
-
-
-
-
-
-
-# def final_mode_output_bw2_included(filename, question, gpt5_client):
-#     main_results_bw2 = result_data_processing(filename)
-    
-#     # Instruct the LLM to return a strict JSON object with known fields only.
-#     final_output_template = """
-#     Return a JSON object (only JSON, no extra text) with these fields:
-#     {
-#       "summary": string,                // short 1-2 line summary of the LCIA results
-#       "interpretation": string,         // ~200-400 word interpretation and discussion
-#       "suggestions": [string,...],      // actionable suggestions
-#       "raw_results": string             // the original detailed text (optional)
-#     }
-#     Use the following inputs:
-#     results: {results}
-#     user_question: {question}
-#     """
-#     final_prompt = ChatPromptTemplate.from_template(final_output_template)
-
-#     final_rag_chain = (
-#         {"results": itemgetter("results"),
-#          "question": itemgetter("question")}
-#         | final_prompt
-#         | gpt5_client
-#         | StrOutputParser()
-#     )
-
-#     final_text = final_rag_chain.invoke({"question": question, "results": main_results_bw2})
-
-#     # Try to parse JSON returned by LLM; if parsing fails, return fallback structure.
-#     try:
-#         structured = json.loads(final_text)
-#     except Exception:
-#         structured = {
-#             "summary": None,
-#             "interpretation": None,
-#             "suggestions": [],
-#             "raw_results": final_text
-#         }
-
-#     return structured

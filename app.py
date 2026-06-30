@@ -25,8 +25,6 @@ from Generation.query_transformation import (
     generate_scope_report_pdf,
 )
 
-
-
 from flask_cors import CORS
 
 from dotenv import load_dotenv
@@ -370,32 +368,6 @@ def download_esg_scope_report_pdf():
         app.logger.exception('Failed to generate ESG scope PDF report: %s', exc)
         return jsonify({'error': 'Failed to generate ESG scope PDF report'}), 500
 
-
-# ── Legacy synchronous endpoint (kept for compatibility) ───────────────────────
-
-
-
-# @app.route('/', methods=['GET'])
-# def health():
-#     # simple health check so curl on / doesn't 404
-#     return jsonify({'status': 'ok'})
-
-# @app.route('/api/query', methods=['POST'])
-# def query():
-#     try:
-#         data = request.get_json()
-#         question = data.get('question', '')
-#         product = data.get('product', 'Not Specified')
-#         answer_pack = generate_response(question, product)
-#         return jsonify({'answer_pack': answer_pack})
-#     except Exception as e:
-#         app.logger.exception(f"Error in /api/query: {e}")
-#         return jsonify({'error': str(e)}), 500
-
-
-
 if __name__ == '__main__':
-    port = int(os.environ.get("PORT", 5052))  # Azure sets PORT automatically
+    port = int(os.environ.get("PORT", 5052))
     app.run(host="0.0.0.0", port=port, threaded=True)
-
-#please note that for dev env, port should change to 5051 or any available port to avoid conflict with docker backend (app).

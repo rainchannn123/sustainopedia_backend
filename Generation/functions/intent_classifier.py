@@ -1,12 +1,3 @@
-"""
-intent_classifier.py
---------------------
-Classifies user LCA queries and extracts structured query parameters in a single LLM call.
-
-The extracted IntentParams guide downstream pipeline routing (BW2 computation vs. fast RAG
-response) and are stored in MongoDB for analytics and session continuity.
-"""
-
 import json
 import logging
 from dataclasses import dataclass, asdict
