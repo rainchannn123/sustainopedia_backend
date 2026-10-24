@@ -19,8 +19,7 @@ from langchain_core.output_parsers import StrOutputParser
 from langchain_core.documents import Document
 from langchain_core.messages import BaseMessage, AIMessage
 from langchain_community.vectorstores import Chroma
-from langchain_openai import AzureChatOpenAI, AzureOpenAIEmbeddings
-from openai import OpenAI
+from langchain_openai import AzureOpenAIEmbeddings, ChatOpenAI
 import sqlite3
 from .functions.non_RAG_methods import conduct_lca_anaylsis, Get_LCIA_methods, generate_response_bw2_input, generate_response_bw2_input_workbench_strict, extract_functional_unit, infer_product_from_query, input_q_to_json, generate_list_of_activities
 from .functions.vectorstore import build_and_save_vectorstores, load_vectorstores, LcaKnowledgeRetriever, load_vectorstores_fast
@@ -50,26 +49,24 @@ if _langchain_api_key:
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "1"
 os.environ["TOKENIZERS_PARALLELISM"] = 'false'
 
-endpoint = "https://seesustainopedia-gpt5-resource.cognitiveservices.azure.com/"
-
+embedding_endpoint = os.getenv("AZURE_EMBEDDING_ENDPOINT")
+llm_base_url = os.getenv("AZURE_OPENAI_ENDPOINT")
 llm_deployment = "gpt-6-luna"
 subscription_key = os.getenv("AZURE_API_KEY") 
-llm_api_version = "2026-09-22"
 
 tm_model_name = "text-embedding-3-large"
 tm_deployment = "text-embedding-3-large"
 tm_api_version = "2024-02-01"
 
-llm_client = AzureChatOpenAI(
-    azure_endpoint=endpoint,
-    api_version=llm_api_version,
-    azure_deployment=llm_deployment,
+llm_client = ChatOpenAI(
+    base_url=llm_base_url,
+    model=llm_deployment,
     api_key=subscription_key,
-    # temperature=0.2
+    use_responses_api=True,
 )
 
 embeddings = AzureOpenAIEmbeddings(
-    azure_endpoint=endpoint,
+    azure_endpoint=embedding_endpoint,
     api_version=tm_api_version,
     azure_deployment=tm_deployment,
     model=tm_model_name,
