@@ -17,14 +17,6 @@ def _ensure_lca_source_path():
         sys.path.insert(0, source_path)
 
 
-def _ensure_ecoinvent_directory():
-    try:
-        ECO_DIR.mkdir(parents=True, exist_ok=True)
-        return True, f"Ecoinvent directory ready: {ECO_DIR}"
-    except Exception as exc:
-        return False, str(exc)
-
-
 def _refresh_engine_modules():
     # Unified_LCA_Engine reads ENGINE_TYPE at import time; force a fresh import per run.
     for module_name in ["Unified_LCA_Engine", "lca_calculator"]:
@@ -33,20 +25,12 @@ def _refresh_engine_modules():
 
 
 def _initialize_ecoinvent_if_needed():
-    ok_db, msg_db = _ensure_ecoinvent_directory()
-    if not ok_db:
-        return False, msg_db
-
-    if ECO_DIR.exists() and any(ECO_DIR.iterdir()):
-        return True, f"Ecoinvent database directory already present: {ECO_DIR}"
-
     try:
-        init_module = importlib.import_module("init_database")
-        init_fn = getattr(init_module, "init_databases")
-        init_result = init_fn()
-        if init_result:
-            return True, "Ecoinvent database initialized successfully"
-        return False, "Ecoinvent database initialization returned False"
+        from .prebuild_bw2db import preinstall_ecoinvent_database
+
+        if preinstall_ecoinvent_database():
+            return True, "Ecoinvent database restored from MongoDB"
+        return False, "MongoDB Brightway snapshot restore failed; check server logs"
     except Exception as exc:
         return False, str(exc)
 
@@ -65,9 +49,9 @@ def connect_and_calculate_lca(engine_arg, json_path, background=False):
     os.environ["ENGINE_TYPE"] = "ecoinvent"
     os.environ["BRIGHTWAY2_DIR"] = str(ECO_DIR)
 
-    # ok_db, msg_db = _initialize_ecoinvent_if_needed()
-    # if not ok_db:
-    #     return {"error": "db_not_initialized", "message": msg_db}
+    ok_db, msg_db = _initialize_ecoinvent_if_needed()
+    if not ok_db:
+        return {"error": "db_not_initialized", "message": msg_db}
 
     try:
         _refresh_engine_modules()
@@ -108,72 +92,36 @@ def start_lca_calculation(choice, json_path, background=False):
         return {"error": "invalid_choice", "message": "choice must be '1', '2' or '3'"}
 
 
-# ─── Lightweight BW2 reference-product lookup for pre-calculation validation ──
+# ─── Lightweight MongoDB reference-product lookup for template validation ──
 
 _bw2_ref_product_index: dict = None  # {name_lower: {name, reference_product, unit, location}}
 
 
 def _build_bw2_ref_product_index() -> dict:
     """
-    Build an in-memory name→metadata index from the BW2 ecoinvent database.
-    Uses bw2data directly (no SentenceTransformer — lightweight).
+    Build an in-memory name→metadata index from MongoDB activity metadata.
     Cached at module level after the first successful build.
     Returns empty dict on any failure so callers degrade gracefully.
     """
     try:
-        _ensure_lca_source_path()
-        os.environ["BRIGHTWAY2_DIR"] = str(ECO_DIR)
-
-        # Import bw2data inside the function so that BRIGHTWAY2_DIR is set first.
-        import importlib as _il
-        bw2data_mod = _il.import_module("bw2data")
-
-        # bw2data.ProjectManager reads BRIGHTWAY2_DIR only during __init__.
-        # If the module was already cached in sys.modules (e.g., loaded by a
-        # previous LCA calculation with a different BRIGHTWAY2_DIR), the
-        # projects._base_data_dir attribute will be wrong and set_current()
-        # will fail to find the "Ecoinvent" project.
-        # Fix: override _base_data_dir directly on the existing singleton, then
-        # re-open the projects registry database so has_project() queries the
-        # right file.
-        current_base = getattr(bw2data_mod.projects, "_base_data_dir", None)
-        if current_base != ECO_DIR:
-            logger.info(
-                "bw2data projects._base_data_dir was '%s'; overriding to '%s'",
-                current_base, ECO_DIR,
-            )
-            bw2data_mod.projects._base_data_dir = ECO_DIR
-            # Re-point the projects registry SQLite file to the new location
-            projects_db_path = ECO_DIR / "projects.db"
-            try:
-                bw2data_mod.projects.db.database.init(str(projects_db_path))
-            except Exception as db_exc:
-                logger.debug(
-                    "projects.db reinit skipped (will proceed anyway): %s", db_exc
-                )
-
-        projects = bw2data_mod.projects
-        Database = bw2data_mod.Database
-
-        projects.set_current("ecoinvent")
-        db = Database("ecoinvent")
+        from .lca_activity_store import iter_activity_metadata
 
         index: dict = {}
-        for act in db:
-            name = act.get("name", "") or ""
+        for act in iter_activity_metadata():
+            name = act.get("name", "")
             if name:
-                index[name.lower()] = {
+                index.setdefault(name.lower(), {
                     "name": name,
-                    "reference_product": act.get("reference product", "") or "",
+                    "reference_product": act.get("reference_product", "") or "",
                     "unit": act.get("unit", "") or "",
                     "location": act.get("location", "") or "",
-                }
+                })
 
-        logger.info("BW2 reference-product index built: %d activities", len(index))
+        logger.info("MongoDB reference-product index built: %d activities", len(index))
         return index
     except Exception as exc:
         logger.warning(
-            "Could not build BW2 reference-product index "
+            "Could not build MongoDB reference-product index "
             "(template validation will use LLM-only mode): %s", exc,
             exc_info=True,
         )
@@ -184,9 +132,8 @@ def lookup_activity_ref_products_batch(activity_names: list, n_close: int = 5) -
     """
     Return reference_product metadata for a list of ecoinvent activity names.
 
-    Uses an in-memory BW2 index (built lazily on first call, then cached for the
-    lifetime of the process).  Falls back gracefully to an empty dict when the
-    BW2 ecoinvent database has not yet been initialised.
+    Uses a MongoDB activity index (built lazily on first call, then cached for
+    the lifetime of the process). Falls back to an empty dict when unavailable.
 
     Parameters
     ----------

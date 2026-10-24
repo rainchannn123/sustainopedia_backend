@@ -32,23 +32,6 @@ jobs:
           source antenv/bin/activate
           pip install -r requirements.txt
       
-      - name: Pre-build Ecoinvent database from Azure Blob Storage
-        env:
-          AZURE_STORAGE_CONNECTION_STRING: ${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}
-          AZURE_CONTAINER_NAME: ${{ secrets.AZURE_CONTAINER_NAME }}
-          ECOINVENT_ZIP_BLOB: ${{ secrets.ECOINVENT_ZIP_BLOB }}
-        run: |
-          source antenv/bin/activate
-          python -c "
-          import sys, os
-          sys.path.insert(0, '.')
-          from Generation.functions.prebuild_bw2db import preinstall_ecoinvent_database
-          result = preinstall_ecoinvent_database()
-          if not result:
-              print('ERROR: preinstall_ecoinvent_database() returned False')
-              sys.exit(1)
-          "
-
       - name: Pre-build ChromaDB vectorstores
         env:
           AZURE_API_KEY: ${{ secrets.AZURE_API_KEY }}
