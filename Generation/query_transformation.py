@@ -52,19 +52,18 @@ os.environ["TOKENIZERS_PARALLELISM"] = 'false'
 
 endpoint = "https://seesustainopedia-gpt5-resource.cognitiveservices.azure.com/"
 
-gpt5_model_name = "gpt-5.4"
-gpt5_deployment = "gpt-5.4"
+llm_deployment = "gpt-6-luna"
 subscription_key = os.getenv("AZURE_API_KEY") 
-gpt5_api_version = "2024-12-01-preview"
+llm_api_version = "2026-09-22"
 
 tm_model_name = "text-embedding-3-large"
 tm_deployment = "text-embedding-3-large"
 tm_api_version = "2024-02-01"
 
-gpt5_client = AzureChatOpenAI(
+llm_client = AzureChatOpenAI(
     azure_endpoint=endpoint,
-    api_version=gpt5_api_version,
-    azure_deployment=gpt5_deployment,
+    api_version=llm_api_version,
+    azure_deployment=llm_deployment,
     api_key=subscription_key,
     # temperature=0.2
 )
@@ -119,7 +118,7 @@ def _extract_n_simulations_from_query(question: str, default: int = 25) -> int:
         ("human", "Query: {question}"),
     ])
     try:
-        chain = _N_SIM_PROMPT | gpt5_client | StrOutputParser()
+        chain = _N_SIM_PROMPT | llm_client | StrOutputParser()
         raw = chain.invoke({"question": question}).strip()
         if raw.lower() == "none":
             return default
@@ -183,7 +182,7 @@ _LCA_INTENT_CLASSIFIER_PROMPT = ChatPromptTemplate.from_messages([
 def _is_lca_computation_query(question: str) -> bool:
     """Return True when the LLM judges the query as requesting an LCA computation."""
     try:
-        chain = _LCA_INTENT_CLASSIFIER_PROMPT | gpt5_client | StrOutputParser()
+        chain = _LCA_INTENT_CLASSIFIER_PROMPT | llm_client | StrOutputParser()
         result = chain.invoke({"question": question}).strip().upper()
         return result.startswith("YES")
     except Exception as exc:
@@ -290,7 +289,7 @@ def _rag_answer(question: str, product: str, context: str, intent: str) -> dict:
         ("system", system_content),
         ("human", "{question}"),
     ])
-    chain = prompt | gpt5_client | StrOutputParser()
+    chain = prompt | llm_client | StrOutputParser()
     try:
         answer = chain.invoke({"question": user_message})
     except Exception:
@@ -345,16 +344,16 @@ def _run_fast_lca_pipeline(
     structured_params = input_q_to_json(user_params_str)
 
     logging.info("Fast LCA: selecting LCIA methods...", extra={"frontend": True})
-    LCIA_method_list = Get_LCIA_methods(question, gpt5_client, retriever_lca_methods)
+    LCIA_method_list = Get_LCIA_methods(question, llm_client, retriever_lca_methods)
 
     logging.info("Fast LCA: generating activity list...", extra={"frontend": True})
     retrieved_activity_list = generate_list_of_activities(
-        gpt5_client, retriever_eco_activity, product, user_params_str
+        llm_client, retriever_eco_activity, product, user_params_str
     )
 
     logging.info("Fast LCA: constructing BW2 input template...", extra={"frontend": True})
     bw2_input_filepath, activities_by_stage_dict = generate_response_bw2_input(
-        gpt5_client,
+        llm_client,
         context_runnable,
         LCIA_method_list,
         retrieved_activity_list,
@@ -379,7 +378,7 @@ def _run_fast_lca_pipeline(
     res = final_mode_output_bw2_included(
         bw2_results_file,
         question,
-        gpt5_client,
+        llm_client,
         product,
         scale_factor=scale_factor,
         n_simulations=structured_params.get("n_simulations", 25),
@@ -471,10 +470,10 @@ def generate_response_fast(question: str, product: str) -> dict:
         # 3b. Infer product name if not supplied.
         resolved_product = (product or "").strip()
         if not resolved_product or resolved_product.lower() == "not specified":
-            resolved_product = infer_product_from_query(question, gpt5_client)
+            resolved_product = infer_product_from_query(question, llm_client)
             
         elif resolved_product.isupper() and len(resolved_product) <= 10:
-            expanded = infer_product_from_query(question, gpt5_client)
+            expanded = infer_product_from_query(question, llm_client)
             if expanded and expanded.lower() not in ("unknown product", "not specified"):
                 logging.info(
                     "Fast LCA: expanding acronym '%s' → '%s'",
@@ -541,7 +540,7 @@ def generate_response_full_lca(user_input_params, product):
     # Infer product from the query if the user left the product field empty
     if not product or not product.strip():
         logging.info("Product field is empty — inferring product from user query...")
-        product = infer_product_from_query(user_input_params, gpt5_client)
+        product = infer_product_from_query(user_input_params, llm_client)
         logging.info(f"Inferred product: {product}")
         
     structured_user_input_json = input_q_to_json(user_input_params)
@@ -565,14 +564,14 @@ def generate_response_full_lca(user_input_params, product):
         retriever_lca_methods = retriever_tg_methods
     elif LCI_DATABASE == "Ecoinvent":
         retriever_lca_methods = retriever_eco_methods
-    LCIA_method_list = Get_LCIA_methods(user_input_params, gpt5_client, retriever_lca_methods)
+    LCIA_method_list = Get_LCIA_methods(user_input_params, llm_client, retriever_lca_methods)
     logging.info(f"Found a list of suitable LCIA methods ✔", extra={"frontend": True})
     
 
     #RAG retrieval
     logging.info(f"Retrieving more knowledge from localized knowledge database...", extra={"frontend": True})
     section4_start = time.time()
-    query_decomposition_retrival = lca_template_knowledge_retrieval(user_input_params, gpt5_client, retriever_lca_knowledge, vectorstore_lca_knowledge, k_per_sub=4)
+    query_decomposition_retrival = lca_template_knowledge_retrieval(user_input_params, llm_client, retriever_lca_knowledge, vectorstore_lca_knowledge, k_per_sub=4)
     section4_end = time.time()
     logging.info(f"retrieve alternative questions took {section4_end - section4_start:.2f} seconds")
     logging.info(f"Knowledge retrieval completed ✔", extra={"frontend": True})
@@ -580,9 +579,9 @@ def generate_response_full_lca(user_input_params, product):
     #1st results = bw2 input
     section5_start = time.time()
     logging.info(f"Constructing a detailed value chain template for LCA Engine computation...", extra={"frontend": True})
-    retrieved_acitivity_list = generate_list_of_activities(gpt5_client, retriever_eco_activity, product, user_input_params)
+    retrieved_acitivity_list = generate_list_of_activities(llm_client, retriever_eco_activity, product, user_input_params)
     bw2_input_filepath, activities_by_stage_dict = generate_response_bw2_input(
-        gpt5_client, query_decomposition_retrival, LCIA_method_list, retrieved_acitivity_list,
+        llm_client, query_decomposition_retrival, LCIA_method_list, retrieved_acitivity_list,
         product, LCI_DATABASE, retriever_eco_activity,
         user_input_params=structured_user_input_json
     )
@@ -608,7 +607,7 @@ def generate_response_full_lca(user_input_params, product):
     _amount_str = str(structured_user_input_json.get("amount", "1"))
     _unit_str = structured_user_input_json.get("unit", "tonne")
     display_amount, display_unit, scale_factor = extract_functional_unit(f"{_amount_str} {_unit_str}")
-    res = final_mode_output_bw2_included(bw2_results_raw_filename, user_input_params, gpt5_client, product, scale_factor=scale_factor, n_simulations=structured_user_input_json.get("n_simulations", 25), display_amount=display_amount, display_unit=display_unit, activities_by_stage_dict=activities_by_stage_dict)
+    res = final_mode_output_bw2_included(bw2_results_raw_filename, user_input_params, llm_client, product, scale_factor=scale_factor, n_simulations=structured_user_input_json.get("n_simulations", 25), display_amount=display_amount, display_unit=display_unit, activities_by_stage_dict=activities_by_stage_dict)
     logging.info(f"Final output generation completed ✔, starting to prepare answer pack...", extra={"frontend": True})
     final_output_with_bw2 = None
     lcia_data = {}
@@ -838,7 +837,7 @@ def _build_scope_report_paragraph(
             "Keep ALL numeric values in the text to 1 decimal place.",
         ),
     ])
-    chain = prompt | gpt5_client | StrOutputParser()
+    chain = prompt | llm_client | StrOutputParser()
     payload = {
         "company_name": company_name,
         "product": product,
@@ -1317,16 +1316,16 @@ def generate_response_workbench_lca(workbench_payload: dict) -> dict:
     logging.info("Computing the best LCIA methods for current analysis...", extra={"frontend": True})
     retriever_lca_methods = retriever_tg_methods if LCI_DATABASE == "Tiangong" else retriever_eco_methods
     query_text = _build_workbench_query_text(product, params, params["strict_nodes"])
-    LCIA_method_list = Get_LCIA_methods(query_text, gpt5_client, retriever_lca_methods)
+    LCIA_method_list = Get_LCIA_methods(query_text, llm_client, retriever_lca_methods)
     logging.info("Found a list of suitable LCIA methods ✔", extra={"frontend": True})
 
     logging.info("Retrieving more knowledge from localized knowledge database...", extra={"frontend": True})
-    query_decomposition_retrival = lca_template_knowledge_retrieval(query_text, gpt5_client, retriever_lca_knowledge, vectorstore_lca_knowledge, k_per_sub=4)
+    query_decomposition_retrival = lca_template_knowledge_retrieval(query_text, llm_client, retriever_lca_knowledge, vectorstore_lca_knowledge, k_per_sub=4)
     logging.info("Knowledge retrieval completed ✔", extra={"frontend": True})
 
     logging.info("Constructing a detailed value chain template for LCA Engine computation...", extra={"frontend": True})
     bw2_input_filepath, activities_by_stage_dict = generate_response_bw2_input_workbench_strict(
-        gpt5_client,
+        llm_client,
         query_decomposition_retrival,
         LCIA_method_list,
         params["strict_nodes"],
@@ -1349,7 +1348,7 @@ def generate_response_workbench_lca(workbench_payload: dict) -> dict:
     res = final_mode_output_bw2_included(
         bw2_results_raw_filename,
         query_text,
-        gpt5_client,
+        llm_client,
         product,
         scale_factor=scale_factor,
         n_simulations=params.get("n_simulations", 25),
