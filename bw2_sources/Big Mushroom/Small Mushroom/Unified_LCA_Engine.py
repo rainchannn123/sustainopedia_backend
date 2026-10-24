@@ -107,7 +107,7 @@ class UnifiedLCAEngine:
                 input_data = json.load(f)
 
             # Get project name and create appropriate engine
-            project_name = input_data.get("Project", "default_project")
+            project_name = "ecoinvent" if ENGINE_TYPE == "ecoinvent" else input_data.get("Project", "default_project")
             engine = self.create_engine(project_name)
 
             #Setup database based on engine type
@@ -319,4 +319,4 @@ def main(json_file_path: str):
     return unified_engine.run_lca_calculation(json_file_path)
 
 if __name__ == "__main__":
-    main('test.json') 
+    main('test.json')

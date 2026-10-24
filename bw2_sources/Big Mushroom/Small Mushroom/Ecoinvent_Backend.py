@@ -7,7 +7,6 @@ import numpy as np
 os.environ.setdefault("BRIGHTWAY2_DIR", "./brightway_databases/brightway2_ecoinvent")
 import bw2io as bi
 from bw2data import Database, databases, Method, methods, projects
-from bw2io import create_default_biosphere3
 from bw2io import SingleOutputEcospold2Importer
 from bw2io.strategies import normalize_units, set_biosphere_type, drop_unspecified_subcategories, link_iterable_by_fields, drop_unlinked_cfs
 from bw2io.data import convert_lcia_methods_data
@@ -16,6 +15,7 @@ from difflib import get_close_matches
 import logging
 import openpyxl
 import functools
+import threading
 import bw2calc as bc
 import pandas as pd
 
@@ -29,6 +29,21 @@ logging.basicConfig(
         logging.FileHandler('ecoinvent_parse.log')
     ]
 )
+
+_semantic_model = None
+_semantic_model_lock = threading.Lock()
+
+
+def _get_semantic_model():
+    global _semantic_model
+    if _semantic_model is None:
+        with _semantic_model_lock:
+            if _semantic_model is None:
+                _semantic_model = SentenceTransformer(
+                    './_models/models--sentence-transformers--all-MiniLM-L6-v2/snapshots/c9745ed1d9f207416be6d2e6f8de32d1f16199bf',
+                    device='cpu',
+                )
+    return _semantic_model
 
 # ---------------------------------------------------------------------------
 # Unit compatibility: map input unit strings → ecoinvent unit string(s).
@@ -106,13 +121,15 @@ class EcoinventEngine:
     def __init__(self, db=None, project_name="default_project"):
         self.project_name = project_name
         self.db = db
-        self.model = SentenceTransformer('./_models/models--sentence-transformers--all-MiniLM-L6-v2/snapshots/c9745ed1d9f207416be6d2e6f8de32d1f16199bf', device='cpu')
+        self.model = _get_semantic_model()
         self.method = None
         self._setup_project()
 
     def _setup_project(self):
         if self.project_name not in projects:
-            projects.create_project(self.project_name)
+            raise RuntimeError(
+                f"Brightway project {self.project_name!r} is missing from the restored database snapshot"
+            )
         projects.set_current(self.project_name)
 
     def find_process_exact(self, name, location=None):
@@ -383,47 +400,22 @@ class EcoinventEngine:
     def setup_database_and_methods(self, db_name: str, datasets_path: str = None):
         """Setup database and ensure it's accessible"""
         from bw2data import databases, Database
-        from bw2io import create_default_biosphere3
-        from bw2data import methods
-        ef_methods = [m for m in methods]
-        logger.info(str(ef_methods))
 
-        # 1. 确保 biosphere3 存在
+        # This is a prebuilt snapshot; don't mutate or re-import it at runtime.
         if "biosphere3" not in databases:
-            logger.warning("Creating biosphere3...")
-            create_default_biosphere3()
-            logger.warning("biosphere3 created.")
-        else:
-            logger.warning("biosphere3 already exists.")
+            raise RuntimeError("Brightway snapshot is missing the required 'biosphere3' database")
 
-        # 2. 检查数据库是否已存在
         if db_name in databases:
             logger.warning(f"Database {db_name} already exists, loading...")
             self.db = Database(db_name)
-            logger.warning(f"Database {db_name} loaded successfully, activity count: {len(list(self.db))}")
+            activity_count = databases[db_name].get("number", "unknown")
+            logger.warning(f"Database {db_name} loaded successfully, activity count: {activity_count}")
             return self.db
 
-        # 3. 如果数据库不存在且提供了数据集路径，则导入新数据库
-        if not datasets_path:
-            raise ValueError(f"Database {db_name} does not exist and no datasets_path provided")
-
-        logger.warning(f"Database {db_name} does not exist, importing from {datasets_path}...")
-        
-        # 尝试导入数据库
-        try:
-            from init_database import init_databases
-            init_result = init_databases()
-            if init_result:
-                logger.warning(f"Database {db_name} imported successfully")
-                self.db = Database(db_name)
-                return self.db
-            else:
-                raise ValueError(f"Failed to import database {db_name}")
-        except Exception as e:
-            logger.error(f"Error importing database: {e}")
-            raise ValueError(f"Failed to import database {db_name}: {e}")
-
-        return self.db
+        raise RuntimeError(
+            f"Brightway database {db_name!r} is missing from project {self.project_name!r}; "
+            "automatic raw-data import is disabled to protect the restored snapshot"
+        )
 
 def main(json_file):
     with open(json_file, "r") as f:

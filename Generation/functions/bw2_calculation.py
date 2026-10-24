@@ -2,11 +2,12 @@ import os
 import importlib
 import sys
 import logging
+import threading
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 LCA_SOURCE_DIR = REPO_ROOT / "bw2_sources" / "Big Mushroom" / "Small Mushroom"
-ECO_DIR = REPO_ROOT / "brightway_databases" / "brightway2_ecoinvent"
+ECO_DIR = Path(os.getenv("BRIGHTWAY_DATA_DIR") or REPO_ROOT / "brightway_databases" / "brightway2_ecoinvent")
 
 logger = logging.getLogger(__name__)
 
@@ -28,9 +29,19 @@ def _initialize_ecoinvent_if_needed():
     try:
         from .prebuild_bw2db import preinstall_ecoinvent_database
 
-        if preinstall_ecoinvent_database():
-            return True, "Ecoinvent database restored from MongoDB"
-        return False, "MongoDB Brightway snapshot restore failed; check server logs"
+        data_dir = preinstall_ecoinvent_database()
+        if data_dir:
+            data_dir = Path(data_dir)
+            os.environ["BRIGHTWAY2_DIR"] = str(data_dir)
+            from bw2data import databases, projects
+
+            if "ecoinvent" not in projects:
+                raise RuntimeError("Restored Brightway snapshot has no 'ecoinvent' project")
+            projects.set_current("ecoinvent")
+            if "ecoinvent" not in databases:
+                raise RuntimeError("Restored 'ecoinvent' project has no 'ecoinvent' database")
+            return True, data_dir
+        return False, "Could not prepare the Brightway cache; check server logs"
     except Exception as exc:
         return False, str(exc)
 
@@ -47,11 +58,14 @@ def connect_and_calculate_lca(engine_arg, json_path, background=False):
 
     _ensure_lca_source_path()
     os.environ["ENGINE_TYPE"] = "ecoinvent"
-    os.environ["BRIGHTWAY2_DIR"] = str(ECO_DIR)
 
-    ok_db, msg_db = _initialize_ecoinvent_if_needed()
+    ok_db, data_dir = _initialize_ecoinvent_if_needed()
     if not ok_db:
-        return {"error": "db_not_initialized", "message": msg_db}
+        return {"error": "db_not_initialized", "message": data_dir}
+
+    global ECO_DIR
+    ECO_DIR = data_dir
+    os.environ["BRIGHTWAY2_DIR"] = str(ECO_DIR)
 
     try:
         _refresh_engine_modules()
@@ -95,9 +109,11 @@ def start_lca_calculation(choice, json_path, background=False):
 # ─── Lightweight MongoDB reference-product lookup for template validation ──
 
 _bw2_ref_product_index: dict = None  # {name_lower: {name, reference_product, unit, location}}
+_bw2_ref_product_snapshot_id = None
+_bw2_ref_product_index_lock = threading.Lock()
 
 
-def _build_bw2_ref_product_index() -> dict:
+def _build_bw2_ref_product_index(snapshot_id: str) -> dict:
     """
     Build an in-memory name→metadata index from MongoDB activity metadata.
     Cached at module level after the first successful build.
@@ -107,7 +123,7 @@ def _build_bw2_ref_product_index() -> dict:
         from .lca_activity_store import iter_activity_metadata
 
         index: dict = {}
-        for act in iter_activity_metadata():
+        for act in iter_activity_metadata(snapshot_id):
             name = act.get("name", "")
             if name:
                 index.setdefault(name.lower(), {
@@ -126,6 +142,30 @@ def _build_bw2_ref_product_index() -> dict:
             exc_info=True,
         )
         return {}
+
+
+def _get_bw2_ref_product_index() -> dict:
+    global _bw2_ref_product_index, _bw2_ref_product_snapshot_id
+    try:
+        from .lca_activity_store import get_active_activity_snapshot
+
+        snapshot_id = get_active_activity_snapshot()["snapshot_id"]
+        if _bw2_ref_product_snapshot_id == snapshot_id and _bw2_ref_product_index:
+            return _bw2_ref_product_index
+
+        with _bw2_ref_product_index_lock:
+            if _bw2_ref_product_snapshot_id != snapshot_id or not _bw2_ref_product_index:
+                index = _build_bw2_ref_product_index(snapshot_id)
+                if not index:
+                    _bw2_ref_product_index = None
+                    _bw2_ref_product_snapshot_id = None
+                    return None
+                _bw2_ref_product_index = index
+                _bw2_ref_product_snapshot_id = snapshot_id
+        return _bw2_ref_product_index
+    except Exception as exc:
+        logger.warning("Could not refresh MongoDB activity metadata index: %s", exc, exc_info=True)
+        return None
 
 
 def lookup_activity_ref_products_batch(activity_names: list, n_close: int = 5) -> dict:
@@ -152,21 +192,12 @@ def lookup_activity_ref_products_batch(activity_names: list, n_close: int = 5) -
         }}
         Missing entries mean no match was found.  Returns {} if BW2 unavailable.
     """
-    global _bw2_ref_product_index
-    if _bw2_ref_product_index is None:
-        _bw2_ref_product_index = _build_bw2_ref_product_index()
-        if not _bw2_ref_product_index:
-            # Build failed — reset to None so the next request retries rather
-            # than permanently returning empty results.
-            _bw2_ref_product_index = None
-            return {}
-
-    if not _bw2_ref_product_index:
+    index = _get_bw2_ref_product_index()
+    if not index:
         return {}
 
     from difflib import get_close_matches as _gcm
 
-    index = _bw2_ref_product_index
     all_names_lower = list(index.keys())
 
     results: dict = {}

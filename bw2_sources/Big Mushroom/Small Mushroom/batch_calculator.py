@@ -17,7 +17,7 @@ def batch_calculate(json_files, engine_type):
     if engine_type == 'tiangong':
         os.environ['BRIGHTWAY2_DIR'] = "./brightway_databases/brightway2_tiangong"
     else:
-        os.environ['BRIGHTWAY2_DIR'] = "./brightway_databases/brightway2_ecoinvent"
+        os.environ.setdefault('BRIGHTWAY2_DIR', "./brightway_databases/brightway2_ecoinvent")
     
     try:
         from Unified_LCA_Engine import UnifiedLCAEngine

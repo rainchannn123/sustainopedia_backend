@@ -29,7 +29,7 @@ from .functions.bw2_calculation import start_lca_calculation
 from .functions.RAG_methods import query_decomposition_retrieval, lca_template_knowledge_retrieval
 from .functions.fast_lca_cache import cache_lookup, cache_store
 # from .functions.intent_classifier import _DEFAULTS, classify_intent  # query intent classification and parameter extraction
-# Brightway files are restored from MongoDB on demand by bw2_calculation.
+# Brightway files are cached from Azure Blob on demand by bw2_calculation.
 
 from dotenv import load_dotenv
 load_dotenv(dotenv_path="./.env")

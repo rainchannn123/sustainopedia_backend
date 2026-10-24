@@ -38,16 +38,11 @@ def init_databases(method=None):
     # 检查项目
     logger.info(f"可用项目: {projects}")
 
-    # 清理旧项目
-    for project in ['ecoinvent', 'Ecoinvent']:
-        if project in projects:
-            logger.info(f"删除旧项目: {project}")
-            projects.delete_project(project)
-    
-    # 创建新项目
-    projects.create_project("ecoinvent")
+    # Reuse the restored project; never delete it during initialization.
+    if "ecoinvent" not in projects:
+        projects.create_project("ecoinvent")
     projects.set_current("ecoinvent")
-    logger.info("创建并设置新项目: ecoinvent")
+    logger.info("Set current project: ecoinvent")
     logger.info(f"Project directory after set: {projects.dir}")
     
     # 重新加载数据库

@@ -37,7 +37,7 @@ def run_ecoinvent_calculation(json_file):
     
     # 设置环境
     os.environ['ENGINE_TYPE'] = 'ecoinvent'
-    os.environ['BRIGHTWAY2_DIR'] = "./brightway_databases/brightway2_ecoinvent"
+    os.environ.setdefault('BRIGHTWAY2_DIR', "./brightway_databases/brightway2_ecoinvent")
     
     try:
         from Unified_LCA_Engine import UnifiedLCAEngine

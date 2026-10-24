@@ -1,20 +1,16 @@
-"""Restore the Brightway database snapshot from MongoDB when calculation needs it."""
+"""Ensure a version-checked local Brightway cache exists for LCA calculations."""
 
 import logging
-from pathlib import Path
 
-from .lca_activity_store import restore_brightway_database
+from .azure_brightway_store import ensure_ecoinvent_database
 
 logger = logging.getLogger(__name__)
-REPO_ROOT = Path(__file__).resolve().parents[2]
-ECOINVENT_DIR = REPO_ROOT / "brightway_databases" / "brightway2_ecoinvent"
 
 
 def preinstall_ecoinvent_database():
-    """Restore the active MongoDB snapshot into Brightway's local data directory."""
+    """Return the local data directory, restoring it from Blob only if needed."""
     try:
-        restore_brightway_database(ECOINVENT_DIR)
-        return True
+        return ensure_ecoinvent_database()
     except Exception:
-        logger.exception("Could not restore the Brightway snapshot from MongoDB")
-        return False
+        logger.exception("Could not prepare the Brightway database cache")
+        return None
